@@ -1,0 +1,24 @@
+<Combine fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="PdfMod" configuration="Debug" />
+      <Entry build="True" name="Packages" configuration="Debug" />
+      <Entry build="True" name="PdfModTranslation" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="PdfMod" configuration="Release" />
+      <Entry build="True" name="Packages" configuration="Release" />
+      <Entry build="True" name="PdfModTranslation" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="PdfMod" single="True">
+    <Execute type="None" entry="PdfMod" />
+    <Execute type="None" entry="Packages" />
+    <Execute type="None" entry="PdfModTranslation" />
+  </StartMode>
+  <Entries>
+    <Entry filename="PdfMod.mdp" />
+    <Entry filename="Packages.mdse" />
+    <Entry filename="PdfModTranslation/PdfModTranslation.mdse" />
+  </Entries>
+</Combine>

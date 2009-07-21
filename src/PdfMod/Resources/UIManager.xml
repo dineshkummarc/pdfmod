@@ -1,0 +1,11 @@
+<ui>
+  <toolbar name="HeaderToolbar">
+    <toolitem action="OpenAction"/>
+    <toolitem action="SaveAction"/>
+    <toolitem action="SaveAsAction"/>
+  </toolbar>
+
+  <popup name="PageContextMenu" action="PageMenuAction">
+    <menuitem name="RemovePage" action="RemovePageAction"/>
+  </popup>
+</ui>
