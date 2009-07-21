@@ -27,7 +27,33 @@ namespace PdfMod
             SizeAllocated += (o, a) => {
                 UpdateItemWidth ();
             };
+
+            // Drag and Drop
+            //EnableModelDragDest(TargetEntry[], Gdk.DragAction);
+            //EnableModelDragSource(Gdk.ModifierType, TargetEntry[], Gdk.DragAction);
+
+            //SelectedItems
+            //SelectionChanged +=
+            DragDataReceived += HandleDragDataReceived;
+            //DragDataGet
+            //DragMotion
+
+            //GetDestItemAtPos(int, int, out TreePath, out IconViewDropPosition) : bool
+
+            // Gtk.Drag.Highlight / Unhighlight
+            
         }
+
+        private void HandleDragDataReceived (object o, DragDataReceivedArgs args)
+        {
+            TreePath path;
+            IconViewDropPosition pos;
+            GetDestItemAtPos (args.X, args.Y, out path, out pos);
+            Console.WriteLine ("DragDataReceived: {0}", pos);
+        }
+
+
+        // CreateDragIcon(TreePath) : Gdk.Pixmap
         
         
         public int Columns {

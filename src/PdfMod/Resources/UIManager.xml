@@ -1,11 +1,50 @@
 <ui>
+  <menubar name="MainMenu" action="MainMenuAction">
+    <menu name="FileMenu" action="FileMenuAction">
+      <menuitem action="OpenAction"/>
+      <menuitem action="SaveAction"/>
+      <menuitem action="SaveAsAction"/>
+      <separator/>
+      <menuitem action="CloseAction"/>
+    </menu>
+    <menu name="EditMenu" action="EditMenuAction">
+      <menuitem action="UndoAction"/>
+      <menuitem action="RedoAction"/>
+      <separator/>
+      <menuitem action="RemoveAction"/>
+      <menuitem action="ExtractAction"/>
+      <separator/>
+      <menuitem action="SelectAllAction"/>
+      <menuitem action="SelectOddsAction"/>
+      <menuitem action="SelectEvensAction"/>
+      <separator/>
+      <menuitem action="RotateRightAction"/>
+      <menuitem action="RotateLeftAction"/>
+      <!--<menuitem action="RotateArbitraryAction"/>-->
+      <separator/>
+    </menu>
+    <menu name="ViewMenu" action="ViewMenuAction">
+      <menuitem action="DualViewAction"/>
+    </menu>
+  </menubar>
+
   <toolbar name="HeaderToolbar">
     <toolitem action="OpenAction"/>
     <toolitem action="SaveAction"/>
     <toolitem action="SaveAsAction"/>
+    <separator/>
+    <toolitem action="RemoveAction"/>
   </toolbar>
 
-  <popup name="PageContextMenu" action="PageMenuAction">
-    <menuitem name="RemovePage" action="RemovePageAction"/>
+  <popup name="PageContextMenu" action="PageContextMenuAction">
+    <menuitem action="RemoveAction"/>
+    <menuitem action="ExtractAction"/>
+    <menuitem action="SelectAllAction"/>
+    <menuitem action="SelectOddsAction"/>
+    <menuitem action="SelectEvensAction"/>
+    <separator/>
+    <menuitem action="RotateRightAction"/>
+    <menuitem action="RotateLeftAction"/>
+    <!--<menuitem action="RotateArbitraryAction"/>-->
   </popup>
 </ui>

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 
+using Mono.Posix;
+
 using Hyena;
 using Hyena.Gui;
 
@@ -30,7 +32,8 @@ namespace PdfMod.Actions
             }
 
             foreach (var i in to_remove) {
-                var page = removed_pages.RemoveAt (0);
+                var page = removed_pages[0];
+                removed_pages.RemoveAt (0);
                 doc.Pages.Insert (i, page);
             }
         }
