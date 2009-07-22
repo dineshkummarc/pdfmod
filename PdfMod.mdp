@@ -28,8 +28,8 @@
     <File name="src/PdfMod/PdfMod.Actions/RemoveAction.cs" subtype="Code" buildaction="Compile" />
     <File name="CellRendererCairo.cs" subtype="Code" buildaction="Compile" />
     <File name="CellRendererPage.cs" subtype="Code" buildaction="Compile" />
-    <File name="Document.cs" subtype="Code" buildaction="Compile" />
-    <File name="Page.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PdfMod/PdfMod/Document.cs" subtype="Code" buildaction="Compile" />
+    <File name="src/PdfMod/PdfMod/Page.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
