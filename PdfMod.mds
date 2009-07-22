@@ -8,21 +8,25 @@
       <Entry build="True" name="PdfMod" configuration="Debug" />
       <Entry build="True" name="Packages" configuration="Debug" />
       <Entry build="True" name="PdfModTranslation" configuration="Debug" />
+      <Entry build="True" name="PdfSharp" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="PdfMod" configuration="Release" />
       <Entry build="True" name="Packages" configuration="Release" />
       <Entry build="True" name="PdfModTranslation" configuration="Release" />
+      <Entry build="True" name="PdfSharp" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="PdfMod" single="True">
     <Execute type="None" entry="PdfMod" />
     <Execute type="None" entry="Packages" />
     <Execute type="None" entry="PdfModTranslation" />
+    <Execute type="None" entry="PdfSharp" />
   </StartMode>
   <Entries>
     <Entry filename="PdfMod.mdp" />
     <Entry filename="Packages.mdse" />
     <Entry filename="PdfModTranslation/PdfModTranslation.mdse" />
+    <Entry filename="src/Libraries/PdfSharp/PdfSharp.csproj" />
   </Entries>
 </Combine>
