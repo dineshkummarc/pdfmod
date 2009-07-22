@@ -161,7 +161,8 @@ namespace PdfMod
         private void OnPagesAdded (int index, Page [] pages)
         {
             foreach (var page in pages) {
-                store.InsertWithValues (index, store.GetValuesForPage (page));
+                var iter = store.InsertWithValues (index, store.GetValuesForPage (page));
+                store.EmitRowInserted (store.GetPath (iter), iter);
             }
 
             RefreshSelection ();
@@ -171,11 +172,15 @@ namespace PdfMod
         {
             // Update preview pixbuf
             foreach (var page in pages) {
+                Console.WriteLine ("IconView got page changed: {0}", page.Index);
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
                     var pixbuf = store.GetValue (iter, PdfListStore.PixbufColumn) as Pixbuf;
-                    store.SetValue (iter, PdfListStore.PixbufColumn, page.Pixbuf);
-                    pixbuf.Dispose ();
+                    if (pixbuf != page.Pixbuf) {
+                        store.SetValue (iter, PdfListStore.PixbufColumn, page.Pixbuf);
+                        pixbuf.Dispose ();
+                        store.EmitRowChanged (store.GetPath (iter), iter);
+                    }
                 }
             }
             
@@ -188,6 +193,7 @@ namespace PdfMod
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
                     store.Remove (ref iter);
+                    store.EmitRowDeleted (store.GetPath (iter));
                 }
             }
 
@@ -201,6 +207,7 @@ namespace PdfMod
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
                     store.SetValue (iter, PdfListStore.SortColumn, index);
+                    store.EmitRowChanged (store.GetPath (iter), iter);
                 }
                 index++;
             }
@@ -251,6 +258,8 @@ namespace PdfMod
                 }
             }
             refreshing_selection = false;
+
+            QueueDraw ();
         }
 
         // CreateDragIcon(TreePath) : Gdk.Pixmap

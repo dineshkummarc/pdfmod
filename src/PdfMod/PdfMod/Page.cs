@@ -19,5 +19,15 @@ namespace PdfMod
         {
             this.pdf_page = pdf_page;
         }
+
+        public Page Clone ()
+        {
+            return this;
+            /*return new Page (pdf_page.Clone ()) {
+                Document = this.Document,
+                Index = this.Index,
+                Pixbuf = this.Pixbuf
+            };*/
+        }
     }
 }

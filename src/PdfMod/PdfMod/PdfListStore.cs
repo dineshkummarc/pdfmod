@@ -27,8 +27,12 @@ namespace PdfMod
 
         public void SetDocument (Document document)
         {
+            Clear ();
             this.document = document;
-            Refresh ();
+
+            foreach (var page in document.Pages) {
+                AppendValues (GetValuesForPage (page));
+            }
         }
 
         public TreeIter GetIterForPage (Page page)
@@ -46,15 +50,6 @@ namespace PdfMod
                         yield return iter;
                     } while (IterNext (ref iter));
                 }
-            }
-        }
-
-        public void Refresh ()
-        {
-            Clear ();
-
-            foreach (var page in document.Pages) {
-                AppendValues (GetValuesForPage (page));
             }
         }
 

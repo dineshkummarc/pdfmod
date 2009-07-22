@@ -14,8 +14,10 @@ namespace PdfMod
         private PdfDocument pdf_document;
         private List<Page> pages = new List<Page> ();
         private string password;
+        private string tmp_path;
         private string tmp_uri;
 
+        public string SuggestedSavePath { get; set; }
         public string Uri { get; private set; }
         public string Path { get; private set; }
         public PdfDocument Pdf { get { return pdf_document; } }
@@ -37,13 +39,23 @@ namespace PdfMod
         public event Action<int, Page []> PagesAdded;
         public event Action<Page []> PagesChanged;
 
-        public Document (string uri, string password)
+        public Document (string uri, string password) : this (uri, password, false)
         {
+        }
+
+        public Document (string uri, string password, bool isAlreadyTmp)
+        {
+            if (isAlreadyTmp) {
+                tmp_uri = new Uri (uri).AbsoluteUri;
+                tmp_path = new Uri (uri).AbsolutePath;
+            }
+            
             Uri = new Uri (uri).AbsoluteUri;
-            Path = new Uri (uri).AbsolutePath;
+            SuggestedSavePath = Path = new Uri (uri).AbsolutePath;
+
             this.password = password;
 
-            pdf_document = PdfSharp.Pdf.IO.PdfReader.Open (Path, password, PdfDocumentOpenMode.Modify);
+            pdf_document = PdfSharp.Pdf.IO.PdfReader.Open (Path, password, PdfDocumentOpenMode.Modify | PdfDocumentOpenMode.Import);
             for (int i = 0; i < pdf_document.PageCount; i++) {
                 var page = new Page (pdf_document.Pages[i]) {
                     Document = this,
@@ -55,32 +67,8 @@ namespace PdfMod
             UpdateThumbnails (pages);
         }
 
-        private const int SIZE = 256;
-        private void UpdateThumbnails (IEnumerable<Page> update_pages)
-        {
-            Console.WriteLine ("Trying to load thumbs for {0}", tmp_uri ?? Uri);
-            using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")) {
-                foreach (var page in update_pages) {
-                    using (var pop_page = doc.GetPage (IndexOf (page))) {
-                        // TODO try to use/get the embedded thumbnail?
-                        double w, h;
-                        pop_page.GetSize (out w, out h);
-                        double scale = SIZE / Math.Max (w, h);
-        
-                        int thumb_w = (int) Math.Ceiling (w * scale);
-                        int thumb_h = (int) Math.Ceiling (h * scale);
-                        page.Pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, thumb_w, thumb_h);
-                        pop_page.RenderToPixbuf (0, 0, (int)w, (int)h, scale, 0, page.Pixbuf);
-                    }
-                }
-            }
-        }
-
-        private void Reindex ()
-        {
-            for (int i = 0; i < pages.Count; i++) {
-                pages[i].Index = i;
-            }
+        public bool HasUnsavedChanged {
+            get { return tmp_uri != null; }
         }
 
         public void Dispose ()
@@ -90,9 +78,9 @@ namespace PdfMod
                 pdf_document = null;
             }
 
-            if (tmp_uri != null) {
-                System.IO.File.Delete (tmp_uri);
-                tmp_uri = null;
+            if (tmp_path != null) {
+                System.IO.File.Delete (tmp_path);
+                tmp_path = tmp_uri = null;
             }
         }
 
@@ -155,6 +143,15 @@ namespace PdfMod
             }
         }
 
+        public void Rotate (Page [] rotate_pages, int rotate_by)
+        {
+            foreach (var page in rotate_pages) {
+                page.Pdf.Rotate += rotate_by;
+            }
+
+            OnChanged (rotate_pages);
+        }
+
         public void Save (string uri)
         {
             Pdf.Save (uri);
@@ -162,40 +159,12 @@ namespace PdfMod
 
             if (tmp_uri != null) {
                 try {
-                    System.IO.File.Delete (tmp_uri);
+                    System.IO.File.Delete (tmp_path);
                 } catch (Exception e) {
                     Log.Exception ("Couldn't delete tmp file after saving", e);
                 } finally {
-                    tmp_uri = null;
+                    tmp_uri = tmp_path = null;
                 }
-            }
-        }
-
-        private void SaveTemp ()
-        {
-            try {
-                if (tmp_uri == null) {
-                    tmp_uri = System.IO.Path.Combine (PdfMod.CacheDir, System.IO.Path.GetFileNameWithoutExtension (Uri) + ".pdf.tmp");
-                    if (System.IO.File.Exists (tmp_uri)) {
-                        System.IO.File.Delete (tmp_uri);
-                    }
-                }
-
-                pdf_document.Save (tmp_uri);
-            } catch (Exception e) {
-                Log.Exception ("Failed to save tmp document", e);
-            }
-        }
-
-        private void OnChanged (Page [] changed_pages)
-        {
-            // Update thumbnails
-            Reindex ();
-            UpdateThumbnails (changed_pages);
-
-            var handler = PagesChanged;
-            if (handler != null) {
-                handler (changed_pages);
             }
         }
 
@@ -216,6 +185,65 @@ namespace PdfMod
             var handler = PagesAdded;
             if (handler != null) {
                 handler (to_index, add_pages);
+            }
+        }
+
+        private const int SIZE = 256;
+        private void UpdateThumbnails (IEnumerable<Page> update_pages)
+        {
+            Console.WriteLine ("Trying to load thumbs for {0}", tmp_uri ?? Uri);
+            using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")) {
+                foreach (var page in update_pages) {
+                    using (var pop_page = doc.GetPage (IndexOf (page))) {
+                        // TODO try to use/get the embedded thumbnail?
+                        double w, h;
+                        pop_page.GetSize (out w, out h);
+                        double scale = SIZE / Math.Max (w, h);
+        
+                        int thumb_w = (int) Math.Ceiling (w * scale);
+                        int thumb_h = (int) Math.Ceiling (h * scale);
+                        page.Pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, thumb_w, thumb_h);
+                        pop_page.RenderToPixbuf (0, 0, (int)w, (int)h, scale, 0, page.Pixbuf);
+                        Console.WriteLine ("Updated icon for {0}", page.Index);
+                    }
+                }
+            }
+        }
+
+        private void Reindex ()
+        {
+            for (int i = 0; i < pages.Count; i++) {
+                pages[i].Index = i;
+            }
+        }
+
+        private void SaveTemp ()
+        {
+            try {
+                if (tmp_path == null) {
+                    tmp_path = PdfMod.GetTmpFilename ();
+                    if (System.IO.File.Exists (tmp_path)) {
+                        System.IO.File.Delete (tmp_path);
+                    }
+                    tmp_uri = new Uri (tmp_path).AbsoluteUri;
+                }
+
+                pdf_document.Save (tmp_path);
+                Log.DebugFormat ("Saved tmp file to {0}", tmp_path);
+            } catch (Exception e) {
+                Log.Exception ("Failed to save tmp document", e);
+            }
+        }
+
+        private void OnChanged (Page [] changed_pages)
+        {
+            Reindex ();
+            SaveTemp ();
+            UpdateThumbnails (changed_pages);
+
+            var handler = PagesChanged;
+            if (handler != null) {
+                handler (changed_pages);
             }
         }
     }

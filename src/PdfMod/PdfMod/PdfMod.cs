@@ -15,7 +15,7 @@ namespace PdfMod
     public class PdfMod
     {
         private static int app_count = 0;
-        public static readonly string CacheDir = System.IO.Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
+        private static readonly string CacheDir = System.IO.Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
 
         public static void Main (string[] args)
         {
@@ -56,6 +56,8 @@ namespace PdfMod
             app_count++;
 
             Window = new Gtk.Window (WindowType.Toplevel);
+            Window.Title = Catalog.GetString ("PDF Mod");
+            Window.SetSizeRequest (640, 480);
             Window.DeleteEvent += delegate(object o, DeleteEventArgs args) {
                 Quit ();
                 args.RetVal = true;
@@ -99,13 +101,48 @@ namespace PdfMod
                 return;
             }
 
-            // TODO prompt if unsaved changes
+            if (PromptIfUnsavedChanges ()) {
+                return;
+            }
+
+            if (Document != null) {
+                Document.Dispose ();
+            }
+
             Window.Destroy ();
             Window = null;
 
             if (--app_count == 0) {
                 Application.Quit ();
             }
+        }
+
+        private bool PromptIfUnsavedChanges ()
+        {
+            if (Document != null && Document.HasUnsavedChanged) {
+                var message_dialog = new Hyena.Widgets.HigMessageDialog (
+                    Window, DialogFlags.Modal, MessageType.Warning, ButtonsType.None,
+                    Catalog.GetString ("Save the changes made to this document?"),
+                    String.Empty
+                );
+                message_dialog.AddButton (Catalog.GetString ("Close _Without Saving"), ResponseType.Close, false);
+                message_dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
+                message_dialog.AddButton (Stock.SaveAs, ResponseType.Ok, true);
+
+                var response = (ResponseType) message_dialog.Run ();
+                message_dialog.Destroy ();
+                switch (response) {
+                    case ResponseType.Ok:
+                        GlobalActions["SaveAsAction"].Activate ();
+                        return PromptIfUnsavedChanges ();
+                    case ResponseType.Close:
+                        return false;
+                    case ResponseType.Cancel:
+                    case ResponseType.DeleteEvent:
+                        return true;
+                }
+            }
+            return false;
         }
 
         private void LoadFiles ()
@@ -128,20 +165,28 @@ namespace PdfMod
             }*/
 
             var uri = "/home/gabe/Projects/PdfMod/bin/Debug/test.pdf";
-            LoadUri (uri);
+            LoadPath (uri);
         }
 
         // TODO support password protected docs
-        public void LoadUri (string uri)
+        public void LoadPath (string path)
+        {
+            LoadPath (path, null);
+        }
+
+        public void LoadPath (string path, string suggestedFilename)
         {
             var ctx_id = StatusBar.GetContextId ("loading");
-            var msg_id = StatusBar.Push (1, String.Format (Catalog.GetString ("Loading {0}"), GLib.Markup.EscapeText (uri)));
+            var msg_id = StatusBar.Push (1, String.Format (Catalog.GetString ("Loading {0}"), GLib.Markup.EscapeText (path)));
 
             try {
-                Document = new Document (uri, null);
-                IconView.Store.SetDocument (Document);
+                Document = new Document (path, null, suggestedFilename != null);
+                if (suggestedFilename != null) {
+                    Document.SuggestedSavePath = suggestedFilename;
+                }
+                IconView.SetDocument (Document);
 
-                var filename = System.IO.Path.GetFileNameWithoutExtension (uri);
+                var filename = System.IO.Path.GetFileName (Document.SuggestedSavePath);
                 if (Document.Pdf.Info == null || String.IsNullOrEmpty (Document.Pdf.Info.Title)) {
                     Window.Title = filename;
                 } else {
@@ -157,11 +202,24 @@ namespace PdfMod
                 Hyena.Log.Exception (e);
                 Hyena.Log.Error (
                     Catalog.GetString ("Error Loading PDF"),
-                    String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (uri ?? "")), true
+                    String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (path ?? "")), true
                 );
             } finally {
                 StatusBar.Remove (ctx_id, msg_id);
             }
+        }
+
+        public static string GetTmpFilename ()
+        {
+            string filename = null;
+            int i = 0;
+            while (filename == null) {
+                filename = System.IO.Path.Combine (CacheDir, "tmpfile-" + i++);
+                if (System.IO.File.Exists (filename)) {
+                    filename = null;
+                }
+            }
+            return filename;
         }
 
         public static void RunIdle (InvokeHandler handler)

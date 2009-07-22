@@ -11,62 +11,41 @@ using PdfMod;
 
 namespace PdfMod.Actions
 {
-    public class RemoveAction : IUndoAction
+    public class RemoveAction : BasePageAction
     {
-        private Document doc;
-        private List<Page> removed_pages = new List<Page> ();
-        private IEnumerable<Page> to_remove;
         private int [] old_indices;
 
-        public RemoveAction (Document doc, IEnumerable<Page> to_remove)
+        public RemoveAction (Document document, IEnumerable<Page> pages) : base (document, pages)
         {
-            this.doc = doc;
-            this.to_remove = to_remove;
-            Redo ();
         }
 
-        #region IUndoAction implementation
-        
-        public void Undo ()
+        public override void Undo ()
         {
             if (old_indices == null) {
                 throw new InvalidOperationException (Catalog.GetString ("Error trying to unremove pages from document"));
             }
 
             for (int i = 0; i < old_indices.Length; i++) {
-                doc.Add (old_indices[i], removed_pages[i]);
+                Console.WriteLine ("Trying to add back page {0} at index {1}", Pages[i], old_indices[i]);
+                Pages[i] = Pages[i].Clone ();
+                Document.Add (old_indices[i], Pages[i]);
             }
-            
-            removed_pages.Clear ();
+
             old_indices = null;
         }
         
-        public void Redo ()
+        public override void Redo ()
         {
-            if (removed_pages.Count != 0) {
+            if (old_indices != null) {
                 throw new InvalidOperationException (Catalog.GetString ("Error trying to remove pages from document"));
             }
 
-            removed_pages.AddRange (to_remove);
-            old_indices = new int[removed_pages.Count];
-
-            for (int i = 0; i < removed_pages.Count; i++) {
-                old_indices[i] = doc.IndexOf (removed_pages[i]);
-                doc.Remove (removed_pages[i]);
+            old_indices = new int[Pages.Count];
+            for (int i = 0; i < Pages.Count; i++) {
+                old_indices[i] = Document.IndexOf (Pages[i]);
+                Console.WriteLine ("Old index of {0} was {1}", Pages[i], old_indices[i]);
+                Document.Remove (Pages[i]);
             }
         }
-        
-        public void Merge (IUndoAction action)
-        {
-            throw new System.NotImplementedException();
-        }
-        
-        public bool CanMerge (IUndoAction action)
-        {
-            return false;
-        }
-        
-        #endregion
-           
     }
 }

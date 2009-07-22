@@ -11,16 +11,17 @@
       <menuitem action="UndoAction"/>
       <menuitem action="RedoAction"/>
       <separator/>
-      <menuitem action="RemoveAction"/>
+      <menuitem action="RotateRightAction"/>
+      <menuitem action="RotateLeftAction"/>
+      <!--<menuitem action="RotateArbitraryAction"/>-->
+      <separator/>
       <menuitem action="ExtractAction"/>
+      <menuitem action="RemoveAction"/>
+      <menuitem action="ExportImagesAction"/>
       <separator/>
       <menuitem action="SelectAllAction"/>
       <menuitem action="SelectOddsAction"/>
       <menuitem action="SelectEvensAction"/>
-      <separator/>
-      <menuitem action="RotateRightAction"/>
-      <menuitem action="RotateLeftAction"/>
-      <!--<menuitem action="RotateArbitraryAction"/>-->
       <separator/>
     </menu>
     <menu name="ViewMenu" action="ViewMenuAction">
@@ -32,12 +33,17 @@
     <toolitem action="OpenAction"/>
     <toolitem action="SaveAsAction"/>
     <separator/>
+    <toolitem action="ExtractAction"/>
     <toolitem action="RemoveAction"/>
+    <toolitem action="ExportImagesAction"/>
+    <toolitem action="RotateRightAction"/>
+    <toolitem action="RotateLeftAction"/>
   </toolbar>
 
   <popup name="PageContextMenu" action="PageContextMenuAction">
-    <menuitem action="RemoveAction"/>
     <menuitem action="ExtractAction"/>
+    <menuitem action="RemoveAction"/>
+    <menuitem action="ExportImagesAction"/>
     <separator/>
     <menuitem action="SelectAllAction"/>
     <menuitem action="SelectOddsAction"/>

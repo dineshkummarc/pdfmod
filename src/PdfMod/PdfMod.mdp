@@ -1,0 +1,63 @@
+<Project name="PdfMod" fileversion="2.0" language="C#" targetFramework="3.5" ctype="DotNetProject">
+  <Policies>
+    <DotNetNamingPolicy DirectoryNamespaceAssociation="Flat" ResourceNamePolicy="FileFormatDefault" />
+  </Policies>
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="../../bin/Debug" assembly="PdfMod" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
+      <EnvironmentVariables />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="../../bin/Release" assembly="PdfMod" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
+      <EnvironmentVariables />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="False" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="pdfmod.desktop" subtype="Code" buildaction="Exclude" DeployService.TargetDirectoryId="Linux.DesktopApplications" />
+    <File name="PdfMod/PdfMod.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/PdfIconView.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/PdfListStore.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/GlobalActions.cs" subtype="Code" buildaction="Compile" />
+    <File name="Resources/UIManager.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="PdfMod.Actions/RemoveAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Document.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Page.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod.Actions/RotateAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod.Actions/BasePageAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod.Actions/ExportImagesAction.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../banshee/bin/Hyena.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../../banshee/bin/Hyena.Gui.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../Libraries/poppler-sharp/poppler-sharp/poppler-sharp.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Project" localcopy="True" refto="PdfSharp" />
+  </References>
+  <GtkDesignInfo gettextClass="Mono.Posix.Catalog" />
+  <MonoDevelop.Autotools.MakefileInfo IntegrationEnabled="True" RelativeMakefileName="Makefile.am" BuildTargetName="" CleanTargetName="" SyncReferences="True" IsAutotoolsProject="True" RelativeConfigureInPath="../..">
+    <BuildFilesVar Sync="True" Name="FILES" />
+    <DeployFilesVar />
+    <ResourcesVar Sync="True" Name="RESOURCES" />
+    <OthersVar />
+    <GacRefVar Sync="True" Name="REFERENCES" />
+    <AsmRefVar Sync="True" Name="DLL_REFERENCES" />
+    <ProjectRefVar Sync="True" Name="PROJECT_REFERENCES" />
+  </MonoDevelop.Autotools.MakefileInfo>
+</Project>

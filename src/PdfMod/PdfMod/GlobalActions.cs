@@ -1,6 +1,8 @@
 
 using System;
+using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 using Mono.Posix;
 using Gtk;
@@ -40,7 +42,10 @@ namespace PdfMod
                 new ActionEntry ("FileMenuAction", null, Catalog.GetString ("_File"), null, null, null),
                 new ActionEntry ("CloseAction", Gtk.Stock.Close, null, "<control>W", null, OnClose),
                 new ActionEntry ("RemoveAction", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
-                new ActionEntry ("ExtractAction", null, "Extract Pages", null, null, OnRemove),
+                new ActionEntry ("ExtractAction", null, "Extract Pages", null, null, OnExtractPages),
+                new ActionEntry ("RotateRightAction", null, Catalog.GetString ("Rotate Right"), null, null, OnRotateRight),
+                new ActionEntry ("RotateLeftAction", null, Catalog.GetString ("Rotate Left"), null, null, OnRotateLeft),
+                new ActionEntry ("ExportImagesAction", null, Catalog.GetString ("Export Images..."), null, null, OnExportImages),
 
                 new ActionEntry ("EditMenuAction", null, Catalog.GetString ("_Edit"), null, null, null),
                 new ActionEntry ("SelectAllAction", Stock.SelectAll, null, "<control>A", null, OnSelectAll),
@@ -78,9 +83,9 @@ namespace PdfMod
             foreach (string action in require_page_actions)
                 UpdateAction (action, true, have_page);
 
-            bool have_undo = have_doc && undo_manager.CanUndo;
-            UpdateActions (true, have_undo, "UndoAction", "SaveAction", "SaveAsAction");
+            UpdateAction ("UndoAction", true, have_doc && undo_manager.CanUndo);
             UpdateAction ("RedoAction", true, have_doc && undo_manager.CanRedo);
+            UpdateActions (true, have_doc && app.Document.HasUnsavedChanged, "SaveAction", "SaveAsAction");
 
             int selection_count = app.IconView.SelectedItems.Length;
             this["RemoveAction"].Label = String.Format (Catalog.GetPluralString (
@@ -107,7 +112,7 @@ namespace PdfMod
                 string filename = chooser.Filename;
                 Log.DebugFormat ("Opening {0}", filename);
                 var new_app = app.Document == null ? app : new PdfMod ();
-                PdfMod.RunIdle (delegate { new_app.LoadUri (filename); });
+                PdfMod.RunIdle (delegate { new_app.LoadPath (filename); });
             }
             
             chooser.Destroy ();
@@ -115,7 +120,8 @@ namespace PdfMod
 
         private void OnSave (object o, EventArgs args)
         {
-            app.Document.Save (app.Document.Uri);
+            app.Document.Save (app.Document.SuggestedSavePath);
+            undo_manager.Clear ();
         }
 
         private void OnSaveAs (object o, EventArgs args)
@@ -126,31 +132,81 @@ namespace PdfMod
             chooser.AddButton (Stock.SaveAs, ResponseType.Ok);
             chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
-            chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.Uri));
-            chooser.CurrentName = System.IO.Path.GetFileName (app.Document.Uri);
+            chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
+            chooser.CurrentName = System.IO.Path.GetFileName (app.Document.SuggestedSavePath);
             chooser.DefaultResponse = ResponseType.Ok;
 
-            if (chooser.Run () == (int)ResponseType.Ok) {
-                string filename = chooser.Filename;
+            var response = chooser.Run ();
+            string filename = chooser.Filename;
+            chooser.Destroy ();
+            
+            if (response == (int)ResponseType.Ok) {
                 Log.DebugFormat ("Saving {0} to {1}", app.Document.Uri, filename);
                 app.Document.Save (filename);
+                undo_manager.Clear ();
             }
-
-            chooser.Destroy ();
         }
 
         private void OnRemove (object o, EventArgs args)
         {
-            undo_manager.AddUndoAction (new RemoveAction (app.Document, app.IconView.SelectedPages));
+            var action = new RemoveAction (app.Document, app.IconView.SelectedPages);
+            action.Do ();
+            undo_manager.AddUndoAction (action);
 
-            var paths = new List<TreePath> (app.IconView.SelectedItems);
+            /*var paths = new List<TreePath> (app.IconView.SelectedItems);
             foreach (var path in paths) {
                 TreeIter iter;
                 app.IconView.Store.GetIter (out iter, path);
                 app.IconView.Store.Remove (ref iter);
             }
 
-            app.IconView.Store.Refresh ();
+            app.IconView.Store.Refresh ();*/
+        }
+
+        private void OnExtractPages (object o, EventArgs args)
+        {
+            var doc = new PdfDocument ();
+            var pages = new List<Page> (app.IconView.SelectedPages);
+            pages.Sort ((a, b) => { return a.Index < b.Index ? -1 : 1; });
+            foreach (var page in pages) {
+                Console.WriteLine ("have page {0}", page.Index);
+                doc.AddPage (page.Pdf);
+            }
+
+            var path = PdfMod.GetTmpFilename ();
+            doc.Save (path);
+            doc.Dispose ();
+
+            string pages_summary = null;
+            if (pages.Count == 1) {
+                // Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+                pages_summary = String.Format (Catalog.GetPluralString ("Page {1}", "Page {1}", pages.Count), pages.Count, pages[0].Index + 1);
+            } else if (pages[0].Index + pages.Count - 1 == pages[pages.Count - 1].Index) {
+                // Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+                // eg Pages 3 - 7
+                pages_summary = String.Format (Catalog.GetPluralString ("Pages {1} - {2}", "Pages {1} - {2}", pages.Count),
+                    pages.Count, pages[0].Index + 1, pages[pages.Count - 1].Index + 1);
+            } else if (pages.Count < 10) {
+                string page_nums = String.Join (", ", pages.Select (p => (p.Index + 1).ToString ()).ToArray ());
+                // Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+                pages_summary = String.Format (Catalog.GetPluralString ("Pages {1}", "Pages {1}", pages.Count), pages.Count, page_nums);
+            } else {
+                // Translators: {0} is the number of pages, eg 12 Pages
+                pages_summary = String.Format (Catalog.GetPluralString ("{0} Page", "{0} Pages}", pages.Count), pages.Count);
+            }
+
+            var new_app = new PdfMod ();
+            new_app.LoadPath (path, Path.Combine (
+                Path.GetDirectoryName (app.Document.SuggestedSavePath),
+                String.Format ("[{0}] {1}",
+                    GLib.Markup.EscapeText (pages_summary),
+                    Path.GetFileName (app.Document.SuggestedSavePath))
+            ));
+        }
+
+        private void OnExportImages (object o, EventArgs args)
+        {
+            throw new NotImplementedException ();
         }
 
         private void OnUndo (object o, EventArgs args)
@@ -181,6 +237,20 @@ namespace PdfMod
         private void OnSelectOdds (object o, EventArgs args)
         {
             app.IconView.SetPageSelectionMode (PageSelectionMode.Odds);
+        }
+
+        private void OnRotateRight (object o, EventArgs args)
+        {
+            var action = new RotateAction (app.Document, app.IconView.SelectedPages, 90);
+            action.Do ();
+            undo_manager.AddUndoAction (action);
+        }
+
+        private void OnRotateLeft (object o, EventArgs args)
+        {
+            var action = new RotateAction (app.Document, app.IconView.SelectedPages, -90);
+            action.Do ();
+            undo_manager.AddUndoAction (action);
         }
 
         private void OnClose (object o, EventArgs args)
