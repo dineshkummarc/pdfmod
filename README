@@ -1,0 +1,4 @@
+To build:
+ * Build Hyena from http://gitorious.org/banshee/mainline/commits/platform
+ * Build poppler-sharp with: cd src/Libraries/poppler-sharp && make
+ * Open PdfMod.mds in MonoDevelop 2.0 and build/run the solution in Debug config
