@@ -1,14 +1,13 @@
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 
 using Mono.Posix;
 using Gtk;
-
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
 
 namespace PdfMod
 {
@@ -16,29 +15,37 @@ namespace PdfMod
     {
         public const int SortColumn = 0;
         public const int MarkupColumn = 1;
+        public const int PageColumn = 2;
         public const int PixbufColumn = 3;
 
-        private const int SIZE = 256;
+        private Document document;
 
-        private string doc_uri;
-        private PdfDocument pdf_doc;
-
-        public PdfListStore () : base (typeof (int), typeof (string), typeof (PdfPage), typeof(Gdk.Pixbuf))
+        public PdfListStore () : base (typeof (int), typeof (string), typeof (Page), typeof(Gdk.Pixbuf))
         {
             SetSortColumnId (SortColumn, SortType.Ascending);
         }
 
-        public void SetDocument (PdfDocument pdf_doc, string doc_uri)
+        public void SetDocument (Document document)
         {
-            this.pdf_doc = pdf_doc;
-            this.doc_uri = doc_uri;
+            this.document = document;
             Refresh ();
         }
 
-        private class ThumbnailSurface : Cairo.Surface
+        public TreeIter GetIterForPage (Page page)
         {
-            public ThumbnailSurface (IntPtr ptr) : base (ptr, true)
-            {
+            return TreeIters.FirstOrDefault (iter => {
+                return GetValue (iter, PageColumn) == page;
+            });
+        }
+
+        public IEnumerable<TreeIter> TreeIters {
+            get {
+                TreeIter iter;
+                if (GetIterFirst (out iter)) {
+                    do {
+                        yield return iter;
+                    } while (IterNext (ref iter));
+                }
             }
         }
 
@@ -46,35 +53,19 @@ namespace PdfMod
         {
             Clear ();
 
-            using (var doc = Poppler.Document.NewFromFile (new Uri (doc_uri).AbsoluteUri, "")) {
-                int n_pages = doc.NPages;
-    
-                if (n_pages != pdf_doc.PageCount) {
-                    Hyena.Log.Error (Catalog.GetString ("Unsupported PDF"), Catalog.GetString ("There was an inconsistency detected when reading this file.  Editing it will probably not work."), true);
-                    return;
-                }
-    
-                for (int i = 0; i < n_pages; i++) {
-                    using (var page = doc.GetPage (i)) {
-                        double w, h;
-                        page.GetSize (out w, out h);
-                        double scale = SIZE / Math.Max (w, h);
-        
-                        int thumb_w = (int) Math.Ceiling (w * scale);
-                        int thumb_h = (int) Math.Ceiling (h * scale);
-                        var pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, thumb_w, thumb_h);
-                        page.RenderToPixbuf (0, 0, (int)w, (int)h, scale, 0, pixbuf);
-                        
-                        AppendValues (
-                            i,
-                            String.Format ("<small>{0}</small>",
-                                GLib.Markup.EscapeText (String.Format (Catalog.GetString ("Page {0}"), i + 1))),
-                            pdf_doc.Pages[i],
-                            pixbuf
-                        );
-                    }
-                }
+            foreach (var page in document.Pages) {
+                AppendValues (GetValuesForPage (page));
             }
+        }
+
+        internal object [] GetValuesForPage (Page page)
+        {
+            return new object[] {
+                page.Index,
+                String.Format ("<small>{0}</small>",
+                    GLib.Markup.EscapeText (String.Format (Catalog.GetString ("Page {0}"), page.Index + 1))),
+                page, page.Pixbuf
+            };
         }
     }
 }

@@ -30,7 +30,6 @@
 
   <toolbar name="HeaderToolbar">
     <toolitem action="OpenAction"/>
-    <toolitem action="SaveAction"/>
     <toolitem action="SaveAsAction"/>
     <separator/>
     <toolitem action="RemoveAction"/>
@@ -39,6 +38,7 @@
   <popup name="PageContextMenu" action="PageContextMenuAction">
     <menuitem action="RemoveAction"/>
     <menuitem action="ExtractAction"/>
+    <separator/>
     <menuitem action="SelectAllAction"/>
     <menuitem action="SelectOddsAction"/>
     <menuitem action="SelectEvensAction"/>

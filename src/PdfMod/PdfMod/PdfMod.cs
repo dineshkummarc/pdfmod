@@ -15,6 +15,7 @@ namespace PdfMod
     public class PdfMod
     {
         private static int app_count = 0;
+        public static readonly string CacheDir = System.IO.Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
 
         public static void Main (string[] args)
         {
@@ -26,23 +27,27 @@ namespace PdfMod
 
             Application.Init ();
 
+            try {
+                System.IO.Directory.CreateDirectory (CacheDir);
+            } catch (Exception e) {
+                Log.Exception (String.Format ("Unable to create cache directory: {0}", CacheDir), e);
+            }
+
             var app = new PdfMod ();
             RunIdle (app.LoadFiles);
 
             Application.Run ();
         }
 
-        private ActionManager action_manager;
-        private GlobalActions global_actions;
         private MenuBar menu_bar;
         private Gtk.Toolbar header_toolbar;
-        
+
+        public ActionManager ActionManager { get; private set; }
+        public GlobalActions GlobalActions { get; private set; }
         public Gtk.Statusbar StatusBar { get; private set; }
         public Gtk.Window Window { get; private set; }
         public PdfIconView IconView { get; private set; }
-        public UndoManager UndoManager { get; private set; }
-        public PdfDocument Document { get; private set; }
-        public string DocumentUri { get; private set; }
+        public Document Document { get; private set; }
 
         public event EventHandler DocumentChanged;
 
@@ -52,31 +57,31 @@ namespace PdfMod
 
             Window = new Gtk.Window (WindowType.Toplevel);
             Window.DeleteEvent += delegate(object o, DeleteEventArgs args) {
-                args.RetVal = Quit ();
+                Quit ();
+                args.RetVal = true;
             };
 
             // PDF Icon View
-            IconView = new PdfIconView ();
+            IconView = new PdfIconView (this);
             var IconView_sw = new Gtk.ScrolledWindow ();
             IconView_sw.Child = IconView;
 
             // Status bar
             StatusBar = new Gtk.Statusbar () { HasResizeGrip = true };
 
-            UndoManager = new Hyena.UndoManager ();
-
             // ActionManager
-            action_manager = new Hyena.Gui.ActionManager ();
-            Window.AddAccelGroup (action_manager.UIManager.AccelGroup);
-            global_actions = new GlobalActions (this, action_manager);
+            ActionManager = new Hyena.Gui.ActionManager ();
+            Window.AddAccelGroup (ActionManager.UIManager.AccelGroup);
+            GlobalActions = new GlobalActions (this, ActionManager);
 
             // Menubar
-            menu_bar = action_manager.UIManager.GetWidget ("/MainMenu") as MenuBar;
+            menu_bar = ActionManager.UIManager.GetWidget ("/MainMenu") as MenuBar;
 
             // Toolbar
-            header_toolbar = action_manager.UIManager.GetWidget ("/HeaderToolbar") as Gtk.Toolbar;
+            header_toolbar = ActionManager.UIManager.GetWidget ("/HeaderToolbar") as Gtk.Toolbar;
             header_toolbar.ShowArrow = false;
-            header_toolbar.ToolbarStyle = ToolbarStyle.BothHoriz;
+            header_toolbar.ToolbarStyle = ToolbarStyle.Icons;
+            header_toolbar.Tooltips = true;
 
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
@@ -88,14 +93,19 @@ namespace PdfMod
             Window.ShowAll ();
         }
 
-        public bool Quit ()
+        public void Quit ()
         {
-            if (--app_count == 0) {
-                Application.Quit ();
-                return true;
+            if (Window == null) {
+                return;
             }
 
-            return false;
+            // TODO prompt if unsaved changes
+            Window.Destroy ();
+            Window = null;
+
+            if (--app_count == 0) {
+                Application.Quit ();
+            }
         }
 
         private void LoadFiles ()
@@ -118,24 +128,24 @@ namespace PdfMod
             }*/
 
             var uri = "/home/gabe/Projects/PdfMod/bin/Debug/test.pdf";
-            //LoadUri (uri);
+            LoadUri (uri);
         }
 
+        // TODO support password protected docs
         public void LoadUri (string uri)
         {
             var ctx_id = StatusBar.GetContextId ("loading");
             var msg_id = StatusBar.Push (1, String.Format (Catalog.GetString ("Loading {0}"), GLib.Markup.EscapeText (uri)));
 
             try {
-                DocumentUri = uri;
-                Document = PdfSharp.Pdf.IO.PdfReader.Open (uri, PdfDocumentOpenMode.Modify);
-                IconView.SetDocument (Document, uri);
+                Document = new Document (uri, null);
+                IconView.Store.SetDocument (Document);
 
                 var filename = System.IO.Path.GetFileNameWithoutExtension (uri);
-                if (Document.Info == null || String.IsNullOrEmpty (Document.Info.Title)) {
+                if (Document.Pdf.Info == null || String.IsNullOrEmpty (Document.Pdf.Info.Title)) {
                     Window.Title = filename;
                 } else {
-                    Window.Title = String.Format ("{0} ({1})", GLib.Markup.EscapeText (Document.Info.Title), filename);
+                    Window.Title = String.Format ("{0} ({1})", GLib.Markup.EscapeText (Document.Pdf.Info.Title), filename);
                 }
 
                 var handler = DocumentChanged;
@@ -143,7 +153,6 @@ namespace PdfMod
                     handler (this, EventArgs.Empty);
                 }
             } catch (Exception e) {
-                DocumentUri = null;
                 Document = null;
                 Hyena.Log.Exception (e);
                 Hyena.Log.Error (
