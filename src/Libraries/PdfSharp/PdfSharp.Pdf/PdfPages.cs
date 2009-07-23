@@ -200,7 +200,7 @@ namespace PdfSharp.Pdf
       if (oldIndex == newIndex)
         return;
 
-      PdfPage page = (PdfPage)pagesArray.Elements[oldIndex];
+      PdfReference page = (PdfReference)pagesArray.Elements[oldIndex];
       pagesArray.Elements.RemoveAt(oldIndex);
       pagesArray.Elements.Insert(newIndex, page);
     }
