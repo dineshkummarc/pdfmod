@@ -92,7 +92,6 @@ namespace PdfMod
 
         public IEnumerable<Page> FindPagesMatching (string text)
         {
-            Console.WriteLine ("using poppler to look for {0}", text);
             using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")) {
                 for (int i = 0; i < doc.NPages; i++) {
                     using (var page = doc.GetPage (i)) {
@@ -138,7 +137,7 @@ namespace PdfMod
         public void Remove (params Page [] remove_pages)
         {
             foreach (var page in remove_pages) {
-                pdf_document.Pages.RemoveAt (pages.IndexOf (page));
+                pdf_document.Pages.Remove (page.Pdf);
                 pages.Remove (page);
             }
 

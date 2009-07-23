@@ -40,11 +40,13 @@ namespace PdfMod
             Page.Thumbnail cache_obj;
             ImageSurface surface = null;
             if (surface_cache.TryGetValue (Page, out cache_obj)) {
-                // Don't use if not big enough or if dirty
+                // Don't use if not big enough, dirty, or corrupt
                 surface = cache_obj.Surface;
-                if (Page.SurfaceDirty || (surface.Width < width && surface.Height < height)) {
+                if (Page.SurfaceDirty || surface.Handle == IntPtr.Zero || (surface.Width < width && surface.Height < height)) {
                     surface_cache.Remove (Page);
-                    surface.Destroy ();
+                    if (surface.Handle != IntPtr.Zero) {
+                        ((IDisposable)surface).Dispose ();
+                    }
                     surface = null;
                     Hyena.Gui.CairoExtensions.DisposeContext (cache_obj.Context);
                 }

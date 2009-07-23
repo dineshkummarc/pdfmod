@@ -7,6 +7,8 @@ using Gtk;
 
 using PdfSharp.Pdf;
 
+using PdfMod.Actions;
+
 namespace PdfMod
 {
     public enum PageSelectionMode
@@ -22,6 +24,9 @@ namespace PdfMod
     {
         const int MIN_WIDTH = 128;
         const int MAX_WIDTH = 2054;
+
+        private static TargetEntry move_target = new TargetEntry ("", TargetFlags.Widget, 0);
+        private static TargetEntry [] move_targets = new TargetEntry [] { move_target };
 
         private PdfMod app;
         private Document document;
@@ -39,18 +44,17 @@ namespace PdfMod
         {
             this.app = app;
             Model = store = new PdfListStore ();
-            TooltipColumn = PdfListStore.MarkupColumn;
-            //MarkupColumn = PdfListStore.MarkupColumn;
+            TooltipColumn = PdfListStore.TooltipColumn;
+            CanZoomIn = CanZoomOut = true;
+            Spacing = 0;
+            ColumnSpacing = RowSpacing = Margin;
+            Reorderable = false;
+            SelectionMode = SelectionMode.Multiple;
+
             var ccell = new CellRendererPage ();
             PackStart (ccell, true);
             AddAttribute (ccell, "page", PdfListStore.PageColumn);
-            CanZoomIn = CanZoomOut = true;
-            Spacing = 0;
 
-            ColumnSpacing = RowSpacing = Margin;
-            //Reorderable = true;
-            SelectionMode = SelectionMode.Multiple;
-            
             SizeAllocated += (o, a) => {
                 if (!zoom_manually_set) {
                     ZoomFit ();
@@ -59,7 +63,6 @@ namespace PdfMod
 
             PopupMenu += HandlePopupMenu;
             ButtonPressEvent += HandleButtonPressEvent;
-            ScrollEvent += HandleScrollEvent;
 
             SelectionChanged += delegate {
                 if (!refreshing_selection) {
@@ -69,13 +72,13 @@ namespace PdfMod
             //ButtonReleaseEvent += HandleButtonReleaseEvent;
 
             // Drag and Drop
-            //EnableModelDragDest(TargetEntry[], Gdk.DragAction);
-            //EnableModelDragSource(Gdk.ModifierType, TargetEntry[], Gdk.DragAction);
+            EnableModelDragDest (move_targets, Gdk.DragAction.Move);
+            EnableModelDragSource (Gdk.ModifierType.None, move_targets, Gdk.DragAction.Move);
 
             //SelectedItems
             //SelectionChanged +=
             DragDataReceived += HandleDragDataReceived;
-            //DragDataGet
+            DragDataGet += HandleDragDataGet;
             //DragMotion
 
             //GetDestItemAtPos(int, int, out TreePath, out IconViewDropPosition) : bool
@@ -83,11 +86,13 @@ namespace PdfMod
             // Gtk.Drag.Highlight / Unhighlight
         }
 
-        void HandleScrollEvent(object o, ScrollEventArgs args)
+        protected override bool OnScrollEvent (Gdk.EventScroll evnt)
         {
-            if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0) {
-                Zoom (args.Event.Direction == ScrollDirection.Down ? -20 : 20);
-                args.RetVal = true;
+            if ((evnt.State & Gdk.ModifierType.ControlMask) != 0) {
+                Zoom (evnt.Direction == ScrollDirection.Down ? -20 : 20);
+                return true;
+            } else {
+                return base.OnScrollEvent (evnt);
             }
         }
 
@@ -124,39 +129,61 @@ namespace PdfMod
             }
         }
 
-        public void HandlePopupMenu (object o, PopupMenuArgs args)
+        private void HandlePopupMenu (object o, PopupMenuArgs args)
         {
             app.GlobalActions["PageContextMenuAction"].Activate ();
         }
 
-
         public IEnumerable<Page> SelectedPages {
             get {
+                var pages = new List<Page> ();
                 foreach (var path in SelectedItems) {
                     TreeIter iter;
                     store.GetIter (out iter, path);
-                    yield return store.GetValue (iter, PdfListStore.PageColumn) as Page;
+                    pages.Add (store.GetValue (iter, PdfListStore.PageColumn) as Page);
                 }
+                pages.Sort ((a, b) => { return a.Index < b.Index ? -1 : 1; });
+                return pages;
             }
         }
 
-        public IEnumerable<int> SelectedIndices {
-            get {
-                foreach (var path in SelectedItems) {
-                    TreeIter iter;
-                    store.GetIter (out iter, path);
-                    yield return (int)store.GetValue (iter, PdfListStore.PageColumn);
-                }
+#region DnD
+
+        private void HandleDragDataGet(object o, DragDataGetArgs args)
+        {
+            if (args.Info == move_target.Info) {
+                var pages = new Hyena.Gui.DragDropList<Page> ();
+                pages.AddRange (SelectedPages);
+                pages.AssignToSelection (args.SelectionData, args.SelectionData.Target);
+                args.RetVal = true;
             }
         }
 
         private void HandleDragDataReceived (object o, DragDataReceivedArgs args)
         {
-            TreePath path;
-            IconViewDropPosition pos;
-            GetDestItemAtPos (args.X, args.Y, out path, out pos);
-            Console.WriteLine ("DragDataReceived: {0}", pos);
+            if (args.Info == move_target.Info) {
+                // Move pages within the document
+                TreePath path;
+                TreeIter iter;
+                IconViewDropPosition pos;
+                GetDestItemAtPos (args.X, args.Y, out path, out pos);
+                store.GetIter (out iter, path);
+
+                var pages = args.SelectionData.Data as Hyena.Gui.DragDropList<Page>;
+
+                var to_index = (store.GetValue (iter, PdfListStore.PageColumn) as Page).Index;
+                if (pos == IconViewDropPosition.DropLeft) {
+                    to_index = Math.Max (0, to_index - 1);
+                }
+                Console.WriteLine ("drop pos = {0} on index {1} so to_index = {2}", pos, (store.GetValue (iter, PdfListStore.PageColumn) as Page).Index, to_index);
+
+                var action = new MoveAction (document, pages, to_index);
+                action.Do ();
+                app.GlobalActions.UndoManager.AddUndoAction (action);
+            }
         }
+
+#endregion
 
         #region Document event handling
 
@@ -225,14 +252,13 @@ namespace PdfMod
 
         private void OnPagesMoved (int index, Page [] pages)
         {
-            // Update the sort values
-            foreach (var page in pages) {
+            // Update the sort values for all pages
+            foreach (var page in document.Pages) {
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
-                    store.SetValue (iter, PdfListStore.SortColumn, index);
+                    store.UpdateForPage (iter, page);
                     store.EmitRowChanged (store.GetPath (iter), iter);
                 }
-                index++;
             }
 
             Refresh ();
@@ -259,7 +285,6 @@ namespace PdfMod
                 return;
             }
 
-            Console.WriteLine ("ItemWidth = {0}", new_width);
             ItemWidth = new_width;
 
             var handler = ZoomChanged;
@@ -355,7 +380,5 @@ namespace PdfMod
 
             QueueDraw ();
         }
-
-        // CreateDragIcon(TreePath) : Gdk.Pixmap
     }
 }

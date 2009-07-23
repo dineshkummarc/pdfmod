@@ -14,9 +14,8 @@ namespace PdfMod
     public class PdfListStore : ListStore
     {
         public const int SortColumn = 0;
-        public const int MarkupColumn = 1;
+        public const int TooltipColumn = 1;
         public const int PageColumn = 2;
-        public const int PixbufColumn = 3;
 
         private Document document;
 
@@ -53,12 +52,18 @@ namespace PdfMod
             }
         }
 
+        public void UpdateForPage (TreeIter iter, Page page)
+        {
+            SetValue (iter, SortColumn, page.Index);
+            SetValue (iter, TooltipColumn, String.Format (Catalog.GetString ("Page {0}"), page.Index + 1));
+            SetValue (iter, PageColumn, page);
+        }
+
         internal object [] GetValuesForPage (Page page)
         {
             return new object[] {
                 page.Index,
-                String.Format ("<small>{0}</small>",
-                    GLib.Markup.EscapeText (String.Format (Catalog.GetString ("Page {0}"), page.Index + 1))),
+                String.Format (Catalog.GetString ("Page {0}"), page.Index + 1),
                 page
             };
         }

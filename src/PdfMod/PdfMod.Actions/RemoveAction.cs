@@ -21,17 +21,18 @@ namespace PdfMod.Actions
 
         public override void Undo ()
         {
-            if (old_indices == null) {
+            Hyena.Log.Error ("Undo for the RemoveAction is not yet implemented");
+            // Currently fails in PdfSharp
+            /*if (old_indices == null) {
                 throw new InvalidOperationException (Catalog.GetString ("Error trying to unremove pages from document"));
             }
 
             for (int i = 0; i < old_indices.Length; i++) {
                 Console.WriteLine ("Trying to add back page {0} at index {1}", Pages[i], old_indices[i]);
-                Pages[i] = Pages[i].Clone ();
                 Document.Add (old_indices[i], Pages[i]);
             }
 
-            old_indices = null;
+            old_indices = null;*/
         }
         
         public override void Redo ()

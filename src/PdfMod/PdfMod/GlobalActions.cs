@@ -29,6 +29,10 @@ namespace PdfMod
             "RemoveAction", "ExtractAction", "ExportImagesAction", "RotateRightAction", "RotateLeftAction"
         };
 
+        public UndoManager UndoManager {
+            get { return undo_manager; }
+        }
+
         public GlobalActions (PdfMod app, ActionManager action_manager) : base (action_manager, "Global")
         {
             this.app = app;
@@ -42,9 +46,9 @@ namespace PdfMod
                 new ActionEntry ("FileMenuAction", null, Catalog.GetString ("_File"), null, null, null),
                 new ActionEntry ("CloseAction", Gtk.Stock.Close, null, "<control>W", null, OnClose),
                 new ActionEntry ("RemoveAction", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
-                new ActionEntry ("ExtractAction", null, "Extract Pages", null, null, OnExtractPages),
-                new ActionEntry ("RotateRightAction", null, Catalog.GetString ("Rotate Right"), null, null, OnRotateRight),
-                new ActionEntry ("RotateLeftAction", null, Catalog.GetString ("Rotate Left"), null, null, OnRotateLeft),
+                new ActionEntry ("ExtractAction", Gtk.Stock.New, null, null, null, OnExtractPages),
+                new ActionEntry ("RotateRightAction", null, Catalog.GetString ("Rotate Right"), "bracketright", null, OnRotateRight),
+                new ActionEntry ("RotateLeftAction", null, Catalog.GetString ("Rotate Left"), "bracketleft", null, OnRotateLeft),
                 new ActionEntry ("ExportImagesAction", null, Catalog.GetString ("Export Images..."), null, null, OnExportImages),
 
                 new ActionEntry ("EditMenuAction", null, Catalog.GetString ("_Edit"), null, null, null),
@@ -58,13 +62,18 @@ namespace PdfMod
                 new ActionEntry ("ViewMenuAction", null, Catalog.GetString ("_View"), null, null, null),
                 new ActionEntry ("ZoomInAction", Stock.ZoomIn, null, "<control>plus", null, OnZoomIn),
                 new ActionEntry ("ZoomOutAction", Stock.ZoomOut, null, "<control>minus", null, OnZoomOut),
-                new ActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>1", null, OnZoomFit),
+                new ActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit),
                 
                 new ActionEntry ("HelpMenuAction", null, Catalog.GetString ("_Help"), null, null, null),
                 new ActionEntry ("AboutAction", Stock.About, null, null, null, OnAbout),
 
                 new ActionEntry ("PageContextMenuAction", null, "", null, null, OnPageContextMenu)
             );
+
+            this["RotateRightAction"].IconName = "object-rotate-right";
+            this["RotateRightAction"].Tooltip = Catalog.GetString ("Rotate right");
+            this["RotateLeftAction"].IconName = "object-rotate-left";
+            this["RotateLeftAction"].Tooltip = Catalog.GetString ("Rotate left");
 
             Update ();
             app.IconView.SelectionChanged += OnChanged;
@@ -103,6 +112,12 @@ namespace PdfMod
                 selection_count);
             this["RemoveAction"].Tooltip = String.Format (Catalog.GetPluralString (
                 "Remove the selected page", "Remove the {0} selected pages", selection_count),
+                selection_count);
+            this["ExtractAction"].Label = String.Format (Catalog.GetPluralString (
+                "Extract Page", "Extract {0} Pages", selection_count),
+                selection_count);
+            this["ExtractAction"].Tooltip = String.Format (Catalog.GetPluralString (
+                "Extract the selected page", "Extract the {0} selected pages", selection_count),
                 selection_count);
         }
 
@@ -161,25 +176,15 @@ namespace PdfMod
         {
             var action = new RemoveAction (app.Document, app.IconView.SelectedPages);
             action.Do ();
-            undo_manager.AddUndoAction (action);
-
-            /*var paths = new List<TreePath> (app.IconView.SelectedItems);
-            foreach (var path in paths) {
-                TreeIter iter;
-                app.IconView.Store.GetIter (out iter, path);
-                app.IconView.Store.Remove (ref iter);
-            }
-
-            app.IconView.Store.Refresh ();*/
+            // Undo isn't working yet
+            //undo_manager.AddUndoAction (action);
         }
 
         private void OnExtractPages (object o, EventArgs args)
         {
             var doc = new PdfDocument ();
             var pages = new List<Page> (app.IconView.SelectedPages);
-            pages.Sort ((a, b) => { return a.Index < b.Index ? -1 : 1; });
             foreach (var page in pages) {
-                Console.WriteLine ("have page {0}", page.Index);
                 doc.AddPage (page.Pdf);
             }
 
