@@ -60,7 +60,6 @@ namespace PdfMod.Actions
 
         public void Do (string to_path)
         {
-            int i = 0;
             foreach (var img_obj in image_objects) {
                 Export (img_obj, to_path);
             }

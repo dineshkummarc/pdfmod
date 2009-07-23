@@ -26,7 +26,12 @@
       <separator/>
     </menu>
     <menu name="ViewMenu" action="ViewMenuAction">
-      <menuitem action="DualViewAction"/>
+      <menuitem action="ZoomInAction"/>
+      <menuitem action="ZoomOutAction"/>
+      <menuitem action="ZoomFitAction"/>
+    </menu>
+    <menu name="HelpMenu" action="HelpMenuAction">
+      <menuitem action="AboutAction"/>
     </menu>
   </menubar>
 

@@ -20,7 +20,7 @@ namespace PdfMod
 
         private Document document;
 
-        public PdfListStore () : base (typeof (int), typeof (string), typeof (Page), typeof(Gdk.Pixbuf))
+        public PdfListStore () : base (typeof (int), typeof (string), typeof (Page))
         {
             SetSortColumnId (SortColumn, SortType.Ascending);
         }
@@ -59,7 +59,7 @@ namespace PdfMod
                 page.Index,
                 String.Format ("<small>{0}</small>",
                     GLib.Markup.EscapeText (String.Format (Catalog.GetString ("Page {0}"), page.Index + 1))),
-                page, page.Pixbuf
+                page
             };
         }
     }

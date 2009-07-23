@@ -65,7 +65,7 @@ namespace PdfMod
                 pages.Add (page);
             }
 
-            UpdateThumbnails (pages);
+            ExpireThumbnails (pages);
             OnChanged ();
         }
 
@@ -189,7 +189,7 @@ namespace PdfMod
 
             Reindex ();
             SaveTemp ();
-            UpdateThumbnails (add_pages);
+            ExpireThumbnails (add_pages);
 
             var handler = PagesAdded;
             if (handler != null) {
@@ -207,25 +207,36 @@ namespace PdfMod
             }
         }
 
-        private const int SIZE = 256;
-        private void UpdateThumbnails (IEnumerable<Page> update_pages)
+        private Poppler.Document poppler_doc;
+        private Poppler.Document PopplerDoc {
+            get { return poppler_doc ?? (poppler_doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")); }
+        }
+
+        private void ExpireThumbnails (IEnumerable<Page> update_pages)
         {
-            Console.WriteLine ("Trying to load thumbs for {0}", tmp_uri ?? Uri);
-            using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")) {
-                foreach (var page in update_pages) {
-                    using (var pop_page = doc.GetPage (IndexOf (page))) {
-                        // TODO try to use/get the embedded thumbnail?
-                        double w, h;
-                        pop_page.GetSize (out w, out h);
-                        double scale = SIZE / Math.Max (w, h);
-        
-                        int thumb_w = (int) Math.Ceiling (w * scale);
-                        int thumb_h = (int) Math.Ceiling (h * scale);
-                        page.Pixbuf = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, thumb_w, thumb_h);
-                        pop_page.RenderToPixbuf (0, 0, (int)w, (int)h, scale, 0, page.Pixbuf);
-                        Console.WriteLine ("Updated icon for {0}", page.Index);
-                    }
-                }
+            if (poppler_doc != null) {
+                poppler_doc.Dispose ();
+                poppler_doc = null;
+            }
+
+            foreach (var page in update_pages) {
+                page.SurfaceDirty = true;
+            }
+        }
+
+        public Page.Thumbnail GetSurface (Page page, int w, int h)
+        {
+            using (var ppage = PopplerDoc.GetPage (page.Index)) {
+                double pw, ph;
+                ppage.GetSize (out pw, out ph);
+                double scale = Math.Min (w / pw, h / ph);
+
+                var surface = new Cairo.ImageSurface (Cairo.Format.Argb32, (int)(scale * pw), (int)(scale * ph));
+                var cr = new Cairo.Context (surface);
+                cr.Scale (scale, scale);
+                ppage.Render (cr);
+                page.SurfaceDirty = false;
+                return new Page.Thumbnail () { Surface = surface, Context = cr };
             }
         }
 
@@ -258,7 +269,7 @@ namespace PdfMod
         {
             Reindex ();
             SaveTemp ();
-            UpdateThumbnails (changed_pages);
+            ExpireThumbnails (changed_pages);
 
             var handler = PagesChanged;
             if (handler != null) {

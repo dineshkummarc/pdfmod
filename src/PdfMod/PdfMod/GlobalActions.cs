@@ -56,12 +56,19 @@ namespace PdfMod
                 new ActionEntry ("RedoAction", Stock.Redo, null, "<control>y", null, OnRedo),
 
                 new ActionEntry ("ViewMenuAction", null, Catalog.GetString ("_View"), null, null, null),
+                new ActionEntry ("ZoomInAction", Stock.ZoomIn, null, "<control>plus", null, OnZoomIn),
+                new ActionEntry ("ZoomOutAction", Stock.ZoomOut, null, "<control>minus", null, OnZoomOut),
+                new ActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>1", null, OnZoomFit),
+                
+                new ActionEntry ("HelpMenuAction", null, Catalog.GetString ("_Help"), null, null, null),
+                new ActionEntry ("AboutAction", Stock.About, null, null, null, OnAbout),
 
                 new ActionEntry ("PageContextMenuAction", null, "", null, null, OnPageContextMenu)
             );
 
             Update ();
             app.IconView.SelectionChanged += OnChanged;
+            app.IconView.ZoomChanged += delegate { Update (); };
             app.DocumentLoaded += OnChanged;
             undo_manager.UndoChanged += OnChanged;
 
@@ -87,6 +94,8 @@ namespace PdfMod
             UpdateAction ("UndoAction", true, have_doc && undo_manager.CanUndo);
             UpdateAction ("RedoAction", true, have_doc && undo_manager.CanRedo);
             UpdateActions (true, have_doc && app.Document.HasUnsavedChanged, "SaveAction", "SaveAsAction");
+            UpdateAction ("ZoomInAction", true, have_doc && app.IconView.CanZoomIn);
+            UpdateAction ("ZoomOutAction", true, have_doc && app.IconView.CanZoomOut);
 
             int selection_count = app.IconView.SelectedItems.Length;
             this["RemoveAction"].Label = String.Format (Catalog.GetPluralString (
@@ -248,6 +257,27 @@ namespace PdfMod
             undo_manager.Redo ();
         }
 
+        private void OnAbout (object o, EventArgs args)
+        {
+            Gtk.AboutDialog.SetUrlHook ((dlg, link) => { System.Diagnostics.Process.Start (link); });
+
+            var dialog = new Gtk.AboutDialog () {
+                Name = "PDF Mod",
+                Version = "0.1",
+                //Website = "http://live.gnome.org/PdfMod",
+                //WebsiteLabel = Catalog.GetString ("Visit Website"),
+                Authors = new string [] { "Gabriel Burt" },
+                Copyright = "Copyright 2009 Novell Inc."
+            };
+
+            try {
+                dialog.License = System.IO.File.ReadAllText ("COPYING");
+            } catch {}
+
+            dialog.Run ();
+            dialog.Destroy ();
+        }
+
         private void OnPageContextMenu (object o, EventArgs args)
         {
             ShowContextMenu ("/PageContextMenu");
@@ -271,6 +301,21 @@ namespace PdfMod
         private void OnSelectMatching (object o, EventArgs args)
         {
             app.ToggleMatchQuery ();
+        }
+
+        private void OnZoomIn (object o, EventArgs args)
+        {
+            app.IconView.Zoom (10);
+        }
+
+        private void OnZoomOut (object o, EventArgs args)
+        {
+            app.IconView.Zoom (-10);
+        }
+
+        private void OnZoomFit (object o, EventArgs args)
+        {
+            app.IconView.ZoomFit ();
         }
 
         private void OnRotateRight (object o, EventArgs args)

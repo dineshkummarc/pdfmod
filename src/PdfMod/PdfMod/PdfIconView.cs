@@ -20,33 +20,46 @@ namespace PdfMod
 
     public class PdfIconView : Gtk.IconView
     {
+        const int MIN_WIDTH = 128;
+        const int MAX_WIDTH = 2054;
+
         private PdfMod app;
         private Document document;
         private PdfListStore store;
         private PageSelectionMode page_selection_mode = PageSelectionMode.None;
-            
-        public PdfListStore Store { get { return store; } }
-
         private int columns = 2;
+
+        public PdfListStore Store { get { return store; } }
+        public bool CanZoomIn { get; private set; }
+        public bool CanZoomOut { get; private set; }
         
+        public event System.Action ZoomChanged;
+
         public PdfIconView (PdfMod app) : base ()
         {
             this.app = app;
             Model = store = new PdfListStore ();
-            PixbufColumn = PdfListStore.PixbufColumn;
-            MarkupColumn = PdfListStore.MarkupColumn;
+            TooltipColumn = PdfListStore.MarkupColumn;
+            //MarkupColumn = PdfListStore.MarkupColumn;
+            var ccell = new CellRendererPage ();
+            PackStart (ccell, true);
+            AddAttribute (ccell, "page", PdfListStore.PageColumn);
+            CanZoomIn = CanZoomOut = true;
+            Spacing = 0;
 
-            ColumnSpacing = RowSpacing = 12;
-            UpdateItemWidth ();
-            Reorderable = true;
+            ColumnSpacing = RowSpacing = Margin;
+            //Reorderable = true;
             SelectionMode = SelectionMode.Multiple;
             
-            /*SizeAllocated += (o, a) => {
-                UpdateItemWidth ();
-            };*/
+            SizeAllocated += (o, a) => {
+                if (!zoom_manually_set) {
+                    ZoomFit ();
+                }
+            };
 
             PopupMenu += HandlePopupMenu;
             ButtonPressEvent += HandleButtonPressEvent;
+            ScrollEvent += HandleScrollEvent;
 
             SelectionChanged += delegate {
                 if (!refreshing_selection) {
@@ -68,7 +81,14 @@ namespace PdfMod
             //GetDestItemAtPos(int, int, out TreePath, out IconViewDropPosition) : bool
 
             // Gtk.Drag.Highlight / Unhighlight
-            
+        }
+
+        void HandleScrollEvent(object o, ScrollEventArgs args)
+        {
+            if ((args.Event.State & Gdk.ModifierType.ControlMask) != 0) {
+                Zoom (args.Event.Direction == ScrollDirection.Down ? -20 : 20);
+                args.RetVal = true;
+            }
         }
 
         void HandleButtonPressEvent(object o, ButtonPressEventArgs args)
@@ -156,6 +176,16 @@ namespace PdfMod
             this.document.PagesMoved   += OnPagesMoved;
 
             store.SetDocument (document);
+            page_selection_mode = PageSelectionMode.None;
+            Refresh ();
+        }
+
+        private void Refresh ()
+        {
+            if (!zoom_manually_set) {
+                ZoomFit ();
+            }
+            RefreshSelection ();
         }
 
         private void OnPagesAdded (int index, Page [] pages)
@@ -165,26 +195,19 @@ namespace PdfMod
                 store.EmitRowInserted (store.GetPath (iter), iter);
             }
 
-            RefreshSelection ();
+            Refresh ();
         }
 
         private void OnPagesChanged (Page [] pages)
         {
-            // Update preview pixbuf
             foreach (var page in pages) {
-                Console.WriteLine ("IconView got page changed: {0}", page.Index);
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
-                    var pixbuf = store.GetValue (iter, PdfListStore.PixbufColumn) as Pixbuf;
-                    if (pixbuf != page.Pixbuf) {
-                        store.SetValue (iter, PdfListStore.PixbufColumn, page.Pixbuf);
-                        pixbuf.Dispose ();
-                        store.EmitRowChanged (store.GetPath (iter), iter);
-                    }
+                    store.EmitRowChanged (store.GetPath (iter), iter);
                 }
             }
             
-            RefreshSelection ();
+            Refresh ();
         }
 
         private void OnPagesRemoved (Page [] pages)
@@ -197,7 +220,7 @@ namespace PdfMod
                 }
             }
 
-            RefreshSelection ();
+            Refresh ();
         }
 
         private void OnPagesMoved (int index, Page [] pages)
@@ -212,10 +235,71 @@ namespace PdfMod
                 index++;
             }
 
-            RefreshSelection ();
+            Refresh ();
         }
 
         #endregion
+
+        private bool zoom_manually_set;
+        public void Zoom (int pixels)
+        {
+            CanZoomIn = CanZoomOut = true;
+            zoom_manually_set = true;
+
+            int new_width = ItemWidth + pixels;
+            if (new_width <= MIN_WIDTH) {
+                CanZoomOut = false;
+                new_width = MIN_WIDTH;
+            } else if (new_width >= MAX_WIDTH) {
+                CanZoomIn = false;
+                new_width = MAX_WIDTH;
+            }
+
+            if (ItemWidth == new_width) {
+                return;
+            }
+
+            Console.WriteLine ("ItemWidth = {0}", new_width);
+            ItemWidth = new_width;
+
+            var handler = ZoomChanged;
+            if (handler != null) {
+                handler ();
+            }
+        }
+
+        private int last_zoom, before_last_zoom;
+        public void ZoomFit ()
+        {
+            if (document == null)
+                return;
+
+            zoom_manually_set = false;
+            // Try to fit all pages into the view, with a minimum size
+            var n = (double)document.Count;
+            var width = (double)Allocation.Width - 2 * Margin - 2*BorderWidth - 4; // HACK this -4 is total hack
+            var height = (double)Allocation.Height - 2 * Margin - 2*BorderWidth - 4; // same
+
+            var n_across = (int)Math.Ceiling (Math.Sqrt (width * n / height));
+            var best_width = (int) Math.Floor ((width - (n_across + 1) * ColumnSpacing - n_across*2*FocusLineWidth) / n_across);
+
+            // restrict to min/max
+            best_width = Math.Min (MAX_WIDTH, Math.Max (MIN_WIDTH, best_width));
+
+            if (best_width == ItemWidth) {
+                return;
+            }
+
+            // Total hack to avoid infinite SizeAllocate/ZoomFit loop
+            if (best_width == before_last_zoom || best_width == last_zoom) {
+                return;
+            }
+
+            before_last_zoom = last_zoom;
+            last_zoom = ItemWidth;
+
+            ItemWidth = best_width;
+        }
 
         private string selection_match_query;
         public void SetSelectionMatchQuery (string query)
@@ -273,27 +357,5 @@ namespace PdfMod
         }
 
         // CreateDragIcon(TreePath) : Gdk.Pixmap
-        
-        
-        public int PageColumns {
-            get { return columns; }
-            set {
-                columns = value;
-                UpdateItemWidth ();
-            }
-        }
-        
-        private void UpdateItemWidth ()
-        {
-            int last_item_width = ItemWidth;
-            int new_item_width = Math.Max (48,
-				(int) Math.Floor ((double)(Allocation.Width - 4*ColumnSpacing - 2*Margin) / Columns)
-			);
-
-            if (last_item_width != new_item_width) {
-            	ItemWidth = new_item_width;
-            }
-            Console.WriteLine ("width = {0}, borderWidth = {1}, ColumnSpacing = {2}, Margin = {3}, itemWidth = {4}", Allocation.Width, this.BorderWidth, this.ColumnSpacing, this.Margin, this.ItemWidth);
-        }
     }
 }

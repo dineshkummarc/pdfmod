@@ -99,6 +99,7 @@ namespace PdfMod
             vbox.PackStart (header_toolbar, false, false, 0);
             vbox.PackStart (query_box, false, false, 0);
             vbox.PackStart (IconView_sw, true, true, 0);
+            //vbox.PackStart (new CairoIconView (), true, true, 0);
             vbox.PackStart (StatusBar, false, true, 0);
             Window.Add (vbox);
 
