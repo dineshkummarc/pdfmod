@@ -22,11 +22,11 @@ namespace PdfMod
         private UndoManager undo_manager;
 
         private static string [] require_doc_actions = new string[] {
-            "SaveAction", "SaveAsAction", "UndoAction", "RedoAction", "SelectAllAction", "SelectEvensAction", "SelectOddsAction"
+            "SaveAction", "SaveAsAction", "UndoAction", "RedoAction", "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction"
         };
 
         private static string [] require_page_actions = new string[] {
-            "RemoveAction", "ExtractAction"
+            "RemoveAction", "ExtractAction", "ExportImagesAction", "RotateRightAction", "RotateLeftAction"
         };
 
         public GlobalActions (PdfMod app, ActionManager action_manager) : base (action_manager, "Global")
@@ -51,6 +51,7 @@ namespace PdfMod
                 new ActionEntry ("SelectAllAction", Stock.SelectAll, null, "<control>A", null, OnSelectAll),
                 new ActionEntry ("SelectEvensAction", null, Catalog.GetString ("Select Even Pages"), null, null, OnSelectEvens),
                 new ActionEntry ("SelectOddsAction", null, Catalog.GetString ("Select Odd Pages"), null, null, OnSelectOdds),
+                new ActionEntry ("SelectMatchingAction", null, Catalog.GetString ("Select Matching..."), "<control>F", null, OnSelectMatching),
                 new ActionEntry ("UndoAction", Stock.Undo, null, "<control>z", null, OnUndo),
                 new ActionEntry ("RedoAction", Stock.Redo, null, "<control>y", null, OnRedo),
 
@@ -61,7 +62,7 @@ namespace PdfMod
 
             Update ();
             app.IconView.SelectionChanged += OnChanged;
-            app.DocumentChanged += OnChanged;
+            app.DocumentLoaded += OnChanged;
             undo_manager.UndoChanged += OnChanged;
 
             AddUiFromFile ("UIManager.xml");
@@ -177,6 +178,19 @@ namespace PdfMod
             doc.Save (path);
             doc.Dispose ();
 
+            var new_app = new PdfMod ();
+            new_app.LoadPath (path, Path.Combine (
+                Path.GetDirectoryName (app.Document.SuggestedSavePath),
+                String.Format ("[{0}] {1}",
+                    GLib.Markup.EscapeText (GetPageSummary (pages)),
+                    Path.GetFileName (app.Document.SuggestedSavePath))
+            ));
+        }
+
+        // Return a simple, nice string describing the selected pages
+        //   e.g.  Page 1, or Page 3 - 6, or Page 2, 4, 6
+        private string GetPageSummary (List<Page> pages)
+        {
             string pages_summary = null;
             if (pages.Count == 1) {
                 // Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
@@ -194,19 +208,34 @@ namespace PdfMod
                 // Translators: {0} is the number of pages, eg 12 Pages
                 pages_summary = String.Format (Catalog.GetPluralString ("{0} Page", "{0} Pages}", pages.Count), pages.Count);
             }
-
-            var new_app = new PdfMod ();
-            new_app.LoadPath (path, Path.Combine (
-                Path.GetDirectoryName (app.Document.SuggestedSavePath),
-                String.Format ("[{0}] {1}",
-                    GLib.Markup.EscapeText (pages_summary),
-                    Path.GetFileName (app.Document.SuggestedSavePath))
-            ));
+            return pages_summary;
         }
 
         private void OnExportImages (object o, EventArgs args)
         {
-            throw new NotImplementedException ();
+            var pages = app.IconView.SelectedPages.ToList ();
+            var action = new ExportImagesAction (app.Document, pages);
+            if (action.ExportableImageCount == 0) {
+                Log.Information ("Found zero exportable images in the selected pages");
+                return;
+            }
+
+            var export_path_base = Path.Combine (
+                Path.GetDirectoryName (app.Document.SuggestedSavePath),
+                // Translators: This is used for creating a folder name, be careful!
+                String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.TitleOrFilename, GetPageSummary (pages))
+            );
+
+            var export_path = export_path_base;
+            int i = 1;
+            while (Directory.Exists (export_path)) {
+                export_path = String.Format ("{0} ({1})", export_path_base, i++);
+            }
+
+            Directory.CreateDirectory (export_path);
+
+            action.Do (export_path);
+            System.Diagnostics.Process.Start (export_path);
         }
 
         private void OnUndo (object o, EventArgs args)
@@ -237,6 +266,11 @@ namespace PdfMod
         private void OnSelectOdds (object o, EventArgs args)
         {
             app.IconView.SetPageSelectionMode (PageSelectionMode.Odds);
+        }
+
+        private void OnSelectMatching (object o, EventArgs args)
+        {
+            app.ToggleMatchQuery ();
         }
 
         private void OnRotateRight (object o, EventArgs args)

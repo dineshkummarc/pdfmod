@@ -34,6 +34,7 @@ namespace PdfMod
             get { return pages[index]; }
         }
 
+        public event System.Action Changed;
         public event Action<int, Page[]> PagesMoved;
         public event Action<Page []> PagesRemoved;
         public event Action<int, Page []> PagesAdded;
@@ -65,10 +66,15 @@ namespace PdfMod
             }
 
             UpdateThumbnails (pages);
+            OnChanged ();
         }
 
         public bool HasUnsavedChanged {
             get { return tmp_uri != null; }
+        }
+
+        public long FileSize {
+            get { return new System.IO.FileInfo (tmp_path ?? Path).Length; }
         }
 
         public void Dispose ()
@@ -86,11 +92,12 @@ namespace PdfMod
 
         public IEnumerable<Page> FindPagesMatching (string text)
         {
+            Console.WriteLine ("using poppler to look for {0}", text);
             using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")) {
                 for (int i = 0; i < doc.NPages; i++) {
                     using (var page = doc.GetPage (i)) {
                         var list = page.FindText (text);
-                        if (list != null) {
+                        if (list != null && list.Count > 0) {
                             yield return pages[i];
                             list.Dispose ();
                         }
@@ -120,6 +127,7 @@ namespace PdfMod
             if (handler != null) {
                 handler (to_index, move_pages);
             }
+            OnChanged ();
         }
 
         public int IndexOf (Page page)
@@ -141,6 +149,7 @@ namespace PdfMod
             if (handler != null) {
                 handler (remove_pages);
             }
+            OnChanged ();
         }
 
         public void Rotate (Page [] rotate_pages, int rotate_by)
@@ -149,7 +158,7 @@ namespace PdfMod
                 page.Pdf.Rotate += rotate_by;
             }
 
-            OnChanged (rotate_pages);
+            OnPagesChanged (rotate_pages);
         }
 
         public void Save (string uri)
@@ -185,6 +194,16 @@ namespace PdfMod
             var handler = PagesAdded;
             if (handler != null) {
                 handler (to_index, add_pages);
+            }
+            OnChanged ();
+        }
+
+        public string TitleOrFilename {
+            get {
+                var title = Pdf.Info.Title;
+                return String.IsNullOrEmpty (title)
+                    ? System.IO.Path.GetFileNameWithoutExtension (SuggestedSavePath)
+                    : title;
             }
         }
 
@@ -235,7 +254,7 @@ namespace PdfMod
             }
         }
 
-        private void OnChanged (Page [] changed_pages)
+        private void OnPagesChanged (Page [] changed_pages)
         {
             Reindex ();
             SaveTemp ();
@@ -244,6 +263,15 @@ namespace PdfMod
             var handler = PagesChanged;
             if (handler != null) {
                 handler (changed_pages);
+            }
+            OnChanged ();
+        }
+
+        private void OnChanged ()
+        {
+            var handler = Changed;
+            if (handler != null) {
+                handler ();
             }
         }
     }

@@ -217,6 +217,13 @@ namespace PdfMod
 
         #endregion
 
+        private string selection_match_query;
+        public void SetSelectionMatchQuery (string query)
+        {
+            selection_match_query = query;
+            SetPageSelectionMode (PageSelectionMode.Matching);
+        }
+
         public void SetPageSelectionMode (PageSelectionMode mode)
         {
             page_selection_mode = mode;
@@ -231,6 +238,10 @@ namespace PdfMod
             } else if (page_selection_mode == PageSelectionMode.All) {
                 SelectAll ();
             } else {
+                List<Page> matches = null;
+                if (page_selection_mode == PageSelectionMode.Matching) {
+                    matches = new List<Page> (app.Document.FindPagesMatching (selection_match_query));
+                }
                 int i = 1;
                 foreach (var iter in store.TreeIters) {
                     var path = store.GetPath (iter);
@@ -244,8 +255,7 @@ namespace PdfMod
                         select = (i % 2) == 1;
                         break;
                     case PageSelectionMode.Matching:
-                        // TODO implement
-                        select = false;
+                        select = matches.Contains (store.GetValue (iter, PdfListStore.PageColumn) as Page);
                         break;
                     }
 

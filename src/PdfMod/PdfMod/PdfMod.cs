@@ -41,6 +41,8 @@ namespace PdfMod
 
         private MenuBar menu_bar;
         private Gtk.Toolbar header_toolbar;
+        private Gtk.Label size_label;
+        private QueryBox query_box;
 
         public ActionManager ActionManager { get; private set; }
         public GlobalActions GlobalActions { get; private set; }
@@ -49,7 +51,7 @@ namespace PdfMod
         public PdfIconView IconView { get; private set; }
         public Document Document { get; private set; }
 
-        public event EventHandler DocumentChanged;
+        public event EventHandler DocumentLoaded;
 
         public PdfMod ()
         {
@@ -68,8 +70,15 @@ namespace PdfMod
             var IconView_sw = new Gtk.ScrolledWindow ();
             IconView_sw.Child = IconView;
 
+            query_box = new QueryBox (this);
+            query_box.NoShowAll = true;
+            query_box.Hide ();
+
             // Status bar
             StatusBar = new Gtk.Statusbar () { HasResizeGrip = true };
+            size_label = new Label ();
+            size_label.Xalign = 0;
+            StatusBar.PackStart (size_label, false, false, 0);
 
             // ActionManager
             ActionManager = new Hyena.Gui.ActionManager ();
@@ -87,12 +96,23 @@ namespace PdfMod
 
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
-            vbox.PackStart (header_toolbar, false, true, 0);
+            vbox.PackStart (header_toolbar, false, false, 0);
+            vbox.PackStart (query_box, false, false, 0);
             vbox.PackStart (IconView_sw, true, true, 0);
             vbox.PackStart (StatusBar, false, true, 0);
             Window.Add (vbox);
 
             Window.ShowAll ();
+        }
+
+        public void ToggleMatchQuery ()
+        {
+            if (query_box.Entry.HasFocus) {
+                query_box.Hide ();
+            } else {
+                query_box.Show ();
+                query_box.Entry.GrabFocus ();
+            }
         }
 
         public void Quit ()
@@ -184,16 +204,13 @@ namespace PdfMod
                 if (suggestedFilename != null) {
                     Document.SuggestedSavePath = suggestedFilename;
                 }
+                
                 IconView.SetDocument (Document);
+                Window.Title = Document.TitleOrFilename;
+                UpdateDocumentSize ();
 
-                var filename = System.IO.Path.GetFileName (Document.SuggestedSavePath);
-                if (Document.Pdf.Info == null || String.IsNullOrEmpty (Document.Pdf.Info.Title)) {
-                    Window.Title = filename;
-                } else {
-                    Window.Title = String.Format ("{0} ({1})", GLib.Markup.EscapeText (Document.Pdf.Info.Title), filename);
-                }
-
-                var handler = DocumentChanged;
+                Document.Changed += UpdateDocumentSize;
+                var handler = DocumentLoaded;
                 if (handler != null) {
                     handler (this, EventArgs.Empty);
                 }
@@ -206,6 +223,24 @@ namespace PdfMod
                 );
             } finally {
                 StatusBar.Remove (ctx_id, msg_id);
+            }
+        }
+
+        private string original_size_string = null;
+        private long original_size;
+        private void UpdateDocumentSize ()
+        {
+            var current_size = Document.FileSize;
+            if (original_size_string == null) {
+                size_label.Text = original_size_string = new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery ();
+                original_size = current_size;
+            } else if (current_size == original_size) {
+                size_label.Text = original_size_string;
+            } else {
+                size_label.Text = String.Format (Catalog.GetString ("{0} (originally {1})"),
+                    new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery (),
+                    original_size_string
+                );
             }
         }
 
