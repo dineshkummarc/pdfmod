@@ -1,7 +1,7 @@
 
-EXTRA_DIST =  
-
 # Warning: This is an automatically generated file, do not edit!
+#
+EXTRA_DIST =
 
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
@@ -47,6 +47,17 @@ POPPLER_SHARP_DLL_CONFIG_SOURCE=../../lib/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../../bin/PdfMod.exe.mdb
 
 endif
+
+desktopdir = $(datadir)/applications
+desktop_in_files = $(wildcard *.desktop.in)
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+
+%.desktop.in: %.desktop.in.in $(DESKTOP_FRAMEWORK_DEPS) $(DESKTOP_MIME_DEPS)
+	./update-desktop-file.sh "$<" "$(VERSION)" "$(UPDATE_MIME_FILES)" > "$@"
+
+@INTLTOOL_DESKTOP_RULE@
+
+EXTRA_DIST += $(desktop_in_files)
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
@@ -110,7 +121,8 @@ DLL_REFERENCES =  \
 	../../lib/Hyena.Gui.dll \
 	../../lib/poppler-sharp.dll
 
-CLEANFILES = $(PROGRAMFILES) $(BINARIES) 
+CLEANFILES = $(PROGRAMFILES) $(BINARIES) \
+	$(desktop_DATA)
 
 include $(top_srcdir)/Makefile.include
 
