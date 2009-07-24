@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-using Mono.Posix;
+using Mono.Unix;
 using Gtk;
 
 namespace PdfMod
@@ -17,8 +17,6 @@ namespace PdfMod
         public const int TooltipColumn = 1;
         public const int PageColumn = 2;
 
-        private Document document;
-
         public PdfListStore () : base (typeof (int), typeof (string), typeof (Page))
         {
             SetSortColumnId (SortColumn, SortType.Ascending);
@@ -27,7 +25,6 @@ namespace PdfMod
         public void SetDocument (Document document)
         {
             Clear ();
-            this.document = document;
 
             foreach (var page in document.Pages) {
                 AppendValues (GetValuesForPage (page));

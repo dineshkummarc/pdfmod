@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-using Mono.Posix;
+using Mono.Unix;
 
 using Hyena;
 using Hyena.Gui;

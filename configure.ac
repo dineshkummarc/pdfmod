@@ -1,9 +1,10 @@
 dnl Warning: This is an automatically generated file, do not edit!
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.54])
-AC_INIT([PdfMod], [0.1])
+AC_INIT([pdfmod], [0.1])
 AM_INIT_AUTOMAKE([foreign dist-bzip2 tar-ustar])
 AM_MAINTAINER_MODE
+AC_SUBST([ACLOCAL_AMFLAGS], ["-I . \${ACLOCAL_FLAGS}"])
 
 dnl pkg-config
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
@@ -11,10 +12,62 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
+AC_DEFUN([SHAMROCK_EXPAND_LIBDIR],
+[	
+	expanded_libdir=`(
+		case $prefix in 
+			NONE) prefix=$ac_default_prefix ;; 
+			*) ;; 
+		esac
+		case $exec_prefix in 
+			NONE) exec_prefix=$prefix ;; 
+			*) ;; 
+		esac
+		eval echo $libdir
+	)`
+	AC_SUBST(expanded_libdir)
+])
+
+AC_DEFUN([SHAMROCK_EXPAND_BINDIR],
+[
+	expanded_bindir=`(
+		case $prefix in 
+			NONE) prefix=$ac_default_prefix ;; 
+			*) ;; 
+		esac
+		case $exec_prefix in 
+			NONE) exec_prefix=$prefix ;; 
+			*) ;; 
+		esac
+		eval echo $bindir
+	)`
+	AC_SUBST(expanded_bindir)
+])
+
+AC_DEFUN([SHAMROCK_EXPAND_DATADIR],
+[
+	case $prefix in
+		NONE) prefix=$ac_default_prefix ;;
+		*) ;;
+	esac
+
+	case $exec_prefix in
+		NONE) exec_prefix=$prefix ;;
+		*) ;;
+	esac
+
+	expanded_datadir=`(eval echo $datadir)`
+	expanded_datadir=`(eval echo $expanded_datadir)`
+
+	AC_SUBST(expanded_datadir)
+])
+
+
 SHAMROCK_EXPAND_LIBDIR
 SHAMROCK_EXPAND_BINDIR
 SHAMROCK_EXPAND_DATADIR
 
+IT_PROG_INTLTOOL([0.35.0])
 AC_PROG_INSTALL
 
 AC_PATH_PROG(GMCS, gmcs, no)
@@ -57,8 +110,10 @@ DISTCHECK_CONFIGURE_FLAGS=""
 AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
 
 AC_CONFIG_FILES([
+po/Makefile.in
 src/Libraries/PdfSharp/Makefile
 src/PdfMod/pdfmod
+src/PdfMod/pdfmod.desktop
 src/PdfMod/Makefile
 Makefile
 

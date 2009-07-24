@@ -32,7 +32,6 @@ namespace PdfMod
         private Document document;
         private PdfListStore store;
         private PageSelectionMode page_selection_mode = PageSelectionMode.None;
-        private int columns = 2;
 
         public PdfListStore Store { get { return store; } }
         public bool CanZoomIn { get; private set; }

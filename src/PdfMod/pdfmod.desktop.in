@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+_Name=PDF Mod
+_Comment=Remove, extract, and rotate pages in PDF documents
+_GenericName=PDF Modifier
+Type=Application
+Exec=pdfmod
+Terminal=false
+Categories=GNOME;GTK;Utility;

@@ -47,7 +47,6 @@ namespace PdfMod.Actions
     public class ExportImagesAction
     {
         private List<ImageInfo> image_objects;
-        private Page [] pages;
 
         public ExportImagesAction (Document document, IEnumerable<Page> pages)
         {
@@ -146,7 +145,6 @@ namespace PdfMod.Actions
         {
             int width = image.ImageObject.Elements.GetInteger (PdfImage.Keys.Width);
             int height = image.ImageObject.Elements.GetInteger (PdfImage.Keys.Height);
-            int bitsPerComponent = image.ImageObject.Elements.GetInteger (PdfImage.Keys.BitsPerComponent);
 
             var decoder = new PdfSharp.Pdf.Filters.FlateDecode ();
             try {

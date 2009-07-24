@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Posix;
+using Mono.Unix;
 using Gtk;
 
 using Hyena;
@@ -133,14 +133,13 @@ namespace PdfMod
             chooser.AddButton (Stock.Open, ResponseType.Ok);
             chooser.DefaultResponse = ResponseType.Ok;
 
-            if (chooser.Run () == (int)ResponseType.Ok) {
-                string filename = chooser.Filename;
-                Log.DebugFormat ("Opening {0}", filename);
-                var new_app = app.Document == null ? app : new PdfMod ();
-                PdfMod.RunIdle (delegate { new_app.LoadPath (filename); });
-            }
-            
+            var response = chooser.Run ();
+            string filename = chooser.Filename;
             chooser.Destroy ();
+            
+            if (response == (int)ResponseType.Ok) {
+                PdfMod.RunIdle (delegate { app.LoadPath (filename); });
+            }
         }
 
         private void OnSave (object o, EventArgs args)
@@ -192,8 +191,7 @@ namespace PdfMod
             doc.Save (path);
             doc.Dispose ();
 
-            var new_app = new PdfMod ();
-            new_app.LoadPath (path, Path.Combine (
+            app.LoadPath (path, Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 String.Format ("[{0}] {1}",
                     GLib.Markup.EscapeText (GetPageSummary (pages)),
@@ -267,7 +265,7 @@ namespace PdfMod
             Gtk.AboutDialog.SetUrlHook ((dlg, link) => { System.Diagnostics.Process.Start (link); });
 
             var dialog = new Gtk.AboutDialog () {
-                Name = "PDF Mod",
+                ProgramName = "PDF Mod",
                 Version = "0.1",
                 //Website = "http://live.gnome.org/PdfMod",
                 //WebsiteLabel = Catalog.GetString ("Visit Website"),

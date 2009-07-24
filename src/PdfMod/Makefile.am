@@ -9,8 +9,7 @@ ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-
 ASSEMBLY = ../../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
-PROJECT_REFERENCES =  \
-	../../bin/PdfSharp.dll
+PROJECT_REFERENCES = ../../bin/PdfSharp.dll
 BUILD_DIR = ../../bin/
 
 PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
@@ -72,41 +71,39 @@ RESGEN=resgen2
 	
 all: $(ASSEMBLY) $(PROGRAMFILES) $(BINARIES) 
 
-FILES = \
-	PdfMod/PdfMod.cs \
-	PdfMod/AssemblyInfo.cs \
-	PdfMod/PdfIconView.cs \
-	PdfMod/PdfListStore.cs \
-	PdfMod/GlobalActions.cs \
-	PdfMod.Actions/RemoveAction.cs \
-	PdfMod/Document.cs \
-	PdfMod/Page.cs \
-	PdfMod.Actions/RotateAction.cs \
+FILES =  \
 	PdfMod.Actions/BasePageAction.cs \
 	PdfMod.Actions/ExportImagesAction.cs \
-	PdfMod/QueryBox.cs \
-	CairoIconView.cs \
+	PdfMod.Actions/MoveAction.cs \
+	PdfMod.Actions/RemoveAction.cs \
+	PdfMod.Actions/RotateAction.cs \
+	PdfMod/AssemblyInfo.cs \
 	PdfMod/CellRendererCairo.cs \
 	PdfMod/CellRendererPage.cs \
-	PdfMod.Actions/MoveAction.cs 
+	PdfMod/Document.cs \
+	PdfMod/GlobalActions.cs \
+	PdfMod/Page.cs \
+	PdfMod/PdfIconView.cs \
+	PdfMod/PdfListStore.cs \
+	PdfMod/PdfMod.cs \
+	PdfMod/QueryBox.cs 
 
 DATA_FILES = 
 
-RESOURCES = \
-	Resources/UIManager.xml 
+RESOURCES = Resources/UIManager.xml 
 
 EXTRAS = \
 	pdfmod.in 
 
 REFERENCES =  \
-	System \
-	Mono.Posix \
-	$(GTK_SHARP_20_LIBS) \
-	$(GLIB_SHARP_20_LIBS) \
-	$(GLADE_SHARP_20_LIBS) \
-	System.Drawing \
 	Mono.Cairo \
-	System.Core
+	Mono.Posix \
+	-pkg:glade-sharp-2.0 \
+	-pkg:glib-sharp-2.0 \
+	-pkg:gtk-sharp-2.0 \
+	System \
+	System.Core \
+	System.Drawing
 
 DLL_REFERENCES =  \
 	../../lib/Hyena.dll \

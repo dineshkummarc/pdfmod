@@ -1,6 +1,6 @@
 using System;
 
-using Mono.Posix;
+using Mono.Unix;
 using Gtk;
 
 using Hyena;
@@ -99,7 +99,6 @@ namespace PdfMod
             vbox.PackStart (header_toolbar, false, false, 0);
             vbox.PackStart (query_box, false, false, 0);
             vbox.PackStart (IconView_sw, true, true, 0);
-            //vbox.PackStart (new CairoIconView (), true, true, 0);
             vbox.PackStart (StatusBar, false, true, 0);
             Window.Add (vbox);
 
@@ -169,24 +168,30 @@ namespace PdfMod
         private void LoadFiles ()
         {
             var files = ApplicationContext.CommandLine.Files;
-            if (files.Count > 1) {
+            if (files.Count == 1) {
+                LoadPath (files[0]);
+            } else if (files.Count > 1) {
                 // Make sure the user wants to open N windows
+                var message_dialog = new Hyena.Widgets.HigMessageDialog (
+                    Window, DialogFlags.Modal, MessageType.Question, ButtonsType.None,
+                    String.Format (Catalog.GetPluralString (
+                        "Continue, opening {0} document in separate windows?", "Continue, opening all {0} documents in separate windows?", files.Count),
+                        files.Count),
+                    String.Empty);
+                message_dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
+                message_dialog.AddButton (Catalog.GetString ("Open _First"), ResponseType.Accept, false);
+                message_dialog.AddButton (Catalog.GetString ("Open _All"), ResponseType.Ok, true);
+                var response = message_dialog.Run ();
+                message_dialog.Destroy ();
 
-                // Even though always {0} will always be > 1, we use GetPluralString
-                // because of languages with different pluralization patterns.
-                /*String.Format (Catalog.GetPluralString (
-                    "You are opening {0} document, which will open {0} window.  Continue?",
-                    "You are opening {0} documents, which will open {0} windows.  Continue?", files.Count),
-                     files.Count);*/
-                //"Cancel" "Open First" "Open All"
+                if ((Gtk.ResponseType)response == Gtk.ResponseType.Ok) {
+                    foreach (string file in files) {
+                        LoadPath (file);
+                    }
+                } else if ((Gtk.ResponseType)response == Gtk.ResponseType.Accept) {
+                    LoadPath (files[0]);
+                }
             }
-
-            /*foreach (string file in files) {
-                new PdfMod ().LoadUri (file);
-            }*/
-
-            var uri = "/home/gabe/Projects/PdfMod/bin/Debug/test.pdf";
-            LoadPath (uri);
         }
 
         // TODO support password protected docs
@@ -197,6 +202,12 @@ namespace PdfMod
 
         public void LoadPath (string path, string suggestedFilename)
         {
+            // One document per window
+            if (Document != null) {
+                new PdfMod ().LoadPath (path, suggestedFilename);
+                return;
+            }
+
             var ctx_id = StatusBar.GetContextId ("loading");
             var msg_id = StatusBar.Push (1, String.Format (Catalog.GetString ("Loading {0}"), GLib.Markup.EscapeText (path)));
 
@@ -219,7 +230,7 @@ namespace PdfMod
                 Document = null;
                 Hyena.Log.Exception (e);
                 Hyena.Log.Error (
-                    Catalog.GetString ("Error Loading PDF"),
+                    Catalog.GetString ("Error Loading Document"),
                     String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (path ?? "")), true
                 );
             } finally {

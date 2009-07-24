@@ -1,7 +1,7 @@
 
 using System;
 
-using Mono.Posix;
+using Mono.Unix;
 using Gtk;
 
 namespace PdfMod
