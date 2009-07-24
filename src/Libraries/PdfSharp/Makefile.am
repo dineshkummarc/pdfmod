@@ -1,5 +1,5 @@
 
-EXTRA_DIST =  
+EXTRA_DIST = 
 
 # Warning: This is an automatically generated file, do not edit!
 
@@ -30,7 +30,6 @@ PDFSHARP_DLL_MDB_SOURCE=../../../bin/PdfSharp.dll.mdb
 endif
 
 AL=al2
-SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
 
 PROGRAMFILES = \
 	$(PDFSHARP_DLL_MDB)  
@@ -336,14 +335,11 @@ FILES = \
 
 DATA_FILES = 
 
-RESOURCES = \
-	PdfSharp.Forms/PagePreview.resx,PdfSharp.Forms.PagePreview.resources \
-	PdfSharp.Forms/PagePreviewCanvas.resx,PdfSharp.Forms.PagePreviewCanvas.resources \
-	Resources/Messages.de.resx,PdfSharp.Resources.Messages.de.resources \
-	Resources/Messages.resx,PdfSharp.Resources.Messages.resources 
+RESOURCES = 
 
 EXTRAS = \
 	Resources/images 
+
 
 REFERENCES =  \
 	System \
