@@ -16,6 +16,8 @@ PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
 HYENA_DLL_SOURCE=../../lib/Hyena.dll
 HYENA_DLL_MDB_SOURCE=../../lib/Hyena.dll.mdb
+MONO_DATA_SQLITE_DLL_SOURCE=../../lib/Mono.Data.Sqlite.dll
+MONO_DATA_SQLITE_DLL_MDB_SOURCE=../../lib/Mono.Data.Sqlite.dll.mdb
 HYENA_GUI_DLL_SOURCE=../../lib/Hyena.Gui.dll
 HYENA_GUI_DLL_CONFIG_SOURCE=../../lib/Hyena.Gui.dll.config
 HYENA_GUI_DLL_MDB_SOURCE=../../lib/Hyena.Gui.dll.mdb
@@ -39,6 +41,8 @@ PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
 HYENA_DLL_SOURCE=../../lib/Hyena.dll
 HYENA_DLL_MDB_SOURCE=../../lib/Hyena.dll.mdb
+MONO_DATA_SQLITE_DLL_SOURCE=../../lib/Mono.Data.Sqlite.dll
+MONO_DATA_SQLITE_DLL_MDB_SOURCE=../../lib/Mono.Data.Sqlite.dll.mdb
 HYENA_GUI_DLL_SOURCE=../../lib/Hyena.Gui.dll
 HYENA_GUI_DLL_CONFIG_SOURCE=../../lib/Hyena.Gui.dll.config
 HYENA_GUI_DLL_MDB_SOURCE=../../lib/Hyena.Gui.dll.mdb
@@ -67,6 +71,8 @@ PROGRAMFILES = \
 	$(PDFSHARP_DLL_MDB) \
 	$(HYENA_DLL) \
 	$(HYENA_DLL_MDB) \
+	$(MONO_DATA_SQLITE_DLL) \
+	$(MONO_DATA_SQLITE_DLL_MDB) \
 	$(HYENA_GUI_DLL) \
 	$(HYENA_GUI_DLL_CONFIG) \
 	$(HYENA_GUI_DLL_MDB) \
@@ -118,6 +124,7 @@ REFERENCES =  \
 
 DLL_REFERENCES =  \
 	../../lib/Hyena.dll \
+	../../lib/Mono.Data.Sqlite.dll \
 	../../lib/Hyena.Gui.dll \
 	../../lib/poppler-sharp.dll
 
@@ -130,6 +137,8 @@ PDFSHARP_DLL = $(BUILD_DIR)/PdfSharp.dll
 PDFSHARP_DLL_MDB = $(BUILD_DIR)/PdfSharp.dll.mdb
 HYENA_DLL = $(BUILD_DIR)/Hyena.dll
 HYENA_DLL_MDB = $(BUILD_DIR)/Hyena.dll.mdb
+MONO_DATA_SQLITE_DLL = $(BUILD_DIR)/Mono.Data.Sqlite.dll
+MONO_DATA_SQLITE_DLL_MDB = $(BUILD_DIR)/Mono.Data.Sqlite.dll.mdb
 HYENA_GUI_DLL = $(BUILD_DIR)/Hyena.Gui.dll
 HYENA_GUI_DLL_CONFIG = $(BUILD_DIR)/Hyena.Gui.dll.config
 HYENA_GUI_DLL_MDB = $(BUILD_DIR)/Hyena.Gui.dll.mdb
@@ -140,6 +149,8 @@ PDFMOD = $(BUILD_DIR)/pdfmod
 
 $(eval $(call emit-deploy-target,HYENA_DLL))
 $(eval $(call emit-deploy-target,HYENA_DLL_MDB))
+$(eval $(call emit-deploy-target,MONO_DATA_SQLITE_DLL))
+$(eval $(call emit-deploy-target,MONO_DATA_SQLITE_DLL_MDB))
 $(eval $(call emit-deploy-target,HYENA_GUI_DLL))
 $(eval $(call emit-deploy-target,HYENA_GUI_DLL_CONFIG))
 $(eval $(call emit-deploy-target,HYENA_GUI_DLL_MDB))

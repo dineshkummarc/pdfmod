@@ -17,6 +17,8 @@ EXTRA_DIST = \
 	lib/Hyena.Gui.dll \
 	lib/Hyena.Gui.dll.mdb \
 	lib/Hyena.Gui.dll.config \
+	lib/Mono.Data.Sqlite.dll \
+	lib/Mono.Data.Sqlite.dll.mdb \
 	lib/poppler-sharp.dll \
 	lib/poppler-sharp.dll.config \
 	intltool-extract.in \
