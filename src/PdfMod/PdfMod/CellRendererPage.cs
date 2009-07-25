@@ -59,7 +59,7 @@ namespace PdfMod
                 var h = height + (height % scale_every);
                 cache_obj = Page.Document.GetSurface (Page, (int)w, (int)h);
                 surface = cache_obj.Surface;
-                
+
                 // Put it in the cache
                 surface_cache.Add (Page, cache_obj);
             }

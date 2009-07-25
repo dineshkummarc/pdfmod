@@ -11,7 +11,7 @@ namespace PdfMod
         private PdfMod app;
         private HBox hbox;
         public Entry Entry { get; private set; }
-        
+
         public QueryBox (PdfMod app)
         {
             this.app = app;
@@ -30,13 +30,13 @@ namespace PdfMod
             close_button.Clicked += delegate {
                 Hide ();
             };
-            
+
             hbox.PackStart (Entry, true, true, 0);
             hbox.PackStart (query_button, false, false, 0);
             hbox.PackStart (close_button, false, false, 0);
             Child = hbox;
 
-            KeyPressEvent += delegate(object o, KeyPressEventArgs args) {
+            KeyPressEvent += delegate (object o, KeyPressEventArgs args) {
                 if (args.Event.Key == Gdk.Key.Escape) {
                     Hide ();
                 }
@@ -64,11 +64,11 @@ namespace PdfMod
         {
             if (!changing_style) {
                 changing_style = true;
-                ModifyBg(StateType.Normal, Style.Background (StateType.Selected));
+                ModifyBg (StateType.Normal, Style.Background (StateType.Selected));
                 changing_style = false;
             }
         }
-        
+
         protected override bool OnExposeEvent (Gdk.EventExpose evnt)
         {
             GdkWindow.DrawRectangle (Style.ForegroundGC (StateType.Normal), false, 0, 0, Allocation.Width - 1, Allocation.Height - 1);

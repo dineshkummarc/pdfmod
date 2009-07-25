@@ -30,7 +30,7 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
 // THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 using System;
@@ -43,7 +43,6 @@ using PdfSharp.Pdf.Advanced;
 
 namespace PdfMod.Actions
 {
-    // 
     public class ExportImagesAction
     {
         private List<ImageInfo> image_objects;
@@ -70,7 +69,7 @@ namespace PdfMod.Actions
                 var resources = page.Pdf.Elements.GetDictionary ("/Resources");
                 if (resources == null)
                     continue;
-                
+
                 var x_objects = resources.Elements.GetDictionary ("/XObject");
                 if (x_objects == null)
                     continue;
@@ -81,7 +80,7 @@ namespace PdfMod.Actions
                     var reference = item as PdfReference;
                     if (reference == null)
                         continue;
-                        
+
                     var x_object = reference.Value as PdfDictionary;
                     if (x_object != null && x_object.Elements.GetString ("/Subtype") == "/Image") {
                         yield return new ImageInfo () { Page = page, ImageObject = x_object, PageIndex = i++ };
@@ -123,7 +122,7 @@ namespace PdfMod.Actions
                     image.Page.Index, image.PageIndex, name_fragment)
             );
         }
-    
+
         /// <summary>
         /// Exports a JPEG image.
         /// </summary>

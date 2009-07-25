@@ -63,7 +63,7 @@ namespace PdfMod
                 new ActionEntry ("ZoomInAction", Stock.ZoomIn, null, "<control>plus", null, OnZoomIn),
                 new ActionEntry ("ZoomOutAction", Stock.ZoomOut, null, "<control>minus", null, OnZoomOut),
                 new ActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit),
-                
+
                 new ActionEntry ("HelpMenuAction", null, Catalog.GetString ("_Help"), null, null, null),
                 new ActionEntry ("AboutAction", Stock.About, null, null, null, OnAbout),
 
@@ -148,7 +148,7 @@ namespace PdfMod
             var response = chooser.Run ();
             string filename = chooser.Filename;
             chooser.Destroy ();
-            
+
             if (response == (int)ResponseType.Ok) {
                 PdfMod.RunIdle (delegate { app.LoadPath (filename); });
             }
@@ -175,7 +175,7 @@ namespace PdfMod
             var response = chooser.Run ();
             string filename = chooser.Filename;
             chooser.Destroy ();
-            
+
             if (response == (int)ResponseType.Ok) {
                 Log.DebugFormat ("Saving {0} to {1}", app.Document.Uri, filename);
                 app.Document.Save (filename);

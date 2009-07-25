@@ -50,7 +50,7 @@ namespace PdfMod
                 tmp_uri = new Uri (uri).AbsoluteUri;
                 tmp_path = new Uri (uri).AbsolutePath;
             }
-            
+
             Uri = new Uri (uri).AbsoluteUri;
             SuggestedSavePath = Path = new Uri (uri).AbsolutePath;
 

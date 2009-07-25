@@ -34,7 +34,7 @@ namespace PdfMod.Actions
 
             old_indices = null;*/
         }
-        
+
         public override void Redo ()
         {
             if (old_indices != null) {

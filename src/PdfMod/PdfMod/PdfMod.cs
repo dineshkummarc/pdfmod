@@ -60,7 +60,7 @@ namespace PdfMod
             Window = new Gtk.Window (WindowType.Toplevel);
             Window.Title = Catalog.GetString ("PDF Mod");
             Window.SetSizeRequest (640, 480);
-            Window.DeleteEvent += delegate(object o, DeleteEventArgs args) {
+            Window.DeleteEvent += delegate (object o, DeleteEventArgs args) {
                 Quit ();
                 args.RetVal = true;
             };
@@ -216,7 +216,7 @@ namespace PdfMod
                 if (suggestedFilename != null) {
                     Document.SuggestedSavePath = suggestedFilename;
                 }
-                
+
                 IconView.SetDocument (Document);
                 Window.Title = Document.TitleOrFilename;
                 UpdateDocumentSize ();
