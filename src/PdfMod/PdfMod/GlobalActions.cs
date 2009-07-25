@@ -45,6 +45,7 @@ namespace PdfMod
                 new ActionEntry ("SaveAsAction", Gtk.Stock.SaveAs, null, "<control><shift>S", Catalog.GetString ("Save this document to a new file"), OnSaveAs),
 
                 new ActionEntry ("FileMenuAction", null, Catalog.GetString ("_File"), null, null, null),
+                new ActionEntry ("RecentMenuAction", null, Catalog.GetString ("Recent _Files"), null, null, null),
                 new ActionEntry ("CloseAction", Gtk.Stock.Close, null, "<control>W", null, OnClose),
                 new ActionEntry ("RemoveAction", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
                 new ActionEntry ("ExtractAction", Gtk.Stock.New, null, null, null, OnExtractPages),
@@ -98,6 +99,18 @@ namespace PdfMod
 
             item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/CloseAction");
             item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.q, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
+
+            // Set up recent documents menu
+            MenuItem recent_item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/RecentMenuAction") as MenuItem;
+            var recent_chooser_item = new RecentChooserMenu (RecentManager.Default) {
+                Filter = new RecentFilter (),
+                SortType = RecentSortType.Mru
+            };
+            recent_chooser_item.Filter.AddPattern ("*.pdf");
+            recent_chooser_item.ItemActivated += delegate {
+                PdfMod.RunIdle (delegate { app.LoadPath (recent_chooser_item.CurrentUri); });
+            };
+            recent_item.Submenu = recent_chooser_item;
         }
 
         private void OnChanged (object o, EventArgs args)

@@ -4,6 +4,7 @@
       <menuitem action="OpenAction"/>
       <menuitem action="SaveAction"/>
       <menuitem action="SaveAsAction"/>
+      <menuitem action="RecentMenuAction"/>
       <separator/>
       <menuitem action="PropertiesAction"/>
       <separator/>
