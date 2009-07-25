@@ -68,8 +68,8 @@ namespace PdfMod
             Spacing = 0;
 
             var page_cell = new CellRendererPage ();
-            AddAttribute (page_cell, "page", PdfListStore.PageColumn);
             PackStart (page_cell, true);
+            AddAttribute (page_cell, "page", PdfListStore.PageColumn);
 
             // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
             EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
