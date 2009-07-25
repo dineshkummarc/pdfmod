@@ -199,13 +199,15 @@ namespace PdfMod
             OnChanged ();
         }
 
-        public string TitleOrFilename {
+        public string Title {
             get {
                 var title = Pdf.Info.Title;
-                return String.IsNullOrEmpty (title)
-                    ? System.IO.Path.GetFileNameWithoutExtension (SuggestedSavePath)
-                    : title;
+                return String.IsNullOrEmpty (title) ? null : title;
             }
+        }
+
+        public string Filename {
+            get { return System.IO.Path.GetFileName (SuggestedSavePath); }
         }
 
         private Poppler.Document poppler_doc;

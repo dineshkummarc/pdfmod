@@ -268,7 +268,7 @@ namespace PdfMod
             var export_path_base = Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 // Translators: This is used for creating a folder name, be careful!
-                String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.TitleOrFilename, GetPageSummary (pages))
+                String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages))
             );
 
             var export_path = export_path_base;

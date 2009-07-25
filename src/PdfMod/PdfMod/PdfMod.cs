@@ -222,7 +222,7 @@ namespace PdfMod
                 }
 
                 IconView.SetDocument (Document);
-                Window.Title = Document.TitleOrFilename;
+                UpdateTitle ();
                 UpdateDocumentSize ();
 
                 Document.Changed += UpdateDocumentSize;
@@ -240,6 +240,13 @@ namespace PdfMod
             } finally {
                 StatusBar.Remove (ctx_id, msg_id);
             }
+        }
+
+        public void UpdateTitle ()
+        {
+            var title = Document.Title;
+            var filename = Document.Filename;
+            Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
         }
 
         private string original_size_string = null;
