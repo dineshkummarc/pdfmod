@@ -65,15 +65,17 @@ namespace PdfMod
             }
 
             double scale = Math.Min (width / (double)surface.Width, height / (double)surface.Height);
+            double doc_width = scale * surface.Width;
+            double doc_height = scale * surface.Height;
 
             // Center the thumbnail if either dimension is smaller than the cell's
-            if (surface.Width * scale < width || surface.Height * scale < height) {
-                var x = ((width - surface.Width * scale) / 2.0) - border_width;
-                var y = ((height - surface.Height * scale) / 2.0) - border_width;
+            if (doc_width < width || doc_height < height) {
+                var x = ((width - doc_width) / 2.0) - border_width;
+                var y = ((height - doc_height) / 2.0) - border_width;
                 cr.Translate (x, y);
             }
 
-            PaintDocumentBorder (cr, scale * surface.Width, scale * surface.Height, border_width);
+            PaintDocumentBorder (cr, doc_width, doc_height, border_width);
 
             // Scale down the surface if it's not exactly the right size
             if (scale < 1) {
@@ -91,9 +93,11 @@ namespace PdfMod
             var thin = 0.25 * border_width;
             var thick = 0.75 * border_width;
 
+            cr.Rectangle (thick + thin/2, thick + thin/2, doc_width, doc_height);
+            cr.Color = new Color (1, 1, 1);
+            cr.FillPreserve ();
             cr.Color = new Color (0, 0, 0);
             cr.LineWidth = thin;
-            cr.Rectangle (thick + thin/2, thick + thin/2, doc_width, doc_height);
             cr.Stroke ();
 
             var offset = .02 * doc_width;
