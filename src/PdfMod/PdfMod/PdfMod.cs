@@ -222,10 +222,9 @@ namespace PdfMod
                 }
 
                 IconView.SetDocument (Document);
-                UpdateTitle ();
-                UpdateDocumentSize ();
+                Document.Changed += UpdateForDocument;
+                UpdateForDocument ();
 
-                Document.Changed += UpdateDocumentSize;
                 var handler = DocumentLoaded;
                 if (handler != null) {
                     handler (this, EventArgs.Empty);
@@ -241,17 +240,9 @@ namespace PdfMod
                 StatusBar.Remove (ctx_id, msg_id);
             }
         }
-
-        public void UpdateTitle ()
-        {
-            var title = Document.Title;
-            var filename = Document.Filename;
-            Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
-        }
-
         private string original_size_string = null;
         private long original_size;
-        private void UpdateDocumentSize ()
+        private void UpdateForDocument ()
         {
             var current_size = Document.FileSize;
             if (original_size_string == null) {
@@ -265,6 +256,10 @@ namespace PdfMod
                     original_size_string
                 );
             }
+
+            var title = Document.Title;
+            var filename = Document.Filename;
+            Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
         }
 
         public static string GetTmpFilename ()

@@ -34,6 +34,36 @@ namespace PdfMod
             get { return pages[index]; }
         }
 
+        public string Title {
+            get {
+                var title = Pdf.Info.Title;
+                return String.IsNullOrEmpty (title) ? null : title;
+            }
+            set {
+                Pdf.Info.Title = value;
+                StartSaveTempTimeout ();
+            }
+        }
+
+        public string Author {
+            get { return Pdf.Info.Author; }
+            set { Pdf.Info.Author = value; StartSaveTempTimeout (); }
+        }
+
+        public string Keywords {
+            get { return Pdf.Info.Keywords; }
+            set { Pdf.Info.Keywords = value; StartSaveTempTimeout (); }
+        }
+
+        public string Subject {
+            get { return Pdf.Info.Subject; }
+            set { Pdf.Info.Subject = value; StartSaveTempTimeout (); }
+        }
+
+        public string Filename {
+            get { return System.IO.Path.GetFileName (SuggestedSavePath); }
+        }
+
         public event System.Action Changed;
         public event Action<int, Page[]> PagesMoved;
         public event Action<Page []> PagesRemoved;
@@ -71,7 +101,7 @@ namespace PdfMod
         }
 
         public bool HasUnsavedChanged {
-            get { return tmp_uri != null; }
+            get { return tmp_uri != null || save_timeout_id != 0; }
         }
 
         public long FileSize {
@@ -127,7 +157,6 @@ namespace PdfMod
             if (handler != null) {
                 handler (to_index, move_pages);
             }
-            OnChanged ();
         }
 
         public int IndexOf (Page page)
@@ -149,7 +178,6 @@ namespace PdfMod
             if (handler != null) {
                 handler (remove_pages);
             }
-            OnChanged ();
         }
 
         public void Rotate (Page [] rotate_pages, int rotate_by)
@@ -196,18 +224,6 @@ namespace PdfMod
             if (handler != null) {
                 handler (to_index, add_pages);
             }
-            OnChanged ();
-        }
-
-        public string Title {
-            get {
-                var title = Pdf.Info.Title;
-                return String.IsNullOrEmpty (title) ? null : title;
-            }
-        }
-
-        public string Filename {
-            get { return System.IO.Path.GetFileName (SuggestedSavePath); }
         }
 
         private Poppler.Document poppler_doc;
@@ -250,6 +266,23 @@ namespace PdfMod
             }
         }
 
+        private uint save_timeout_id = 0;
+        private void StartSaveTempTimeout ()
+        {
+            if (save_timeout_id != 0) {
+                GLib.Source.Remove (save_timeout_id);
+            }
+            
+            save_timeout_id = GLib.Timeout.Add (100, OnSaveTempTimeout);
+        }
+
+        private bool OnSaveTempTimeout ()
+        {
+            save_timeout_id = 0;
+            SaveTemp ();
+            return false;
+        }
+
         private void SaveTemp ()
         {
             try {
@@ -265,6 +298,8 @@ namespace PdfMod
                 Log.DebugFormat ("Saved tmp file to {0}", tmp_path);
             } catch (Exception e) {
                 Log.Exception ("Failed to save tmp document", e);
+            } finally {
+                OnChanged ();
             }
         }
 

@@ -11,7 +11,7 @@ namespace PdfMod
 {
     public class CellRendererPage : CellRendererCairo
     {
-        const int scale_every = 200;
+        const int scale_every = 400;
 
         private ThumbnailLruCache surface_cache;
 
@@ -38,7 +38,7 @@ namespace PdfMod
             width -= 2 * border_width;
             height -= 2 * border_width;
 
-            //Console.WriteLine ("SurfaceCache has HitRatio = {0} ({1} hits, {2} misses)", surface_cache.HitRatio, surface_cache.Hits, surface_cache.Misses);
+            //Console.WriteLine ("SurfaceCache has HitRatio = {0:0.00} ({1} hits, {2} misses, max_count = {3})", surface_cache.HitRatio, surface_cache.Hits, surface_cache.Misses, surface_cache.MaxCount);
             PageThumbnail cache_obj;
             ImageSurface surface = null;
             if (surface_cache.TryGetValue (Page, out cache_obj)) {

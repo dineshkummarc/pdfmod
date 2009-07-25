@@ -64,7 +64,6 @@ namespace PdfMod
                 new ActionEntry ("ViewMenuAction", null, Catalog.GetString ("_View"), null, null, null),
                 new ActionEntry ("ZoomInAction", Stock.ZoomIn, null, "<control>plus", null, OnZoomIn),
                 new ActionEntry ("ZoomOutAction", Stock.ZoomOut, null, "<control>minus", null, OnZoomOut),
-                new ActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit),
 
                 new ActionEntry ("HelpMenuAction", null, Catalog.GetString ("_Help"), null, null, null),
                 new ActionEntry ("AboutAction", Stock.About, null, null, null, OnAbout),
@@ -73,7 +72,8 @@ namespace PdfMod
             );
 
             AddImportant (
-                new ToggleActionEntry ("PropertiesAction", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false)
+                new ToggleActionEntry ("PropertiesAction", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
+                new ToggleActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true)
             );
 
             this["RotateRightAction"].IconName = "object-rotate-right";
@@ -82,7 +82,10 @@ namespace PdfMod
             Update ();
             app.IconView.SelectionChanged += OnChanged;
             app.IconView.ZoomChanged += delegate { Update (); };
-            app.DocumentLoaded += OnChanged;
+            app.DocumentLoaded += (o, a) => {
+                app.Document.Changed += () => Update ();
+                Update ();
+            };
             undo_manager.UndoChanged += OnChanged;
 
             AddUiFromFile ("UIManager.xml");
@@ -202,6 +205,9 @@ namespace PdfMod
         private void OnProperties (object o, EventArgs args)
         {
             app.EditorBox.Visible = (this["PropertiesAction"] as ToggleAction).Active;
+            if (app.EditorBox.Visible) {
+                app.EditorBox.GrabFocus ();
+            }
         }
 
         private void OnRemove (object o, EventArgs args)
@@ -357,16 +363,21 @@ namespace PdfMod
 
         private void OnRotateRight (object o, EventArgs args)
         {
-            var action = new RotateAction (app.Document, app.IconView.SelectedPages, 90);
-            action.Do ();
-            undo_manager.AddUndoAction (action);
+            Rotate (90);
         }
 
         private void OnRotateLeft (object o, EventArgs args)
         {
-            var action = new RotateAction (app.Document, app.IconView.SelectedPages, -90);
-            action.Do ();
-            undo_manager.AddUndoAction (action);
+            Rotate (-90);
+        }
+
+        private void Rotate (int degrees)
+        {
+            if (!(app.Window.Focus is Gtk.Entry)) {
+                var action = new RotateAction (app.Document, app.IconView.SelectedPages, degrees);
+                action.Do ();
+                undo_manager.AddUndoAction (action);
+            }
         }
 
         private void OnClose (object o, EventArgs args)

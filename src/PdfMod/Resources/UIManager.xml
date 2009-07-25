@@ -40,9 +40,10 @@
 
   <toolbar name="HeaderToolbar">
     <toolitem action="OpenAction"/>
-    <toolitem action="SaveAsAction"/>
     <separator/>
+    <toolitem action="SaveAsAction"/>
     <toolitem action="PropertiesAction"/>
+    <separator/>
     <toolitem action="ExtractAction"/>
     <toolitem action="RemoveAction"/>
     <toolitem action="RotateLeftAction"/>

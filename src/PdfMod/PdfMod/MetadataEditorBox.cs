@@ -9,9 +9,9 @@ namespace PdfMod
     public class MetadataEditorBox : EventBox
     {
         private PdfMod app;
-        private VBox vbox;
         private Table table;
-        private PdfSharp.Pdf.PdfDocumentInformation info;
+        private Button revert_button;
+        private Document doc;
 
         private TextProperty [] properties;
         private TextProperty title, author, keywords, subject;
@@ -21,20 +21,17 @@ namespace PdfMod
             this.app = app;
             app.DocumentLoaded += HandleDocumentLoaded;
 
-            vbox = new VBox ();
-            vbox.BorderWidth = 6;
-            Child = vbox;
-
             table = new Table (2, 5, false) {
                 RowSpacing = 6,
-                ColumnSpacing = 6
+                ColumnSpacing = 6,
+                BorderWidth = 6
             };
-            vbox.PackStart (table, true, true, 0);
+            Child = table;
 
             BuildEditor ();
             BuildButtons ();
 
-            KeyPressEvent += delegate (object o, KeyPressEventArgs args) {
+            KeyPressEvent += (o, args) => {
                 if (args.Event.Key == Gdk.Key.Escape) {
                     Hide ();
                 }
@@ -46,14 +43,10 @@ namespace PdfMod
 
         private void BuildEditor ()
         {
-            title = new TextProperty (Catalog.GetString ("_Title:"), t => {
-                info.Title = t;
-                app.UpdateTitle ();
-            });
-
-            author   = new TextProperty (Catalog.GetString ("_Author:"),   t => info.Author = t);
-            keywords = new TextProperty (Catalog.GetString ("_Keywords:"), t => info.Keywords = t);
-            subject  = new TextProperty (Catalog.GetString ("_Subject:"),  t => info.Subject = t);
+            title    = new TextProperty (Catalog.GetString ("_Title:"),    t => doc.Title = t);
+            author   = new TextProperty (Catalog.GetString ("_Author:"),   t => doc.Author = t);
+            keywords = new TextProperty (Catalog.GetString ("_Keywords:"), t => doc.Keywords = t);
+            subject  = new TextProperty (Catalog.GetString ("_Subject:"),  t => doc.Subject = t);
 
             properties = new TextProperty [] { title, author, keywords, subject };
 
@@ -66,16 +59,20 @@ namespace PdfMod
                     column = 0;
                     row++;
                 }
+
+                property.Entry.Changed += delegate { UpdateSensitivity (); };
             }
         }
 
         private void BuildButtons ()
         {
-            var revert_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("Revert Properties"), "revert");
-            revert_button.TooltipText = Catalog.GetString ("Change the document's properties back to the original values");
+            revert_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Revert Properties"), "revert") {
+                TooltipText = Catalog.GetString ("Change the document's properties back to the original values")
+            };
             revert_button.Clicked += HandleRevert;
 
-            var close_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("Close"), Gtk.Stock.Close);
+
+            var close_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Close"), Gtk.Stock.Close);
             close_button.TooltipText = Catalog.GetString ("Hide the document's properties");
             close_button.Clicked += delegate {
                 Hide ();
@@ -88,15 +85,21 @@ namespace PdfMod
         private void UpdateSensitivity ()
         {
             Sensitive = app.Document != null;
+
+            bool have_changes = false;
+            foreach (var prop in properties) {
+                have_changes |= prop.HasChanges;
+            }
+            revert_button.Sensitive = have_changes;
         }
 
         #region Event handlers
 
-        private void HandleDocumentLoaded(object sender, EventArgs e)
+        private void HandleDocumentLoaded (object o, EventArgs e)
         {
-            UpdateSensitivity ();
+            doc = app.Document;
             var pdf = app.Document.Pdf;
-            info = pdf.Info;
+            var info = pdf.Info;
             
             Console.WriteLine ("Author           = {0}", info.Author);
             Console.WriteLine ("CreationDate     = {0}", info.CreationDate);
@@ -127,10 +130,11 @@ namespace PdfMod
             Console.WriteLine ("HideToolbar      = {0}", prefs.HideToolbar);
             Console.WriteLine ("HideWindowUI     = {0}", prefs.HideWindowUI);
 
-            title.SetDefault (info.Title);
-            author.SetDefault (info.Author);
-            keywords.SetDefault (info.Keywords);
-            subject.SetDefault (info.Subject);
+            title.SetDefault (doc.Title);
+            author.SetDefault (doc.Author);
+            keywords.SetDefault (doc.Keywords);
+            subject.SetDefault (doc.Subject);
+            UpdateSensitivity ();
         }
 
         private void HandleRevert (object o, EventArgs args)
@@ -138,6 +142,7 @@ namespace PdfMod
             foreach (var prop in properties) {
                 prop.Revert ();
             }
+            revert_button.Sensitive = false;
         }
 
         #endregion
@@ -149,6 +154,11 @@ namespace PdfMod
             (app.GlobalActions["PropertiesAction"] as Gtk.ToggleAction).Active = false;
             base.Hide ();
             app.IconView.GrabFocus ();
+        }
+
+        public new void GrabFocus ()
+        {
+            title.Entry.GrabFocus ();
         }
 
         #endregion
@@ -167,7 +177,9 @@ namespace PdfMod
                 this.on_updated = onUpdated;
 
                 Entry = new Entry ();
-                Entry.Changed += (o, a) => { on_updated (Entry.Text); };
+                Entry.Changed += (o, a) => {
+                    on_updated (Entry.Text);
+                };
                 undo_adapter = new Hyena.Gui.EditableUndoAdapter<Entry> (Entry);
                 undo_adapter.Connect ();
                 Label = new Label (label) {
@@ -188,6 +200,8 @@ namespace PdfMod
                 Entry.Text = initial_value;
                 undo_adapter.UndoManager.Clear ();
             }
+
+            public bool HasChanges { get { return undo_adapter.UndoManager.CanUndo; } }
         }
     }
 }

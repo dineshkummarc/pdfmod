@@ -357,7 +357,11 @@ namespace PdfMod
         public void Zoom (int pixels)
         {
             CanZoomIn = CanZoomOut = true;
-            zoom_manually_set = true;
+
+            if (!zoom_manually_set) {
+                zoom_manually_set = true;
+                (app.GlobalActions["ZoomFitAction"] as ToggleAction).Active = false;
+            }
 
             int new_width = ItemWidth + pixels;
             if (new_width <= MIN_WIDTH) {
@@ -410,7 +414,14 @@ namespace PdfMod
             before_last_zoom = last_zoom;
             last_zoom = ItemWidth;
 
-            ItemWidth = best_width;
+            ItemWidth  = best_width;
+            CanZoomOut = ItemWidth > MIN_WIDTH;
+            CanZoomIn  = ItemWidth < MAX_WIDTH;
+
+            var handler = ZoomChanged;
+            if (handler != null) {
+                handler ();
+            }
         }
 
         #region Selection
