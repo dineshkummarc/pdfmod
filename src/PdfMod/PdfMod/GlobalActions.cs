@@ -306,16 +306,24 @@ namespace PdfMod
             var dialog = new Gtk.AboutDialog () {
                 ProgramName = "PDF Mod",
                 Version = "0.1",
-                //Website = "http://live.gnome.org/PdfMod",
-                //WebsiteLabel = Catalog.GetString ("Visit Website"),
-                Authors = new string [] { "Gabriel Burt" },
+                Website = "http://live.gnome.org/PdfMod",
+                WebsiteLabel = Catalog.GetString ("Visit Website"),
+                Authors = new string [] { "Gabriel Burt", "", "Contributions from:", "Aaron Bockover", "Sandy Armstrong" },
                 Copyright = "Copyright 2009 Novell Inc."
             };
 
-            try {
-                // FIXME not working
-                dialog.License = System.IO.File.ReadAllText ("COPYING");
-            } catch {}
+            string [] license_paths = new string [] {
+                "/usr/share/doc/packages/pdfmod/COPYING",
+                "/usr/local/share/doc/packages/pdfmod/COPYING",
+                "COPYING"
+            };
+
+            foreach (var path in license_paths) {
+                try {
+                    dialog.License = System.IO.File.ReadAllText (path);
+                    break;
+                } catch {}
+            }
 
             dialog.Run ();
             dialog.Destroy ();
