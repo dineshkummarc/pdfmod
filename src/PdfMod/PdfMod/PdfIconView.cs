@@ -34,130 +34,57 @@ namespace PdfMod
         private Document document;
         private PdfListStore store;
         private PageSelectionMode page_selection_mode = PageSelectionMode.None;
+        private bool highlighted;
 
         public PdfListStore Store { get { return store; } }
         public bool CanZoomIn { get; private set; }
         public bool CanZoomOut { get; private set; }
-        
+
+        public IEnumerable<Page> SelectedPages {
+            get {
+                var pages = new List<Page> ();
+                foreach (var path in SelectedItems) {
+                    TreeIter iter;
+                    store.GetIter (out iter, path);
+                    pages.Add (store.GetValue (iter, PdfListStore.PageColumn) as Page);
+                }
+                pages.Sort ((a, b) => { return a.Index < b.Index ? -1 : 1; });
+                return pages;
+            }
+        }
+
         public event System.Action ZoomChanged;
 
         public PdfIconView (PdfMod app) : base ()
         {
             this.app = app;
-            Model = store = new PdfListStore ();
+
             TooltipColumn = PdfListStore.TooltipColumn;
-            CanZoomIn = CanZoomOut = true;
-            Spacing = 0;
-            ColumnSpacing = RowSpacing = Margin;
-            Reorderable = false;
             SelectionMode = SelectionMode.Multiple;
+            ColumnSpacing = RowSpacing = Margin;
+            Model = store = new PdfListStore ();
+            CanZoomIn = CanZoomOut = true;
+            Reorderable = false;
+            Spacing = 0;
 
-            var ccell = new CellRendererPage ();
-            PackStart (ccell, true);
-            AddAttribute (ccell, "page", PdfListStore.PageColumn);
+            var page_cell = new CellRendererPage ();
+            AddAttribute (page_cell, "page", PdfListStore.PageColumn);
+            PackStart (page_cell, true);
 
-            SizeAllocated += (o, a) => {
-                if (!zoom_manually_set) {
-                    ZoomFit ();
-                }
-            };
+            // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
+            EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
+            EnableModelDragDest (new TargetEntry [] { move_target, uri_dest_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
 
+            SizeAllocated += HandleSizeAllocated;
             PopupMenu += HandlePopupMenu;
             ButtonPressEvent += HandleButtonPressEvent;
-
-            SelectionChanged += delegate {
-                if (!refreshing_selection) {
-                    page_selection_mode = PageSelectionMode.None;
-                }
-            };
-
-            // Drag and Drop
-            var move_targets = new TargetEntry [] { move_target };
-            //EnableModelDragDest (move_targets, Gdk.DragAction.Move);
-
-            // Working! but not for moves (obviously)
-            EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
-            EnableModelDragDest (new TargetEntry [] { uri_dest_target, move_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
-
-            /*EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { uri_target }, Gdk.DragAction.Default | Gdk.DragAction.Copy | Gdk.DragAction.Move);
-            EnableModelDragDest (new TargetEntry [] { uri_target }, Gdk.DragAction.Default | Gdk.DragAction.Copy | Gdk.DragAction.Move);
-            EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
-            EnableModelDragDest (new TargetEntry [] { move_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);*/
-
-            //Gtk.Drag.DestSet (this, DestDefaults.Motion, new TargetEntry [] { uri_target, move_target }, Gdk.DragAction.Default);
-            this.Events |= EventMask.PointerMotionMask;
-            //EnableModelDragDest (new TargetEntry [] { uri_target }, DragAction.Default);
-
-            //EnableModelDragDest (new TargetEntry [] { uri_target }, Gdk.DragAction.Copy);
-            // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
-
+            SelectionChanged += HandleSelectionChanged;
             DragDataReceived += HandleDragDataReceived;
             DragDataGet += HandleDragDataGet;
-            /*DragBegin += delegate(object o, DragBeginArgs args) {
-                Console.WriteLine ("Drag begin on IconView");
-            };*/            
-            DragLeave += delegate(object o, DragLeaveArgs args) {
-                Console.WriteLine ("Drag leave on IconView");
-                if (highlighted) {
-                    Gtk.Drag.Unhighlight (this);
-                    highlighted = false;
-                }
-                args.RetVal = true;
-            };
-            //DragDrop += HandleDragDrop;
-            /* delegate(object o, DragDropArgs args) {
-                Console.WriteLine ("DragDrop!");
-                args.RetVal = true;
-            };*/
-            DragFailed += delegate(object o, DragFailedArgs args) {
-                Console.WriteLine ("DragFailed!");
-            };
-
-            //GetDestItemAtPos(int, int, out TreePath, out IconViewDropPosition) : bool
-            // Gtk.Drag.Highlight / Unhighlight
+            DragLeave += HandleDragLeave;
         }
 
-        /*[GLib.ConnectBefore]
-        void HandleDragDrop(object o, DragDropArgs args)
-        {
-            args.RetVal = true;
-            Console.WriteLine ("Drag Drop!");
-        }*/
-
-        private bool highlighted;
-        protected override bool OnDragMotion (Gdk.DragContext context, int x, int y, uint time_)
-        {
-            //var ret = base.OnDragMotion (context, x, y, time_);
-            Console.WriteLine ("Drag motion!! action = {0}, actions = {1}", context.Action, context.Actions);
-            /*foreach (var t in context.Targets) {
-                Console.WriteLine ("target: {0}", (string)t);
-            }*/
-            //return base.OnDragMotion (context, x, y, time_);
-            var targets = context.Targets.Select (t => (string)t);
-            if (targets.Contains (move_target.Target)) {
-                return base.OnDragMotion (context, x, y, time_);
-            } else if (targets.Contains (uri_dest_target.Target)) {
-                // TODO could do this (from Gtk+ docs) to make sure the uris are all .pdfs (or mime-sniffed as pdfs):
-                /* If the decision whether the drop will be accepted or rejected can't be made based solely on the
-                   cursor position and the type of the data, the handler may inspect the dragged data by calling gtk_drag_get_data() and
-                   defer the gdk_drag_status() call to the "drag-data-received" handler. Note that you cannot not pass GTK_DEST_DEFAULT_DROP, 
-                   GTK_DEST_DEFAULT_MOTION or GTK_DEST_DEFAULT_ALL to gtk_drag_dest_set() when using the drag-motion signal that way. */
-                Gdk.Drag.Status (context, DragAction.Copy, time_);
-                if (!highlighted) {
-                    Gtk.Drag.Highlight (this);
-                    highlighted = true;
-                }
-
-                TreePath path;
-                IconViewDropPosition pos;
-                GetDestItemAtPos (x, y, out path, out pos);
-                SetDragDestItem (path, pos);
-                return true;
-            }
-
-            Gdk.Drag.Abort (context, time_);
-            return false;
-        }
+        #region Gtk.Widget event handlers/overrides
 
         protected override bool OnScrollEvent (Gdk.EventScroll evnt)
         {
@@ -169,7 +96,21 @@ namespace PdfMod
             }
         }
 
-        void HandleButtonPressEvent(object o, ButtonPressEventArgs args)
+        private void HandleSizeAllocated (object o, EventArgs args)
+        {
+            if (!zoom_manually_set) {
+                ZoomFit ();
+            }
+        }
+
+        private void HandleSelectionChanged (object o, EventArgs args)
+        {
+            if (!refreshing_selection) {
+                page_selection_mode = PageSelectionMode.None;
+            }
+        }
+
+        private void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
         {
             if (args.Event.Button == 3) {
                 var path = GetPathAtPos ((int)args.Event.X, (int)args.Event.Y);
@@ -207,30 +148,56 @@ namespace PdfMod
             app.GlobalActions["PageContextMenuAction"].Activate ();
         }
 
-        public IEnumerable<Page> SelectedPages {
-            get {
-                var pages = new List<Page> ();
-                foreach (var path in SelectedItems) {
-                    TreeIter iter;
-                    store.GetIter (out iter, path);
-                    pages.Add (store.GetValue (iter, PdfListStore.PageColumn) as Page);
-                }
-                pages.Sort ((a, b) => { return a.Index < b.Index ? -1 : 1; });
-                return pages;
+        #endregion
+
+        #region Drag and Drop event handling
+
+        private void HandleDragLeave (object o, DragLeaveArgs args)
+        {
+            if (highlighted) {
+                Gtk.Drag.Unhighlight (this);
+                highlighted = false;
             }
+            args.RetVal = true;
         }
 
-#region DnD
+        protected override bool OnDragMotion (Gdk.DragContext context, int x, int y, uint time_)
+        {
+            var targets = context.Targets.Select (t => (string)t);
+            if (targets.Contains (move_target.Target)) {
+                return base.OnDragMotion (context, x, y, time_);
+            } else if (targets.Contains (uri_dest_target.Target)) {
+                // TODO could do this (from Gtk+ docs) to make sure the uris are all .pdfs (or mime-sniffed as pdfs):
+                /* If the decision whether the drop will be accepted or rejected can't be made based solely on the
+                   cursor position and the type of the data, the handler may inspect the dragged data by calling gtk_drag_get_data() and
+                   defer the gdk_drag_status() call to the "drag-data-received" handler. Note that you cannot not pass GTK_DEST_DEFAULT_DROP,
+                   GTK_DEST_DEFAULT_MOTION or GTK_DEST_DEFAULT_ALL to gtk_drag_dest_set() when using the drag-motion signal that way. */
+                Gdk.Drag.Status (context, DragAction.Copy, time_);
+                if (!highlighted) {
+                    Gtk.Drag.Highlight (this);
+                    highlighted = true;
+                }
+
+                TreePath path;
+                IconViewDropPosition pos;
+                GetDestItemAtPos (x, y, out path, out pos);
+                SetDragDestItem (path, pos);
+                return true;
+            }
+
+            Gdk.Drag.Abort (context, time_);
+            return false;
+        }
 
         private void HandleDragDataGet(object o, DragDataGetArgs args)
         {
-            Console.WriteLine ("dragdataget, info = {0}", args.Info);
             if (args.Info == move_target.Info) {
                 var pages = new Hyena.Gui.DragDropList<Page> ();
                 pages.AddRange (SelectedPages);
                 pages.AssignToSelection (args.SelectionData, args.SelectionData.Target);
                 args.RetVal = true;
             } else if (args.Info == uri_src_target.Info) {
+                // TODO implement page extraction via DnD?
                 Console.WriteLine ("HandleDragDataGet, wants a uri list...");
             }
         }
@@ -261,7 +228,7 @@ namespace PdfMod
 
         private static string [] newline = new string [] { "\r\n" };
         private void HandleDragDataReceived (object o, DragDataReceivedArgs args)
-        {    
+        {
             Console.WriteLine ("drag data recv: uris == null? {0}  info = {1}", args.SelectionData.Uris == null, args.Info);
             if (args.SelectionData.Uris == null) {
                 // Move pages within the document
@@ -326,19 +293,10 @@ namespace PdfMod
             GrabFocus ();
         }
 
-        private void Refresh ()
-        {
-            if (!zoom_manually_set) {
-                ZoomFit ();
-            }
-            RefreshSelection ();
-        }
-
         private void OnPagesAdded (int index, Page [] pages)
         {
             foreach (var page in pages) {
-                var iter = store.InsertWithValues (index, store.GetValuesForPage (page));
-                //store.EmitRowInserted (store.GetPath (iter), iter);
+                store.InsertWithValues (index, store.GetValuesForPage (page));
             }
 
             UpdateAllPages ();
@@ -353,7 +311,7 @@ namespace PdfMod
                     store.EmitRowChanged (store.GetPath (iter), iter);
                 }
             }
-            
+
             Refresh ();
         }
 
@@ -371,6 +329,20 @@ namespace PdfMod
             Refresh ();
         }
 
+        private void OnPagesMoved (int index, Page [] pages)
+        {
+            UpdateAllPages ();
+            Refresh ();
+        }
+
+        private void Refresh ()
+        {
+            if (!zoom_manually_set) {
+                ZoomFit ();
+            }
+            RefreshSelection ();
+        }
+
         private void UpdateAllPages ()
         {
             foreach (var page in document.Pages) {
@@ -380,12 +352,6 @@ namespace PdfMod
                     store.EmitRowChanged (store.GetPath (iter), iter);
                 }
             }
-        }
-
-        private void OnPagesMoved (int index, Page [] pages)
-        {
-            UpdateAllPages ();
-            Refresh ();
         }
 
         #endregion
@@ -450,6 +416,8 @@ namespace PdfMod
             ItemWidth = best_width;
         }
 
+        #region Selection
+
         private string selection_match_query;
         public void SetSelectionMatchQuery (string query)
         {
@@ -504,5 +472,7 @@ namespace PdfMod
 
             QueueDraw ();
         }
+
+        #endregion
     }
 }
