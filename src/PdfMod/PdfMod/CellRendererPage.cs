@@ -39,12 +39,12 @@ namespace PdfMod
             height -= 2 * border_width;
 
             //Console.WriteLine ("SurfaceCache has HitRatio = {0} ({1} hits, {2} misses)", surface_cache.HitRatio, surface_cache.Hits, surface_cache.Misses);
-            Page.Thumbnail cache_obj;
+            PageThumbnail cache_obj;
             ImageSurface surface = null;
             if (surface_cache.TryGetValue (Page, out cache_obj)) {
                 // Don't use if not big enough, dirty, or corrupt
                 surface = cache_obj.Surface;
-                if (Page.SurfaceDirty || surface.Handle == IntPtr.Zero || (surface.Width < width && surface.Height < height)) {
+                if (Page.SurfaceDirty || surface == null || surface.Handle == IntPtr.Zero || (surface.Width < width && surface.Height < height)) {
                     cache_obj.Dispose ();
                     cache_obj = null;
                     surface = null;
@@ -112,13 +112,13 @@ namespace PdfMod
             cr.Translate (border_width, border_width);
         }
 
-        private class ThumbnailLruCache : LruCache<Page, Page.Thumbnail>
+        private class ThumbnailLruCache : LruCache<Page, PageThumbnail>
         {
             public ThumbnailLruCache () : base (60, 0.8)
             {
             }
 
-            protected override void ExpireItem (Page.Thumbnail thumb)
+            protected override void ExpireItem (PageThumbnail thumb)
             {
                 thumb.Dispose ();
             }

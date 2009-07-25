@@ -224,7 +224,7 @@ namespace PdfMod
             }
         }
 
-        public Page.Thumbnail GetSurface (Page page, int w, int h)
+        public PageThumbnail GetSurface (Page page, int w, int h)
         {
             using (var ppage = PopplerDoc.GetPage (page.Index)) {
                 double pw, ph;
@@ -236,7 +236,7 @@ namespace PdfMod
                 cr.Scale (scale, scale);
                 ppage.Render (cr);
                 page.SurfaceDirty = false;
-                return new Page.Thumbnail () { Surface = surface, Context = cr };
+                return new PageThumbnail () { Surface = surface, Context = cr };
             }
         }
 
