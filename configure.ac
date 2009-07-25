@@ -113,7 +113,6 @@ AC_CONFIG_FILES([
 po/Makefile.in
 src/Libraries/PdfSharp/Makefile
 src/PdfMod/pdfmod
-src/PdfMod/pdfmod.desktop
 src/PdfMod/Makefile
 Makefile
 

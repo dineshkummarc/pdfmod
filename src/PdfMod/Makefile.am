@@ -56,9 +56,6 @@ desktopdir = $(datadir)/applications
 desktop_in_files = $(wildcard *.desktop.in)
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-%.desktop.in: %.desktop.in.in $(DESKTOP_FRAMEWORK_DEPS) $(DESKTOP_MIME_DEPS)
-	./update-desktop-file.sh "$<" "$(VERSION)" "$(UPDATE_MIME_FILES)" > "$@"
-
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST += $(desktop_in_files)

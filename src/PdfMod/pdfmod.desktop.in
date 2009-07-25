@@ -1,9 +1,16 @@
 [Desktop Entry]
-Encoding=UTF-8
 _Name=PDF Mod
 _Comment=Remove, extract, and rotate pages in PDF documents
 _GenericName=PDF Modifier
+#DocPath=pdfmod
+TryExec=pdfmod
+Exec=pdfmod %U
+StartupNotify=true
 Type=Application
-Exec=pdfmod
 Terminal=false
-Categories=GNOME;GTK;Utility;
+#X-GNOME-Bugzilla-Bugzilla=GNOME
+#X-GNOME-Bugzilla-Product=pdfmod
+#X-GNOME-Bugzilla-Component=general
+#X-GNOME-Bugzilla-Version=@VERSION@
+Categories=GNOME;GTK;Office;Utility;
+MimeType=application/pdf;application/x-bzpdf;application/x-gzpdf;
