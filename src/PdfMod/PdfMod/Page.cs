@@ -18,16 +18,6 @@ namespace PdfMod
             Pdf = pdf_page;
         }
 
-        public Page Clone ()
-        {
-            return this;
-            /*return new Page (pdf_page.Clone ()) {
-                Document = this.Document,
-                Index = this.Index,
-                Pixbuf = this.Pixbuf
-            };*/
-        }
-
         public class Thumbnail : IDisposable
         {
             public Cairo.ImageSurface Surface { get; internal set; }
