@@ -1,5 +1,14 @@
 PDF Mod NEWS
 
+Version 0.3
+* Fix bug with files with spaces in their URI [Sandy]
+* Add Recent Documents menu [Sandy]
+* Fix glitch with page bg rendering [Aaron]
+* Add more convenience keybindings for zoom/quit [Sandy]
+* Open file in empty pdfmod by DnD from nautilus [Gabriel]
+* Insert external PDF into current doc via DnD [Gabriel]
+* Properties editor [Gabriel]
+
 Version 0.2
 * Fix not-installed .desktop file
 
