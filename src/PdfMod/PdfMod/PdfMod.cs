@@ -50,6 +50,7 @@ namespace PdfMod
         public Gtk.Window Window { get; private set; }
         public PdfIconView IconView { get; private set; }
         public Document Document { get; private set; }
+        public MetadataEditorBox EditorBox { get; private set; }
 
         public event EventHandler DocumentLoaded;
 
@@ -70,8 +71,7 @@ namespace PdfMod
             var IconView_sw = new Gtk.ScrolledWindow ();
             IconView_sw.Child = IconView;
 
-            query_box = new QueryBox (this);
-            query_box.NoShowAll = true;
+            query_box = new QueryBox (this) { NoShowAll = true };
             query_box.Hide ();
 
             // Status bar
@@ -85,6 +85,9 @@ namespace PdfMod
             Window.AddAccelGroup (ActionManager.UIManager.AccelGroup);
             GlobalActions = new GlobalActions (this, ActionManager);
 
+            EditorBox = new MetadataEditorBox (this) { NoShowAll = true };
+            EditorBox.Hide ();
+
             // Menubar
             menu_bar = ActionManager.UIManager.GetWidget ("/MainMenu") as MenuBar;
 
@@ -97,6 +100,7 @@ namespace PdfMod
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
             vbox.PackStart (header_toolbar, false, false, 0);
+            vbox.PackStart (EditorBox, false, false, 0);
             vbox.PackStart (query_box, false, false, 0);
             vbox.PackStart (IconView_sw, true, true, 0);
             vbox.PackStart (StatusBar, false, true, 0);

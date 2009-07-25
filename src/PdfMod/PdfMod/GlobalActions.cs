@@ -22,7 +22,8 @@ namespace PdfMod
         private UndoManager undo_manager;
 
         private static string [] require_doc_actions = new string[] {
-            "SaveAction", "SaveAsAction", "UndoAction", "RedoAction", "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction", "ZoomFitAction"
+            "SaveAction", "SaveAsAction", "PropertiesAction", "UndoAction", "RedoAction", "ZoomFitAction",
+            "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction"
         };
 
         private static string [] require_page_actions = new string[] {
@@ -47,8 +48,8 @@ namespace PdfMod
                 new ActionEntry ("CloseAction", Gtk.Stock.Close, null, "<control>W", null, OnClose),
                 new ActionEntry ("RemoveAction", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
                 new ActionEntry ("ExtractAction", Gtk.Stock.New, null, null, null, OnExtractPages),
-                new ActionEntry ("RotateRightAction", null, Catalog.GetString ("Rotate Right"), "bracketright", null, OnRotateRight),
-                new ActionEntry ("RotateLeftAction", null, Catalog.GetString ("Rotate Left"), "bracketleft", null, OnRotateLeft),
+                new ActionEntry ("RotateRightAction", null, Catalog.GetString ("Rotate Right"), "bracketright", Catalog.GetString ("Rotate right"), OnRotateRight),
+                new ActionEntry ("RotateLeftAction", null, Catalog.GetString ("Rotate Left"), "bracketleft", Catalog.GetString ("Rotate left"), OnRotateLeft),
                 new ActionEntry ("ExportImagesAction", null, Catalog.GetString ("Export Images..."), null, null, OnExportImages),
 
                 new ActionEntry ("EditMenuAction", null, Catalog.GetString ("_Edit"), null, null, null),
@@ -70,10 +71,12 @@ namespace PdfMod
                 new ActionEntry ("PageContextMenuAction", null, "", null, null, OnPageContextMenu)
             );
 
+            AddImportant (
+                new ToggleActionEntry ("PropertiesAction", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false)
+            );
+
             this["RotateRightAction"].IconName = "object-rotate-right";
-            this["RotateRightAction"].Tooltip = Catalog.GetString ("Rotate right");
             this["RotateLeftAction"].IconName = "object-rotate-left";
-            this["RotateLeftAction"].Tooltip = Catalog.GetString ("Rotate left");
 
             Update ();
             app.IconView.SelectionChanged += OnChanged;
@@ -181,6 +184,11 @@ namespace PdfMod
                 app.Document.Save (filename);
                 undo_manager.Clear ();
             }
+        }
+
+        private void OnProperties (object o, EventArgs args)
+        {
+            app.EditorBox.Visible = (this["PropertiesAction"] as ToggleAction).Active;
         }
 
         private void OnRemove (object o, EventArgs args)

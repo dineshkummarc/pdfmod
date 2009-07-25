@@ -5,6 +5,8 @@
       <menuitem action="SaveAction"/>
       <menuitem action="SaveAsAction"/>
       <separator/>
+      <menuitem action="PropertiesAction"/>
+      <separator/>
       <menuitem action="CloseAction"/>
     </menu>
     <menu name="EditMenu" action="EditMenuAction">
@@ -39,6 +41,7 @@
     <toolitem action="OpenAction"/>
     <toolitem action="SaveAsAction"/>
     <separator/>
+    <toolitem action="PropertiesAction"/>
     <toolitem action="ExtractAction"/>
     <toolitem action="RemoveAction"/>
     <toolitem action="RotateLeftAction"/>

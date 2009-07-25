@@ -99,6 +99,7 @@ FILES =  \
 	PdfMod/CellRendererPage.cs \
 	PdfMod/Document.cs \
 	PdfMod/GlobalActions.cs \
+	PdfMod/MetadataEditorBox.cs \
 	PdfMod/Page.cs \
 	PdfMod/PdfIconView.cs \
 	PdfMod/PdfListStore.cs \

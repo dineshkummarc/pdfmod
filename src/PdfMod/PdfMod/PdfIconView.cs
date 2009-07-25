@@ -229,7 +229,6 @@ namespace PdfMod
         private static string [] newline = new string [] { "\r\n" };
         private void HandleDragDataReceived (object o, DragDataReceivedArgs args)
         {
-            Console.WriteLine ("drag data recv: uris == null? {0}  info = {1}", args.SelectionData.Uris == null, args.Info);
             if (args.SelectionData.Uris == null) {
                 // Move pages within the document
                 var pages = args.SelectionData.Data as Hyena.Gui.DragDropList<Page>;
@@ -238,30 +237,28 @@ namespace PdfMod
                 action.Do ();
                 app.GlobalActions.UndoManager.AddUndoAction (action);
                 args.RetVal = true;
-            } else {
-                if (args.SelectionData.Uris != null) {
-                    var uris = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data).Split (newline, StringSplitOptions.RemoveEmptyEntries);
-                    if (uris.Length == 1 && app.Document == null) {
-                        app.LoadPath (uris[0]);
-                        args.RetVal = true;
-                    } else {
-                        int to_index = GetDropIndex (args.X, args.Y);
-                        // TODO somehow ask user for which pages of the docs to insert?
-                        // TODO pwd handling - keyring#?
-                        // TODO make action/undoable
-                        foreach (var uri in uris) {
-                            Console.WriteLine ("Inserting pages from {0} to index {1}", uri, to_index);
-                            using (var doc = PdfSharp.Pdf.IO.PdfReader.Open (new Uri (uri).AbsolutePath, null, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import)) {
-                                var pages = new List<Page> ();
-                                for (int i = 0; i < doc.PageCount; i++) {
-                                    pages.Add (new Page (doc.Pages [i]));
-                                }
-                                this.document.Add (to_index, pages.ToArray ());
-                                to_index += pages.Count;
+            } else if (args.SelectionData.Uris != null) {
+                var uris = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data).Split (newline, StringSplitOptions.RemoveEmptyEntries);
+                if (uris.Length == 1 && app.Document == null) {
+                    app.LoadPath (uris[0]);
+                    args.RetVal = true;
+                } else {
+                    int to_index = GetDropIndex (args.X, args.Y);
+                    // TODO somehow ask user for which pages of the docs to insert?
+                    // TODO pwd handling - keyring#?
+                    // TODO make action/undoable
+                    foreach (var uri in uris) {
+                        Console.WriteLine ("Inserting pages from {0} to index {1}", uri, to_index);
+                        using (var doc = PdfSharp.Pdf.IO.PdfReader.Open (new Uri (uri).AbsolutePath, null, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import)) {
+                            var pages = new List<Page> ();
+                            for (int i = 0; i < doc.PageCount; i++) {
+                                pages.Add (new Page (doc.Pages [i]));
                             }
+                            this.document.Add (to_index, pages.ToArray ());
+                            to_index += pages.Count;
                         }
-                        args.RetVal = true;
                     }
+                    args.RetVal = true;
                 }
             }
 
