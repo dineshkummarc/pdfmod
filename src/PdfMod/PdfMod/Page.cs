@@ -28,10 +28,23 @@ namespace PdfMod
             };*/
         }
 
-        public class Thumbnail
+        public class Thumbnail : IDisposable
         {
             public Cairo.ImageSurface Surface { get; internal set; }
             public Cairo.Context Context { get; internal set; }
+
+            public void Dispose ()
+            {
+                if (Surface != null && Surface.Handle != IntPtr.Zero) {
+                    ((IDisposable)Surface).Dispose ();
+                }
+                Surface = null;
+
+                if (Context != null) {
+                    Hyena.Gui.CairoExtensions.DisposeContext (Context);
+                    Context = null;
+                }
+            }
         }
     }
 }

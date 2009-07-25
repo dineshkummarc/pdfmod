@@ -13,10 +13,11 @@ namespace PdfMod
     {
         const int scale_every = 200;
 
-        private LruCache<Page, Page.Thumbnail> surface_cache = new LruCache<Page, Page.Thumbnail> (60, 0.8);
+        private ThumbnailLruCache surface_cache;
 
         public CellRendererPage ()
         {
+            surface_cache = new ThumbnailLruCache ();
         }
 
         [GLib.Property ("page")]
@@ -44,12 +45,9 @@ namespace PdfMod
                 // Don't use if not big enough, dirty, or corrupt
                 surface = cache_obj.Surface;
                 if (Page.SurfaceDirty || surface.Handle == IntPtr.Zero || (surface.Width < width && surface.Height < height)) {
-                    surface_cache.Remove (Page);
-                    if (surface.Handle != IntPtr.Zero) {
-                        ((IDisposable)surface).Dispose ();
-                    }
+                    cache_obj.Dispose ();
+                    cache_obj = null;
                     surface = null;
-                    Hyena.Gui.CairoExtensions.DisposeContext (cache_obj.Context);
                 }
             }
 
@@ -112,6 +110,18 @@ namespace PdfMod
             cr.Stroke ();
 
             cr.Translate (border_width, border_width);
+        }
+
+        private class ThumbnailLruCache : LruCache<Page, Page.Thumbnail>
+        {
+            public ThumbnailLruCache () : base (60, 0.8)
+            {
+            }
+
+            protected override void ExpireItem (Page.Thumbnail thumb)
+            {
+                thumb.Dispose ();
+            }
         }
     }
 }
