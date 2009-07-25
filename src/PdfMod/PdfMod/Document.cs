@@ -51,8 +51,9 @@ namespace PdfMod
                 tmp_path = new Uri (uri).AbsolutePath;
             }
 
-            Uri = new Uri (uri).AbsoluteUri;
-            SuggestedSavePath = Path = new Uri (uri).AbsolutePath;
+            var uri_obj = new Uri (uri);
+            Uri = uri_obj.AbsoluteUri;
+            SuggestedSavePath = Path = uri_obj.LocalPath;
 
             this.password = password;
 
