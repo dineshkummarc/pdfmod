@@ -83,6 +83,18 @@ namespace PdfMod
 
             AddUiFromFile ("UIManager.xml");
             Register ();
+
+            // Add additional menu item keybindings
+            var item = ActionManager.UIManager.GetWidget ("/MainMenu/ViewMenu/ZoomInAction");
+            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.KP_Add, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
+            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.equal, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
+
+            item = ActionManager.UIManager.GetWidget ("/MainMenu/ViewMenu/ZoomOutAction");
+            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.KP_Subtract, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
+            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.underscore, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
+
+            item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/CloseAction");
+            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.q, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
         }
 
         private void OnChanged (object o, EventArgs args)
