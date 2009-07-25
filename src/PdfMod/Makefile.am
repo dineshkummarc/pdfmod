@@ -124,8 +124,8 @@ REFERENCES =  \
 
 DLL_REFERENCES =  \
 	../../lib/Hyena.dll \
-	../../lib/Mono.Data.Sqlite.dll \
 	../../lib/Hyena.Gui.dll \
+	../../lib/Mono.Data.Sqlite.dll \
 	../../lib/poppler-sharp.dll
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES) \

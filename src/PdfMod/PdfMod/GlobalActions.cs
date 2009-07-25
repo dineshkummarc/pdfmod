@@ -22,7 +22,7 @@ namespace PdfMod
         private UndoManager undo_manager;
 
         private static string [] require_doc_actions = new string[] {
-            "SaveAction", "SaveAsAction", "UndoAction", "RedoAction", "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction"
+            "SaveAction", "SaveAsAction", "UndoAction", "RedoAction", "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction", "ZoomFitAction"
         };
 
         private static string [] require_page_actions = new string[] {
@@ -274,6 +274,7 @@ namespace PdfMod
             };
 
             try {
+                // FIXME not working
                 dialog.License = System.IO.File.ReadAllText ("COPYING");
             } catch {}
 

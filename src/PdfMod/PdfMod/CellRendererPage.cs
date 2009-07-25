@@ -32,6 +32,7 @@ namespace PdfMod
 
         protected override void Render (Cairo.Context cr, double width, double height, CellRendererState state)
         {
+            // Scale the border size w/ the cell size
             var border_width = 1.0 * (width / 128.0);
             width -= 2 * border_width;
             height -= 2 * border_width;

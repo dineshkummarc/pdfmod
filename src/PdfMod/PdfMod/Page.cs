@@ -7,9 +7,7 @@ namespace PdfMod
 {
     public class Page
     {
-        private PdfPage pdf_page;
-
-        internal PdfPage Pdf { get { return pdf_page; } }
+        internal PdfPage Pdf { get; set; }
 
         public Document Document { get; internal set; }
         public int Index { get; internal set; }
@@ -17,7 +15,7 @@ namespace PdfMod
         
         public Page (PdfPage pdf_page)
         {
-            this.pdf_page = pdf_page;
+            Pdf = pdf_page;
         }
 
         public Page Clone ()

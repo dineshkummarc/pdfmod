@@ -180,9 +180,10 @@ namespace PdfMod
         {
             int i = to_index;
             foreach (var page in add_pages) {
+                var pdf = pdf_document.Pages.Insert (i, page.Pdf);
+                page.Pdf = pdf;
                 page.Document = this;
                 pages.Insert (i, page);
-                pdf_document.Pages.Insert (i, page.Pdf);
                 i++;
             }
 
