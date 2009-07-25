@@ -318,7 +318,6 @@ namespace PdfMod
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
                     store.Remove (ref iter);
-                    store.EmitRowDeleted (store.GetPath (iter));
                 }
             }
 
