@@ -99,6 +99,11 @@ if test -z "$CONFIG_REQUESTED" ; then
 	enable_release=yes
 fi
 
+dnl localisation
+GETTEXT_PACKAGE=pdfmod
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Gettext package name])
+AM_GLIB_GNU_GETTEXT
 
 dnl package checks, common for all configs
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
