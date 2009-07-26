@@ -26,6 +26,7 @@ namespace PdfMod
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
             Application.Init ();
+            Catalog.Init("pdfmod", "/usr/local/share/locale/");
 
             try {
                 System.IO.Directory.CreateDirectory (CacheDir);
