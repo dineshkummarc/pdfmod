@@ -44,12 +44,12 @@
 
 			<para>
 				You can start PDF Mod from your applications menu or launcher, or by
-				right clicking on one or more PDF document in the file browser, and
+				right clicking on one or more PDF documents in the file browser, and
 				choosing to open with PDF Mod.
 			</para>
 
 			<para>
-				Like a normal editor application, you must save your changes you make using PDF Mod.
+				Like a normal editor application, you must save the changes you make using PDF Mod.
 				If you want to keep the original document and save your changes to a new file, use Save As.
 			</para>
 	</chapter>
@@ -132,7 +132,7 @@
 				Extracting the selected page or pages will open a new PDF Mod window with just the selected pages in a new document, ready for further editing or to save.
 			</para>
 			<para>
-				To extract the one or more selected pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>.
+				To extract the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>.
 			</para>
 			<tip>
 				<para>
@@ -153,7 +153,7 @@
 		<sect2 id="removing-pages">
 			<title>Removing Pages</title>
 			<para>
-				To remove the one or more selected pages, press <keycap>Delete</keycap> or choose
+				To remove the selected page or pages, press <keycap>Delete</keycap> or choose
 				<menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</guimenuitem></menuchoice>.
 			</para>
 			<warning>

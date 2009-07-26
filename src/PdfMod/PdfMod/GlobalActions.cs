@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Linq;
 
 using Mono.Unix;
@@ -308,13 +309,46 @@ namespace PdfMod
             undo_manager.Redo ();
         }
 
+        [DllImport ("glib-2.0.dll")]
+        private static extern IntPtr g_get_language_names ();
+
+        private string CombinePaths (params string [] parts)
+        {
+            string path = parts[0];
+            for (int i = 1; i < parts.Length; i++) {
+                path = System.IO.Path.Combine (path, parts[i]);
+            }
+            return path;
+        }
+
         private void OnHelp (object o, EventArgs args)
         {
+            bool shown = false;
             try {
-                Gnome.Help.DisplayDesktopOnScreen (Gnome.Program.Get (), "pdfmod", "pdfmod.xml", null, app.Window.Screen);
-            } catch (Exception e) {
-                Hyena.Log.Exception ("Unable to open help", e);
+                IntPtr lang_ptr = g_get_language_names ();
+                var langs = GLib.Marshaller.NullTermPtrToStringArray (lang_ptr, false);
 
+                string help_dir = null;
+                foreach (var dir in new string [] { "/usr/share/gnome/help/", "/usr/local/share/gnome/help/", "docs/" }) {
+                    help_dir = dir;
+                    if (System.IO.Directory.Exists (dir)) {
+                        break;
+                    }
+                }
+
+                foreach (var lang in langs) {
+                    var help_path = CombinePaths (help_dir, "pdfmod", lang, "pdfmod.xml");
+                    if (System.IO.File.Exists (help_path)) {
+                        System.Diagnostics.Process.Start (String.Format ("ghelp://{0}", help_path));
+                        shown = true;
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                Hyena.Log.Exception ("Error opening help", e);
+            }
+
+            if (!shown) {
                 var message_dialog = new Hyena.Widgets.HigMessageDialog (
                     app.Window, DialogFlags.Modal, MessageType.Warning, ButtonsType.None,
                     Catalog.GetString ("Error opening help"),
