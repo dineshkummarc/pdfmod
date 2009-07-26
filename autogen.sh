@@ -70,6 +70,11 @@ esac
     $LIBTOOLIZE --force --copy
 }
 
+(which gnome-doc-prepare && gnome-doc-prepare )|| {
+        echo "**Error**: You must have gnome-common installed to compile $PROJECT."
+        exit 1
+}
+
 echo "Running $ACLOCAL $aclocalinclude ..."
 $ACLOCAL $aclocalinclude
 

@@ -197,7 +197,7 @@ namespace PdfMod
 
             public void Revert ()
             {
-                Entry.Text = initial_value;
+                Entry.Text = initial_value ?? "";
                 undo_adapter.UndoManager.Clear ();
             }
 

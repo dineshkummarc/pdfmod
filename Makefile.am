@@ -2,16 +2,17 @@
 
 #Warning: This is an automatically generated file, do not edit!
 if ENABLE_DEBUG
- SUBDIRS =  src/Libraries/PdfSharp src/PdfMod po
+ SUBDIRS =  src/Libraries/PdfSharp src/PdfMod po docs
 endif
 if ENABLE_RELEASE
- SUBDIRS =  src/Libraries/PdfSharp src/PdfMod po
+ SUBDIRS =  src/Libraries/PdfSharp src/PdfMod po docs
 endif
 
 run:
 	cd bin; mono --debug PdfMod.exe;
 
 EXTRA_DIST = \
+	gnome-doc-utils.make \
 	lib/Hyena.dll \
 	lib/Hyena.dll.mdb \
 	lib/Hyena.Gui.dll \
@@ -33,6 +34,7 @@ CLEANFILES = \
 	intltool-merge
 
 DISTCLEANFILES = \
+	gnome-doc-utils.make \
 	*.bak \
 	*~ \
 	*.pidb

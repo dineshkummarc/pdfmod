@@ -12,6 +12,8 @@ if test "x$PKG_CONFIG" = "xno"; then
         AC_MSG_ERROR([You need to install pkg-config])
 fi
 
+GNOME_DOC_INIT
+
 AC_DEFUN([SHAMROCK_EXPAND_LIBDIR],
 [	
 	expanded_libdir=`(
@@ -101,7 +103,7 @@ fi
 dnl package checks, common for all configs
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
-PKG_CHECK_MODULES([GLADE_SHARP_20], [glade-sharp-2.0])
+PKG_CHECK_MODULES([GNOME_SHARP_20], [gnome-sharp-2.0])
 
 dnl package checks, per config
 
@@ -111,6 +113,7 @@ AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
 
 AC_CONFIG_FILES([
 po/Makefile.in
+docs/Makefile
 src/Libraries/PdfSharp/Makefile
 src/PdfMod/pdfmod
 src/PdfMod/Makefile

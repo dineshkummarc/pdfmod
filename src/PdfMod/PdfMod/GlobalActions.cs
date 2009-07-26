@@ -20,6 +20,7 @@ namespace PdfMod
     {
         private PdfMod app;
         private UndoManager undo_manager;
+        private const string WIKI_URL = "http://live.gnome.org/PdfMod";
 
         private static string [] require_doc_actions = new string[] {
             "SaveAction", "SaveAsAction", "PropertiesAction", "UndoAction", "RedoAction", "ZoomFitAction",
@@ -66,6 +67,7 @@ namespace PdfMod
                 new ActionEntry ("ZoomOutAction", Stock.ZoomOut, null, "<control>minus", null, OnZoomOut),
 
                 new ActionEntry ("HelpMenuAction", null, Catalog.GetString ("_Help"), null, null, null),
+                new ActionEntry ("HelpAction", Stock.Help, Catalog.GetString ("_Contents"), "F1", null, OnHelp),
                 new ActionEntry ("AboutAction", Stock.About, null, null, null, OnAbout),
 
                 new ActionEntry ("PageContextMenuAction", null, "", null, null, OnPageContextMenu)
@@ -78,6 +80,13 @@ namespace PdfMod
 
             this["RotateRightAction"].IconName = "object-rotate-right";
             this["RotateLeftAction"].IconName = "object-rotate-left";
+
+            // Don't show HelpAction unless we can at least access some of the GNOME api
+            UpdateAction ("HelpAction", false);
+            try {
+                Gnome.Program.Get ();
+                UpdateAction ("HelpAction", true);
+            } catch {}
 
             Update ();
             app.IconView.SelectionChanged += OnChanged;
@@ -299,6 +308,29 @@ namespace PdfMod
             undo_manager.Redo ();
         }
 
+        private void OnHelp (object o, EventArgs args)
+        {
+            try {
+                Gnome.Help.DisplayDesktopOnScreen (Gnome.Program.Get (), "pdfmod", "pdfmod.xml", null, app.Window.Screen);
+            } catch (Exception e) {
+                Hyena.Log.Exception ("Unable to open help", e);
+
+                var message_dialog = new Hyena.Widgets.HigMessageDialog (
+                    app.Window, DialogFlags.Modal, MessageType.Warning, ButtonsType.None,
+                    Catalog.GetString ("Error opening help"),
+                    Catalog.GetString ("Would you like to open PDF Mod's online documentation?")
+                );
+                message_dialog.AddButton (Stock.No, ResponseType.No, false);
+                message_dialog.AddButton (Stock.Yes, ResponseType.Yes, true);
+
+                var response = (ResponseType) message_dialog.Run ();
+                message_dialog.Destroy ();
+                if (response == ResponseType.Yes) {
+                    System.Diagnostics.Process.Start (WIKI_URL);
+                }
+            }
+        }
+
         private void OnAbout (object o, EventArgs args)
         {
             Gtk.AboutDialog.SetUrlHook ((dlg, link) => { System.Diagnostics.Process.Start (link); });
@@ -306,7 +338,7 @@ namespace PdfMod
             var dialog = new Gtk.AboutDialog () {
                 ProgramName = "PDF Mod",
                 Version = "0.1",
-                Website = "http://live.gnome.org/PdfMod",
+                Website = WIKI_URL,
                 WebsiteLabel = Catalog.GetString ("Visit Website"),
                 Authors = new string [] { "Gabriel Burt", "", "Contributions from:", "Aaron Bockover", "Sandy Armstrong" },
                 Copyright = "Copyright 2009 Novell Inc."

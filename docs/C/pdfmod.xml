@@ -1,0 +1,181 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML 4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book id="pdfmod" lang="C">
+	<bookinfo>
+		<title>The PDF Mod Manual</title>
+		<abstract role="description">
+			<para>This is the user's manual for PDF Mod, a simple tool for manipulating PDF documents.</para>
+		</abstract>
+		<subtitle>Quick, Easy PDF Modification</subtitle>
+		<copyright>
+			<year>2009</year>
+			<holder>Novell, Inc.</holder>
+		</copyright>
+		<publisher>
+			<publishername>GNOME Documentation Project</publishername>
+		</publisher>
+		<authorgroup>
+			<author role="maintainer">
+				<firstname>Gabriel</firstname>
+				<surname>Burt</surname>
+				<affiliation>
+					<orgname>Novell, Inc.</orgname>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<revhistory>
+			<revision>
+				<revnumber>0.1</revnumber>
+				<date>2009-07-25</date>
+			</revision>
+		 </revhistory>
+	</bookinfo>
+
+	<chapter id="introduction">
+		<title>Introduction</title>
+			<para>
+				PDF Mod is a simple tool for doing basic manipulations of PDF documents.
+			</para>
+
+			<para>
+				With this tool, you can rotate, remove, or extract pages in a PDF document.
+				You can also add pages from another document.
+			</para>
+
+			<para>
+				You can start PDF Mod from your applications menu or launcher, or by
+				right clicking on one or more PDF document in the file browser, and
+				choosing to open with PDF Mod.
+			</para>
+
+			<para>
+				Like a normal editor application, you must save your changes you make using PDF Mod.
+				If you want to keep the original document and save your changes to a new file, use Save As.
+			</para>
+	</chapter>
+
+	<chapter id="usage">
+		<title>Usage</title>
+
+		<sect2 id="opening-file">
+			<title>Opening a Document</title>
+			<para>
+				To open a document in PDF Mod:
+			</para>
+			<itemizedlist>
+			  <listitem>
+				  <para>
+					  Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> and select your document, or
+				  </para>
+			  </listitem>
+			  <listitem>
+				  <para>
+					  Press
+					  <keycombo>
+						<keycap>Ctrl</keycap>
+						<keycap>O</keycap>
+					  </keycombo>
+					  and select your document, or
+				  </para>
+			  </listitem>
+			  <listitem>
+				  <para>
+					  Drag a PDF document from your Desktop or file browser into a PDF Mod window that doesn't already have a document loaded, or
+				  </para>
+			  </listitem>
+			  <listitem>
+				  <para>
+					  Choose a document from <menuchoice><guimenu>File</guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>.
+				  </para>
+			  </listitem>
+		  </itemizedlist>
+		</sect2>
+
+		<sect2 id="zooming">
+			<title>Zooming</title>
+			<para>
+				Zooming will make the page thumbnails bigger or smaller.  PDF Mod starts in Best Fit mode, where it tries to make all the pages visible at once.
+			</para>
+			<para>
+				You can zoom in or out with the options under <menuchoice><guimenu>View</guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your mouse's scroll wheel.
+			</para>
+		</sect2>
+
+		<sect2 id="selection">
+			<title>Selecting Pages</title>
+			<para>
+				PDF Mod can automatically select all pages, even-numbered pages, odd-numbered pages, or pages containing a search term.  
+				These options are available under <menuchoice><guimenu>Edit</guimenu></menuchoice>.
+			</para>
+			<para>
+				You can select pages manually using the keyboard and mouse as well.  Use <keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page.
+			</para>
+		</sect2>
+
+		<sect2 id="moving-pages">
+			<title>Moving Pages</title>
+			<para>
+				To move (aka reorder) the selected page or pages, drag them to the position in the document to which you want them moved.
+			</para>
+			<tip>
+				<para>
+					All editing actions except removing pages can be undone by choosing 
+					<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice> or by pressing 
+					<keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>.
+				</para>
+			</tip> 
+		</sect2>
+
+		<sect2 id="extracting-pages">
+			<title>Extracting Pages</title>
+			<para>
+				Extracting the selected page or pages will open a new PDF Mod window with just the selected pages in a new document, ready for further editing or to save.
+			</para>
+			<para>
+				To extract the one or more selected pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>.
+			</para>
+			<tip>
+				<para>
+					All of the editing and selection actions available under <menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right clicking on a page.
+					Some actions are available on the toolbar as well.
+				</para>
+			</tip> 
+		</sect2>
+
+		<sect2 id="rotating-pages">
+			<title>Rotating Pages</title>
+			<para>
+				To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press
+				<keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and <keycombo><keycap>]</keycap></keycombo> to rotate right (CW).
+			</para>
+		</sect2>
+
+		<sect2 id="removing-pages">
+			<title>Removing Pages</title>
+			<para>
+				To remove the one or more selected pages, press <keycap>Delete</keycap> or choose
+				<menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</guimenuitem></menuchoice>.
+			</para>
+			<warning>
+				<para>
+					It is not currently possible to undo this action via <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice>.  
+					You can close the document without saving and open it again to get your page back, though you will lose any other changes you have made.
+				</para>
+			</warning> 
+		</sect2>
+
+		<sect2 id="saving">
+			<title>Saving</title>
+			<para>
+				After making changes to the document, there are two ways to save your work. 
+				You can overwrite the original document by choosing 
+				<menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>,
+				or you can save your changes to a new file by choosing 
+				<menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></menuchoice>.
+			</para>
+		</sect2>
+
+	</chapter>
+	
+</book>
+

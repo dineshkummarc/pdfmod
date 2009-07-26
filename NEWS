@@ -5,8 +5,8 @@ Version 0.3
 * Add Recent Documents menu [Sandy]
 * Fix glitch with page bg rendering [Aaron]
 * Add more convenience keybindings for zoom/quit [Sandy]
-* Open file in empty pdfmod by DnD from nautilus [Gabriel]
-* Insert external PDF into current doc via DnD [Gabriel]
+* Open document by dragging from nautilus [Gabriel]
+* Insert external PDF into current doc by dragging from nautilus [Gabriel]
 * Properties editor [Gabriel]
 
 Version 0.2
