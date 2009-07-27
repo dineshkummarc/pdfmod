@@ -101,6 +101,15 @@
 			</para>
 		</sect2>
 
+		<sect2 id="properties">
+			<title>Viewing and Editing Properties</title>
+			<para>
+				You can view and edit the Title, Author, Keywords, and Subject of the document by opening the properties.  To do so, choose
+				<menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice>, press
+				<keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, or click the Properties button on the toolbar.
+			</para>
+		</sect2>
+
 		<sect2 id="selection">
 			<title>Selecting Pages</title>
 			<para>
