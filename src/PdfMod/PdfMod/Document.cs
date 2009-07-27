@@ -1,5 +1,6 @@
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Hyena;
@@ -138,12 +139,20 @@ namespace PdfMod
 
         public void Move (int to_index, Page [] move_pages)
         {
-            for (int i = 0, new_index = to_index; i < move_pages.Length; i++, new_index++) {
+            int [] old_indexes = move_pages.Select (p => p.Index).ToArray ();
+
+            // First remove all of them, so we don't have to calculate indexes
+            // based on which pages have already been moved etc
+            foreach (var page in move_pages) {
+                pages.Remove (page);
+            }
+
+            for (int i = 0; i < move_pages.Length; i++) {
                 var page = move_pages[i];
-                int old_index = pages.IndexOf (page);
+                int old_index = old_indexes[i];
+                int new_index = to_index + i;
 
                 // Move it in our list of Pages
-                pages.Remove (page);
                 pages.Insert (new_index, page);
 
                 // Move it in the actual document

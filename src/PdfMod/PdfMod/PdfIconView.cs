@@ -164,8 +164,11 @@ namespace PdfMod
         protected override bool OnDragMotion (Gdk.DragContext context, int x, int y, uint time_)
         {
             var targets = context.Targets.Select (t => (string)t);
+
             if (targets.Contains (move_target.Target)) {
-                return base.OnDragMotion (context, x, y, time_);
+                bool ret = base.OnDragMotion (context, x, y, time_);
+                SetDestInfo (x, y);
+                return ret;
             } else if (targets.Contains (uri_dest_target.Target)) {
                 // TODO could do this (from Gtk+ docs) to make sure the uris are all .pdfs (or mime-sniffed as pdfs):
                 /* If the decision whether the drop will be accepted or rejected can't be made based solely on the
@@ -178,15 +181,21 @@ namespace PdfMod
                     highlighted = true;
                 }
 
-                TreePath path;
-                IconViewDropPosition pos;
-                GetDestItemAtPos (x, y, out path, out pos);
-                SetDragDestItem (path, pos);
+                SetDestInfo (x, y);
+
                 return true;
             }
 
             Gdk.Drag.Abort (context, time_);
             return false;
+        }
+
+        private void SetDestInfo (int x, int y)
+        {
+            TreePath path;
+            IconViewDropPosition pos;
+            GetCorrectedPathAndPosition (x, y, out path, out pos);
+            SetDragDestItem (path, pos);
         }
 
         private void HandleDragDataGet(object o, DragDataGetArgs args)
@@ -202,27 +211,39 @@ namespace PdfMod
             }
         }
 
+        private void GetCorrectedPathAndPosition (int x, int y, out TreePath path, out IconViewDropPosition pos)
+        {
+            GetDestItemAtPos (x, y, out path, out pos);
+
+            // Convert drop above/below/into into DropLeft or DropRight based on the x coordinate
+            if (path != null && (pos == IconViewDropPosition.DropAbove || pos == IconViewDropPosition.DropBelow || pos == IconViewDropPosition.DropInto)) {
+                if (!path.Equals (GetPathAtPos (x + ItemWidth/2, y))) {
+                    pos = IconViewDropPosition.DropRight;
+                } else {
+                    pos = IconViewDropPosition.DropLeft;
+                }
+            }
+        }
+
         private int GetDropIndex (int x, int y)
         {
             TreePath path;
             TreeIter iter;
             IconViewDropPosition pos;
-            GetDestItemAtPos (x, y, out path, out pos);
-            if (path == null)
+            GetCorrectedPathAndPosition (x, y, out path, out pos);
+            if (path == null) {
                 return -1;
+            }
 
             store.GetIter (out iter, path);
             if (TreeIter.Zero.Equals (iter))
                 return -1;
 
             var to_index = (store.GetValue (iter, PdfListStore.PageColumn) as Page).Index;
-            Console.WriteLine ("drop index = {0}, pos = {1}", to_index, pos);
-            if (pos == IconViewDropPosition.DropLeft) {
-                to_index = Math.Max (0, to_index - 1);
-            } else if (pos == IconViewDropPosition.DropRight) {
+            if (pos == IconViewDropPosition.DropRight) {
                 to_index++;
             }
-            Console.Write ("final drop position = {0}", to_index);
+
             return to_index;
         }
 
@@ -231,8 +252,17 @@ namespace PdfMod
         {
             if (args.SelectionData.Uris == null) {
                 // Move pages within the document
-                var pages = args.SelectionData.Data as Hyena.Gui.DragDropList<Page>;
                 int to_index = GetDropIndex (args.X, args.Y);
+                if (to_index < 0)
+                    return;
+
+                var pages = args.SelectionData.Data as Hyena.Gui.DragDropList<Page>;
+
+                // if there are any pages with index < to_index, we need to decrement the to_index accordingly since
+                // those pages will be first removed, then reinserted
+                //to_index -= pages.Count (p => p.Index < to_index);
+                to_index -= pages.Count (p => p.Index < to_index);
+
                 var action = new MoveAction (document, pages, to_index);
                 action.Do ();
                 app.GlobalActions.UndoManager.AddUndoAction (action);
@@ -244,6 +274,8 @@ namespace PdfMod
                     args.RetVal = true;
                 } else {
                     int to_index = GetDropIndex (args.X, args.Y);
+                    if (to_index < 0)
+                        return;
                     // TODO somehow ask user for which pages of the docs to insert?
                     // TODO pwd handling - keyring#?
                     // TODO make action/undoable
