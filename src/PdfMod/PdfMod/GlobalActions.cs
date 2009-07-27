@@ -29,7 +29,8 @@ namespace PdfMod
         };
 
         private static string [] require_page_actions = new string[] {
-            "RemoveAction", "ExtractAction", "ExportImagesAction", "RotateRightAction", "RotateLeftAction"
+            "RemoveAction", "ExtractAction", "RotateRightAction", "RotateLeftAction"
+            //, "ExportImagesAction"
         };
 
         public UndoManager UndoManager {
@@ -79,6 +80,9 @@ namespace PdfMod
                 new ToggleActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
                 new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, true)
             );
+
+            // Not ready/finished yet
+            UpdateAction ("ExportImagesAction", false);
 
             this["RotateRightAction"].IconName = "object-rotate-right";
             this["RotateLeftAction"].IconName = "object-rotate-left";
