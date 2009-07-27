@@ -191,7 +191,7 @@ namespace PdfMod
             public void SetDefault (string default_value)
             {
                 this.initial_value = default_value;
-                Entry.Text = default_value;
+                Entry.Text = default_value ?? "";
                 undo_adapter.UndoManager.Clear ();
             }
 
