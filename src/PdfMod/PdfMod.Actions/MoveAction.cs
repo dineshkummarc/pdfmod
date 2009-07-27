@@ -1,5 +1,6 @@
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -27,11 +28,7 @@ namespace PdfMod.Actions
                 throw new InvalidOperationException (Catalog.GetString ("Error trying to unmove pages"));
             }
 
-            for (int i = 0; i < old_indices.Length; i++) {
-                Console.WriteLine ("Trying to move page {0} back to index {1}", Pages[i], old_indices[i]);
-                Document.Move (old_indices[i], new Page [] { Pages[i] });
-            }
-
+            Document.Move (to_index, Pages.ToArray (), old_indices);
             old_indices = null;
         }
 
@@ -41,12 +38,8 @@ namespace PdfMod.Actions
                 throw new InvalidOperationException (Catalog.GetString ("Error trying to move pages"));
             }
 
-            old_indices = new int[Pages.Count];
-            for (int i = 0; i < Pages.Count; i++) {
-                old_indices[i] = Document.IndexOf (Pages[i]);
-            }
-
-            Document.Move (to_index, Pages.ToArray ());
+            old_indices = Pages.Select<Page, int> (Document.IndexOf).ToArray ();
+            Document.Move (to_index, Pages.ToArray (), null);
         }
     }
 }

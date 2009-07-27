@@ -21,10 +21,10 @@ namespace PdfMod
         All
     }
 
-    public class PdfIconView : Gtk.IconView
+    public class PdfIconView : Gtk.IconView, IDisposable
     {
-        const int MIN_WIDTH = 128;
-        const int MAX_WIDTH = 2054;
+        public const int MIN_WIDTH = 128;
+        public const int MAX_WIDTH = 2054;
 
         private static TargetEntry uri_src_target = new TargetEntry ("text/uri-list", 0, 0);
         private static TargetEntry uri_dest_target = new TargetEntry ("text/uri-list", TargetFlags.OtherApp, 1);
@@ -33,6 +33,7 @@ namespace PdfMod
         private PdfMod app;
         private Document document;
         private PdfListStore store;
+        private CellRendererPage page_renderer;
         private PageSelectionMode page_selection_mode = PageSelectionMode.None;
         private bool highlighted;
 
@@ -67,9 +68,9 @@ namespace PdfMod
             Reorderable = false;
             Spacing = 0;
 
-            var page_cell = new CellRendererPage ();
-            PackStart (page_cell, true);
-            AddAttribute (page_cell, "page", PdfListStore.PageColumn);
+            page_renderer = new CellRendererPage ();
+            PackStart (page_renderer, true);
+            AddAttribute (page_renderer, "page", PdfListStore.PageColumn);
 
             // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
             EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
@@ -82,6 +83,12 @@ namespace PdfMod
             DragDataReceived += HandleDragDataReceived;
             DragDataGet += HandleDragDataGet;
             DragLeave += HandleDragLeave;
+        }
+
+        public override void Dispose ()
+        {
+            page_renderer.Dispose ();
+            base.Dispose ();
         }
 
         #region Gtk.Widget event handlers/overrides
@@ -257,12 +264,7 @@ namespace PdfMod
                     return;
 
                 var pages = args.SelectionData.Data as Hyena.Gui.DragDropList<Page>;
-
-                // if there are any pages with index < to_index, we need to decrement the to_index accordingly since
-                // those pages will be first removed, then reinserted
-                //to_index -= pages.Count (p => p.Index < to_index);
                 to_index -= pages.Count (p => p.Index < to_index);
-
                 var action = new MoveAction (document, pages, to_index);
                 action.Do ();
                 app.GlobalActions.UndoManager.AddUndoAction (action);
@@ -334,12 +336,12 @@ namespace PdfMod
 
         private void OnPagesChanged (Page [] pages)
         {
-            foreach (var page in pages) {
+            /*foreach (var page in pages) {
                 var iter = store.GetIterForPage (page);
                 if (!TreeIter.Zero.Equals (iter)) {
                     store.EmitRowChanged (store.GetPath (iter), iter);
                 }
-            }
+            }*/
 
             Refresh ();
         }
@@ -357,7 +359,7 @@ namespace PdfMod
             Refresh ();
         }
 
-        private void OnPagesMoved (int index, Page [] pages)
+        private void OnPagesMoved ()
         {
             UpdateAllPages ();
             Refresh ();

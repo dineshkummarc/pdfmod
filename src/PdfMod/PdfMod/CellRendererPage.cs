@@ -1,5 +1,6 @@
 
 using System;
+using System.Linq;
 
 using Gtk;
 using Cairo;
@@ -9,7 +10,7 @@ using Hyena.Collections;
 
 namespace PdfMod
 {
-    public class CellRendererPage : CellRendererCairo
+    public class CellRendererPage : CellRendererCairo, IDisposable
     {
         const int scale_every = 400;
 
@@ -31,12 +32,25 @@ namespace PdfMod
             height = cell_area.Width;
         }
 
+        public override void Dispose ()
+        {
+            var keys = surface_cache.Select (e => e.Key).ToList ();
+            foreach (var key in keys) {
+                surface_cache.Remove (key);
+            }
+
+            base.Dispose ();
+        }
+
         protected override void Render (Cairo.Context cr, double width, double height, CellRendererState state)
         {
             // Scale the border size w/ the cell size
-            var border_width = 1.0 * (width / 128.0);
+            var border_width = width / 128.0;
             width -= 2 * border_width;
             height -= 2 * border_width;
+            if (width < 0 || height < 0) {
+                return;
+            }
 
             //Console.WriteLine ("SurfaceCache has HitRatio = {0:0.00} ({1} hits, {2} misses, max_count = {3})", surface_cache.HitRatio, surface_cache.Hits, surface_cache.Misses, surface_cache.MaxCount);
             PageThumbnail cache_obj;
@@ -45,7 +59,7 @@ namespace PdfMod
                 // Don't use if not big enough, dirty, or corrupt
                 surface = cache_obj.Surface;
                 if (Page.SurfaceDirty || surface == null || surface.Handle == IntPtr.Zero || (surface.Width < width && surface.Height < height)) {
-                    cache_obj.Dispose ();
+                    surface_cache.Remove (Page);
                     cache_obj = null;
                     surface = null;
                 }
@@ -56,6 +70,9 @@ namespace PdfMod
                 var w = width + (width % scale_every);
                 var h = height + (height % scale_every);
                 cache_obj = Page.Document.GetSurface (Page, (int)w, (int)h);
+                if (cache_obj == null) {
+                    return;
+                }
                 surface = cache_obj.Surface;
 
                 // Put it in the cache

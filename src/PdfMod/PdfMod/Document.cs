@@ -41,6 +41,12 @@ namespace PdfMod
                 return String.IsNullOrEmpty (title) ? null : title;
             }
             set {
+                if (value.Trim () == "")
+                    value = null;
+
+                if (value == Title)
+                    return;
+
                 Pdf.Info.Title = value;
                 StartSaveTempTimeout ();
             }
@@ -48,17 +54,44 @@ namespace PdfMod
 
         public string Author {
             get { return Pdf.Info.Author; }
-            set { Pdf.Info.Author = value; StartSaveTempTimeout (); }
+            set {
+                if (value.Trim () == "")
+                    value = null;
+
+                if (value == Author)
+                    return;
+
+                Pdf.Info.Author = value;
+                StartSaveTempTimeout ();
+            }
         }
 
         public string Keywords {
             get { return Pdf.Info.Keywords; }
-            set { Pdf.Info.Keywords = value; StartSaveTempTimeout (); }
+            set {
+                if (value.Trim () == "")
+                    value = null;
+
+                if (value == Keywords)
+                    return;
+
+                Pdf.Info.Keywords = value;
+                StartSaveTempTimeout ();
+            }
         }
 
         public string Subject {
             get { return Pdf.Info.Subject; }
-            set { Pdf.Info.Subject = value; StartSaveTempTimeout (); }
+            set {
+                if (value.Trim () == "")
+                    value = null;
+
+                if (value == Subject)
+                    return;
+
+                Pdf.Info.Subject = value;
+                StartSaveTempTimeout ();
+            }
         }
 
         public string Filename {
@@ -66,7 +99,7 @@ namespace PdfMod
         }
 
         public event System.Action Changed;
-        public event Action<int, Page[]> PagesMoved;
+        public event System.Action PagesMoved;
         public event Action<Page []> PagesRemoved;
         public event Action<int, Page []> PagesAdded;
         public event Action<Page []> PagesChanged;
@@ -137,34 +170,34 @@ namespace PdfMod
             }
         }
 
-        public void Move (int to_index, Page [] move_pages)
+        public void Move (int to_index, Page [] move_pages, int [] new_indexes)
         {
-            int [] old_indexes = move_pages.Select (p => p.Index).ToArray ();
-
-            // First remove all of them, so we don't have to calculate indexes
-            // based on which pages have already been moved etc
+            // Remove all the pages
             foreach (var page in move_pages) {
                 pages.Remove (page);
             }
 
+            if (new_indexes == null) {
+                new_indexes = move_pages.Select (p => to_index++).ToArray ();
+            }
+
+            // Add back at the right index
             for (int i = 0; i < move_pages.Length; i++) {
-                var page = move_pages[i];
-                int old_index = old_indexes[i];
-                int new_index = to_index + i;
+                pages.Insert (new_indexes[i], move_pages[i]);
+            }
 
-                // Move it in our list of Pages
-                pages.Insert (new_index, page);
-
-                // Move it in the actual document
-                pdf_document.Pages.MovePage (old_index, new_index);
+            // Do the actual move in the document
+            foreach (var page in move_pages) {
+                pdf_document.Pages.MovePage (page.Index, IndexOf (page));
             }
 
             Reindex ();
+
             SaveTemp ();
 
             var handler = PagesMoved;
             if (handler != null) {
-                handler (to_index, move_pages);
+                handler ();
             }
         }
 
@@ -201,6 +234,7 @@ namespace PdfMod
         public void Save (string uri)
         {
             Pdf.Save (uri);
+            Log.DebugFormat ("Saved to {0}", uri);
             Uri = uri;
 
             if (tmp_uri != null) {
@@ -237,7 +271,12 @@ namespace PdfMod
 
         private Poppler.Document poppler_doc;
         private Poppler.Document PopplerDoc {
-            get { return poppler_doc ?? (poppler_doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")); }
+            get {
+                if (poppler_doc == null) {
+                    poppler_doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "");
+                }
+                return poppler_doc;
+            }
         }
 
         private void ExpireThumbnails (IEnumerable<Page> update_pages)
@@ -254,6 +293,10 @@ namespace PdfMod
 
         public PageThumbnail GetSurface (Page page, int w, int h)
         {
+            if (w < PdfIconView.MIN_WIDTH || h < PdfIconView.MIN_WIDTH) {
+                return null;
+            }
+
             using (var ppage = PopplerDoc.GetPage (page.Index)) {
                 double pw, ph;
                 ppage.GetSize (out pw, out ph);
@@ -305,10 +348,10 @@ namespace PdfMod
 
                 pdf_document.Save (tmp_path);
                 Log.DebugFormat ("Saved tmp file to {0}", tmp_path);
+                OnChanged ();
             } catch (Exception e) {
                 Log.Exception ("Failed to save tmp document", e);
-            } finally {
-                OnChanged ();
+                // TODO tell user, shutdown
             }
         }
 

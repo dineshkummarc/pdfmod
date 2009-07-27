@@ -25,7 +25,7 @@ namespace PdfMod
             Hyena.Log.Debugging = true;
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
-            Application.Init ();
+            Gtk.Application.Init ();
             InitCatalog ("/usr/local/share/locale/", "/usr/share/locale/");
 
             try {
@@ -134,6 +134,11 @@ namespace PdfMod
                 Document.Dispose ();
             }
 
+            if (IconView != null) {
+                IconView.Dispose ();
+                IconView = null;
+            }
+
             Window.Destroy ();
             Window = null;
 
@@ -172,6 +177,9 @@ namespace PdfMod
 
         private void LoadFiles ()
         {
+            // This variable should probably be marked volatile
+            Hyena.Log.Debugging = true;
+
             var files = ApplicationContext.CommandLine.Files;
             if (files.Count == 1) {
                 LoadPath (files[0]);
@@ -252,10 +260,12 @@ namespace PdfMod
             } else if (current_size == original_size) {
                 size_label.Text = original_size_string;
             } else {
-                size_label.Text = String.Format (Catalog.GetString ("{0} (originally {1})"),
-                    new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery (),
-                    original_size_string
-                );
+                string current_size_string = new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery ();
+                if (current_size_string == original_size_string) {
+                    size_label.Text = original_size_string;
+                } else {
+                    size_label.Text = String.Format (Catalog.GetString ("{0} (originally {1})"), current_size_string, original_size_string);
+                }
             }
 
             var title = Document.Title;

@@ -194,6 +194,7 @@ namespace PdfMod
         {
             var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Save as..."), app.Window, FileChooserAction.Save);
             chooser.SelectMultiple = false;
+            chooser.DoOverwriteConfirmation = true;
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.SaveAs, ResponseType.Ok);
             chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
@@ -244,14 +245,14 @@ namespace PdfMod
             app.LoadPath (path, Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 String.Format ("[{0}] {1}",
-                    GLib.Markup.EscapeText (GetPageSummary (pages)),
+                    GLib.Markup.EscapeText (GetPageSummary (pages, 10)),
                     Path.GetFileName (app.Document.SuggestedSavePath))
             ));
         }
 
         // Return a simple, nice string describing the selected pages
         //   e.g.  Page 1, or Page 3 - 6, or Page 2, 4, 6
-        private string GetPageSummary (List<Page> pages)
+        public static string GetPageSummary (List<Page> pages, int maxListed)
         {
             string pages_summary = null;
             if (pages.Count == 1) {
@@ -262,13 +263,13 @@ namespace PdfMod
                 // eg Pages 3 - 7
                 pages_summary = String.Format (Catalog.GetPluralString ("Pages {1} - {2}", "Pages {1} - {2}", pages.Count),
                     pages.Count, pages[0].Index + 1, pages[pages.Count - 1].Index + 1);
-            } else if (pages.Count < 10) {
+            } else if (pages.Count < maxListed) {
                 string page_nums = String.Join (", ", pages.Select (p => (p.Index + 1).ToString ()).ToArray ());
                 // Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
                 pages_summary = String.Format (Catalog.GetPluralString ("Pages {1}", "Pages {1}", pages.Count), pages.Count, page_nums);
             } else {
                 // Translators: {0} is the number of pages, eg 12 Pages
-                pages_summary = String.Format (Catalog.GetPluralString ("{0} Page", "{0} Pages}", pages.Count), pages.Count);
+                pages_summary = String.Format (Catalog.GetPluralString ("{0} Page", "{0} Pages", pages.Count), pages.Count);
             }
             return pages_summary;
         }
@@ -285,7 +286,7 @@ namespace PdfMod
             var export_path_base = Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 // Translators: This is used for creating a folder name, be careful!
-                String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages))
+                String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages, 10))
             );
 
             var export_path = export_path_base;
