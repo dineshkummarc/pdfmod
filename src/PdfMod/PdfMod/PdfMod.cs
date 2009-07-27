@@ -26,7 +26,7 @@ namespace PdfMod
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
             Application.Init ();
-            Catalog.Init("pdfmod", "/usr/local/share/locale/");
+            InitCatalog ("/usr/local/share/locale/", "/usr/share/locale/");
 
             try {
                 System.IO.Directory.CreateDirectory (CacheDir);
@@ -261,6 +261,18 @@ namespace PdfMod
             var title = Document.Title;
             var filename = Document.Filename;
             Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
+        }
+
+        private static void InitCatalog (params string [] dirs)
+        {
+            foreach (var dir in dirs) {
+                var test_file = System.IO.Path.Combine (dir, "fr/LC_MESSAGES/pdfmod.mo");
+                if (System.IO.File.Exists (test_file)) {
+                    Log.DebugFormat ("Initializing i18n catalog from {0}", dir);
+                    Catalog.Init ("pdfmod", dir);
+                    break;
+                }
+            }
         }
 
         public static string GetTmpFilename ()
