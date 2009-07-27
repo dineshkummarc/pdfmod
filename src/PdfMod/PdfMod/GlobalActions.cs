@@ -377,7 +377,7 @@ namespace PdfMod
 
             var dialog = new Gtk.AboutDialog () {
                 ProgramName = "PDF Mod",
-                Version = "0.1",
+                Version = "0.3",
                 Website = WIKI_URL,
                 WebsiteLabel = Catalog.GetString ("Visit Website"),
                 Authors = new string [] { "Gabriel Burt", "", "Contributions from:", "Sandy Armstrong", "Aaron Bockover", "Olivier Le Thanh Duong" },
