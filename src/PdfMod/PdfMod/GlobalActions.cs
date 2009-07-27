@@ -76,7 +76,8 @@ namespace PdfMod
 
             AddImportant (
                 new ToggleActionEntry ("PropertiesAction", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
-                new ToggleActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true)
+                new ToggleActionEntry ("ZoomFitAction", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
+                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, true)
             );
 
             this["RotateRightAction"].IconName = "object-rotate-right";
@@ -434,6 +435,11 @@ namespace PdfMod
         private void OnZoomFit (object o, EventArgs args)
         {
             app.IconView.ZoomFit ();
+        }
+
+        private void OnViewToolbar (object o, EventArgs args)
+        {
+            app.HeaderToolbar.Visible = (this["ViewToolbar"] as ToggleAction).Active;
         }
 
         private void OnRotateRight (object o, EventArgs args)

@@ -32,6 +32,8 @@
       <menuitem action="ZoomInAction"/>
       <menuitem action="ZoomOutAction"/>
       <menuitem action="ZoomFitAction"/>
+      <separator/>
+      <menuitem action="ViewToolbar"/>
     </menu>
     <menu name="HelpMenu" action="HelpMenuAction">
       <menuitem action="HelpAction"/>

@@ -41,11 +41,11 @@ namespace PdfMod
         }
 
         private MenuBar menu_bar;
-        private Gtk.Toolbar header_toolbar;
         private Gtk.Label size_label;
         private QueryBox query_box;
 
         public ActionManager ActionManager { get; private set; }
+        public Toolbar HeaderToolbar;
         public GlobalActions GlobalActions { get; private set; }
         public Gtk.Statusbar StatusBar { get; private set; }
         public Gtk.Window Window { get; private set; }
@@ -93,14 +93,14 @@ namespace PdfMod
             menu_bar = ActionManager.UIManager.GetWidget ("/MainMenu") as MenuBar;
 
             // Toolbar
-            header_toolbar = ActionManager.UIManager.GetWidget ("/HeaderToolbar") as Gtk.Toolbar;
-            header_toolbar.ShowArrow = false;
-            header_toolbar.ToolbarStyle = ToolbarStyle.Icons;
-            header_toolbar.Tooltips = true;
+            HeaderToolbar = ActionManager.UIManager.GetWidget ("/HeaderToolbar") as Gtk.Toolbar;
+            HeaderToolbar.ShowArrow = false;
+            HeaderToolbar.ToolbarStyle = ToolbarStyle.Icons;
+            HeaderToolbar.Tooltips = true;
 
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
-            vbox.PackStart (header_toolbar, false, false, 0);
+            vbox.PackStart (HeaderToolbar, false, false, 0);
             vbox.PackStart (EditorBox, false, false, 0);
             vbox.PackStart (query_box, false, false, 0);
             vbox.PackStart (IconView_sw, true, true, 0);
