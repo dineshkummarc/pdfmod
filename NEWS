@@ -1,16 +1,31 @@
 PDF Mod NEWS
 
 Version 0.3
-* Fix bug with files with spaces in their URI [Sandy]
-* Add Recent Documents menu [Sandy]
-* Fix glitch with page bg rendering [Aaron]
-* Add more convenience keybindings for zoom/quit [Sandy]
-* Open document by dragging from nautilus [Gabriel]
-* Insert external PDF into current doc by dragging from nautilus [Gabriel]
-* Properties editor [Gabriel]
+
+Contributors:
+Sandy Armstrong, Aaron Bockover, Olivier Le Thanh Duong
+
+Bugs:
+* Opening files with spaces in the filename fixed
+* Page background rendering glitch fixed
+* Reordering and undo bug fixed
+* Reordering now only allows dropping left/right of a page
+* Desktop file now has pdf mimetype
+* Dispose some cairo contexts we were missing
+
+Features:
+* Convenience keybindings for zoom/quit
+* Open document by dragging from nautilus
+* Insert external PDF into current doc by dragging from nautilus
+* Properties (title, author, etc) editor
+* Recent Documents menu
+* User guide (F1)
+* French translation
+
 
 Version 0.2
 * Fix not-installed .desktop file
+
 
 Version 0.1
 * Initial release
