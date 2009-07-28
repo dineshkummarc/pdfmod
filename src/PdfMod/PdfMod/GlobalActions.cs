@@ -337,7 +337,7 @@ namespace PdfMod
                 string help_dir = null;
                 foreach (var dir in new string [] { "/usr/share/gnome/help/", "/usr/local/share/gnome/help/", "docs/" }) {
                     help_dir = dir;
-                    if (System.IO.Directory.Exists (dir)) {
+                    if (System.IO.Directory.Exists (dir + "pdfmod/")) {
                         break;
                     }
                 }
