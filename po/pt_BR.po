@@ -1,0 +1,270 @@
+# Portuguese translations for pdfmod package.
+# Copyright (C) 2009 THE PDFMOD'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pdfmod package.
+# Og Maciel <ogmaciel@gnome.org>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-27 23:06-0400\n"
+"PO-Revision-Date: 2009-07-27 23:06-0400\n"
+"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:63
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:2
+msgid "PDF Modifier"
+msgstr "Modificador de PDF"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:3
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Remove, extrai e rotaciona páginas em documentos PDF"
+
+#: ../src/PdfMod/PdfMod.Actions/ExportImagesAction.cs:85
+msgid "/Subtype"
+msgstr "/Subtipo"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:28
+msgid "Error trying to unmove pages"
+msgstr "Erro tentando retornar páginas"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:38
+msgid "Error trying to move pages"
+msgstr "Erro tentando mover páginas"
+
+#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "Erro tentando remover páginas do documento"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "Open a document"
+msgstr "Abrir um documento"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Salvar modificações neste documento, sobrescrevendo o arquivo atual"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:48
+msgid "Save this document to a new file"
+msgstr "Salvar este documento como um novo arquivo"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:50
+msgid "_File"
+msgstr "_Arquivo"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:51
+msgid "Recent _Files"
+msgstr "Arquivos _recentes"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate Right"
+msgstr "Rotacionar para a direita"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate right"
+msgstr "Rotaciona para a direita"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate Left"
+msgstr "Rotacionar para a esquerda"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate left"
+msgstr "Rotacionar para a esquerda"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Export Images..."
+msgstr "Exportar imagens..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:59
+msgid "_Edit"
+msgstr "_Editar"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:61
+msgid "Select Even Pages"
+msgstr "Selecionar páginas pares"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+msgid "Select Odd Pages"
+msgstr "Selecionar páginas ímpares"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:63
+msgid "Select Matching..."
+msgstr "Selecionar combinando..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:67
+msgid "_View"
+msgstr "_Visualizar"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:71
+msgid "_Help"
+msgstr "Aj_uda"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:72
+msgid "_Contents"
+msgstr "_Conteúdo"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:79
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "Visualize e edite o título, palavras-chave, e mais para este documento"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:81
+msgid "Toolbar"
+msgstr "Barra de ferramentas"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:157
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Remover página"
+msgstr[1] "Remover {0} páginas"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:160
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Remove a página selecionada"
+msgstr[1] "Remove as {0} páginas selecionadas"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:163
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Extrair página"
+msgstr[1] "Extrair {0} páginas"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:166
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Extrai a página selecionada"
+msgstr[1] "Extrai as {0} páginas selecionadas"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:174
+msgid "Select PDF"
+msgstr "Selecionar PDF"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:176
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:205
+msgid "All Files"
+msgstr "Todos arquivos"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:199
+msgid "Save as..."
+msgstr "Salvar como..."
+
+#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:264
+#, csharp-format
+msgid "Page {1}"
+msgid_plural "Page {1}"
+msgstr[0] "Página {1}"
+msgstr[1] "Página {1}"
+
+#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+#. eg Pages 3 - 7
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:268
+#, csharp-format
+msgid "Pages {1} - {2}"
+msgid_plural "Pages {1} - {2}"
+msgstr[0] "Páginas {1} - {2}"
+msgstr[1] "Páginas {1} - {2}"
+
+#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:273
+#, csharp-format
+msgid "Pages {1}"
+msgid_plural "Pages {1}"
+msgstr[0] "Páginas {1}"
+msgstr[1] "Páginas {1}"
+
+#. Translators: {0} is the number of pages, eg 12 Pages
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:276
+#, csharp-format
+msgid "{0} Page"
+msgid_plural "{0} Pages"
+msgstr[0] "{0} página"
+msgstr[1] "{0} páginas"
+
+#. Translators: This is used for creating a folder name, be careful!
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:293
+#, csharp-format
+msgid "{0} - Images for {1}"
+msgstr "{0} - Imagens para {1}"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:360
+msgid "Error opening help"
+msgstr "Erro abrindo a ajuda"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:361
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Você gostaria abrir a documentação online do PDF Mod?"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:382
+msgid "Visit Website"
+msgstr "Visitar a página do projeto na web"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:385
+msgid "translator-credits"
+msgstr ""
+"Og Maciel <ogmaciel@gnome.org>"
+
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:55
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:63
+#, csharp-format
+msgid "Page {0}"
+msgstr "Página {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:155
+msgid "Save the changes made to this document?"
+msgstr "Salvar as modificações feitas neste documento?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:158
+msgid "Close _Without Saving"
+msgstr "Fechar _sem aviso"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:191
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Continue, abrindo {0} documento em janelas separadas?"
+msgstr[1] "Continue, abrindo todos {0} documentos em janelas separadas?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:195
+msgid "Open _First"
+msgstr "Abrir _primeiro"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:196
+msgid "Open _All"
+msgstr "Abrir _todos"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:225
+#, csharp-format
+msgid "Loading {0}"
+msgstr "Carregando {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:245
+msgid "Error Loading Document"
+msgstr "Erro carregando o documento"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:246
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Houve um erro carregango {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:267
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (originalmente {1})"
+
+#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+msgid "Select Matching"
+msgstr "Selecionar combinação"
