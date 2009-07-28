@@ -1,0 +1,275 @@
+# Swedish translation for pdfmod.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the pdfmod package.
+# Daniel Nylander <po@danielnylander.se>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-28 09:04+0200\n"
+"PO-Revision-Date: 2009-07-28 09:24+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:1
+#: ../src/PdfMod/PdfMod/PdfMod.cs:63
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:2
+msgid "PDF Modifier"
+msgstr "PDF-ändrare"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:3
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Ta bort, extrahera och rotera sidor i PDF-dokument"
+
+#: ../src/PdfMod/PdfMod.Actions/ExportImagesAction.cs:85
+msgid "/Subtype"
+msgstr "/Undertyp"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:28
+msgid "Error trying to unmove pages"
+msgstr "Fel vid försök att flytta tillbaka sidor"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:38
+msgid "Error trying to move pages"
+msgstr "Fel vid försök att flytta sidor"
+
+#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "Fel vid försök att flytta sidor från dokumentet"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "Open a document"
+msgstr "Öppna ett dokument"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Spara ändringar i detta dokument och skriv över den befintliga filen"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:48
+msgid "Save this document to a new file"
+msgstr "Spara detta dokument som en ny fil"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:50
+msgid "_File"
+msgstr "_Arkiv"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:51
+msgid "Recent _Files"
+msgstr "Tidigare _filer"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate Right"
+msgstr "Rotera åt höger"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate right"
+msgstr "Rotera åt höger"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate Left"
+msgstr "Rotera åt vänster"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate left"
+msgstr "Rotera åt vänster"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Export Images..."
+msgstr "Exportera bilder..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:59
+msgid "_Edit"
+msgstr "R_edigera"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:61
+msgid "Select Even Pages"
+msgstr "Markera jämna sidor"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+msgid "Select Odd Pages"
+msgstr "Markera udda sidor"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:63
+msgid "Select Matching..."
+msgstr "Markera matchande..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:67
+msgid "_View"
+msgstr "_Visa"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:71
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:72
+msgid "_Contents"
+msgstr "_Innehåll"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:79
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "Visa och redigera titeln, nyckelord och annat i detta dokument"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:81
+msgid "Toolbar"
+msgstr "Verktygsrad"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:157
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Ta bort sida"
+msgstr[1] "Ta bort {0} sidor"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:160
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Ta bort markerad sida"
+msgstr[1] "Ta bort {0} markerade sidor"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:163
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Extrahera sida"
+msgstr[1] "Extrahera {0} sidor"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:166
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Extrahera markerad sida"
+msgstr[1] "Extrahera {0} markerade sidor"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:174
+msgid "Select PDF"
+msgstr "Välj PDF"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:176
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:205
+msgid "All Files"
+msgstr "Alla filer"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:199
+msgid "Save as..."
+msgstr "Spara som..."
+
+#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:264
+#, csharp-format
+msgid "Page {1}"
+msgid_plural "Page {1}"
+msgstr[0] "Sida {1}"
+msgstr[1] "Sida {1}"
+
+#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+#. eg Pages 3 - 7
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:268
+#, csharp-format
+msgid "Pages {1} - {2}"
+msgid_plural "Pages {1} - {2}"
+msgstr[0] "Sidor {1} - {2}"
+msgstr[1] "Sidor {1} - {2}"
+
+#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:273
+#, csharp-format
+msgid "Pages {1}"
+msgid_plural "Pages {1}"
+msgstr[0] "Sidor {1}"
+msgstr[1] "Sidor {1}"
+
+#. Translators: {0} is the number of pages, eg 12 Pages
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:276
+#, csharp-format
+msgid "{0} Page"
+msgid_plural "{0} Pages"
+msgstr[0] "{0} sida"
+msgstr[1] "{0} sidor"
+
+#. Translators: This is used for creating a folder name, be careful!
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:293
+#, csharp-format
+msgid "{0} - Images for {1}"
+msgstr "{0} - Bilder för {1}"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:360
+msgid "Error opening help"
+msgstr "Fel vid öppnandet av hjälp"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:361
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Vill du öppna nätdokumentationen för PDF Mod?"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:382
+msgid "Visit Website"
+msgstr "Besök webbplatsen"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:385
+msgid "translator-credits"
+msgstr ""
+"Daniel Nylander <po@danielnylander.se>\n"
+"\n"
+"Skicka synpunkter på översättningen till\n"
+"<tp-sv@listor.tp-sv.se>."
+
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:55
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:63
+#, csharp-format
+msgid "Page {0}"
+msgstr "Sida {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:155
+msgid "Save the changes made to this document?"
+msgstr "Spara ändringarna gjorda i detta dokument?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:158
+msgid "Close _Without Saving"
+msgstr "Stäng _utan att spara"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:191
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Fortsätt och öppna {0} dokument i separat fönster?"
+msgstr[1] "Fortsätt och öppna alla {0} dokument i separata fönster?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:195
+msgid "Open _First"
+msgstr "Öppna _första"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:196
+msgid "Open _All"
+msgstr "Öppna _alla"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:225
+#, csharp-format
+msgid "Loading {0}"
+msgstr "Läser in {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:245
+msgid "Error Loading Document"
+msgstr "Fel vid inläsning av dokumentet"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:246
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Det uppstod ett fel vid inläsning av {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:267
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (ursprungligen {1})"
+
+#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+msgid "Select Matching"
+msgstr "Välj matchande"
+
