@@ -1,0 +1,273 @@
+# Danish translation of pdfmod
+# Copyright (C) 2009 pdfmod
+# This file is distributed under the same license as the pdfmod package.
+# Kris Thomsen <lakristho@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-28 23:04+0200\n"
+"PO-Revision-Date: 2009-07-28 HO:MI+0200\n"
+"Last-Translator: Kris Thomsen <lakristho@gmail.com>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../data/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:63
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../data/pdfmod.desktop.in.h:2
+msgid "PDF Modifier"
+msgstr "PDF Moderator"
+
+#: ../data/pdfmod.desktop.in.h:3
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Fjern, udtræk og rotér sider i PDF-dokumenter"
+
+#: ../src/PdfMod/PdfMod.Actions/ExportImagesAction.cs:85
+msgid "/Subtype"
+msgstr "/Undertype"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:28
+msgid "Error trying to unmove pages"
+msgstr "Kunne ikke omgøre flytning af sider"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:38
+msgid "Error trying to move pages"
+msgstr "Kunne ikke flytte sider"
+
+#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "Kunne ikke fjerne sider fra dokument"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "Open a document"
+msgstr "Åbn et dokument"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Gem ændringer til dette dokument og overskriv den eksisterende fil"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:48
+msgid "Save this document to a new file"
+msgstr "Gem dette dokument til en ny fil"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:50
+msgid "_File"
+msgstr "_Fil"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:51
+msgid "Recent _Files"
+msgstr "Seneste _filer"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate Right"
+msgstr "Rotér til højre"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate right"
+msgstr "Rotér til højre"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate Left"
+msgstr "Rotér til venstre"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate left"
+msgstr "Rotér til venstre"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Export Images..."
+msgstr "Eksportér billeder..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:59
+msgid "_Edit"
+msgstr "_Redigér"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:61
+msgid "Select Even Pages"
+msgstr "Vælg lige sider"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+msgid "Select Odd Pages"
+msgstr "Vælg ulige sider"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:63
+msgid "Select Matching..."
+msgstr "Vælg tilsvarende..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:67
+msgid "_View"
+msgstr "_Vis"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:71
+msgid "_Help"
+msgstr "_Hjælp"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:72
+msgid "_Contents"
+msgstr "_Indhold"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:79
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "Vis og redigér titlen, stikordene og andet for dette dokument"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:81
+msgid "Toolbar"
+msgstr "Værktøjslinje"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:157
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Fjern side"
+msgstr[1] "Fjern {0} sider"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:160
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Fjern markeret side"
+msgstr[1] "Fjern de {0} markerede sider"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:163
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Udtræk side"
+msgstr[1] "Udtræk {0} sider"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:166
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Udtræk den valgte side"
+msgstr[1] "Udtræk de {0} valgte sider"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:174
+msgid "Select PDF"
+msgstr "Vælg PDF"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:176
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:205
+msgid "All Files"
+msgstr "Alle filer"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:199
+msgid "Save as..."
+msgstr "Gem som..."
+
+#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:264
+#, csharp-format
+msgid "Page {1}"
+msgid_plural "Page {1}"
+msgstr[0] "Side {1}"
+msgstr[1] "Side {1}"
+
+#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+#. eg Pages 3 - 7
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:268
+#, csharp-format
+msgid "Pages {1} - {2}"
+msgid_plural "Pages {1} - {2}"
+msgstr[0] "Side {1} - {2}"
+msgstr[1] "Side {1} - {2}"
+
+#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:273
+#, csharp-format
+msgid "Pages {1}"
+msgid_plural "Pages {1}"
+msgstr[0] "Side {1}"
+msgstr[1] "Side {1}"
+
+#. Translators: {0} is the number of pages, eg 12 Pages
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:276
+#, csharp-format
+msgid "{0} Page"
+msgid_plural "{0} Pages"
+msgstr[0] "{0} side"
+msgstr[1] "{0} sider"
+
+#. Translators: This is used for creating a folder name, be careful!
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:293
+#, csharp-format
+msgid "{0} - Images for {1}"
+msgstr "{0} - Billeder for {1}"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:360
+msgid "Error opening help"
+msgstr "Fejl ved åbning af hjælp"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:361
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Vil du åbne PDF Mods online-dokumentation?"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:382
+msgid "Visit Website"
+msgstr "Besøg netsted"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:386
+msgid "translator-credits"
+msgstr ""
+"Kris Thomsen\n"
+"\n"
+"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Mere info: http://www.dansk-gruppen.dk"
+
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:55
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:63
+#, csharp-format
+msgid "Page {0}"
+msgstr "Side {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:156
+msgid "Save the changes made to this document?"
+msgstr "Gem ændringerne i dette dokument?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:159
+msgid "Close _Without Saving"
+msgstr "Luk _uden at gemme"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:192
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Fortsæt, åbn {0} dokument i et separat vindue?"
+msgstr[1] "Fortsæt, åbn alle {0} dokumenter i separate vinduer?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:196
+msgid "Open _First"
+msgstr "Åbn _første"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:197
+msgid "Open _All"
+msgstr "Åbn _alle"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:226
+#, csharp-format
+msgid "Loading {0}"
+msgstr "Indlæser {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:246
+msgid "Error Loading Document"
+msgstr "Fejl ved indlæsning af dokument"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:247
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Der opstod en fejl ved indlæsning {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:268
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (oprindeligt {1})"
+
+#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+msgid "Select Matching"
+msgstr "Vælg passende"
