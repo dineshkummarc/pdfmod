@@ -381,9 +381,14 @@ namespace PdfMod
                 Website = WIKI_URL,
                 WebsiteLabel = Catalog.GetString ("Visit Website"),
                 Authors = new string [] { "Gabriel Burt", "", "Contributions from:", "Sandy Armstrong", "Aaron Bockover", "Olivier Le Thanh Duong" },
+                Artists = new string [] { "Kalle Persson" },
                 Copyright = "Copyright 2009 Novell Inc.",
                 TranslatorCredits = Catalog.GetString ("translator-credits")
             };
+
+            try {
+                dialog.Logo = Gtk.IconTheme.Default.LoadIcon ("pdfmod", 128, 0);
+            } catch {}
 
             string [] license_paths = new string [] {
                 "/usr/share/doc/packages/pdfmod/COPYING",

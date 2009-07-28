@@ -38,6 +38,6 @@ autom4te.cache/
 bin/
 po/Makefile.in.in
 po/stamp-it
-src/PdfMod/pdfmod.desktop
+data/pdfmod.desktop
 src/PdfMod/pdfmod
 *.resources

@@ -119,6 +119,8 @@ AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
 AC_CONFIG_FILES([
 po/Makefile.in
 docs/Makefile
+data/Makefile
+data/icons/Makefile
 src/Libraries/PdfSharp/Makefile
 src/PdfMod/pdfmod
 src/PdfMod/Makefile

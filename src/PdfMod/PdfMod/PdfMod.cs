@@ -61,6 +61,7 @@ namespace PdfMod
 
             Window = new Gtk.Window (WindowType.Toplevel);
             Window.Title = Catalog.GetString ("PDF Mod");
+            Window.DefaultIconName = "pdfmod";
             Window.SetSizeRequest (640, 480);
             Window.DeleteEvent += delegate (object o, DeleteEventArgs args) {
                 Quit ();

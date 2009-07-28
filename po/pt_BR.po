@@ -16,15 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../src/PdfMod/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:63
+#: ../data/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:63
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/pdfmod.desktop.in.h:2
+#: ../data/pdfmod.desktop.in.h:2
 msgid "PDF Modifier"
 msgstr "Modificador de PDF"
 
-#: ../src/PdfMod/pdfmod.desktop.in.h:3
+#: ../data/pdfmod.desktop.in.h:3
 msgid "Remove, extract, and rotate pages in PDF documents"
 msgstr "Remove, extrai e rotaciona páginas em documentos PDF"
 

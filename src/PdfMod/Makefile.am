@@ -52,14 +52,6 @@ PDFMOD_EXE_MDB_SOURCE=../../bin/PdfMod.exe.mdb
 
 endif
 
-desktopdir = $(datadir)/applications
-desktop_in_files = $(wildcard *.desktop.in)
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-
-@INTLTOOL_DESKTOP_RULE@
-
-EXTRA_DIST += $(desktop_in_files)
-
 AL=al2
 SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
 
@@ -128,8 +120,7 @@ DLL_REFERENCES =  \
 	../../lib/Mono.Data.Sqlite.dll \
 	../../lib/poppler-sharp.dll
 
-CLEANFILES = $(PROGRAMFILES) $(BINARIES) \
-	$(desktop_DATA)
+CLEANFILES = $(PROGRAMFILES) $(BINARIES)
 
 include $(top_srcdir)/Makefile.include
 
