@@ -9,3 +9,4 @@ src/PdfMod/PdfMod/GlobalActions.cs
 src/PdfMod/PdfMod/PdfListStore.cs
 src/PdfMod/PdfMod/PdfMod.cs
 src/PdfMod/PdfMod/QueryBox.cs
+src/PdfMod/PdfMod/MetadataEditorBox.cs
