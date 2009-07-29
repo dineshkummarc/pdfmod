@@ -13,9 +13,9 @@
 
   <homepage rdf:resource="http://live.gnome.org/PdfMod" />
   <!--<download-page rdf:resource="http://banshee-project.org/download" />-->
-  <!--<mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/banshee-list" />-->
+  <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/pdfmod-list" />
   <!--<bug-database rdf:resource="http://bugzilla.gnome.org/" />-->
-  <license rdf:resource="http://usefulinc.com/doap/licenses/mit" />
+  <license rdf:resource="http://usefulinc.com/doap/licenses/GPL" />
 
   <!-- Current Releases -->
   <release>
