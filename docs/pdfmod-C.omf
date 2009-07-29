@@ -3,15 +3,15 @@
   <resource>
     <maintainer>(Gabriel Burt)</maintainer>
     <title>PDF Mod</title>
-    <date>2009-07-25</date>
-    <version identifier="0.1" date="2009-07-25"/>
-    <subject category="GNOME|Applications|Graphics"/>
+    <date>2009-07-29</date>
+    <version identifier="0.2" date="2009-07-29"/>
+    <subject category="GNOME|Applications|Utilities"/>
     <description>This is the user's manual for PDF Mod, a simple tool for manipulating PDF documents</description>
     <type>user's guide</type>
     <format mime="text/xml" dtd="-//OASIS//DTD DocBook XML 4.1.2//EN"/>
     <identifier url="file:///usr/local/share/gnome/help/pdfmod/C/pdfmod.xml"/>
     <language code="C"/>
     <relation seriesid="f248a486-a60c-11db-804e-a9087ba0dc2d"/>
-    <rights type="GNU FDL" license.version="1.1" holder=""/>
+    <rights type="CC SA" license.version="3.0" holder="Novell, Inc."/>
   </resource>
 </omf>
