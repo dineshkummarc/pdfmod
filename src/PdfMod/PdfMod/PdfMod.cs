@@ -265,6 +265,7 @@ namespace PdfMod
                 if (current_size_string == original_size_string) {
                     size_label.Text = original_size_string;
                 } else {
+                    // Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
                     size_label.Text = String.Format (Catalog.GetString ("{0} (originally {1})"), current_size_string, original_size_string);
                 }
             }
