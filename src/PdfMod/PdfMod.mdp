@@ -19,7 +19,6 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="pdfmod.desktop" subtype="Code" buildaction="Exclude" DeployService.TargetDirectoryId="Linux.DesktopApplications" />
     <File name="PdfMod/PdfMod.cs" subtype="Code" buildaction="Compile" />
     <File name="PdfMod/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="PdfMod/PdfIconView.cs" subtype="Code" buildaction="Compile" />
