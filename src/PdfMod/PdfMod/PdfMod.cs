@@ -23,6 +23,7 @@ namespace PdfMod
             ThreadAssist.ProxyToMainHandler = RunIdle;
 
             Hyena.Log.Debugging = true;
+            Hyena.Log.Notify += OnLogNotify;
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
             Gtk.Application.Init ();
@@ -273,6 +274,33 @@ namespace PdfMod
             var title = Document.Title;
             var filename = Document.Filename;
             Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
+        }
+
+        private static void OnLogNotify (LogNotifyArgs args)
+        {
+            Gtk.Window window = null;
+            Gtk.MessageType mtype;
+            var entry = args.Entry;
+
+            switch (entry.Type) {
+                case LogEntryType.Warning:
+                    mtype = Gtk.MessageType.Warning;
+                    break;
+                case LogEntryType.Information:
+                    mtype = Gtk.MessageType.Info;
+                    break;
+                case LogEntryType.Error:
+                default:
+                    mtype = Gtk.MessageType.Error;
+                    break;
+            }
+
+            Hyena.Widgets.HigMessageDialog dialog = new Hyena.Widgets.HigMessageDialog (
+                null, Gtk.DialogFlags.Modal, mtype, Gtk.ButtonsType.Close, entry.Message, entry.Details);
+
+            dialog.Title = String.Empty;
+            dialog.Run ();
+            dialog.Destroy ();
         }
 
         private static void InitCatalog (params string [] dirs)
