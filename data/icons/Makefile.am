@@ -5,6 +5,7 @@ theme_icons = \
 	apps,pdfmod-22.png \
 	apps,pdfmod-24.png \
 	apps,pdfmod-32.png \
+	apps,pdfmod-256.png \
 	apps,pdfmod.svg
 
 install_icon_exec = $(top_srcdir)/icon-theme-installer \

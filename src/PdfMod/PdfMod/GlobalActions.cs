@@ -387,7 +387,7 @@ namespace PdfMod
             };
 
             try {
-                dialog.Logo = Gtk.IconTheme.Default.LoadIcon ("pdfmod", 128, 0);
+                dialog.Logo = Gtk.IconTheme.Default.LoadIcon ("pdfmod", 256, 0);
             } catch {}
 
             string [] license_paths = new string [] {
