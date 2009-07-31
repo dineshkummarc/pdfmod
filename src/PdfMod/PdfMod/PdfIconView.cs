@@ -68,7 +68,7 @@ namespace PdfMod
             Reorderable = false;
             Spacing = 0;
 
-            page_renderer = new CellRendererPage ();
+            page_renderer = new CellRendererPage (this);
             PackStart (page_renderer, true);
             AddAttribute (page_renderer, "page", PdfListStore.PageColumn);
 

@@ -15,9 +15,11 @@ namespace PdfMod
         const int scale_every = 400;
 
         private ThumbnailLruCache surface_cache;
+        private IconView parent;
 
-        public CellRendererPage ()
+        public CellRendererPage (IconView parent)
         {
+            this.parent = parent;
             surface_cache = new ThumbnailLruCache ();
         }
 
@@ -28,8 +30,7 @@ namespace PdfMod
         {
             base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
             x_offset = y_offset = 0;
-            width = cell_area.Width;
-            height = cell_area.Width;
+            width = height = parent.ItemWidth;
         }
 
         public override void Dispose ()
