@@ -71,8 +71,8 @@ namespace PdfMod
 
             // PDF Icon View
             IconView = new PdfIconView (this);
-            var IconView_sw = new Gtk.ScrolledWindow ();
-            IconView_sw.Child = IconView;
+            var iconview_sw = new Gtk.ScrolledWindow ();
+            iconview_sw.Child = IconView;
 
             query_box = new QueryBox (this) { NoShowAll = true };
             query_box.Hide ();
@@ -80,8 +80,9 @@ namespace PdfMod
             // Status bar
             StatusBar = new Gtk.Statusbar () { HasResizeGrip = true };
             size_label = new Label ();
-            size_label.Xalign = 0;
-            StatusBar.PackStart (size_label, false, false, 0);
+            size_label.Xalign = 0.0f;
+            StatusBar.PackStart (size_label, true, true, 6);
+            StatusBar.ReorderChild (size_label, 0);
 
             // ActionManager
             ActionManager = new Hyena.Gui.ActionManager ();
@@ -105,7 +106,7 @@ namespace PdfMod
             vbox.PackStart (HeaderToolbar, false, false, 0);
             vbox.PackStart (EditorBox, false, false, 0);
             vbox.PackStart (query_box, false, false, 0);
-            vbox.PackStart (IconView_sw, true, true, 0);
+            vbox.PackStart (iconview_sw, true, true, 0);
             vbox.PackStart (StatusBar, false, true, 0);
             Window.Add (vbox);
 
@@ -256,20 +257,26 @@ namespace PdfMod
         private void UpdateForDocument ()
         {
             var current_size = Document.FileSize;
+            string size_str = null;
             if (original_size_string == null) {
-                size_label.Text = original_size_string = new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery ();
+                size_str = original_size_string = new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery ();
                 original_size = current_size;
             } else if (current_size == original_size) {
-                size_label.Text = original_size_string;
+                size_str = original_size_string;
             } else {
                 string current_size_string = new Hyena.Query.FileSizeQueryValue (current_size).ToUserQuery ();
                 if (current_size_string == original_size_string) {
-                    size_label.Text = original_size_string;
+                    size_str = original_size_string;
                 } else {
                     // Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-                    size_label.Text = String.Format (Catalog.GetString ("{0} (originally {1})"), current_size_string, original_size_string);
+                    size_str = String.Format (Catalog.GetString ("{0} (originally {1})"), current_size_string, original_size_string);
                 }
             }
+
+            size_label.Text = String.Format ("{0} \u2013 {1}",
+                String.Format (Catalog.GetPluralString ("{0} page", "{0} pages", Document.Count), Document.Count),
+                size_str
+            );
 
             var title = Document.Title;
             var filename = Document.Filename;
