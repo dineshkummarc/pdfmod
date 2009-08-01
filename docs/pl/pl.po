@@ -1,0 +1,202 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod 0.3\n"
+"POT-Creation-Date: 2009-08-01 19:43+0200\n"
+"PO-Revision-Date: 2009-08-01 19:55+0100\n"
+"Last-Translator: Michał Sawicz <michal@sawicz.net>\n"
+"Language-Team: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: C/pdfmod.xml:6(title)
+msgid "The PDF Mod Manual"
+msgstr "Instrukcja obsługi PDF Mod"
+
+#: C/pdfmod.xml:8(para)
+msgid "This is the user's manual for PDF Mod, a simple tool for manipulating PDF documents."
+msgstr "To jest instrukcja obsługi PDF Mod, prostego narzędzia do manipulacji dokumentami PDF."
+
+#: C/pdfmod.xml:10(subtitle)
+msgid "Quick, Easy PDF Modification"
+msgstr "Szybka i łatwa edycja dokumentów PDF"
+
+#: C/pdfmod.xml:12(year)
+msgid "2009"
+msgstr "2009"
+
+#: C/pdfmod.xml:13(holder)
+#: C/pdfmod.xml:23(orgname)
+msgid "Novell, Inc."
+msgstr "Novell, Inc."
+
+#: C/pdfmod.xml:16(publishername)
+msgid "GNOME Documentation Project"
+msgstr "Projekt Dokumentacji GNOME"
+
+#: C/pdfmod.xml:20(firstname)
+msgid "Gabriel"
+msgstr "Gabriel"
+
+#: C/pdfmod.xml:21(surname)
+msgid "Burt"
+msgstr "Burt"
+
+#: C/pdfmod.xml:29(revnumber)
+msgid "0.2"
+msgstr "0.2"
+
+#: C/pdfmod.xml:30(date)
+msgid "2009-07-29"
+msgstr "2009-07-29"
+
+#: C/pdfmod.xml:33(revnumber)
+msgid "0.1"
+msgstr "0.1"
+
+#: C/pdfmod.xml:34(date)
+msgid "2009-07-25"
+msgstr "2009-07-25"
+
+#: C/pdfmod.xml:40(title)
+msgid "Introduction"
+msgstr "Wstęp"
+
+#: C/pdfmod.xml:41(para)
+msgid "PDF Mod is a simple tool for doing basic manipulations of PDF documents."
+msgstr "PDF Mod to proste narzędzie pozwalające na podstawową edycję dokumentów PDF."
+
+#: C/pdfmod.xml:45(para)
+msgid "With this tool, you can rotate, remove, or extract pages in a PDF document. You can also add pages from another document."
+msgstr "Dzięki niemu możesz obracać, usuwać lub zgrywać strony dokumentu PDF. Możesz także dodać strony z innego dokumentu."
+
+#: C/pdfmod.xml:50(para)
+msgid "You can start PDF Mod from your applications menu or launcher, or by right clicking on one or more PDF documents in the file browser, and choosing to open with PDF Mod."
+msgstr "PDF Mod możesz uruchomić poprzez menu aplikacji lub poprzez kliknięcie lewego przycisku myszy na jednym bądź kilku dokumentach PDF w przeglądarce plików i wybór otwarcia przy użyciu PDF Mod."
+
+#: C/pdfmod.xml:56(para)
+msgid "Like a normal editor application, you must save the changes you make using PDF Mod. If you want to keep the original document and save your changes to a new file, use Save As."
+msgstr "Jak w przypadku każdego edytora, musisz zapisać zmiany wykonane w dokumencie. Jeśli chcesz zachować oryginalny dokument i zapisać zmiany, użyj opcji Zapisz jako."
+
+#: C/pdfmod.xml:63(title)
+msgid "Usage"
+msgstr "Sposób użycia"
+
+#: C/pdfmod.xml:66(title)
+msgid "Opening a Document"
+msgstr "Otwieranie dokumentu"
+
+#: C/pdfmod.xml:67(para)
+msgid "To open a document in PDF Mod:"
+msgstr "Aby otworzyć dokument w PDF Mod:"
+
+#: C/pdfmod.xml:72(para)
+msgid "Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> and select your document, or"
+msgstr "Wybierz <menuchoice><guimenu>Plik</guimenu> <guimenuitem>Otwórz</guimenuitem></menuchoice> i wybierz dokument lub"
+
+#: C/pdfmod.xml:77(para)
+msgid "Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> and select your document, or"
+msgstr "Naciśnij <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> i wybierz dokument lub"
+
+#: C/pdfmod.xml:87(para)
+msgid "Drag a PDF document from your Desktop or file browser into a PDF Mod window that doesn't already have a document loaded, or"
+msgstr "Przeciągnij dokument PDF z Pulpitu lub przeglądarki plików na okno PDF Mod w którym nie otwarto jeszcze dokumentu lub"
+
+#: C/pdfmod.xml:92(para)
+msgid "Choose a document from <menuchoice><guimenu>File</guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>."
+msgstr "Wybierz dokument z <menuchoice><guimenu>Plik</guimenu><guimenuitem>Ostatnio otwarte pliki</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:100(title)
+msgid "Zooming"
+msgstr "Powiększenie"
+
+#: C/pdfmod.xml:101(para)
+msgid "Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in Best Fit mode, where it tries to make all the pages visible at once."
+msgstr "Powiększenie zwiększy lub zmniejszy miniaturki stron. PDF Mod uruchamia się w trybie Najlepsze dopasowanie, w którym wszystkie strony są widoczne w tym samym czasie."
+
+#: C/pdfmod.xml:104(para)
+msgid "You can zoom in or out with the options under <menuchoice><guimenu>View</guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your mouse's scroll wheel."
+msgstr "Możesz powiększać lub powiększać używając opcji w menu <menuchoice><guimenu>View</guimenu></menuchoice> lub przytrzymując <keycap>Ctrl</keycap> i obracając kółko myszy."
+
+#: C/pdfmod.xml:110(title)
+msgid "Viewing and Editing Properties"
+msgstr "Podgląd i edycja właściwości"
+
+#: C/pdfmod.xml:111(para)
+msgid "You can view and edit the Title, Author, Keywords, and Subject of the document by opening the properties. To do so, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, or click the Properties button on the toolbar."
+msgstr "PDF Mod może automatycznie zaznaczyć wszystkie strony, strony parzyste lub nieparzyste albo strony zawierające dane wyrażenie. Opcje te dostępne są w menu <menuchoice><guimenu>Edycja</guimenu></menuchoice>."
+
+#: C/pdfmod.xml:119(title)
+msgid "Selecting Pages"
+msgstr "Zaznaczanie stron"
+
+#: C/pdfmod.xml:120(para)
+msgid "PDF Mod can automatically select all pages, even-numbered pages, odd-numbered pages, or pages containing a search term. These options are available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
+msgstr "PDF Mod może automatycznie zaznaczyć wszystkie strony, strony parzyste lub nieparzyste albo strony zawierające dane wyrażenie. Opcje te dostępne są w menu <menuchoice><guimenu>Edycja</guimenu></menuchoice>."
+
+#: C/pdfmod.xml:124(para)
+msgid "You can select pages manually using the keyboard and mouse as well. Use <keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
+msgstr "Możesz także ręcznie wybierać strony używając klawiatury lub myszy. Użyj <keycap>Ctrl</keycap> lub <keycap>Shift</keycap> aby wybrać więcej niż jedną stronę."
+
+#: C/pdfmod.xml:130(title)
+msgid "Moving Pages"
+msgstr "Przenoszenie stron"
+
+#: C/pdfmod.xml:131(para)
+msgid "To move (aka reorder) the selected page or pages, drag them to the position in the document to which you want them moved."
+msgstr "Aby przenieść (zmienić kolejność) zaznaczoną stronę lub strony, przeciągnij je w dokumencie na pozycję w której mają się znaleźć."
+
+#: C/pdfmod.xml:135(para)
+msgid "All editing actions except removing pages can be undone by choosing <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice> or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+msgstr "Wszystkie operacje z wyjątkiem usuwania stron mogą być cofnięte poprzez wybór <menuchoice><guimenu>Edycja</guimenu><guimenuitem>Cofnij</guimenuitem></menuchoice> lub naciśnięcie <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+
+#: C/pdfmod.xml:144(title)
+msgid "Extracting Pages"
+msgstr "Zgrywanie stron"
+
+#: C/pdfmod.xml:145(para)
+msgid "Extracting the selected page or pages will open a new PDF Mod window with just the selected pages in a new document, ready for further editing or to save."
+msgstr "Zgranie zaznaczonej strony lub stron otworzy nowe okno PDF Mod zawierające wybrane strony w nowym dokumencie, gotowym do dalszej edycji lub zapisania."
+
+#: C/pdfmod.xml:148(para)
+msgid "To extract the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
+msgstr "Aby zgrać zazaczoną stronę lub strony, wubierz <menuchoice><guimenu>Edycja</guimenu><guimenuitem>Zgraj stronę</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:152(para)
+msgid "All of the editing and selection actions available under <menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right clicking on a page. Some actions are available on the toolbar as well."
+msgstr "Wszystkie operacje edycji i zaznaczania dostępne w menu <menuchoice><guimenu>Edycja</guimenu></menuchoice> są także dostępne po kliknięciu prawym przyciskiem myszy na stronie. Część operacji jest też dostępna w pasku narzędzi."
+
+#: C/pdfmod.xml:160(title)
+msgid "Rotating Pages"
+msgstr "Obracanie stron"
+
+#: C/pdfmod.xml:161(para)
+msgid "To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press <keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and <keycombo><keycap>]</keycap></keycombo> to rotate right (CW)."
+msgstr "Aby obrócić zaznaczoną stronę lub strony, wybierz <menuchoice><guimenu>Edycja</guimenu><guimenuitem>Obróć stronę</guimenuitem></menuchoice> lub naciśnij <keycombo><keycap>[</keycap></keycombo> aby obrócić w lewo (przeciwnie do wskazówek zegara) lub <keycombo><keycap>]</keycap></keycombo> aby obrócić w prawo (zgodnie ze wskazówkami zegara)."
+
+#: C/pdfmod.xml:168(title)
+msgid "Removing Pages"
+msgstr "Usuwanie stron"
+
+#: C/pdfmod.xml:169(para)
+msgid "To remove the selected page or pages, press <keycap>Delete</keycap> or choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</guimenuitem></menuchoice>."
+msgstr "Aby usunąć zaznaczoną stronę lub strony, naciśnij <keycap>Delete</keycap> lub wybierz <menuchoice><guimenu>Edycja</guimenu><guimenuitem>Usuń stronę</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:174(para)
+msgid "It is not currently possible to undo this action via <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice>. You can close the document without saving and open it again to get your page back, though you will lose any other changes you have made."
+msgstr "Obecnie nie jest możliwe cofnięcie tej operacji poprzez menu <menuchoice><guimenu>Edycja</guimenu><guimenuitem>Cofnij</guimenuitem></menuchoice>. Możesz zamknąć dokument bez zapisywania i otworzyć ponownie aby odzyskać stronę, utracisz jednak wszystkie inne zmiany dokonane w dokumencie."
+
+#: C/pdfmod.xml:182(title)
+msgid "Saving"
+msgstr "Zapisywanie"
+
+#: C/pdfmod.xml:183(para)
+msgid "After making changes to the document, there are two ways to save your work. You can overwrite the original document by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>, or you can save your changes to a new file by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></menuchoice>."
+msgstr "Po dokonaniu zmian w dokumencie, istnieją dwie możliwości ich zapisania. Możesz nadpisać oryginalny dokument wybierając <menuchoice><guimenu>Plik</guimenu><guimenuitem>Zapisz</guimenuitem></menuchoice> lub zapisać zmiany w nowym pliku wybierając <menuchoice><guimenu>Plik</guimenu><guimenuitem>Zapisz jako</guimenuitem></menuchoice>."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: C/pdfmod.xml:0(None)
+msgid "translator-credits"
+msgstr "Michał Sawicz <michal@sawicz.net>, 2009."
+
