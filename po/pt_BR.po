@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:06-0400\n"
-"PO-Revision-Date: 2009-07-27 23:06-0400\n"
+"POT-Creation-Date: 2009-08-01 14:39-0400\n"
+"PO-Revision-Date: 2009-08-01 14:46-0400\n"
 "Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../data/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:63
+#: ../data/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:64
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
@@ -212,10 +212,9 @@ msgstr "Você gostaria abrir a documentação online do PDF Mod?"
 msgid "Visit Website"
 msgstr "Visitar a página do projeto na web"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:385
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:386
 msgid "translator-credits"
-msgstr ""
-"Og Maciel <ogmaciel@gnome.org>"
+msgstr "Og Maciel <ogmaciel@gnome.org>"
 
 #: ../src/PdfMod/PdfMod/PdfListStore.cs:55
 #: ../src/PdfMod/PdfMod/PdfListStore.cs:63
@@ -223,48 +222,88 @@ msgstr ""
 msgid "Page {0}"
 msgstr "Página {0}"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:155
+#: ../src/PdfMod/PdfMod/PdfMod.cs:158
 msgid "Save the changes made to this document?"
 msgstr "Salvar as modificações feitas neste documento?"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:158
+#: ../src/PdfMod/PdfMod/PdfMod.cs:161
 msgid "Close _Without Saving"
 msgstr "Fechar _sem aviso"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:191
+#: ../src/PdfMod/PdfMod/PdfMod.cs:194
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "Continue, abrindo {0} documento em janelas separadas?"
 msgstr[1] "Continue, abrindo todos {0} documentos em janelas separadas?"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:195
+#: ../src/PdfMod/PdfMod/PdfMod.cs:198
 msgid "Open _First"
 msgstr "Abrir _primeiro"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:196
+#: ../src/PdfMod/PdfMod/PdfMod.cs:199
 msgid "Open _All"
 msgstr "Abrir _todos"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:225
+#: ../src/PdfMod/PdfMod/PdfMod.cs:228
 #, csharp-format
 msgid "Loading {0}"
 msgstr "Carregando {0}"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:245
+#: ../src/PdfMod/PdfMod/PdfMod.cs:248
 msgid "Error Loading Document"
 msgstr "Erro carregando o documento"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:246
+#: ../src/PdfMod/PdfMod/PdfMod.cs:249
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Houve um erro carregango {0}"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:267
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/PdfMod/PdfMod.cs:272
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (originalmente {1})"
 
+#: ../src/PdfMod/PdfMod/PdfMod.cs:277
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} página"
+msgstr[1] "{0} páginas"
+
 #: ../src/PdfMod/PdfMod/QueryBox.cs:26
 msgid "Select Matching"
 msgstr "Selecionar combinação"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:46
+msgid "_Title:"
+msgstr "_Título:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:47
+msgid "_Author:"
+msgstr "_Autor:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:48
+msgid "_Keywords:"
+msgstr "_Palavra-chave:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:49
+msgid "_Subject:"
+msgstr "A_ssunto"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:69
+msgid "_Revert Properties"
+msgstr "_Reverter propriedades"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:70
+msgid "Change the document's properties back to the original values"
+msgstr "Reverte as propriedades do documento de volta aos valores originais"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:75
+msgid "_Close"
+msgstr "_Fechar"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:76
+msgid "Hide the document's properties"
+msgstr "Ocultar as propriedades do documento"
