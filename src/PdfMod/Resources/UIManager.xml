@@ -15,6 +15,7 @@
       <menuitem action="RedoAction"/>
       <separator/>
       <menuitem action="ExtractAction"/>
+      <menuitem action="InsertFromAction"/>
       <menuitem action="RemoveAction"/>
       <menuitem action="ExportImagesAction"/>
       <separator/>
@@ -48,6 +49,7 @@
     <toolitem action="PropertiesAction"/>
     <separator/>
     <toolitem action="ExtractAction"/>
+    <toolitem action="InsertFromAction"/>
     <toolitem action="RemoveAction"/>
     <toolitem action="RotateLeftAction"/>
     <toolitem action="RotateRightAction"/>

@@ -25,7 +25,7 @@ namespace PdfMod
 
         private static string [] require_doc_actions = new string[] {
             "SaveAction", "SaveAsAction", "PropertiesAction", "UndoAction", "RedoAction", "ZoomFitAction",
-            "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction"
+            "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction", "InsertFromAction"
         };
 
         private static string [] require_page_actions = new string[] {
@@ -44,6 +44,7 @@ namespace PdfMod
 
             AddImportant (
                 new ActionEntry ("OpenAction",   Gtk.Stock.Open,   null, "<control>O", Catalog.GetString ("Open a document"), OnOpen),
+                new ActionEntry ("InsertFromAction", Gtk.Stock.Add, Catalog.GetString("_Insert From..."), null, Catalog.GetString("Insert pages from another document"), OnInsertFrom),
                 new ActionEntry ("SaveAction",   Gtk.Stock.Save,   null, "<control>S", Catalog.GetString ("Save changes to this document, overwriting the existing file"), OnSave),
                 new ActionEntry ("SaveAsAction", Gtk.Stock.SaveAs, null, "<control><shift>S", Catalog.GetString ("Save this document to a new file"), OnSaveAs),
 
@@ -185,6 +186,25 @@ namespace PdfMod
 
             if (response == (int)ResponseType.Ok) {
                 PdfMod.RunIdle (delegate { app.LoadPath (filename); });
+            }
+        }
+
+        private void OnInsertFrom (object o, EventArgs args)
+        {
+            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
+            chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
+            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
+            chooser.SelectMultiple = false;
+            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            chooser.AddButton (Stock.Open, ResponseType.Ok);
+            chooser.DefaultResponse = ResponseType.Ok;
+
+            var response = chooser.Run ();
+            string filename = chooser.Filename;
+            chooser.Destroy();
+
+            if (response == (int)ResponseType.Ok) {
+                app.Document.AddFromUri (new Uri (filename));
             }
         }
 

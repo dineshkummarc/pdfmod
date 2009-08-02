@@ -248,6 +248,24 @@ namespace PdfMod
             }
         }
 
+        public void AddFromUri (Uri uri)
+        {
+            AddFromUri (uri, 0);
+        }
+
+        public void AddFromUri (Uri uri, int to_index)
+        {
+            Log.DebugFormat ("Inserting pages from {0} to index {1}", uri, to_index);
+            using (var doc = PdfSharp.Pdf.IO.PdfReader.Open (uri.AbsolutePath, null, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import)) {
+                var pages = new List<Page> ();
+                for (int i = 0; i < doc.PageCount; i++) {
+                    pages.Add (new Page (doc.Pages [i]));
+                }
+                Add (to_index, pages.ToArray ());
+                to_index += pages.Count;
+            }
+        }
+
         public void Add (int to_index, params Page [] add_pages)
         {
             int i = to_index;

@@ -282,15 +282,7 @@ namespace PdfMod
                     // TODO pwd handling - keyring#?
                     // TODO make action/undoable
                     foreach (var uri in uris) {
-                        Console.WriteLine ("Inserting pages from {0} to index {1}", uri, to_index);
-                        using (var doc = PdfSharp.Pdf.IO.PdfReader.Open (new Uri (uri).AbsolutePath, null, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import)) {
-                            var pages = new List<Page> ();
-                            for (int i = 0; i < doc.PageCount; i++) {
-                                pages.Add (new Page (doc.Pages [i]));
-                            }
-                            this.document.Add (to_index, pages.ToArray ());
-                            to_index += pages.Count;
-                        }
+                        document.AddFromUri (new Uri (uri), to_index);
                     }
                     args.RetVal = true;
                 }
