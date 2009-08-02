@@ -1,0 +1,263 @@
+# Tamil translation for PDF Mod, a PDF modifier
+# Copyright (C) 2009
+# This file is distributed under the same license as the PDF Mod package.
+#
+# 
+# Dr.T.Vasudevan <agnihot3@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-27 02:13+0200\n"
+"PO-Revision-Date: 2009-07-28 21:22+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: Tamil <Ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 0.3\n"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:1 ../src/PdfMod/PdfMod/PdfMod.cs:62
+msgid "PDF Mod"
+msgstr "பிடிஎஃப் மோட்"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:2
+msgid "PDF Modifier"
+msgstr "பிடிஎஃப் திருத்தர்"
+
+#: ../src/PdfMod/pdfmod.desktop.in.h:3
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "பிடிஎஃப் ஆவணங்கள் இல் பக்கங்கள் ஐ  நீக்கு, பிரி  மற்றும் சுழற்று"
+
+#: ../src/PdfMod/PdfMod.Actions/ExportImagesAction.cs:85
+msgid "/Subtype"
+msgstr "/துணை வகைகள்"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:27
+msgid "Error trying to unmove pages"
+msgstr "பக்கங்கள் ஐ நகர்வு நீக்கலில்  பிழை"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "பக்கங்கள் ஐ நகர்த்துகையில் பிழை"
+
+#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "ஆவணத்தில் பக்கங்கள் ஐ நீக்குதலில் பிழை"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:45
+msgid "Open a document"
+msgstr "ஒரு ஆவணத்தை திற"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "இருப்பிலுள்ள கோப்பு ஐ மேலெழுதி  இந்த ஆவணத்தில் மாற்றங்களை சேமி."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "Save this document to a new file"
+msgstr "இந்த ஆவணத்தை  ஒரு  புதிய  கோப்பு ஆக சேமி."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:49
+msgid "_File"
+msgstr "_F கோப்பு"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:50
+msgid "Recent _Files"
+msgstr "_F சமீபத்திய ஆவணங்கள்"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:54
+msgid "Rotate Right"
+msgstr "வலது பக்கம் சுழற்று"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:54
+msgid "Rotate right"
+msgstr "வலது பக்கம் சுழற்று"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate Left"
+msgstr "இடது பக்கம் சுழற்று"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate left"
+msgstr "இடது பக்கம் சுழற்று"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Export Images..."
+msgstr "பிம்பங்களை ஏற்றுமதி செய்க..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:58
+msgid "_Edit"
+msgstr "_E திருத்து"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:60
+msgid "Select Even Pages"
+msgstr "இரட்டைப்படை  பக்கங்கள் ஐ தேர்வுசெய்க "
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:61
+msgid "Select Odd Pages"
+msgstr "ஒற்றைப்படை  பக்கங்கள் ஐ தேர்வுசெய்க"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+msgid "Select Matching..."
+msgstr "பொருந்துவதை தேர்வுசெய்க ..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:66
+msgid "_View"
+msgstr "_V காட்டுக"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:70
+msgid "_Help"
+msgstr "_H உதவி"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:71
+msgid "_Contents"
+msgstr "_C உள்ளடக்கங்கள்"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:78
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "இந்த ஆவணத்தை பார்; தலைப்பு, விசைச்சொல் ஆகியவற்றை திருத்து, மேலும் பலதும் செய்"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:152
+#, csharp-format
+msgid "Remove Page "
+msgid_plural "Remove {0} Pages"
+msgstr[0] "பக்கம் நீக்கு"
+msgstr[1] "{0} பக்கங்கள் நீக்கு"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:155
+#, csharp-format
+msgid "Remove the selected Page "
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "தேர்வுசெய்த பக்கத்தை நீக்கு"
+msgstr[1] "தேர்வுசெய்த {0} பக்கங்கள் ஐ நீக்கு"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:158
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "பக்கத்தை பிரி"
+msgstr[1] "{0} பக்கங்கள் ஐ பிரி"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:161
+#, csharp-format
+msgid "Extract the selected Page "
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "தேர்வு செய்த பக்கத்தை பிரி"
+msgstr[1] "தேர்வு செய்த {0}  பக்கங்கள் ஐ பிரி"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:169
+msgid "Select PDF"
+msgstr "பிடிஎஃப் ஐ தேர்வுசெய்க"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:171
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:199
+msgid "All Files"
+msgstr "எல்லா ஆவணங்கள்"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:194
+msgid "Save as..."
+msgstr "இப்படி சேமி ..."
+
+#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:258
+#, csharp-format
+msgid "Page {1}"
+msgid_plural "Page {1}"
+msgstr[0] "பக்கம்  {1}"
+msgstr[1] "பக்கம்  {1}"
+
+#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+#. eg Pages 3 - 7
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:262
+#, csharp-format
+msgid "Pages {1} - {2}"
+msgid_plural "Pages {1} - {2}"
+msgstr[0] "பக்கங்கள்  {1} - {2}"
+msgstr[1] "பக்கங்கள்  {1} - {2}"
+
+#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:267
+#, csharp-format
+msgid "Pages {1}"
+msgid_plural "Pages {1}"
+msgstr[0] "பக்கங்கள்  {1}"
+msgstr[1] "பக்கங்கள்  {1}"
+
+#. Translators: {0} is the number of pages, eg 12 Pages
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:270
+msgid "{0} Page"
+msgid_plural "{0} Pages"
+msgstr[0] "{0} பக்கம்"
+msgstr[1] "{1} பக்கங்கள்"
+
+#. Translators: This is used for creating a folder name, be careful!
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:287
+#, csharp-format
+msgid "{0} - Images for {1}"
+msgstr "{0} - பிம்பங்கள்  {1} க்கு"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:354
+msgid "Error opening help"
+msgstr "உதவி  திறப்பதில் பிழை "
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:355
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "பிடிஎஃப் மோட் இன் வலை ஆவணத்தை திறக்க விருப்பமா?"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:376
+msgid "Visit Website"
+msgstr "வலைப்பக்கத்துக்கு விஜயம் செய்க"
+
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:55
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:63
+#, csharp-format
+msgid "பக்கம்  {0}"
+msgstr "பக்கம்  {0}"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:149
+msgid "Save the changes made to this document?"
+msgstr "ஆவணத்தில் மாற்றங்களை சேமிக்கவா?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:152
+msgid "Close _Without Saving"
+msgstr "_W சேமிக்காமல் மூடுக"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:182
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "தொடர்ந்து, ஆவணம்  {0} ஐ தனி சாளரத்தில் திறக்கவா?"
+msgstr[1] "தொடர்ந்து, அனைத்து  {0} ஆவணங்கள் ஐயும்  தனி சாளரங்களில் திறக்கவா?"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:186
+msgid "Open _First"
+msgstr "_F முதலாவதை திற"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:187
+msgid "Open _All"
+msgstr "_A அனைத்தையும் திற"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:216
+#, csharp-format
+msgid "Loading {0}"
+msgstr "{0} ஐ ஏற்றுகிறது"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:236
+msgid "Error Loading Document"
+msgstr "ஆவணத்தை ஏற்றுவதில் பிழை"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:237
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "{0} ஐ ஏற்றுவதில் பிழை"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:254
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (முன்னே {1})"
+
+#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+msgid "Select Matching"
+msgstr "பொருந்துவதை தேர்வுசெய்க"
+
