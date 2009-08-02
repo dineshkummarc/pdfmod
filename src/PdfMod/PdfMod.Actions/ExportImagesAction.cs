@@ -82,7 +82,9 @@ namespace PdfMod.Actions
                         continue;
 
                     var x_object = reference.Value as PdfDictionary;
-                    if (x_object != null && x_object.Elements.GetString ("/Subtype") == "/Image") {
+                    // Put this in a variable to pass to GetString so that it's not pulled out as a translation string
+                    var subtype = "/Subtype";
+                    if (x_object != null && x_object.Elements.GetString (subtype) == "/Image") {
                         yield return new ImageInfo () { Page = page, ImageObject = x_object, PageIndex = i++ };
                     }
                 }
