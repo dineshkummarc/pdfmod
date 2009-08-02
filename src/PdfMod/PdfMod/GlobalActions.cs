@@ -400,7 +400,15 @@ namespace PdfMod
                 Version = "0.3",
                 Website = WIKI_URL,
                 WebsiteLabel = Catalog.GetString ("Visit Website"),
-                Authors = new string [] { "Gabriel Burt", "", "Contributions from:", "Sandy Armstrong", "Aaron Bockover", "Olivier Le Thanh Duong" },
+                Authors = new string [] {
+                    "Gabriel Burt", "",
+                    "Contributions from:",
+                    " • Sandy Armstrong",
+                    " • Aaron Bockover",
+                    " • Olivier Le Thanh Duong",
+                    " • Julien Rebetez"
+                },
+                Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
                 Copyright = "Copyright 2009 Novell Inc.",
                 TranslatorCredits = Catalog.GetString ("translator-credits")
