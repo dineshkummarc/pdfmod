@@ -1,9 +1,13 @@
+Website:  http://live.gnome.org/PdfMod
+Bugs:     http://bugzilla.gnome.org/browse.cgi?product=pdfmod
+
 Dependencies:
 
  * Mono
  * Gtk#
  * poppler
- * gnome-doc-utils
+ * gnome-doc-utils-devel
+ * gnome-common (if building from git)
 
 To build from git:
 
