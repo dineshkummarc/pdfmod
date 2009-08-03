@@ -178,6 +178,14 @@ namespace PdfMod
 
         protected override bool OnDragMotion (Gdk.DragContext context, int x, int y, uint time_)
         {
+            // Scroll if within 20 pixels of the top or bottom
+            var parent = Parent as Gtk.ScrolledWindow;
+            if (y < 20) {
+                parent.Vadjustment.Value -= 30;
+            } else if ((parent.Allocation.Height - y) < 20) {
+                parent.Vadjustment.Value = Math.Min (parent.Vadjustment.Upper - parent.Allocation.Height, parent.Vadjustment.Value + 30);
+            }
+
             var targets = context.Targets.Select (t => (string)t);
 
             if (targets.Contains (move_internal_target.Target) || targets.Contains (move_external_target.Target)) {
