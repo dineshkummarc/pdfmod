@@ -1,0 +1,5 @@
+Translators:
+
+You can get the latest .pot file from http://l10n.gnome.org/module/pdfmod/
+
+Remember to add your language to DOC_LINGUAS in Makefile.am
