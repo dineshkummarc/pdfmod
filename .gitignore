@@ -41,3 +41,7 @@ po/stamp-it
 data/pdfmod.desktop
 src/PdfMod/pdfmod
 *.resources
+gnome-doc-utils.make
+docs/*/.xml2po.mo
+docs/*/pdfmod.xml
+po/.intltool-merge-cache
