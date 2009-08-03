@@ -1,6 +1,32 @@
 PDF Mod NEWS
 
-Version 0.3
+=========================
+Version 0.4 - Aug ?, 2009
+=========================
+
+PDF Mod is now fully hosted on GNOME infrastructure, including
+bugzilla, mailing list, IRC, release tarballs, and wiki.  See
+http://live.gnome.org/PdfMod for more information.
+
+Contributors:
+Julien Rebetez
+
+Bugs:
+* No longer jumps to top on zoom or delete
+* Error messages are shown to user in popup
+
+Features:
+* Insert external documents via menu/toolbar
+* Drag pages between open documents
+* Beautiful new icon from Kalle Persson
+* UI translated into 10 languages:
+    da de es fr hr lt pl pt_BR sv ta
+* User docs translated into 5 langauges:
+    de es hr pl sv
+
+==========================
+Version 0.3 - Jul 28, 2009
+==========================
 
 Contributors:
 Sandy Armstrong, Aaron Bockover, Olivier Le Thanh Duong
@@ -22,11 +48,15 @@ Features:
 * User guide (F1)
 * French translation
 
+==========================
+Version 0.2 - Jul 24, 2009
+==========================
 
-Version 0.2
 * Fix not-installed .desktop file
 
+==========================
+Version 0.1 - Jul 24, 2009
+==========================
 
-Version 0.1
 * Initial release
 * Support for removing, rotating, moving, and extracting pages
