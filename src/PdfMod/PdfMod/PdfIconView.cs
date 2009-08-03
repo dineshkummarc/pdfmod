@@ -26,9 +26,17 @@ namespace PdfMod
         public const int MIN_WIDTH = 128;
         public const int MAX_WIDTH = 2054;
 
-        private static TargetEntry uri_src_target = new TargetEntry ("text/uri-list", 0, 0);
-        private static TargetEntry uri_dest_target = new TargetEntry ("text/uri-list", TargetFlags.OtherApp, 1);
-        private static TargetEntry move_target = new TargetEntry ("pdfmod/page-list", 0, 2);
+        private enum Target {
+            UriSrc,
+            UriDest,
+            MoveInternal,
+            MoveExternal
+        }
+
+        private static readonly TargetEntry uri_src_target = new TargetEntry ("text/uri-list", 0, (uint)Target.UriSrc);
+        private static readonly TargetEntry uri_dest_target = new TargetEntry ("text/uri-list", TargetFlags.OtherApp, (uint)Target.UriDest);
+        private static readonly TargetEntry move_internal_target = new TargetEntry ("pdfmod/page-list", TargetFlags.Widget, (uint)Target.MoveInternal);
+        private static readonly TargetEntry move_external_target = new TargetEntry ("pdfmod/page-list-external", 0, (uint)Target.MoveExternal);
 
         private PdfMod app;
         private Document document;
@@ -73,8 +81,8 @@ namespace PdfMod
             AddAttribute (page_renderer, "page", PdfListStore.PageColumn);
 
             // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
-            EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
-            EnableModelDragDest (new TargetEntry [] { move_target, uri_dest_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
+            EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_internal_target, move_external_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
+            EnableModelDragDest (new TargetEntry [] { move_internal_target, move_external_target, uri_dest_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
 
             SizeAllocated += HandleSizeAllocated;
             PopupMenu += HandlePopupMenu;
@@ -172,7 +180,7 @@ namespace PdfMod
         {
             var targets = context.Targets.Select (t => (string)t);
 
-            if (targets.Contains (move_target.Target)) {
+            if (targets.Contains (move_internal_target.Target) || targets.Contains (move_external_target.Target)) {
                 bool ret = base.OnDragMotion (context, x, y, time_);
                 SetDestInfo (x, y);
                 return ret;
@@ -207,10 +215,15 @@ namespace PdfMod
 
         private void HandleDragDataGet(object o, DragDataGetArgs args)
         {
-            if (args.Info == move_target.Info) {
+            if (args.Info == move_internal_target.Info) {
                 var pages = new Hyena.Gui.DragDropList<Page> ();
                 pages.AddRange (SelectedPages);
-                pages.AssignToSelection (args.SelectionData, args.SelectionData.Target);
+                pages.AssignToSelection (args.SelectionData, Gdk.Atom.Intern (move_internal_target.Target, false));
+                args.RetVal = true;
+            } else if (args.Info == move_external_target.Info) {
+                string doc_and_pages = String.Format ("{0}{1}{2}", document.CurrentStateUri, newline[0], String.Join (",", SelectedPages.Select (p => p.Index.ToString ()).ToArray ()));
+                byte [] data = System.Text.Encoding.UTF8.GetBytes (doc_and_pages);
+                args.SelectionData.Set (Gdk.Atom.Intern (move_external_target.Target, false), 8, data);
                 args.RetVal = true;
             } else if (args.Info == uri_src_target.Info) {
                 // TODO implement page extraction via DnD?
@@ -257,7 +270,9 @@ namespace PdfMod
         private static string [] newline = new string [] { "\r\n" };
         private void HandleDragDataReceived (object o, DragDataReceivedArgs args)
         {
-            if (args.SelectionData.Uris == null) {
+            args.RetVal = false;
+            string target = (string)args.SelectionData.Target;
+            if (target == move_internal_target.Target) {
                 // Move pages within the document
                 int to_index = GetDropIndex (args.X, args.Y);
                 if (to_index < 0)
@@ -269,7 +284,19 @@ namespace PdfMod
                 action.Do ();
                 app.GlobalActions.UndoManager.AddUndoAction (action);
                 args.RetVal = true;
-            } else if (args.SelectionData.Uris != null) {
+            } else if (target == move_external_target.Target) {
+                int to_index = GetDropIndex (args.X, args.Y);
+                if (to_index < 0)
+                    return;
+
+                string doc_and_pages = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data);
+                var pieces = doc_and_pages.Split (newline, StringSplitOptions.RemoveEmptyEntries);
+                string uri = pieces[0];
+                int [] pages = pieces[1].Split (',').Select (p => Int32.Parse (p)).ToArray ();
+
+                document.AddFromUri (new Uri (uri), to_index, pages);
+                args.RetVal = true;
+            } else if (target == uri_src_target.Target) {
                 var uris = System.Text.Encoding.UTF8.GetString (args.SelectionData.Data).Split (newline, StringSplitOptions.RemoveEmptyEntries);
                 if (uris.Length == 1 && app.Document == null) {
                     app.LoadPath (uris[0]);

@@ -17,6 +17,7 @@ namespace PdfMod
         private string password;
         private string tmp_path;
         private string tmp_uri;
+        internal string CurrentStateUri { get { return tmp_uri ?? Uri; } }
 
         public string SuggestedSavePath { get; set; }
         public string Uri { get; private set; }
@@ -112,7 +113,7 @@ namespace PdfMod
         {
             if (isAlreadyTmp) {
                 tmp_uri = new Uri (uri).AbsoluteUri;
-                tmp_path = new Uri (uri).AbsolutePath;
+                tmp_path = new Uri (uri).LocalPath;
             }
 
             var uri_obj = new Uri (uri);
@@ -255,11 +256,18 @@ namespace PdfMod
 
         public void AddFromUri (Uri uri, int to_index)
         {
+            AddFromUri (uri, to_index, null);
+        }
+
+        public void AddFromUri (Uri uri, int to_index, int [] pages_to_import)
+        {
             Log.DebugFormat ("Inserting pages from {0} to index {1}", uri, to_index);
-            using (var doc = PdfSharp.Pdf.IO.PdfReader.Open (uri.AbsolutePath, null, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import)) {
+            using (var doc = PdfSharp.Pdf.IO.PdfReader.Open (uri.LocalPath, null, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import)) {
                 var pages = new List<Page> ();
                 for (int i = 0; i < doc.PageCount; i++) {
-                    pages.Add (new Page (doc.Pages [i]));
+                    if (pages_to_import == null || pages_to_import.Contains (i)) {
+                        pages.Add (new Page (doc.Pages [i]));
+                    }
                 }
                 Add (to_index, pages.ToArray ());
                 to_index += pages.Count;
