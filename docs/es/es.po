@@ -278,7 +278,7 @@ msgstr ""
 
 #: C/pdfmod.xml:163(title)
 msgid "Removing Pages"
-msgstr "Eliminando páginas"
+msgstr "Eliminando Páginas"
 
 #: C/pdfmod.xml:164(para)
 msgid ""
