@@ -6,6 +6,9 @@
       <menuitem action="SaveAsAction"/>
       <menuitem action="RecentMenuAction"/>
       <separator/>
+      <menuitem action="ExportImagesAction"/>
+      <menuitem action="InsertFromAction"/>
+      <separator/>
       <menuitem action="PropertiesAction"/>
       <separator/>
       <menuitem action="CloseAction"/>
@@ -15,9 +18,7 @@
       <menuitem action="RedoAction"/>
       <separator/>
       <menuitem action="ExtractAction"/>
-      <menuitem action="InsertFromAction"/>
       <menuitem action="RemoveAction"/>
-      <menuitem action="ExportImagesAction"/>
       <separator/>
       <menuitem action="RotateLeftAction"/>
       <menuitem action="RotateRightAction"/>
@@ -47,9 +48,10 @@
     <toolitem action="SaveAsAction"/>
     <separator/>
     <toolitem action="PropertiesAction"/>
+    <toolitem action="ExportImagesAction"/>
+    <toolitem action="InsertFromAction"/>
     <separator/>
     <toolitem action="ExtractAction"/>
-    <toolitem action="InsertFromAction"/>
     <toolitem action="RemoveAction"/>
     <toolitem action="RotateLeftAction"/>
     <toolitem action="RotateRightAction"/>
@@ -58,7 +60,6 @@
   <popup name="PageContextMenu" action="PageContextMenuAction">
     <menuitem action="ExtractAction"/>
     <menuitem action="RemoveAction"/>
-    <menuitem action="ExportImagesAction"/>
     <separator/>
     <menuitem action="RotateLeftAction"/>
     <menuitem action="RotateRightAction"/>

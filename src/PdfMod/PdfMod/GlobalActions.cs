@@ -25,12 +25,11 @@ namespace PdfMod
 
         private static string [] require_doc_actions = new string[] {
             "SaveAction", "SaveAsAction", "PropertiesAction", "UndoAction", "RedoAction", "ZoomFitAction",
-            "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction", "InsertFromAction"
+            "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction", "InsertFromAction", "ExportImagesAction"
         };
 
         private static string [] require_page_actions = new string[] {
             "RemoveAction", "ExtractAction", "RotateRightAction", "RotateLeftAction"
-            //, "ExportImagesAction"
         };
 
         public UndoManager UndoManager {
@@ -55,7 +54,7 @@ namespace PdfMod
                 new ActionEntry ("ExtractAction", Gtk.Stock.New, null, null, null, OnExtractPages),
                 new ActionEntry ("RotateRightAction", null, Catalog.GetString ("Rotate Right"), "bracketright", Catalog.GetString ("Rotate right"), OnRotateRight),
                 new ActionEntry ("RotateLeftAction", null, Catalog.GetString ("Rotate Left"), "bracketleft", Catalog.GetString ("Rotate left"), OnRotateLeft),
-                new ActionEntry ("ExportImagesAction", null, Catalog.GetString ("Export Images..."), null, null, OnExportImages),
+                new ActionEntry ("ExportImagesAction", null, Catalog.GetString ("Export Images"), null, Catalog.GetString ("Save all images in this document to a new folder"), OnExportImages),
 
                 new ActionEntry ("EditMenuAction", null, Catalog.GetString ("_Edit"), null, null, null),
                 new ActionEntry ("SelectAllAction", Stock.SelectAll, null, "<control>A", null, OnSelectAll),
@@ -82,11 +81,9 @@ namespace PdfMod
                 new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, true)
             );
 
-            // Not ready/finished yet
-            UpdateAction ("ExportImagesAction", false);
-
             this["RotateRightAction"].IconName = "object-rotate-right";
             this["RotateLeftAction"].IconName = "object-rotate-left";
+            this["ExportImagesAction"].IconName = "image-x-generic";
 
             // Don't show HelpAction unless we can at least access some of the GNOME api
             UpdateAction ("HelpAction", false);
@@ -300,8 +297,7 @@ namespace PdfMod
 
         private void OnExportImages (object o, EventArgs args)
         {
-            var pages = app.IconView.SelectedPages.ToList ();
-            var action = new ExportImagesAction (app.Document, pages);
+            var action = new ExportImagesAction (app.Document, app.Document.Pages);
             if (action.ExportableImageCount == 0) {
                 Log.Information ("Found zero exportable images in the selected pages");
                 return;
@@ -310,16 +306,21 @@ namespace PdfMod
             var export_path_base = Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 // Translators: This is used for creating a folder name, be careful!
-                String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages, 10))
+                //String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages, 10))
+                app.Document.Title ?? System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename)
             );
 
             var export_path = export_path_base;
             int i = 1;
-            while (Directory.Exists (export_path)) {
+            while (Directory.Exists (export_path) && i < 100) {
                 export_path = String.Format ("{0} ({1})", export_path_base, i++);
             }
 
-            Directory.CreateDirectory (export_path);
+            try {
+                Directory.CreateDirectory (export_path);
+            } catch (Exception e) {
+                Hyena.Log.Exception (e);
+            }
 
             action.Do (export_path);
             System.Diagnostics.Process.Start (export_path);

@@ -49,7 +49,7 @@ namespace PdfMod.Actions
 
         public ExportImagesAction (Document document, IEnumerable<Page> pages)
         {
-            image_objects = GetImageObjects (pages).Where (IsExportable).ToList ();
+            image_objects = GetImageObjectsFrom (pages).Where (IsExportable).ToList ();
         }
 
         public int ExportableImageCount {
@@ -63,16 +63,19 @@ namespace PdfMod.Actions
             }
         }
 
-        private IEnumerable<ImageInfo> GetImageObjects (IEnumerable<Page> pages)
+        private IEnumerable<ImageInfo> GetImageObjectsFrom (IEnumerable<Page> pages)
         {
-            foreach (var page in pages) {
+            // Doesn't seem like you can get the images just on one page; the following
+            // gets all the images in the whole document, so only need to do it from one page
+            //foreach (var page in pages) {
+                var page = pages.First ();
                 var resources = page.Pdf.Elements.GetDictionary ("/Resources");
                 if (resources == null)
-                    continue;
+                    yield break;
 
                 var x_objects = resources.Elements.GetDictionary ("/XObject");
                 if (x_objects == null)
-                    continue;
+                    yield break;
 
                 int i = 0;
                 var items = x_objects.Elements.Values;
@@ -88,13 +91,12 @@ namespace PdfMod.Actions
                         yield return new ImageInfo () { Page = page, ImageObject = x_object, PageIndex = i++ };
                     }
                 }
-            }
+            //}
         }
 
         private bool IsExportable (ImageInfo image)
         {
             var filter = image.ImageObject.Elements.GetName("/Filter");
-            Console.WriteLine ("Have image of type: {0}", filter);
             return filter == "/DCTDecode" || filter == "/FlateDecode";
         }
 
@@ -106,23 +108,26 @@ namespace PdfMod.Actions
             string filter = image.ImageObject.Elements.GetName("/Filter");
             switch (filter) {
             case "/DCTDecode":
-                ExportJpegImage (image, GetFilename (image, to_path));
+                ExportJpegImage (image, GetFilename (image, to_path, "jpg"));
                 break;
             case "/FlateDecode":
-                ExportAsPngImage (image, GetFilename (image, to_path));
+                ExportAsPngImage (image, GetFilename (image, to_path, "png"));
                 break;
             }
         }
 
-        private static string GetFilename (ImageInfo image, string to_path)
+        private static string GetFilename (ImageInfo image, string to_path, string ext)
         {
             var name = image.ImageObject.Elements.GetName ("/Name");
             var name_fragment = String.IsNullOrEmpty (name) ? null : String.Format (" ({0})", name);
-            return Path.Combine (
-                Path.GetDirectoryName (to_path),
-                String.Format ("Page {0} - #{1:00}{2}.jpeg",
-                    image.Page.Index, image.PageIndex, name_fragment)
+            var path = Path.Combine (
+                to_path,
+                String.Format ("{0:00}{1}.{2}",
+                    image.PageIndex, name_fragment, ext)
+                //String.Format ("Page {0} - #{1:00}{2}.{3}",
+                    //image.Page.Index, image.PageIndex, name_fragment, ext)
             );
+            return path;
         }
 
         /// <summary>
@@ -140,18 +145,18 @@ namespace PdfMod.Actions
         }
 
         /// <summary>
-        /// Exports image in PNF format.
+        /// Exports image in PNG format.
         /// </summary>
         static void ExportAsPngImage (ImageInfo image, string path)
         {
             int width = image.ImageObject.Elements.GetInteger (PdfImage.Keys.Width);
             int height = image.ImageObject.Elements.GetInteger (PdfImage.Keys.Height);
 
-            var decoder = new PdfSharp.Pdf.Filters.FlateDecode ();
             try {
-                byte[] data = decoder.Decode (image.ImageObject.Stream.Value);
-                Gdk.Pixbuf pixbuf = new Gdk.Pixbuf (data, width, height);
-                pixbuf.Save (path, "png");
+                byte [] data = image.ImageObject.Stream.UnfilteredValue;
+                using (var pixbuf = new Gdk.Pixbuf (data, Gdk.Colorspace.Rgb, false, 8, width, height, width*3)) {
+                    pixbuf.Save (path, "png");
+                }
             } catch (Exception e) {
                 Hyena.Log.Exception ("Unable to load PNG from embedded PDF object", e);
             }
