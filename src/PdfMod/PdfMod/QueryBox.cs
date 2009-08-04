@@ -24,7 +24,7 @@ namespace PdfMod
             Entry.Activated += OnActivated;
 
             var query_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("Select Matching"), Gtk.Stock.Find);
-            query_button.Activated += OnActivated;
+            query_button.Clicked += OnActivated;
 
             var close_button = new Hyena.Widgets.ImageButton (null, Gtk.Stock.Close);
             close_button.Clicked += delegate {
