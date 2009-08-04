@@ -10,7 +10,7 @@ msgstr ""
 "POT-Creation-Date: 2009-08-05 00:07+0200\n"
 "PO-Revision-Date: 2009-07-27 01:41+0200\n"
 "Last-Translator: Olivier Lê Thanh Duong <olivier@lethanh.be>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Olivier Lê Thanh Duong <olivier@lethanh.be>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,12 +42,11 @@ msgstr "Ouvrir un document"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:46
 msgid "_Insert From..."
-msgstr ""
+msgstr "_Insérer depuis..."
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:46
-#, fuzzy
 msgid "Insert pages from another document"
-msgstr "Sauver les modificactions effectuées à ce document?"
+msgstr "Insérer des pages d'un autre document"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:47
 msgid "Save changes to this document, overwriting the existing file"
@@ -82,14 +81,12 @@ msgid "Rotate left"
 msgstr "Rotation antihoraire"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:57
-#, fuzzy
 msgid "Export Images"
 msgstr "Exporter les images..."
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:57
-#, fuzzy
 msgid "Save all images in this document to a new folder"
-msgstr "Sauver ce docuement dans un nouveau fichier."
+msgstr "Sauver toutes les images de ce document dans un nouveau dossier."
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:59
 msgid "_Edit"
@@ -125,7 +122,7 @@ msgstr "Afficher et éditer le titre, les mots-clefs, etc... pour ce document"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:81
 msgid "Toolbar"
-msgstr ""
+msgstr "Barre d'outils"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:155
 #, csharp-format
@@ -197,11 +194,11 @@ msgstr[1] "Pages {1}"
 
 #. Translators: {0} is the number of pages, eg 12 Pages
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:293
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} Page"
 msgid_plural "{0} Pages"
-msgstr[0] "{0} page"
-msgstr[1] "{1} pages"
+msgstr[0] "{0} Page"
+msgstr[1] "{0} Pages"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:381
 msgid "Error opening help"
@@ -217,7 +214,7 @@ msgstr "Visitez le site Web"
 
 #: ../src/PdfMod/PdfMod/GlobalActions.cs:416
 msgid "translator-credits"
-msgstr ""
+msgstr "Olivier Lê Thanh Duong <olivier@lethanh.be>"
 
 #: ../src/PdfMod/PdfMod/PdfListStore.cs:55
 #: ../src/PdfMod/PdfMod/PdfListStore.cs:63
@@ -273,48 +270,47 @@ msgid "{0} (originally {1})"
 msgstr "{0} (originellement {1})"
 
 #: ../src/PdfMod/PdfMod/PdfMod.cs:277
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} page"
-msgstr[1] "{1} pages"
+msgstr[1] "{0} pages"
 
 #: ../src/PdfMod/PdfMod/QueryBox.cs:26
 msgid "Select Matching"
 msgstr "Sélectionner la recherche"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:46
-#, fuzzy
 msgid "_Title:"
-msgstr "_Fichier"
+msgstr "_Titre :"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:47
 msgid "_Author:"
-msgstr ""
+msgstr "_Auteur :"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:48
 msgid "_Keywords:"
-msgstr ""
+msgstr "_Mots-clefs :"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:49
 msgid "_Subject:"
-msgstr ""
+msgstr "_Sujet :"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:69
 msgid "_Revert Properties"
-msgstr ""
+msgstr "_Rétablir les propriétés"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:70
 msgid "Change the document's properties back to the original values"
-msgstr ""
+msgstr "Modifier les propriétés du document à leurs valeurs d'origine"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:75
 msgid "_Close"
-msgstr ""
+msgstr "_Fermer"
 
 #: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:76
 msgid "Hide the document's properties"
-msgstr ""
+msgstr "Cacher les propriétés du document"
 
 #~ msgid "/Subtype"
 #~ msgstr "/Sous-type"
