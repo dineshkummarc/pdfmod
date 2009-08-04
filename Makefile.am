@@ -13,6 +13,7 @@ run:
 
 EXTRA_DIST = \
 	gnome-doc-utils.make \
+	icon-theme-installer \
 	lib/Hyena.dll \
 	lib/Hyena.dll.mdb \
 	lib/Hyena.Gui.dll \
