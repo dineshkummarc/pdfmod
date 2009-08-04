@@ -14,10 +14,12 @@ Julien Rebetez
 Bugs:
 * No longer jumps to top on zoom or delete
 * Error messages are shown to user in popup
+* Scroll when dragging near the top or bottom
 
 Features:
 * Insert external documents via menu/toolbar
 * Drag pages between open documents
+* Export images (jpg/png) working
 * Beautiful new icon from Kalle Persson
 * UI translated into 10 languages:
     da de es fr hr lt pl pt_BR sv ta
