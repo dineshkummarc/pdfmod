@@ -9,12 +9,13 @@ bugzilla, mailing list, IRC, release tarballs, and wiki.  See
 http://live.gnome.org/PdfMod for more information.
 
 Contributors:
-Julien Rebetez
+Julien Rebetez, Igor Vatavuk
 
 Bugs:
 * No longer jumps to top on zoom or delete
 * Error messages are shown to user in popup
 * Scroll when dragging near the top or bottom
+* Clicking on select matching button works
 
 Features:
 * Insert external documents via menu/toolbar

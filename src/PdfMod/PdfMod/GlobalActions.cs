@@ -407,7 +407,8 @@ namespace PdfMod
                     " • Sandy Armstrong",
                     " • Aaron Bockover",
                     " • Olivier Le Thanh Duong",
-                    " • Julien Rebetez"
+                    " • Julien Rebetez",
+                    " • Igor Vatavuk"
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
