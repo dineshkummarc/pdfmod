@@ -1,0 +1,205 @@
+# French translation for PDF Mod Documentation
+# Copyright (C) 2009
+# This file is distributed under the same license as the PDF Mod package.
+# Olivier Lê Thanh Duong <olivier@lethanh.be>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdf mod doc\n"
+"POT-Creation-Date: 2009-08-04 23:15+0000\n"
+"PO-Revision-Date: 2009-08-05 01:21+0200\n"
+"Last-Translator: Olivier Lê Thanh Duong <olivier@lethanh.be>\n"
+"Language-Team: Olivier Lê Thanh Duong <olivier@lethanh.be>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C/pdfmod.xml:6(title) 
+msgid "The PDF Mod Manual"
+msgstr "Manuel de PDF Mod"
+
+#: C/pdfmod.xml:8(para) 
+msgid "This is the user's manual for PDF Mod, a simple tool for manipulating PDF documents."
+msgstr "Ceci est le manuel d'utilisateur pour PDF Mod, un simple outil pour manipuler les document PDF"
+
+#: C/pdfmod.xml:10(subtitle) 
+msgid "Quick, Easy PDF Modification"
+msgstr "Modifications de PDF rapides et faciles."
+
+#: C/pdfmod.xml:12(year) 
+msgid "2009"
+msgstr "2009"
+
+#: C/pdfmod.xml:13(holder) C/pdfmod.xml:23(orgname) 
+msgid "Novell, Inc."
+msgstr "Novel, Inc."
+
+#: C/pdfmod.xml:16(publishername) 
+msgid "GNOME Documentation Project"
+msgstr "GNOME Documentation Project"
+
+#: C/pdfmod.xml:20(firstname) 
+msgid "Gabriel"
+msgstr "Gabriel"
+
+#: C/pdfmod.xml:21(surname) 
+msgid "Burt"
+msgstr "Burt"
+
+#: C/pdfmod.xml:29(revnumber) 
+msgid "0.2"
+msgstr "0.2"
+
+#: C/pdfmod.xml:30(date) 
+msgid "2009-07-29"
+msgstr "2009-07-29"
+
+#: C/pdfmod.xml:33(revnumber) 
+msgid "0.1"
+msgstr "0.1"
+
+#: C/pdfmod.xml:34(date) 
+msgid "2009-07-25"
+msgstr "2009-07-05"
+
+#: C/pdfmod.xml:40(title) 
+msgid "Introduction"
+msgstr "Introduction"
+
+#: C/pdfmod.xml:41(para) 
+msgid "PDF Mod is a simple tool for doing basic manipulations of PDF documents."
+msgstr "PDF Mod est un outil simple pour effectuer des manipulations basiques de documents PDF"
+
+#: C/pdfmod.xml:45(para) 
+msgid "With this tool, you can rotate, remove, or extract pages in a PDF document. You can also add pages from another document."
+msgstr "Avec cet outil, vous pouvez tourner, retirer ou extraire les pages d'un document PDF. Vous pouvez aussi ajouter les pages d'un autre document."
+
+#: C/pdfmod.xml:50(para) 
+msgid "You can start PDF Mod from your applications menu or launcher, or by right clicking on one or more PDF documents in the file browser, and choosing to open with PDF Mod."
+msgstr "Vous pouvez lancer PDF Mod depuis votre menu d'Application ou votre lanceur, ou en faisant un clic droit sur un ou plusieur document PDF dans votre navigateur de fichier et en choisissant de les ouvrir avec PDF Mod."
+
+#: C/pdfmod.xml:56(para) 
+msgid "Like a normal editor application, you must save the changes you make using PDF Mod. If you want to keep the original document and save your changes to a new file, use Save As."
+msgstr "Comme un application d'édition normal, vous devez enregistrer les modifications effectuées avec PDF Mod. Si vous souhaitez garder votre document d'origine et sauver vos modification dans un nouveau fichier, utiliser Sauvez sous"
+
+#: C/pdfmod.xml:63(title) 
+msgid "Usage"
+msgstr "Utilisation"
+
+#: C/pdfmod.xml:66(title) 
+msgid "Opening a Document"
+msgstr "Ouvrir un document"
+
+#: C/pdfmod.xml:67(para) 
+msgid "To open a document in PDF Mod:"
+msgstr "Pour ouvrir un document dans PDF Mod :"
+
+#: C/pdfmod.xml:72(para) 
+msgid "Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> and select your document, or"
+msgstr "Choisissez  <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Ouvrir</guimenuitem></menuchoice> et sélectionner votre document, ou"
+
+#: C/pdfmod.xml:77(para) 
+msgid "Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> and select your document, or"
+msgstr "Pressez <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> et sélectionner votre document, ou"
+
+#: C/pdfmod.xml:87(para) 
+msgid "Drag a PDF document from your Desktop or file browser into a PDF Mod window that doesn't already have a document loaded, or"
+msgstr "Glissez un document PDF depuis votre Bureau ou navigateur de fichier dans une fenêtre de PDF Mod qui ne contient pas déjà un document ouvert, ou"
+
+#: C/pdfmod.xml:92(para) 
+msgid "Choose a document from <menuchoice><guimenu>File</guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>."
+msgstr "Choisissez un document depuis <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Documents récents</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:100(title) 
+msgid "Zooming"
+msgstr "Zoom"
+
+#: C/pdfmod.xml:101(para) 
+msgid "Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in Best Fit mode, where it tries to make all the pages visible at once."
+msgstr "Zoomez affichera les miniatures des pages plus grandes ou plus petites. PDF Mod démarre dans le mode Taille idéale, dans lequel il essayera d'afficher toutes les pages à la fois."
+
+#: C/pdfmod.xml:104(para) 
+msgid "You can zoom in or out with the options under <menuchoice><guimenu>View</guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your mouse's scroll wheel."
+msgstr "Vous pouvez effectuer un zoom avant ou arrière avec les options dans <menuchoice><guimenu>Affichage</guimenu></menuchoice>, ou en pressant <keycap>Ctrl</keycap> tout en bougeant la roulette de votre souris."
+
+#: C/pdfmod.xml:110(title) 
+msgid "Viewing and Editing Properties"
+msgstr "Afficher et Éditer les propriétés"
+
+#: C/pdfmod.xml:111(para) 
+msgid "You can view and edit the Title, Author, Keywords, and Subject of the document by opening the properties. To do so, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, or click the Properties button on the toolbar."
+msgstr "Vous pouvez afficher et éditer le titre, l'auteur, les mots-clefs et le sujet du document en ouvrant les propriétés. Pour ce faire, choisissez <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Propriétés</guimenuitem></menuchoice>, pressez <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, ou cliquez sur le bouton Propriétés dans la barre à outil."
+
+#: C/pdfmod.xml:119(title) 
+msgid "Selecting Pages"
+msgstr "Sélectionnez des pages"
+
+#: C/pdfmod.xml:120(para) 
+msgid "PDF Mod can automatically select all pages, even-numbered pages, odd-numbered pages, or pages containing a search term. These options are available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
+msgstr "PDF Mod peut automatiquement sélectionner toutes les pages, les pages pairs, les pages impaires ou les pages contenant le terme recherché. Ces options sont disponnibles dans <menuchoice><guimenu>Édition</guimenu></menuchoice>."
+
+#: C/pdfmod.xml:124(para) 
+msgid "You can select pages manually using the keyboard and mouse as well. Use <keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
+msgstr "Vous pouvez également sélectionner des pages manuellement en utilisant le clavier et la souris. Utilisez <keycap>Ctrl</keycap> ou <keycap>Shift</keycap> pour sélectionner plus d'une page."
+
+#: C/pdfmod.xml:130(title) 
+msgid "Moving Pages"
+msgstr "Déplacer des pages"
+
+#: C/pdfmod.xml:131(para) 
+msgid "To move (aka reorder) the selected page or pages, drag them to the position in the document to which you want them moved."
+msgstr "Pour bouger (en d'autres mots réordonner) la ou les page(s) sélectionnées, glissez les à la position désirées dans le document."
+
+#: C/pdfmod.xml:135(para) 
+msgid "All editing actions except removing pages can be undone by choosing <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice> or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+msgstr "Toutes les actions d'éditions, excepté la suppression, peuvent être annulée en choisissant <menuchoice><guimenu>Édition</guimenu><guimenuitem>Annuler</guimenuitem></menuchoice> ou en pressant <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+
+#: C/pdfmod.xml:144(title) 
+msgid "Extracting Pages"
+msgstr "Extraire des pages"
+
+#: C/pdfmod.xml:145(para) 
+msgid "Extracting the selected page or pages will open a new PDF Mod window with just the selected pages in a new document, ready for further editing or to save."
+msgstr "Extraire la ou les page(s) sélectionnée(s) ouvre une nouvelle fenêtre PDF Mod contenant juste les pages sélectionnés dans un nouveau document, prêtes pour d'autres modifications ou pour être sauvées."
+
+#: C/pdfmod.xml:148(para) 
+msgid "To extract the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
+msgstr "Pour extraire la ou les page(s) sélectionnée(s), choisissez  <menuchoice><guimenu>Édition</guimenu><guimenuitem>Extraire la page</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:152(para) 
+msgid "All of the editing and selection actions available under <menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right clicking on a page. Some actions are available on the toolbar as well."
+msgstr "Toute les actions d'édition ou de sélection disponible dans  <menuchoice><guimenu>Édition</guimenu></menuchoice> sont également disponible par un clic droit sur une page. Certaines actions sont également disponibles dans la barre d'outils."
+
+#: C/pdfmod.xml:160(title) 
+msgid "Rotating Pages"
+msgstr "Tourner des pages"
+
+#: C/pdfmod.xml:161(para) 
+msgid "To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press <keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and <keycombo><keycap>]</keycap></keycombo> to rotate right (CW)."
+msgstr "Pour tourner la ou les page(s) sélectionnée(s), choisissez <menuchoice><guimenu>Édition</guimenu><guimenuitem>Rotation</guimenuitem></menuchoice> ou pressez <keycombo><keycap>[</keycap></keycombo> pour effectuer une rotation antihoraire et <keycombo><keycap>]</keycap></keycombo> pour effectuer une rotation horaire."
+
+#: C/pdfmod.xml:168(title) 
+msgid "Removing Pages"
+msgstr "Retirer des pages"
+
+#: C/pdfmod.xml:169(para) 
+msgid "To remove the selected page or pages, press <keycap>Delete</keycap> or choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</guimenuitem></menuchoice>."
+msgstr "Pour retirer la ou les page(s) sélectionnée(s), pressez <keycap>Supprimer</keycap> ou choisissez <menuchoice><guimenu>Édition</guimenu><guimenuitem>Retirer la page</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:174(para) 
+msgid "It is not currently possible to undo this action via <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice>. You can close the document without saving and open it again to get your page back, though you will lose any other changes you have made."
+msgstr "Il n'est pour l'instant pas possible d'annuler cette action via <menuchoice><guimenu>Édition</guimenu><guimenuitem>Annuler</guimenuitem></menuchoice>. Vous pouvez fermer le document sans sauver et l'ouvrir a nouveau pour récupérer votre page mais vous perdrez toutes autres modifications que vous aurez effectuées"
+
+#: C/pdfmod.xml:182(title) 
+msgid "Saving"
+msgstr "Sauver"
+
+#: C/pdfmod.xml:183(para) 
+msgid "After making changes to the document, there are two ways to save your work. You can overwrite the original document by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>, or you can save your changes to a new file by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></menuchoice>."
+msgstr "Après avoir modifié le document, il y a 2 façons de sauver votre travail. Vous pouvez écraser le document originel ne choisissant <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Sauver</guimenuitem></menuchoice>, ou vous pouvez sauver vos modifications dans un nouveau fichier en choisissant <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Sauver sous</guimenuitem></menuchoice>."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: C/pdfmod.xml:0(None) 
+msgid "translator-credits"
+msgstr "Olivier Lê Thanh Duong <olivier@lethanh.be>, 2009."
+
