@@ -76,11 +76,11 @@ msgstr "Avec cet outil, vous pouvez tourner, retirer ou extraire les pages d'un 
 
 #: C/pdfmod.xml:50(para) 
 msgid "You can start PDF Mod from your applications menu or launcher, or by right clicking on one or more PDF documents in the file browser, and choosing to open with PDF Mod."
-msgstr "Vous pouvez lancer PDF Mod depuis votre menu d'Application ou votre lanceur, ou en faisant un clic droit sur un ou plusieur document PDF dans votre navigateur de fichier et en choisissant de les ouvrir avec PDF Mod."
+msgstr "Vous pouvez lancer PDF Mod depuis votre menu Applications ou votre lanceur, ou en faisant un clic droit sur un ou plusieur document PDF dans votre navigateur de fichier et en choisissant de les ouvrir avec PDF Mod."
 
 #: C/pdfmod.xml:56(para) 
 msgid "Like a normal editor application, you must save the changes you make using PDF Mod. If you want to keep the original document and save your changes to a new file, use Save As."
-msgstr "Comme un application d'édition normal, vous devez enregistrer les modifications effectuées avec PDF Mod. Si vous souhaitez garder votre document d'origine et sauver vos modification dans un nouveau fichier, utiliser Sauvez sous"
+msgstr "Comme pour toutes applications d'édition, vous devez enregistrer les modifications effectuées avec PDF Mod. Si vous souhaitez garder votre document d'origine et sauver vos modification dans un nouveau fichier, utilisez Sauvez sous"
 
 #: C/pdfmod.xml:63(title) 
 msgid "Usage"
@@ -112,11 +112,11 @@ msgstr "Choisissez un document depuis <menuchoice><guimenu>Fichier</guimenu><gui
 
 #: C/pdfmod.xml:100(title) 
 msgid "Zooming"
-msgstr "Zoom"
+msgstr "Zoomer"
 
 #: C/pdfmod.xml:101(para) 
 msgid "Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in Best Fit mode, where it tries to make all the pages visible at once."
-msgstr "Zoomez affichera les miniatures des pages plus grandes ou plus petites. PDF Mod démarre dans le mode Taille idéale, dans lequel il essayera d'afficher toutes les pages à la fois."
+msgstr "Zoomer affichera les miniatures des pages soit plus grandes soit plus petites. PDF Mod démarre dans le mode Taille idéale, dans lequel il essayera d'afficher toutes les pages à la fois."
 
 #: C/pdfmod.xml:104(para) 
 msgid "You can zoom in or out with the options under <menuchoice><guimenu>View</guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your mouse's scroll wheel."
@@ -128,7 +128,7 @@ msgstr "Afficher et Éditer les propriétés"
 
 #: C/pdfmod.xml:111(para) 
 msgid "You can view and edit the Title, Author, Keywords, and Subject of the document by opening the properties. To do so, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, or click the Properties button on the toolbar."
-msgstr "Vous pouvez afficher et éditer le titre, l'auteur, les mots-clefs et le sujet du document en ouvrant les propriétés. Pour ce faire, choisissez <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Propriétés</guimenuitem></menuchoice>, pressez <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, ou cliquez sur le bouton Propriétés dans la barre à outil."
+msgstr "Vous pouvez afficher et éditer le titre, l'auteur, les mots-clefs et le sujet du document en affichant les propriétés. Pour ce faire, choisissez <menuchoice><guimenu>Fichier</guimenu><guimenuitem>Propriétés</guimenuitem></menuchoice>, pressez <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, ou cliquez sur le bouton Propriétés dans la barre à outil."
 
 #: C/pdfmod.xml:119(title) 
 msgid "Selecting Pages"
@@ -136,7 +136,7 @@ msgstr "Sélectionnez des pages"
 
 #: C/pdfmod.xml:120(para) 
 msgid "PDF Mod can automatically select all pages, even-numbered pages, odd-numbered pages, or pages containing a search term. These options are available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
-msgstr "PDF Mod peut automatiquement sélectionner toutes les pages, les pages pairs, les pages impaires ou les pages contenant le terme recherché. Ces options sont disponnibles dans <menuchoice><guimenu>Édition</guimenu></menuchoice>."
+msgstr "PDF Mod peut automatiquement sélectionner toutes les pages, les pages pairs, les pages impaires ou les pages contenant le terme recherché. Ces options sont disponibles dans <menuchoice><guimenu>Édition</guimenu></menuchoice>."
 
 #: C/pdfmod.xml:124(para) 
 msgid "You can select pages manually using the keyboard and mouse as well. Use <keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
@@ -184,7 +184,7 @@ msgstr "Retirer des pages"
 
 #: C/pdfmod.xml:169(para) 
 msgid "To remove the selected page or pages, press <keycap>Delete</keycap> or choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</guimenuitem></menuchoice>."
-msgstr "Pour retirer la ou les page(s) sélectionnée(s), pressez <keycap>Supprimer</keycap> ou choisissez <menuchoice><guimenu>Édition</guimenu><guimenuitem>Retirer la page</guimenuitem></menuchoice>."
+msgstr "Pour retirer la ou les page(s) sélectionnée(s), pressez la touche <keycap>Supprimer</keycap> ou choisissez <menuchoice><guimenu>Édition</guimenu><guimenuitem>Retirer la page</guimenuitem></menuchoice>."
 
 #: C/pdfmod.xml:174(para) 
 msgid "It is not currently possible to undo this action via <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice>. You can close the document without saving and open it again to get your page back, though you will lose any other changes you have made."
