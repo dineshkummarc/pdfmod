@@ -10,6 +10,7 @@ CONFIGURE=configure.ac
 : ${LIBTOOLIZE=libtoolize}
 : ${ACLOCAL=aclocal}
 : ${LIBTOOL=libtool}
+: ${INTLTOOLIZE=intltoolize}
 
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
@@ -47,6 +48,12 @@ DIE=0
   }
 }
 
+($INTLTOOLIZE --version) < /dev/null > /dev/null 2>&1 || {
+        echo
+        echo "You must have intltool installed to compile $PROJECT."
+        DIE=1
+}
+
 if test "$DIE" -eq 1; then
         exit 1
 fi
@@ -70,10 +77,13 @@ esac
     $LIBTOOLIZE --force --copy
 }
 
-(which gnome-doc-prepare && gnome-doc-prepare )|| {
+(which gnome-doc-prepare && gnome-doc-prepare --force )|| {
         echo "**Error**: You must have gnome-common installed to compile $PROJECT."
         exit 1
 }
+
+echo "Running $INTLTOOLIZE ..."
+$INTLTOOLIZE --force --copy
 
 echo "Running $ACLOCAL $aclocalinclude ..."
 $ACLOCAL $aclocalinclude
