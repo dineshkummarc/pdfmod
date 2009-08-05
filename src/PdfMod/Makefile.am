@@ -10,7 +10,7 @@ ASSEMBLY = ../../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
 PROJECT_REFERENCES = ../../bin/PdfSharp.dll
-BUILD_DIR = ../../bin/
+BUILD_DIR = ../../bin
 
 PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
@@ -35,7 +35,7 @@ ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
 PROJECT_REFERENCES =  \
 	../../bin/PdfSharp.dll
-BUILD_DIR = ../../bin/
+BUILD_DIR = ../../bin
 
 PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
