@@ -337,9 +337,7 @@ DATA_FILES =
 
 RESOURCES = 
 
-EXTRAS = \
-	Resources/images 
-
+EXTRAS = 
 
 REFERENCES =  \
 	System \

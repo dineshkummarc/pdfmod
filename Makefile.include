@@ -47,8 +47,10 @@ emit_resgen_target_2=$(call q2s,$1) : $(call q2s,$(subst .resources,.resx,$1)); 
 emit_resgen_target=$(if $(filter resgen2,$(RESGEN)),$(emit_resgen_target_2),$(emit_resgen_target_1))
 emit_resgen_targets=$(foreach res,$(build_resx_resources_esc),$(eval $(call emit_resgen_target,$(res))))
 
+DLL_REFERENCES_EXPANDED = $(foreach reference, $(DLL_REFERENCES), $(addprefix $(srcdir)/, $(reference)))
+
 build_references_ref = $(call q2s,$(foreach ref, $(call s2q,$(REFERENCES)), $(if $(filter -pkg:%, $(ref)), $(ref), $(if $(filter -r:%, $(ref)), $(ref), -r:$(ref)))))
-build_references_ref += $(call q2s,$(foreach ref, $(call s2q,$(DLL_REFERENCES)), -r:$(ref)))
+build_references_ref += $(call q2s,$(foreach ref, $(call s2q,$(DLL_REFERENCES_EXPANDED)), -r:$(ref)))
 build_references_ref += $(call q2s,$(foreach ref, $(call s2q,$(PROJECT_REFERENCES)), -r:$(ref)))
 
 s2q2s=$(call unesc2,$(call s2q,$1))
