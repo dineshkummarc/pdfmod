@@ -67,7 +67,6 @@ FILES = \
 	PdfSharp.Fonts.TrueType/TrueTypeFontTable.cs \
 	PdfSharp.Fonts/FontWriter.cs \
 	PdfSharp.Fonts.TrueType/TrueTypeFontWriter.cs \
-	PdfSharp.Forms/ColorComboBox.cs \
 	PdfSharp.Internal/ColorHelper.cs \
 	PdfSharp.Internal/DoubleUtil.cs \
 	PdfSharp.Internal/TokenizerHelper.cs \
@@ -165,11 +164,6 @@ FILES = \
 	PdfSharp.Fonts/AdobeGlyphList20.cs \
 	PdfSharp.Fonts/AdobeGlyphListForNewFonts.cs \
 	PdfSharp.Fonts/CMapInfo.cs \
-	PdfSharp.Forms/DeviceInfos.cs \
-	PdfSharp.Forms/enums/Zoom.cs \
-	PdfSharp.Forms/enums/RenderMode.cs \
-	PdfSharp.Forms/PagePreview.cs \
-	PdfSharp.Forms/PagePreviewCanvas.cs \
 	PdfSharp.Internal/Calc.cs \
 	PdfSharp.Internal/NativeMethods.cs \
 	PdfSharp.Pdf.AcroForms/enums/PdfAcroFieldFlags.cs \
@@ -343,7 +337,6 @@ REFERENCES =  \
 	System \
 	System.Data \
 	System.Drawing \
-	System.Windows.Forms \
 	System.Xml
 
 DLL_REFERENCES = 

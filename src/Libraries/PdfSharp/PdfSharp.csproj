@@ -78,7 +78,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -111,9 +110,6 @@
     <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeFontTable.cs" />
     <Compile Include="PdfSharp.Fonts\FontWriter.cs" />
     <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeFontWriter.cs" />
-    <Compile Include="PdfSharp.Forms\ColorComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="PdfSharp.Internal\ColorHelper.cs" />
     <Compile Include="PdfSharp.Internal\DoubleUtil.cs" />
     <Compile Include="PdfSharp.Internal\TokenizerHelper.cs" />
@@ -327,17 +323,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PdfSharp.Fonts\CMapInfo.cs" />
-    <Compile Include="PdfSharp.Forms\DeviceInfos.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PdfSharp.Forms\enums\Zoom.cs" />
-    <Compile Include="PdfSharp.Forms\enums\RenderMode.cs" />
-    <Compile Include="PdfSharp.Forms\PagePreview.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PdfSharp.Forms\PagePreviewCanvas.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="PdfSharp.Internal\Calc.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -731,14 +716,6 @@
     <None Include="StrongnameKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PdfSharp.Forms\PagePreview.resx">
-      <DependentUpon>PagePreview.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PdfSharp.Forms\PagePreviewCanvas.resx">
-      <DependentUpon>PagePreviewCanvas.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -756,10 +733,6 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PdfSharp.Drawing.Wpf\" />
-    <Folder Include="Resources\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
