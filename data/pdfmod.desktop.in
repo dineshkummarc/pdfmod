@@ -2,13 +2,12 @@
 Name=PDF Mod
 _Comment=Remove, extract, and rotate pages in PDF documents
 _GenericName=PDF Modifier
-DocPath=pdfmod
 TryExec=pdfmod
 Exec=pdfmod %U
 StartupNotify=true
 Type=Application
 Terminal=false
-IconName=pdfmod
+Icon=pdfmod
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=pdfmod
 X-GNOME-Bugzilla-Component=general
