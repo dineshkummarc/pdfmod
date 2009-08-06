@@ -146,6 +146,17 @@ namespace PdfMod
 
             UpdateAction ("UndoAction", true, have_doc && undo_manager.CanUndo);
             UpdateAction ("RedoAction", true, have_doc && undo_manager.CanRedo);
+
+            var undo = undo_manager.UndoAction as IDescribedUndoAction;
+            this["UndoAction"].Label = undo == null
+                ? Catalog.GetString ("_Undo")
+                : String.Format (Catalog.GetString ("Undo {0}"), undo.Description);
+
+            var redo = undo_manager.RedoAction as IDescribedUndoAction;
+            this["RedoAction"].Label = redo == null
+                ? Catalog.GetString ("_Redo")
+                : String.Format (Catalog.GetString ("Redo {0}"), redo.Description);
+
             UpdateActions (true, have_doc && app.Document.HasUnsavedChanged, "SaveAction", "SaveAsAction");
             UpdateAction ("ZoomInAction", true, have_doc && app.IconView.CanZoomIn);
             UpdateAction ("ZoomOutAction", true, have_doc && app.IconView.CanZoomOut);

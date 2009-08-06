@@ -6,10 +6,16 @@ using Hyena;
 
 namespace PdfMod.Actions
 {
-    public abstract class BasePageAction : IUndoAction
+    public interface IDescribedUndoAction : IUndoAction
+    {
+        string Description { get; }
+    }
+
+    public abstract class BasePageAction : IDescribedUndoAction
     {
         protected Document Document { get; private set; }
         protected List<Page> Pages { get; private set; }
+        public string Description { get; protected set; }
 
         public BasePageAction (Document document, IEnumerable<Page> to_remove)
         {

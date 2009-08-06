@@ -20,6 +20,9 @@ namespace PdfMod.Actions
         public MoveAction (Document document, IEnumerable<Page> pages, int to_index) : base (document, pages)
         {
             this.to_index = to_index;
+            // Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+            Description = String.Format (Catalog.GetPluralString ("Move {1}", "Move {1}", Pages.Count),
+                Pages.Count, GlobalActions.GetPageSummary (Pages, 5));
         }
 
         public override void Undo ()
