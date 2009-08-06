@@ -19,6 +19,11 @@ namespace PdfMod
 
         public static void Main (string[] args)
         {
+            ApplicationContext.TrySetProcessName ("pdfmod");
+
+            Gtk.Application.Init (null, ref args);
+            Gdk.Global.ProgramClass = "pdfmod";
+
             ThreadAssist.InitializeMainThread ();
             ThreadAssist.ProxyToMainHandler = RunIdle;
 
@@ -26,7 +31,6 @@ namespace PdfMod
             Hyena.Log.Notify += OnLogNotify;
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
-            Gtk.Application.Init ();
             InitCatalog ("/usr/local/share/locale/", "/usr/share/locale/");
 
             try {
@@ -285,7 +289,6 @@ namespace PdfMod
 
         private static void OnLogNotify (LogNotifyArgs args)
         {
-            Gtk.Window window = null;
             Gtk.MessageType mtype;
             var entry = args.Entry;
 
