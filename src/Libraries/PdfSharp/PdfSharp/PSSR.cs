@@ -357,7 +357,7 @@ namespace PdfSharp
 
     static PSSR()
     {
-      TestResourceMessages();
+      //TestResourceMessages();
     }
 
     #endregion
