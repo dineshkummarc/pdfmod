@@ -727,11 +727,14 @@ namespace PdfSharp.Pdf.IO
         }
         if (char.IsLetterOrDigit(this.currChar))
         {
-          hex[0] = char.ToUpper(this.currChar);
-          hex[1] = char.ToUpper(this.nextChar);
-          int ch = int.Parse(new string(hex), NumberStyles.AllowHexSpecifier);
-          this.token.Append(Convert.ToChar(ch));
-          ScanNextChar();
+          if (char.IsLetterOrDigit(this.nextChar))
+          {
+            hex[0] = char.ToUpper(this.currChar);
+            hex[1] = char.ToUpper(this.nextChar);
+            int ch = int.Parse(new string(hex), NumberStyles.AllowHexSpecifier);
+            this.token.Append(Convert.ToChar(ch));
+            ScanNextChar();
+          }
           ScanNextChar();
         }
       }
