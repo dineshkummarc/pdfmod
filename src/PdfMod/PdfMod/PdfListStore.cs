@@ -48,21 +48,24 @@ namespace PdfMod
                 }
             }
         }
-
+        
+        private string GetPageTooltip (Page page)
+        {
+            var label = page.Document.Labels[page];
+            string page_no = Catalog.GetString (String.Format ("Page {0}", page.Index + 1));
+            return ((null == label) ? page_no : String.Format ("{0} ({1})", label, page_no));
+        }
+        
         public void UpdateForPage (TreeIter iter, Page page)
         {
             SetValue (iter, SortColumn, page.Index);
-            SetValue (iter, TooltipColumn, String.Format (Catalog.GetString ("Page {0}"), page.Index + 1));
+            SetValue (iter, TooltipColumn, GetPageTooltip(page));
             SetValue (iter, PageColumn, page);
         }
 
         internal object [] GetValuesForPage (Page page)
         {
-            return new object[] {
-                page.Index,
-                String.Format (Catalog.GetString ("Page {0}"), page.Index + 1),
-                page
-            };
+            return new object[] { page.Index, GetPageTooltip(page), page };
         }
     }
 }

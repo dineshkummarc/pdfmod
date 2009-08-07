@@ -16,8 +16,10 @@ namespace PdfMod
         private List<Page> pages = new List<Page> ();
         private string tmp_path;
         private string tmp_uri;
+        private PageLabels page_labels;
         internal string CurrentStateUri { get { return tmp_uri ?? Uri; } }
 
+        public PageLabels Labels { get { return page_labels; } }
         public string SuggestedSavePath { get; set; }
         public string Uri { get; private set; }
         public string Path { get; private set; }
@@ -130,6 +132,7 @@ namespace PdfMod
                 pages.Add (page);
             }
 
+            page_labels = new PageLabels (pdf_document);
             ExpireThumbnails (pages);
             OnChanged ();
         }

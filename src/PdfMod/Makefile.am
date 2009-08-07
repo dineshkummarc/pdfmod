@@ -90,6 +90,7 @@ FILES =  \
 	PdfMod/GlobalActions.cs \
 	PdfMod/MetadataEditorBox.cs \
 	PdfMod/Page.cs \
+	PdfMod/PageLabels.cs \
 	PdfMod/PageThumbnail.cs \
 	PdfMod/PdfIconView.cs \
 	PdfMod/PdfListStore.cs \
