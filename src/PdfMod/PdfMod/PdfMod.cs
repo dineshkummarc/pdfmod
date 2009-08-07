@@ -237,8 +237,8 @@ namespace PdfMod
 
             ThreadAssist.SpawnFromMain (delegate {
                 try {
-
-                    Document = new Document (path, null, suggestedFilename != null);
+                    Document = new Document ();
+                    Document.Load (path, PasswordProvider, suggestedFilename != null);
                     if (suggestedFilename != null) {
                         Document.SuggestedSavePath = suggestedFilename;
                     }
@@ -300,6 +300,41 @@ namespace PdfMod
             var title = Document.Title;
             var filename = Document.Filename;
             Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
+        }
+
+        public void PasswordProvider (PdfPasswordProviderArgs args)
+        {
+            var reset_event = new System.Threading.ManualResetEvent (false);
+            ThreadAssist.ProxyToMain (delegate {
+                Log.Debug ("Password requested to open document");
+                var dialog = new Hyena.Widgets.HigMessageDialog (
+                    Window, DialogFlags.Modal, MessageType.Question, ButtonsType.None,
+                    Catalog.GetString ("Document is Encrypted"),
+                    Catalog.GetString ("Enter the document's password to open it:")
+                );
+                dialog.Image = Gtk.IconTheme.Default.LoadIcon ("dialog-password", 48, 0);
+
+                var password_entry = new Entry ();
+                password_entry.Visibility = false;
+                password_entry.Show ();
+                dialog.LabelVBox.PackStart (password_entry, false, false, 12);
+
+                dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
+                dialog.AddButton (Stock.Ok, ResponseType.Ok, true);
+
+                var response = (ResponseType)dialog.Run ();
+                string password = password_entry.Text;
+                dialog.Destroy ();
+
+                if (response == ResponseType.Ok) {
+                    args.Password = Document.Password = password;
+                } else {
+                    Log.Information ("Password dialog cancelled");
+                    args.Abort = true;
+                }
+                reset_event.Set ();
+            });
+            reset_event.WaitOne ();
         }
 
         private static void OnLogNotify (LogNotifyArgs args)

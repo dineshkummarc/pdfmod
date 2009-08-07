@@ -14,7 +14,6 @@ namespace PdfMod
     {
         private PdfDocument pdf_document;
         private List<Page> pages = new List<Page> ();
-        private string password;
         private string tmp_path;
         private string tmp_uri;
         internal string CurrentStateUri { get { return tmp_uri ?? Uri; } }
@@ -99,17 +98,19 @@ namespace PdfMod
             get { return System.IO.Path.GetFileName (SuggestedSavePath); }
         }
 
+        public string Password { get; set; }
+
         public event System.Action Changed;
         public event System.Action PagesMoved;
         public event Action<Page []> PagesRemoved;
         public event Action<int, Page []> PagesAdded;
         public event Action<Page []> PagesChanged;
 
-        public Document (string uri, string password) : this (uri, password, false)
+        public Document ()
         {
         }
 
-        public Document (string uri, string password, bool isAlreadyTmp)
+        public void Load (string uri, PdfPasswordProvider passwordProvider, bool isAlreadyTmp)
         {
             if (isAlreadyTmp) {
                 tmp_uri = new Uri (uri).AbsoluteUri;
@@ -120,9 +121,7 @@ namespace PdfMod
             Uri = uri_obj.AbsoluteUri;
             SuggestedSavePath = Path = uri_obj.LocalPath;
 
-            this.password = password;
-
-            pdf_document = PdfSharp.Pdf.IO.PdfReader.Open (Path, password, PdfDocumentOpenMode.Modify | PdfDocumentOpenMode.Import);
+            pdf_document = PdfSharp.Pdf.IO.PdfReader.Open (Path, PdfDocumentOpenMode.Modify | PdfDocumentOpenMode.Import, passwordProvider);
             for (int i = 0; i < pdf_document.PageCount; i++) {
                 var page = new Page (pdf_document.Pages[i]) {
                     Document = this,
@@ -158,7 +157,7 @@ namespace PdfMod
 
         public IEnumerable<Page> FindPagesMatching (string text)
         {
-            using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "")) {
+            using (var doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, Password ?? "")) {
                 for (int i = 0; i < doc.NPages; i++) {
                     using (var page = doc.GetPage (i)) {
                         var list = page.FindText (text);
@@ -299,7 +298,7 @@ namespace PdfMod
         private Poppler.Document PopplerDoc {
             get {
                 if (poppler_doc == null) {
-                    poppler_doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, password ?? "");
+                    poppler_doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, Password ?? "");
                 }
                 return poppler_doc;
             }
