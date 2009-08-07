@@ -46,7 +46,7 @@ namespace PdfMod
         }
 
         private MenuBar menu_bar;
-        private Gtk.Label size_label;
+        private Gtk.Label status_label;
         private QueryBox query_box;
 
         public ActionManager ActionManager { get; private set; }
@@ -83,10 +83,10 @@ namespace PdfMod
 
             // Status bar
             StatusBar = new Gtk.Statusbar () { HasResizeGrip = true };
-            size_label = new Label ();
-            size_label.Xalign = 0.0f;
-            StatusBar.PackStart (size_label, true, true, 6);
-            StatusBar.ReorderChild (size_label, 0);
+            status_label = new Label ();
+            status_label.Xalign = 0.0f;
+            StatusBar.PackStart (status_label, true, true, 6);
+            StatusBar.ReorderChild (status_label, 0);
 
             // ActionManager
             ActionManager = new Hyena.Gui.ActionManager ();
@@ -220,42 +220,57 @@ namespace PdfMod
             LoadPath (path, null);
         }
 
+        private bool loading;
         public void LoadPath (string path, string suggestedFilename)
         {
-            // One document per window
-            if (Document != null) {
-                new PdfMod ().LoadPath (path, suggestedFilename);
-                return;
-            }
-
-            var ctx_id = StatusBar.GetContextId ("loading");
-            var msg_id = StatusBar.Push (1, String.Format (Catalog.GetString ("Loading {0}"), GLib.Markup.EscapeText (path)));
-
-            try {
-                Document = new Document (path, null, suggestedFilename != null);
-                if (suggestedFilename != null) {
-                    Document.SuggestedSavePath = suggestedFilename;
+            lock (this) {
+                // One document per window
+                if (loading || Document != null) {
+                    new PdfMod ().LoadPath (path, suggestedFilename);
+                    return;
                 }
 
-                IconView.SetDocument (Document);
-                Document.Changed += UpdateForDocument;
-                UpdateForDocument ();
-
-                var handler = DocumentLoaded;
-                if (handler != null) {
-                    handler (this, EventArgs.Empty);
-                }
-            } catch (Exception e) {
-                Document = null;
-                Hyena.Log.Exception (e);
-                Hyena.Log.Error (
-                    Catalog.GetString ("Error Loading Document"),
-                    String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (path ?? "")), true
-                );
-            } finally {
-                StatusBar.Remove (ctx_id, msg_id);
+                loading = true;
             }
+
+            status_label.Text = Catalog.GetString ("Loading document...");
+
+            ThreadAssist.SpawnFromMain (delegate {
+                try {
+
+                    Document = new Document (path, null, suggestedFilename != null);
+                    if (suggestedFilename != null) {
+                        Document.SuggestedSavePath = suggestedFilename;
+                    }
+
+                    ThreadAssist.ProxyToMain (delegate {
+                        IconView.SetDocument (Document);
+                        Document.Changed += UpdateForDocument;
+                        UpdateForDocument ();
+
+                        var handler = DocumentLoaded;
+                        if (handler != null) {
+                            handler (this, EventArgs.Empty);
+                        }
+                    });
+                } catch (Exception e) {
+                    Document = null;
+                    ThreadAssist.ProxyToMain (delegate {
+                        status_label.Text = "";
+                    });
+                    Hyena.Log.Exception (e);
+                    Hyena.Log.Error (
+                        Catalog.GetString ("Error Loading Document"),
+                            String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (path ?? "")), true
+                                );
+                } finally {
+                    lock (this) {
+                        loading = false;
+                    }
+                }
+            });
         }
+
         private string original_size_string = null;
         private long original_size;
         private void UpdateForDocument ()
@@ -277,7 +292,7 @@ namespace PdfMod
                 }
             }
 
-            size_label.Text = String.Format ("{0} \u2013 {1}",
+            status_label.Text = String.Format ("{0} \u2013 {1}",
                 String.Format (Catalog.GetPluralString ("{0} page", "{0} pages", Document.Count), Document.Count),
                 size_str
             );
@@ -289,10 +304,11 @@ namespace PdfMod
 
         private static void OnLogNotify (LogNotifyArgs args)
         {
-            Gtk.MessageType mtype;
-            var entry = args.Entry;
+            ThreadAssist.ProxyToMain (delegate {
+                Gtk.MessageType mtype;
+                var entry = args.Entry;
 
-            switch (entry.Type) {
+                switch (entry.Type) {
                 case LogEntryType.Warning:
                     mtype = Gtk.MessageType.Warning;
                     break;
@@ -303,14 +319,15 @@ namespace PdfMod
                 default:
                     mtype = Gtk.MessageType.Error;
                     break;
-            }
+                }
 
-            Hyena.Widgets.HigMessageDialog dialog = new Hyena.Widgets.HigMessageDialog (
-                null, Gtk.DialogFlags.Modal, mtype, Gtk.ButtonsType.Close, entry.Message, entry.Details);
+                Hyena.Widgets.HigMessageDialog dialog = new Hyena.Widgets.HigMessageDialog (
+                    null, Gtk.DialogFlags.Modal, mtype, Gtk.ButtonsType.Close, entry.Message, entry.Details);
 
-            dialog.Title = String.Empty;
-            dialog.Run ();
-            dialog.Destroy ();
+                dialog.Title = String.Empty;
+                dialog.Run ();
+                dialog.Destroy ();
+            });
         }
 
         private static void InitCatalog (params string [] dirs)
