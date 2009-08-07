@@ -420,7 +420,8 @@ namespace PdfMod
                     " • Olivier Le Thanh Duong",
                     " • Julien Rebetez",
                     " • Igor Vatavuk",
-                    " • Bertrand Lorentz"
+                    " • Bertrand Lorentz",
+                    " • Michael McKinley"
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
