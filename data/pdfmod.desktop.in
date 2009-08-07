@@ -11,6 +11,6 @@ Icon=pdfmod
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=pdfmod
 X-GNOME-Bugzilla-Component=general
-X-GNOME-Bugzilla-Version=0.4
+X-GNOME-Bugzilla-Version=0.5
 Categories=GNOME;GTK;Utility;
 MimeType=application/pdf;application/x-bzpdf;application/x-gzpdf;
