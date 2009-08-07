@@ -1,4 +1,4 @@
-//Author: Michael McKinley (m.mckinley@gmail.com)
+// Author: Michael McKinley (m.mckinley@gmail.com)
 
 using System;
 using System.Linq;
@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
-using System;
 
 namespace PdfMod
 {
@@ -24,12 +23,12 @@ namespace PdfMod
         private const string name_labels = "/PageLabels";
         private const string name_numtree = "/Nums";
         
-        //Keys (PdfNames) for formatting attributes
+        // Keys (PdfNames) for formatting attributes
         private const string name_fmt = "/S";
         private const string name_start_at = "/St";
         private const string name_prefix = "/P";
         
-        //Possible values for the numbering style
+        // Possible values for the numbering style
         private const string alpha_upper = "/A"; 
         private const string alpha_lower = "/a"; 
         private const string roman_upper = "/R";
@@ -43,12 +42,10 @@ namespace PdfMod
 
         public string this[Page page] { get { return this[page.Index]; } }
         
-        public string this[int index]
-        {
-            get
-            {
+        public string this[int index] {
+            get {
                 if (index < 0 || index > pdf_document.PageCount) {
-                    throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException ();
                 }
 
                 if (page_labels.Count == 0) {
@@ -60,7 +57,7 @@ namespace PdfMod
                     PageLabelFormat cur_format = page_labels[range_base];
                     string label = cur_format.prefix;
                     
-                    //Restart numbering for each range of pages
+                    // Restart numbering for each range of pages
                     int vindex = index + cur_format.first_number - range_base;
                     
                     if (cur_format.number_style == roman_upper || cur_format.number_style == alpha_upper) {
@@ -69,26 +66,26 @@ namespace PdfMod
                         label += RenderVal (vindex, cur_format.number_style).ToLower ();
                     }
                     return label;
-                } catch (KeyNotFoundException e) {
-                    return (1 + index).ToString ();
+                } catch (KeyNotFoundException) {
                 }
-                return (1 + index).ToString ();
+
+                return null;
             }
         }
         
         internal PageLabels (PdfDocument document)
         {
-            page_labels = new SortedDictionary<int, PageLabelFormat>();
+            page_labels = new SortedDictionary<int, PageLabelFormat> ();
             pdf_elements = document.Internals.Catalog.Elements;
             pdf_document = document;
             edited = false;
             
-            //Ignore documents that don't have labelling stuff defined
+            // Ignore documents that don't have labelling stuff defined
             if (!pdf_elements.Contains (name_labels)) {
                 return;
             }
             
-            //Ignore documents that don't have a properly-defined PageLabelFmt section
+            // Ignore documents that don't have a properly-defined PageLabelFmt section
             PdfDictionary my_labels = pdf_elements.GetDictionary (name_labels);
             if (!my_labels.Elements.Contains (name_numtree)) {
                 return;
@@ -108,21 +105,21 @@ namespace PdfMod
                 int range_start = number_tree.Elements.GetInteger (i * 2);
                 PdfDictionary label_data = number_tree.Elements.GetDictionary (i * 2 + 1);
                 
-                //Set the prefix, default to ""
+                // Set the prefix, default to ""
                 if (label_data.Elements.Contains (name_prefix)) {
                     temp_label.prefix = label_data.Elements.GetString (name_prefix);
                 } else {
                     temp_label.prefix = "";
                 }        
                 
-                //Set the start number, default to 1
+                // Set the start number, default to 1
                 if (label_data.Elements.Contains (name_start_at)) {
                     temp_label.first_number = label_data.Elements.GetInteger (name_start_at);
                 } else {
                     temp_label.first_number = 1;
                 }
                 
-                //Set the format type, default to no numbering (only show the prefix)
+                // Set the format type, default to no numbering (only show the prefix)
                 if (label_data.Elements.Contains (name_fmt)) {
                     temp_label.number_style = label_data.Elements.GetString (name_fmt);
                 } else {
@@ -133,21 +130,23 @@ namespace PdfMod
             }
         }
         
-        //Determine which formatting rules apply to page index.  Returns the start of the formatting range
+        // Determine which formatting rules apply to page index.  Returns the start of the formatting range
         private int GetFormat (int index)
         {
-            //Todo: find the correct range using a binary search
-            SortedDictionary<int, PageLabelFormat>.KeyCollection ranges = page_labels.Keys;
+            // TODO: find the correct range using a binary search
             
             int last = -1;
-            foreach (int range_start in ranges) {
-                if (range_start > index) break;
+            foreach (int range_start in page_labels.Keys) {
+                if (range_start > index) {
+                    break;
+                }
                 last = range_start;
             }
+
             return last;
         }
         
-        //Render the value index in the proper format (case-agnostic)
+        // Render the value index in the proper format (case-agnostic)
         private string RenderVal (int index, string fmt)
         {
             if (arabic == fmt) {
@@ -161,11 +160,11 @@ namespace PdfMod
             }        
         }
     
-        //Convert val into Roman numerals
+        // Convert val into Roman numerals
         private string ToRoman (int val)
         {
             StringBuilder roman_val = new StringBuilder ();
-            //TODO: see if there's a more elegant conversion
+            // TODO: see if there's a more elegant conversion
             
             if (val >= 1000) {
                 roman_val.Append ('M', val / 1000);
@@ -219,7 +218,7 @@ namespace PdfMod
             return roman_val.ToString ();
         }
         
-        //Convert val into the alpha representation. 1 -> a, 2 -> b, ... 26 -> z, 27 -> aa, 28 -> bb, etc.
+        // Convert val into the alpha representation. 1 -> a, 2 -> b, ... 26 -> z, 27 -> aa, 28 -> bb, etc.
         private string ToAlpha (int val)
         {
             char letter = (char)((val - 1) % 26 + 'a');        
@@ -229,14 +228,14 @@ namespace PdfMod
             return s.ToString ();
         }
         
-        //Write labels to the PDF
+        // Write labels to the PDF
         internal void WriteLabels ()
         {
             if (!edited) { 
                 return;
             }
             
-            //Grab the labels element, creating it if necessary
+            // Grab the labels element, creating it if necessary
             PdfDictionary labels_dict;
             if (!pdf_elements.Contains (name_labels)) {
                 labels_dict = new PdfDictionary (pdf_document);
@@ -246,10 +245,10 @@ namespace PdfMod
             }
             labels_dict.Elements.Clear ();
 
-            //Create the number tree
+            // Create the number tree
             PdfArray number_tree = new PdfArray (pdf_document);
 
-            //Add the range-start, attrib-dict pairs
+            // Add the range-start, attrib-dict pairs
             foreach (int range_start in page_labels.Keys)
             {
                 number_tree.Elements.Add (new PdfInteger (range_start));
