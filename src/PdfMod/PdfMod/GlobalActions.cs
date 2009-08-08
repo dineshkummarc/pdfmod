@@ -367,7 +367,7 @@ namespace PdfMod
                 var langs = GLib.Marshaller.NullTermPtrToStringArray (lang_ptr, false);
 
                 string help_dir = null;
-                foreach (var dir in new string [] { "/usr/share/gnome/help/", "/usr/local/share/gnome/help/", "docs/" }) {
+                foreach (var dir in new string [] { Defines.PREFIX + "/share/gnome/help/", "/usr/local/share/gnome/help/", "docs/" }) {
                     help_dir = dir;
                     if (System.IO.Directory.Exists (dir + "pdfmod/")) {
                         break;
@@ -409,7 +409,7 @@ namespace PdfMod
 
             var dialog = new Gtk.AboutDialog () {
                 ProgramName = "PDF Mod",
-                Version = "0.4",
+                Version = Defines.VERSION,
                 Website = WIKI_URL,
                 WebsiteLabel = Catalog.GetString ("Visit Website"),
                 Authors = new string [] {
@@ -434,7 +434,7 @@ namespace PdfMod
             } catch {}
 
             string [] license_paths = new string [] {
-                "/usr/share/doc/packages/pdfmod/COPYING",
+                Defines.PREFIX + "/share/doc/packages/pdfmod/COPYING",
                 "/usr/local/share/doc/packages/pdfmod/COPYING",
                 "COPYING"
             };

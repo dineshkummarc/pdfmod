@@ -31,7 +31,7 @@ namespace PdfMod
             Hyena.Log.Notify += OnLogNotify;
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
-            InitCatalog ("/usr/local/share/locale/", "/usr/share/locale/");
+            InitCatalog ("/usr/local/share/locale/", Defines.PREFIX + "/share/locale/");
 
             try {
                 System.IO.Directory.CreateDirectory (CacheDir);

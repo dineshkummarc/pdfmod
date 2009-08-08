@@ -1,0 +1,10 @@
+using System;
+
+namespace PdfMod
+{
+	public class Defines
+	{
+		public const string VERSION = "@VERSION@";
+		public const string PREFIX = "@prefix@";
+	}
+}
