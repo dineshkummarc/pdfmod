@@ -421,7 +421,8 @@ namespace PdfMod
                     " • Julien Rebetez",
                     " • Igor Vatavuk",
                     " • Bertrand Lorentz",
-                    " • Michael McKinley"
+                    " • Michael McKinley",
+                    " • Łukasz Jernaś"
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
