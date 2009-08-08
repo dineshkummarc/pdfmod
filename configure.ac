@@ -122,6 +122,7 @@ docs/Makefile
 data/Makefile
 data/icons/Makefile
 src/Libraries/PdfSharp/Makefile
+src/PdfMod/PdfMod/Defines.cs
 src/PdfMod/pdfmod
 src/PdfMod/Makefile
 Makefile

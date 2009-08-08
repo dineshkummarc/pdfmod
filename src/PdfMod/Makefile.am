@@ -86,6 +86,7 @@ FILES =  \
 	PdfMod/AssemblyInfo.cs \
 	PdfMod/CellRendererCairo.cs \
 	PdfMod/CellRendererPage.cs \
+	PdfMod/Defines.cs \
 	PdfMod/Document.cs \
 	PdfMod/GlobalActions.cs \
 	PdfMod/MetadataEditorBox.cs \
