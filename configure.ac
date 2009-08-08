@@ -120,6 +120,7 @@ AC_CONFIG_FILES([
 po/Makefile.in
 docs/Makefile
 data/Makefile
+data/pdfmod.desktop.in
 data/icons/Makefile
 src/Libraries/PdfSharp/Makefile
 src/PdfMod/PdfMod/Defines.cs
