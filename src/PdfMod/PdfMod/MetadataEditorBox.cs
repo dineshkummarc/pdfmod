@@ -151,7 +151,7 @@ namespace PdfMod
 
         public new void Hide ()
         {
-            (app.GlobalActions["PropertiesAction"] as Gtk.ToggleAction).Active = false;
+            (app.GlobalActions["Properties"] as Gtk.ToggleAction).Active = false;
             base.Hide ();
             app.IconView.GrabFocus ();
         }

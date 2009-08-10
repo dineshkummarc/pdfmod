@@ -160,7 +160,7 @@ namespace PdfMod
 
         private void HandlePopupMenu (object o, PopupMenuArgs args)
         {
-            app.GlobalActions["PageContextMenuAction"].Activate ();
+            app.GlobalActions["PageContextMenu"].Activate ();
         }
 
         #endregion
@@ -420,7 +420,7 @@ namespace PdfMod
 
             if (!zoom_manually_set) {
                 zoom_manually_set = true;
-                (app.GlobalActions["ZoomFitAction"] as ToggleAction).Active = false;
+                (app.GlobalActions["ZoomFit"] as ToggleAction).Active = false;
             }
 
             int new_width = ItemWidth + pixels;

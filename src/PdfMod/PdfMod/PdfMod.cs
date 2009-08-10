@@ -170,7 +170,7 @@ namespace PdfMod
                 message_dialog.Destroy ();
                 switch (response) {
                     case ResponseType.Ok:
-                        GlobalActions["SaveAsAction"].Activate ();
+                        GlobalActions["SaveAs"].Activate ();
                         return PromptIfUnsavedChanges ();
                     case ResponseType.Close:
                         return false;

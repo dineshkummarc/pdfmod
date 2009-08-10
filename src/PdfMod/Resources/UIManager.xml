@@ -1,78 +1,78 @@
 <ui>
-  <menubar name="MainMenu" action="MainMenuAction">
-    <menu name="FileMenu" action="FileMenuAction">
-      <menuitem action="OpenAction"/>
-      <menuitem action="SaveAction"/>
-      <menuitem action="SaveAsAction"/>
-      <menuitem action="RecentMenuAction"/>
+  <menubar action="MainMenu">
+    <menu action="FileMenu">
+      <menuitem action="Open"/>
+      <menuitem action="Save"/>
+      <menuitem action="SaveAs"/>
+      <menuitem action="RecentMenu"/>
       <separator/>
-      <menuitem action="ExportImagesAction"/>
-      <menuitem action="InsertFromAction"/>
+      <menuitem action="ExportImages"/>
+      <menuitem action="InsertFrom"/>
       <separator/>
-      <menuitem action="PropertiesAction"/>
+      <menuitem action="Properties"/>
       <separator/>
-      <menuitem action="CloseAction"/>
+      <menuitem action="Close"/>
     </menu>
-    <menu name="EditMenu" action="EditMenuAction">
-      <menuitem action="UndoAction"/>
-      <menuitem action="RedoAction"/>
+    <menu action="EditMenu">
+      <menuitem action="Undo"/>
+      <menuitem action="Redo"/>
       <separator/>
-      <menuitem action="ExtractAction"/>
-      <menuitem action="RemoveAction"/>
+      <menuitem action="Extract"/>
+      <menuitem action="Remove"/>
       <separator/>
-      <menuitem action="RotateLeftAction"/>
-      <menuitem action="RotateRightAction"/>
-      <!--<menuitem action="RotateArbitraryAction"/>-->
+      <menuitem action="RotateLeft"/>
+      <menuitem action="RotateRight"/>
+      <!--<menuitem action="RotateArbitrary"/>-->
       <separator/>
-      <menuitem action="SelectAllAction"/>
-      <menuitem action="SelectOddsAction"/>
-      <menuitem action="SelectEvensAction"/>
-      <menuitem action="SelectMatchingAction"/>
+      <menuitem action="SelectAll"/>
+      <menuitem action="SelectOdds"/>
+      <menuitem action="SelectEvens"/>
+      <menuitem action="SelectMatching"/>
       <separator/>
     </menu>
-    <menu name="ViewMenu" action="ViewMenuAction">
-      <menuitem action="ZoomInAction"/>
-      <menuitem action="ZoomOutAction"/>
-      <menuitem action="ZoomFitAction"/>
+    <menu action="ViewMenu">
+      <menuitem action="ZoomIn"/>
+      <menuitem action="ZoomOut"/>
+      <menuitem action="ZoomFit"/>
       <separator/>
-      <menuitem action="OpenInViewerAction"/>
+      <menuitem action="OpenInViewer"/>
       <separator/>
       <menuitem action="ViewToolbar"/>
     </menu>
-    <menu name="HelpMenu" action="HelpMenuAction">
-      <menuitem action="HelpAction"/>
-      <menuitem action="AboutAction"/>
+    <menu action="HelpMenu">
+      <menuitem action="Help"/>
+      <menuitem action="About"/>
     </menu>
   </menubar>
 
   <toolbar name="HeaderToolbar">
-    <toolitem action="OpenAction"/>
-    <toolitem action="SaveAsAction"/>
+    <toolitem action="Open"/>
+    <toolitem action="SaveAs"/>
     <separator/>
-    <toolitem action="PropertiesAction"/>
-    <toolitem action="ExportImagesAction"/>
-    <toolitem action="InsertFromAction"/>
+    <toolitem action="Properties"/>
+    <toolitem action="ExportImages"/>
+    <toolitem action="InsertFrom"/>
     <separator/>
-    <toolitem action="ExtractAction"/>
-    <toolitem action="RemoveAction"/>
-    <toolitem action="RotateLeftAction"/>
-    <toolitem action="RotateRightAction"/>
+    <toolitem action="Extract"/>
+    <toolitem action="Remove"/>
+    <toolitem action="RotateLeft"/>
+    <toolitem action="RotateRight"/>
     <separator/>
-    <!-- Commented out until we have a good icon <toolitem action="OpenInViewerAction"/>-->
+    <!-- Commented out until we have a good icon <toolitem action="OpenInViewer"/>-->
   </toolbar>
 
-  <popup name="PageContextMenu" action="PageContextMenuAction">
-    <menuitem action="ExtractAction"/>
-    <menuitem action="RemoveAction"/>
+  <popup action="PageContextMenu">
+    <menuitem action="Extract"/>
+    <menuitem action="Remove"/>
     <separator/>
-    <menuitem action="RotateLeftAction"/>
-    <menuitem action="RotateRightAction"/>
-    <!--<menuitem action="RotateArbitraryAction"/>-->
+    <menuitem action="RotateLeft"/>
+    <menuitem action="RotateRight"/>
+    <!--<menuitem action="RotateArbitrary"/>-->
     <separator/>
-    <menuitem action="SelectAllAction"/>
-    <menuitem action="SelectOddsAction"/>
-    <menuitem action="SelectEvensAction"/>
-    <menuitem action="SelectMatchingAction"/>
+    <menuitem action="SelectAll"/>
+    <menuitem action="SelectOdds"/>
+    <menuitem action="SelectEvens"/>
+    <menuitem action="SelectMatching"/>
     <separator/>
   </popup>
 </ui>
