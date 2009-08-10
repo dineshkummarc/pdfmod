@@ -80,7 +80,7 @@ namespace PdfMod
             AddImportant (
                 new ToggleActionEntry ("Properties", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
                 new ToggleActionEntry ("ZoomFit", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
-                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, true)
+                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, PdfMod.Configuration.ShowToolbar)
             );
 
             this["RotateRight"].IconName = "object-rotate-right";
@@ -189,6 +189,11 @@ namespace PdfMod
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.Open, ResponseType.Ok);
             chooser.DefaultResponse = ResponseType.Ok;
+            if (app.Document != null) {
+                chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
+            } else {
+                chooser.SetCurrentFolder (PdfMod.Configuration.LastOpenFolder);
+            }
 
             var response = chooser.Run ();
             string filename = chooser.Filename;
@@ -210,6 +215,7 @@ namespace PdfMod
             chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
             chooser.SelectMultiple = false;
+            chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.Open, ResponseType.Ok);
             chooser.DefaultResponse = ResponseType.Ok;
@@ -500,7 +506,8 @@ namespace PdfMod
 
         private void OnViewToolbar (object o, EventArgs args)
         {
-            app.HeaderToolbar.Visible = (this["ViewToolbar"] as ToggleAction).Active;
+            bool show = (this["ViewToolbar"] as ToggleAction).Active;
+            PdfMod.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
         }
 
         private void OnRotateRight (object o, EventArgs args)

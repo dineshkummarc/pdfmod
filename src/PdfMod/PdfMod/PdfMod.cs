@@ -27,6 +27,7 @@ namespace PdfMod
             Gtk.Application.Init (null, ref args);
             Gdk.Global.ProgramClass = "pdfmod";
 
+            Configuration = new Configuration ();
             ThreadAssist.InitializeMainThread ();
             ThreadAssist.ProxyToMainHandler = RunIdle;
 
@@ -55,6 +56,7 @@ namespace PdfMod
         public PdfIconView IconView { get; private set; }
         public Document Document { get; private set; }
         public MetadataEditorBox EditorBox { get; private set; }
+        public static Configuration Configuration { get; private set; }
 
         public event EventHandler DocumentLoaded;
 
@@ -102,6 +104,8 @@ namespace PdfMod
             HeaderToolbar.ShowArrow = false;
             HeaderToolbar.ToolbarStyle = ToolbarStyle.Icons;
             HeaderToolbar.Tooltips = true;
+            HeaderToolbar.NoShowAll = true;
+            HeaderToolbar.Visible = Configuration.ShowToolbar;
 
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
@@ -231,6 +235,7 @@ namespace PdfMod
                 loading = true;
             }
 
+            Configuration.LastOpenFolder = System.IO.Path.GetDirectoryName (suggestedFilename ?? path);
             status_label.Text = Catalog.GetString ("Loading document...");
 
             ThreadAssist.SpawnFromMain (delegate {

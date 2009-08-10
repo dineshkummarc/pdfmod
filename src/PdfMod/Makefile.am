@@ -86,6 +86,7 @@ FILES =  \
 	PdfMod/AssemblyInfo.cs \
 	PdfMod/CellRendererCairo.cs \
 	PdfMod/CellRendererPage.cs \
+	PdfMod/Configuration.cs \
 	PdfMod/Defines.cs \
 	PdfMod/Document.cs \
 	PdfMod/GlobalActions.cs \
@@ -108,6 +109,7 @@ EXTRAS = \
 REFERENCES =  \
 	Mono.Cairo \
 	Mono.Posix \
+	-pkg:gconf-sharp-2.0 \
 	-pkg:glade-sharp-2.0 \
 	-pkg:glib-sharp-2.0 \
 	-pkg:gnome-sharp-2.0 \

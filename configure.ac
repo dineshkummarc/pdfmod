@@ -109,6 +109,7 @@ dnl package checks, common for all configs
 PKG_CHECK_MODULES([GTK_SHARP_20], [gtk-sharp-2.0])
 PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 PKG_CHECK_MODULES([GNOME_SHARP_20], [gnome-sharp-2.0])
+PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 
 dnl package checks, per config
 
