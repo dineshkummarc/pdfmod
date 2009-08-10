@@ -1,7 +1,7 @@
 # List of source files containing translatable strings.
 [encoding: UTF-8]
 
-data/pdfmod.desktop.in
+data/pdfmod.desktop.in.in
 src/PdfMod/PdfMod.Actions/ExportImagesAction.cs
 src/PdfMod/PdfMod.Actions/MoveAction.cs
 src/PdfMod/PdfMod.Actions/RemoveAction.cs
