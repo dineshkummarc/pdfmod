@@ -24,7 +24,7 @@ namespace PdfMod
         private const string WIKI_URL = "http://live.gnome.org/PdfMod";
 
         private static string [] require_doc_actions = new string[] {
-            "SaveAction", "SaveAsAction", "PropertiesAction", "UndoAction", "RedoAction", "ZoomFitAction",
+            "SaveAction", "SaveAsAction", "PropertiesAction", "UndoAction", "RedoAction", "ZoomFitAction", "OpenInViewerAction",
             "SelectAllAction", "SelectEvensAction", "SelectOddsAction", "SelectMatchingAction", "InsertFromAction", "ExportImagesAction"
         };
 
@@ -72,7 +72,9 @@ namespace PdfMod
                 new ActionEntry ("HelpAction", Stock.Help, Catalog.GetString ("_Contents"), "F1", null, OnHelp),
                 new ActionEntry ("AboutAction", Stock.About, null, null, null, OnAbout),
 
-                new ActionEntry ("PageContextMenuAction", null, "", null, null, OnPageContextMenu)
+                new ActionEntry ("PageContextMenuAction", null, "", null, null, OnPageContextMenu),
+
+                new ActionEntry ("OpenInViewerAction", null, Catalog.GetString ("Open in Viewer"), "F5", Catalog.GetString ("Open in viewer"), OnOpenInViewer)
             );
 
             AddImportant (
@@ -195,6 +197,11 @@ namespace PdfMod
             if (response == (int)ResponseType.Ok) {
                 PdfMod.RunIdle (delegate { app.LoadPath (filename); });
             }
+        }
+
+        private void OnOpenInViewer (object o, EventArgs args)
+        {
+            System.Diagnostics.Process.Start (app.Document.CurrentStateUri);
         }
 
         private void OnInsertFrom (object o, EventArgs args)

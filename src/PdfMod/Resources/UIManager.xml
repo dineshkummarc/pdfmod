@@ -35,6 +35,8 @@
       <menuitem action="ZoomOutAction"/>
       <menuitem action="ZoomFitAction"/>
       <separator/>
+      <menuitem action="OpenInViewerAction"/>
+      <separator/>
       <menuitem action="ViewToolbar"/>
     </menu>
     <menu name="HelpMenu" action="HelpMenuAction">
@@ -55,6 +57,8 @@
     <toolitem action="RemoveAction"/>
     <toolitem action="RotateLeftAction"/>
     <toolitem action="RotateRightAction"/>
+    <separator/>
+    <!-- Commented out until we have a good icon <toolitem action="OpenInViewerAction"/>-->
   </toolbar>
 
   <popup name="PageContextMenu" action="PageContextMenuAction">
