@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 using Mono.Unix;
 using Gtk;
@@ -15,7 +16,9 @@ namespace PdfMod
     public class PdfMod
     {
         private static int app_count = 0;
-        private static readonly string CacheDir = System.IO.Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
+
+        private static readonly string old_cache_dir = Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
+        private static readonly string CacheDir = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory ("XDG_CACHE_HOME", ".cache"), "pdfmod");
 
         public static void Main (string[] args)
         {
@@ -32,12 +35,7 @@ namespace PdfMod
             Hyena.Log.DebugFormat ("Starting PdfMod");
 
             InitCatalog ("/usr/local/share/locale/", Defines.PREFIX + "/share/locale/");
-
-            try {
-                System.IO.Directory.CreateDirectory (CacheDir);
-            } catch (Exception e) {
-                Log.Exception (String.Format ("Unable to create cache directory: {0}", CacheDir), e);
-            }
+            InitCache ();
 
             var app = new PdfMod ();
             RunIdle (app.LoadFiles);
@@ -368,12 +366,41 @@ namespace PdfMod
         private static void InitCatalog (params string [] dirs)
         {
             foreach (var dir in dirs) {
-                var test_file = System.IO.Path.Combine (dir, "fr/LC_MESSAGES/pdfmod.mo");
-                if (System.IO.File.Exists (test_file)) {
+                var test_file = Path.Combine (dir, "fr/LC_MESSAGES/pdfmod.mo");
+                if (File.Exists (test_file)) {
                     Log.DebugFormat ("Initializing i18n catalog from {0}", dir);
                     Catalog.Init ("pdfmod", dir);
                     break;
                 }
+            }
+        }
+
+        private static void InitCache ()
+        {
+            // Remove the old "cache" dir that really ended up being ~/.config/
+            if (Directory.Exists (old_cache_dir)) {
+                try {
+                    Directory.Delete (old_cache_dir);
+                } catch {}
+            }
+
+            // Make sure the new one exists
+            try {
+                Directory.CreateDirectory (CacheDir);
+                Log.DebugFormat ("Cache directory set to {0}", CacheDir);
+
+                // Remove any tmp files that haven't been touched in three days
+                var too_old = DateTime.Now;
+                too_old.AddDays (-3);
+                foreach (string file in Directory.GetFiles (CacheDir)) {
+                    if (file.Contains ("tmpfile-")) {
+                        if (File.GetLastAccessTime (file) < too_old) {
+                            File.Delete (file);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.Exception (String.Format ("Unable to create cache directory: {0}", CacheDir), e);
             }
         }
 
@@ -382,8 +409,8 @@ namespace PdfMod
             string filename = null;
             int i = 0;
             while (filename == null) {
-                filename = System.IO.Path.Combine (CacheDir, "tmpfile-" + i++);
-                if (System.IO.File.Exists (filename)) {
+                filename = Path.Combine (CacheDir, "tmpfile-" + i++);
+                if (File.Exists (filename)) {
                     filename = null;
                 }
             }
