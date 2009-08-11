@@ -5,17 +5,18 @@ Version 0.6 - Aug ?, 2009
 =========================
 
 Contributors:
-Łukasz Jernaś, Sandy Armstrong
+Łukasz Jernaś, Sandy Armstrong, Igor Vatavuk
 
 Features:
 * Open in Viewer action that launches the default app
 * Remembers last folder a doc was opened from
-* Remembers if the toolbar is shown
+* Remembers if the toolbar was hidden
 
 Bugs Fixed:
 * Uses the XDG cache dir for storing tmp files
 * Does a better job of cleaning up tmp files
 * Fix bug with installing to custom prefix
+* Fix some zoom inconsistencies
 
 =========================
 Version 0.5 - Aug 7, 2009
