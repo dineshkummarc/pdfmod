@@ -4,15 +4,15 @@ using System;
 using Mono.Unix;
 using Gtk;
 
-namespace PdfMod
+namespace PdfMod.Gui
 {
     public class QueryBox : EventBox
     {
-        private PdfMod app;
+        private Client app;
         private HBox hbox;
         public Entry Entry { get; private set; }
 
-        public QueryBox (PdfMod app)
+        public QueryBox (Client app)
         {
             this.app = app;
             AppPaintable = true;

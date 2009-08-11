@@ -7,13 +7,13 @@ using Cairo;
 using Hyena.Gui;
 using Hyena.Gui.Theming;
 
-namespace PdfMod
+namespace PdfMod.Gui
 {
-    public abstract class CellRendererCairo : CellRenderer
+    public abstract class CairoCell : CellRenderer
     {
         protected Theme Theme { get; private set; }
 
-        public CellRendererCairo ()
+        public CairoCell ()
         {
             Mode = CellRendererMode.Inert;
             Xpad = Ypad = 0;

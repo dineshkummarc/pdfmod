@@ -3,12 +3,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-using Hyena;
+using Mono.Unix;
 
+using Hyena;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
-namespace PdfMod
+namespace PdfMod.Pdf
 {
     public class Document : IDisposable
     {
@@ -319,9 +320,9 @@ namespace PdfMod
             }
         }
 
-        public PageThumbnail GetSurface (Page page, int w, int h)
+        public PageThumbnail GetSurface (Page page, int w, int h, int min_width)
         {
-            if (w < PdfIconView.MIN_WIDTH || h < PdfIconView.MIN_WIDTH) {
+            if (w < min_width || h < min_width) {
                 return null;
             }
 
@@ -367,7 +368,7 @@ namespace PdfMod
         {
             try {
                 if (tmp_path == null) {
-                    tmp_path = PdfMod.GetTmpFilename ();
+                    tmp_path = Core.Client.GetTmpFilename ();
                     if (System.IO.File.Exists (tmp_path)) {
                         System.IO.File.Delete (tmp_path);
                     }
@@ -403,5 +404,30 @@ namespace PdfMod
                 handler ();
             }
         }
+
+        // Return a simple, nice string describing the selected pages
+        //   e.g.  Page 1, or Page 3 - 6, or Page 2, 4, 6
+        public static string GetPageSummary (List<Page> pages, int maxListed)
+        {
+            string pages_summary = null;
+            if (pages.Count == 1) {
+                // Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+                pages_summary = String.Format (Catalog.GetPluralString ("Page {1}", "Page {1}", pages.Count), pages.Count, pages[0].Index + 1);
+            } else if (pages[0].Index + pages.Count - 1 == pages[pages.Count - 1].Index) {
+                // Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+                // eg Pages 3 - 7
+                pages_summary = String.Format (Catalog.GetPluralString ("Pages {1} - {2}", "Pages {1} - {2}", pages.Count),
+                    pages.Count, pages[0].Index + 1, pages[pages.Count - 1].Index + 1);
+            } else if (pages.Count < maxListed) {
+                string page_nums = String.Join (", ", pages.Select (p => (p.Index + 1).ToString ()).ToArray ());
+                // Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+                pages_summary = String.Format (Catalog.GetPluralString ("Pages {1}", "Pages {1}", pages.Count), pages.Count, page_nums);
+            } else {
+                // Translators: {0} is the number of pages, eg 12 Pages
+                pages_summary = String.Format (Catalog.GetPluralString ("{0} Page", "{0} Pages", pages.Count), pages.Count);
+            }
+            return pages_summary;
+        }
+
     }
 }

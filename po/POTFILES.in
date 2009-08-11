@@ -2,11 +2,11 @@
 [encoding: UTF-8]
 
 data/pdfmod.desktop.in.in
-src/PdfMod/PdfMod.Actions/ExportImagesAction.cs
-src/PdfMod/PdfMod.Actions/MoveAction.cs
-src/PdfMod/PdfMod.Actions/RemoveAction.cs
-src/PdfMod/PdfMod/GlobalActions.cs
-src/PdfMod/PdfMod/PdfListStore.cs
-src/PdfMod/PdfMod/PdfMod.cs
-src/PdfMod/PdfMod/QueryBox.cs
-src/PdfMod/PdfMod/MetadataEditorBox.cs
+src/PdfMod/Pdf/Actions/ExportImagesAction.cs
+src/PdfMod/Pdf/Actions/MoveAction.cs
+src/PdfMod/Pdf/Actions/RemoveAction.cs
+src/PdfMod/Gui/Actions.cs
+src/PdfMod/Gui/ListStore.cs
+src/PdfMod/Gui/Client.cs
+src/PdfMod/Gui/SelectMatchingBox.cs
+src/PdfMod/Gui/MetadataEditorBox.cs

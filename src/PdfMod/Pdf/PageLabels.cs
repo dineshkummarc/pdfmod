@@ -9,7 +9,7 @@ using PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
 
-namespace PdfMod
+namespace PdfMod.Pdf
 {
     struct PageLabelFormat
     {

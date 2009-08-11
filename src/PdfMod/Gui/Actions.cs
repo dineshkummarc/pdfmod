@@ -13,13 +13,14 @@ using Hyena.Gui;
 
 using PdfSharp.Pdf;
 
-using PdfMod.Actions;
+using PdfMod.Pdf;
+using PdfMod.Pdf.Actions;
 
-namespace PdfMod
+namespace PdfMod.Gui
 {
-    public class GlobalActions : HyenaActionGroup
+    public class Actions : HyenaActionGroup
     {
-        private PdfMod app;
+        private Client app;
         private UndoManager undo_manager;
         private const string WIKI_URL = "http://live.gnome.org/PdfMod";
 
@@ -36,7 +37,7 @@ namespace PdfMod
             get { return undo_manager; }
         }
 
-        public GlobalActions (PdfMod app, ActionManager action_manager) : base (action_manager, "Global")
+        public Actions (Client app, ActionManager action_manager) : base (action_manager, "Global")
         {
             this.app = app;
             undo_manager = new UndoManager ();
@@ -80,7 +81,7 @@ namespace PdfMod
             AddImportant (
                 new ToggleActionEntry ("Properties", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
                 new ToggleActionEntry ("ZoomFit", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
-                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, PdfMod.Configuration.ShowToolbar)
+                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, Client.Configuration.ShowToolbar)
             );
 
             this["RotateRight"].IconName = "object-rotate-right";
@@ -126,7 +127,7 @@ namespace PdfMod
             };
             recent_chooser_item.Filter.AddPattern ("*.pdf");
             recent_chooser_item.ItemActivated += delegate {
-                PdfMod.RunIdle (delegate { app.LoadPath (recent_chooser_item.CurrentUri); });
+                Client.RunIdle (delegate { app.LoadPath (recent_chooser_item.CurrentUri); });
             };
             recent_item.Submenu = recent_chooser_item;
         }
@@ -192,7 +193,7 @@ namespace PdfMod
             if (app.Document != null) {
                 chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
             } else {
-                chooser.SetCurrentFolder (PdfMod.Configuration.LastOpenFolder);
+                chooser.SetCurrentFolder (Client.Configuration.LastOpenFolder);
             }
 
             var response = chooser.Run ();
@@ -200,7 +201,7 @@ namespace PdfMod
             chooser.Destroy ();
 
             if (response == (int)ResponseType.Ok) {
-                PdfMod.RunIdle (delegate { app.LoadPath (filename); });
+                Client.RunIdle (delegate { app.LoadPath (filename); });
             }
         }
 
@@ -283,40 +284,16 @@ namespace PdfMod
                 doc.AddPage (page.Pdf);
             }
 
-            var path = PdfMod.GetTmpFilename ();
+            var path = Client.GetTmpFilename ();
             doc.Save (path);
             doc.Dispose ();
 
             app.LoadPath (path, Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 String.Format ("[{0}] {1}",
-                    GLib.Markup.EscapeText (GetPageSummary (pages, 10)),
+                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10)),
                     Path.GetFileName (app.Document.SuggestedSavePath))
             ));
-        }
-
-        // Return a simple, nice string describing the selected pages
-        //   e.g.  Page 1, or Page 3 - 6, or Page 2, 4, 6
-        public static string GetPageSummary (List<Page> pages, int maxListed)
-        {
-            string pages_summary = null;
-            if (pages.Count == 1) {
-                // Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
-                pages_summary = String.Format (Catalog.GetPluralString ("Page {1}", "Page {1}", pages.Count), pages.Count, pages[0].Index + 1);
-            } else if (pages[0].Index + pages.Count - 1 == pages[pages.Count - 1].Index) {
-                // Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
-                // eg Pages 3 - 7
-                pages_summary = String.Format (Catalog.GetPluralString ("Pages {1} - {2}", "Pages {1} - {2}", pages.Count),
-                    pages.Count, pages[0].Index + 1, pages[pages.Count - 1].Index + 1);
-            } else if (pages.Count < maxListed) {
-                string page_nums = String.Join (", ", pages.Select (p => (p.Index + 1).ToString ()).ToArray ());
-                // Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
-                pages_summary = String.Format (Catalog.GetPluralString ("Pages {1}", "Pages {1}", pages.Count), pages.Count, page_nums);
-            } else {
-                // Translators: {0} is the number of pages, eg 12 Pages
-                pages_summary = String.Format (Catalog.GetPluralString ("{0} Page", "{0} Pages", pages.Count), pages.Count);
-            }
-            return pages_summary;
         }
 
         private void OnExportImages (object o, EventArgs args)
@@ -380,7 +357,7 @@ namespace PdfMod
                 var langs = GLib.Marshaller.NullTermPtrToStringArray (lang_ptr, false);
 
                 string help_dir = null;
-                foreach (var dir in new string [] { Defines.PREFIX + "/share/gnome/help/", "/usr/local/share/gnome/help/", "docs/" }) {
+                foreach (var dir in new string [] { Core.Defines.PREFIX + "/share/gnome/help/", "/usr/local/share/gnome/help/", "docs/" }) {
                     help_dir = dir;
                     if (System.IO.Directory.Exists (dir + "pdfmod/")) {
                         break;
@@ -422,7 +399,7 @@ namespace PdfMod
 
             var dialog = new Gtk.AboutDialog () {
                 ProgramName = "PDF Mod",
-                Version = Defines.VERSION,
+                Version = Core.Defines.VERSION,
                 Website = WIKI_URL,
                 WebsiteLabel = Catalog.GetString ("Visit Website"),
                 Authors = new string [] {
@@ -448,7 +425,7 @@ namespace PdfMod
             } catch {}
 
             string [] license_paths = new string [] {
-                Defines.PREFIX + "/share/doc/packages/pdfmod/COPYING",
+                Core.Defines.PREFIX + "/share/doc/packages/pdfmod/COPYING",
                 "/usr/local/share/doc/packages/pdfmod/COPYING",
                 "COPYING"
             };
@@ -507,7 +484,7 @@ namespace PdfMod
         private void OnViewToolbar (object o, EventArgs args)
         {
             bool show = (this["ViewToolbar"] as ToggleAction).Active;
-            PdfMod.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
+            Client.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
         }
 
         private void OnRotateRight (object o, EventArgs args)

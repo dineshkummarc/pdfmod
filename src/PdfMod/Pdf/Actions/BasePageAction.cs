@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Hyena;
 
-namespace PdfMod.Actions
+namespace PdfMod.Pdf.Actions
 {
     public interface IDescribedUndoAction : IUndoAction
     {

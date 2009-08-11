@@ -40,8 +40,8 @@ po/Makefile.in.in
 po/stamp-it
 data/pdfmod.desktop
 data/pdfmod.desktop.in
-src/PdfMod/pdfmod
-src/PdfMod/PdfMod/Defines.cs
+src/pdfmod
+src/PdfMod/Core/Defines.cs
 *.resources
 gnome-doc-utils.make
 docs/*/.xml2po.mo

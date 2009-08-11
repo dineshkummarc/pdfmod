@@ -2,10 +2,10 @@
 
 #Warning: This is an automatically generated file, do not edit!
 if ENABLE_DEBUG
- SUBDIRS =  src/Libraries/PdfSharp src/PdfMod po docs data
+ SUBDIRS =  lib/PdfSharp src po docs data
 endif
 if ENABLE_RELEASE
- SUBDIRS =  src/Libraries/PdfSharp src/PdfMod po docs data
+ SUBDIRS =  lib/PdfSharp src po docs data
 endif
 
 run:

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Mono.Unix;
 
-namespace PdfMod.Actions
+namespace PdfMod.Pdf.Actions
 {
     public class RotateAction : BasePageAction
     {
@@ -14,7 +14,7 @@ namespace PdfMod.Actions
         {
             this.rotation = rotation;
             Description = String.Format (Catalog.GetPluralString ("Rotate {1}", "Rotate {1}", Pages.Count),
-                Pages.Count, GlobalActions.GetPageSummary (Pages, 5));
+                Pages.Count, Document.GetPageSummary (Pages, 5));
         }
 
         public override void Undo ()

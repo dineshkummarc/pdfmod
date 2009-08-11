@@ -123,10 +123,10 @@ docs/Makefile
 data/Makefile
 data/pdfmod.desktop.in
 data/icons/Makefile
-src/Libraries/PdfSharp/Makefile
-src/PdfMod/PdfMod/Defines.cs
-src/PdfMod/pdfmod
-src/PdfMod/Makefile
+lib/PdfSharp/Makefile
+src/PdfMod/Core/Defines.cs
+src/pdfmod
+src/Makefile
 Makefile
 
 ])

@@ -1,6 +1,6 @@
 using System;
 
-namespace PdfMod
+namespace PdfMod.Core
 {
 	public class Defines
 	{

@@ -4,11 +4,13 @@ using System;
 using Mono.Unix;
 using Gtk;
 
-namespace PdfMod
+using PdfMod.Pdf;
+
+namespace PdfMod.Gui
 {
     public class MetadataEditorBox : EventBox
     {
-        private PdfMod app;
+        private Client app;
         private Table table;
         private Button revert_button;
         private Document doc;
@@ -16,7 +18,7 @@ namespace PdfMod
         private TextProperty [] properties;
         private TextProperty title, author, keywords, subject;
 
-        public MetadataEditorBox (PdfMod app)
+        public MetadataEditorBox (Client app)
         {
             this.app = app;
             app.DocumentLoaded += HandleDocumentLoaded;
@@ -151,7 +153,7 @@ namespace PdfMod
 
         public new void Hide ()
         {
-            (app.GlobalActions["Properties"] as Gtk.ToggleAction).Active = false;
+            (app.Actions["Properties"] as Gtk.ToggleAction).Active = false;
             base.Hide ();
             app.IconView.GrabFocus ();
         }

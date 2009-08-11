@@ -3,7 +3,7 @@ using System;
 
 using PdfSharp.Pdf;
 
-namespace PdfMod
+namespace PdfMod.Pdf
 {
     public class Page
     {

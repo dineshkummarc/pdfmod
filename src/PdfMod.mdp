@@ -4,14 +4,14 @@
   </Policies>
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="../../bin/" assembly="PdfMod" />
+      <Output directory="../bin/" assembly="PdfMod" />
       <Build debugmode="True" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
       <EnvironmentVariables />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="../../bin/" assembly="PdfMod" />
+      <Output directory="../bin/" assembly="PdfMod" />
       <Build debugmode="True" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" />
       <EnvironmentVariables />
@@ -19,28 +19,30 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="PdfMod/PdfMod.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/PdfIconView.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/PdfListStore.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/GlobalActions.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Main.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Core/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/DocumentView.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/ListStore.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/Actions.cs" subtype="Code" buildaction="Compile" />
     <File name="Resources/UIManager.xml" subtype="Code" buildaction="EmbedAsResource" />
-    <File name="PdfMod.Actions/RemoveAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/Document.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/Page.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod.Actions/RotateAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod.Actions/BasePageAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod.Actions/ExportImagesAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/QueryBox.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/CellRendererCairo.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/CellRendererPage.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod.Actions/MoveAction.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/MetadataEditorBox.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/PageThumbnail.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/PageLabels.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/Defines.cs.in" subtype="Code" buildaction="Nothing" />
-    <File name="PdfMod/Defines.cs" subtype="Code" buildaction="Compile" />
-    <File name="PdfMod/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Actions/RemoveAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Document.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Page.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Actions/RotateAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Actions/BasePageAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Actions/ExportImagesAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/SelectMatchingBox.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/CairoCell.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/PageCell.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/Client.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/Actions/MoveAction.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Gui/MetadataEditorBox.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/PageThumbnail.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Core/Defines.cs.in" subtype="Code" buildaction="Nothing" />
+    <File name="PdfMod/Core/Defines.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Core/Client.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Core/Configuration.cs" subtype="Code" buildaction="Compile" />
+    <File name="PdfMod/Pdf/PageLabels.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -55,15 +57,15 @@
     <ProjectReference type="Gac" localcopy="True" refto="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <ProjectReference type="Project" localcopy="True" refto="PdfSharp" />
-    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../lib/Hyena.dll" />
-    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../lib/Mono.Data.Sqlite.dll" />
-    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../lib/Hyena.Gui.dll" />
-    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../../lib/poppler-sharp.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../lib/Hyena.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../lib/Mono.Data.Sqlite.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../lib/Hyena.Gui.dll" />
+    <ProjectReference type="Assembly" localcopy="True" specificVersion="False" refto="../lib/poppler-sharp.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="gnome-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <ProjectReference type="Gac" localcopy="True" refto="gconf-sharp, Version=2.24.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </References>
   <GtkDesignInfo gettextClass="Mono.Posix.Catalog" />
-  <MonoDevelop.Autotools.MakefileInfo IntegrationEnabled="True" RelativeMakefileName="Makefile.am" BuildTargetName="" CleanTargetName="" SyncReferences="True" IsAutotoolsProject="True" RelativeConfigureInPath="../..">
+  <MonoDevelop.Autotools.MakefileInfo IntegrationEnabled="True" RelativeMakefileName="Makefile.am" BuildTargetName="" CleanTargetName="" SyncReferences="True" IsAutotoolsProject="True" RelativeConfigureInPath="..">
     <BuildFilesVar Sync="True" Name="FILES" />
     <DeployFilesVar />
     <ResourcesVar Sync="True" Name="RESOURCES" />

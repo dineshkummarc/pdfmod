@@ -9,7 +9,9 @@ using System.Linq;
 using Mono.Unix;
 using Gtk;
 
-namespace PdfMod
+using PdfMod.Pdf;
+
+namespace PdfMod.Gui
 {
     public class PdfListStore : ListStore
     {

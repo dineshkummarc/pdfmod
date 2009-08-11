@@ -18,7 +18,7 @@
     <Execute type="None" entry="PdfSharp" />
   </StartMode>
   <Entries>
-    <Entry filename="src/PdfMod/PdfMod.mdp" />
-    <Entry filename="src/Libraries/PdfSharp/PdfSharp.csproj" />
+    <Entry filename="src/PdfMod.mdp" />
+    <Entry filename="lib/PdfSharp/PdfSharp.csproj" />
   </Entries>
 </Combine>

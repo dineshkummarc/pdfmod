@@ -9,7 +9,7 @@ using Hyena.Gui;
 
 using PdfMod;
 
-namespace PdfMod.Actions
+namespace PdfMod.Pdf.Actions
 {
     public class RemoveAction : BasePageAction
     {

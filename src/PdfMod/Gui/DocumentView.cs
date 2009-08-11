@@ -3,14 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Gdk;
 using Gtk;
+using Gdk;
 
 using PdfSharp.Pdf;
 
-using PdfMod.Actions;
+using PdfMod.Pdf;
+using PdfMod.Pdf.Actions;
 
-namespace PdfMod
+namespace PdfMod.Gui
 {
     public enum PageSelectionMode
     {
@@ -21,7 +22,7 @@ namespace PdfMod
         All
     }
 
-    public class PdfIconView : Gtk.IconView, IDisposable
+    public class DocumentView : Gtk.IconView, IDisposable
     {
         public const int MIN_WIDTH = 128;
         public const int MAX_WIDTH = 2054;
@@ -38,10 +39,10 @@ namespace PdfMod
         private static readonly TargetEntry move_internal_target = new TargetEntry ("pdfmod/page-list", TargetFlags.Widget, (uint)Target.MoveInternal);
         private static readonly TargetEntry move_external_target = new TargetEntry ("pdfmod/page-list-external", 0, (uint)Target.MoveExternal);
 
-        private PdfMod app;
+        private Client app;
         private Document document;
         private PdfListStore store;
-        private CellRendererPage page_renderer;
+        private PageCell page_renderer;
         private PageSelectionMode page_selection_mode = PageSelectionMode.None;
         private bool highlighted;
 
@@ -64,7 +65,7 @@ namespace PdfMod
 
         public event System.Action ZoomChanged;
 
-        public PdfIconView (PdfMod app) : base ()
+        public DocumentView (Client app) : base ()
         {
             this.app = app;
 
@@ -76,7 +77,7 @@ namespace PdfMod
             Reorderable = false;
             Spacing = 0;
 
-            page_renderer = new CellRendererPage (this);
+            page_renderer = new PageCell (this);
             PackStart (page_renderer, true);
             AddAttribute (page_renderer, "page", PdfListStore.PageColumn);
 
@@ -160,7 +161,7 @@ namespace PdfMod
 
         private void HandlePopupMenu (object o, PopupMenuArgs args)
         {
-            app.GlobalActions["PageContextMenu"].Activate ();
+            app.Actions["PageContextMenu"].Activate ();
         }
 
         #endregion
@@ -290,7 +291,7 @@ namespace PdfMod
                 to_index -= pages.Count (p => p.Index < to_index);
                 var action = new MoveAction (document, pages, to_index);
                 action.Do ();
-                app.GlobalActions.UndoManager.AddUndoAction (action);
+                app.Actions.UndoManager.AddUndoAction (action);
                 args.RetVal = true;
             } else if (target == move_external_target.Target) {
                 int to_index = GetDropIndex (args.X, args.Y);
@@ -420,7 +421,7 @@ namespace PdfMod
 
             if (!zoom_manually_set) {
                 zoom_manually_set = true;
-                (app.GlobalActions["ZoomFit"] as ToggleAction).Active = false;
+                (app.Actions["ZoomFit"] as ToggleAction).Active = false;
             }
 
             int new_width = ItemWidth + pixels;
@@ -450,7 +451,7 @@ namespace PdfMod
             if (document == null)
                 return;
 
-            if ((app.GlobalActions["ZoomFit"] as ToggleAction).Active == false)
+            if ((app.Actions["ZoomFit"] as ToggleAction).Active == false)
                 return;
 
             zoom_manually_set = false;

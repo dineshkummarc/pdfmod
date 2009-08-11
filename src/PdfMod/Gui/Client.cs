@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
-using Mono.Unix;
 using Gtk;
+using Mono.Unix;
 
 using Hyena;
 using Hyena.Gui;
@@ -11,62 +12,45 @@ using PdfSharp;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
-namespace PdfMod
+using PdfMod.Pdf;
+
+namespace PdfMod.Gui
 {
-    public class PdfMod
+    public class Client : Core.Client
     {
         private static int app_count = 0;
 
-        private static readonly string old_cache_dir = Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
-        private static readonly string CacheDir = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory ("XDG_CACHE_HOME", ".cache"), "pdfmod");
-
-        public static void Main (string[] args)
-        {
-            ApplicationContext.TrySetProcessName ("pdfmod");
-
-            Gtk.Application.Init (null, ref args);
-            Gdk.Global.ProgramClass = "pdfmod";
-
-            Configuration = new Configuration ();
-            ThreadAssist.InitializeMainThread ();
-            ThreadAssist.ProxyToMainHandler = RunIdle;
-
-            Hyena.Log.Debugging = true;
-            Hyena.Log.Notify += OnLogNotify;
-            Hyena.Log.DebugFormat ("Starting PdfMod");
-
-            InitCatalog ("/usr/local/share/locale/", Defines.PREFIX + "/share/locale/");
-            InitCache ();
-
-            var app = new PdfMod ();
-            RunIdle (app.LoadFiles);
-
-            Application.Run ();
-        }
-
-        private MenuBar menu_bar;
+        private Gtk.MenuBar menu_bar;
         private Gtk.Label status_label;
         private QueryBox query_box;
 
         public ActionManager ActionManager { get; private set; }
-        public Toolbar HeaderToolbar;
-        public GlobalActions GlobalActions { get; private set; }
+        public Gtk.Toolbar HeaderToolbar;
+        public Actions Actions { get; private set; }
         public Gtk.Statusbar StatusBar { get; private set; }
         public Gtk.Window Window { get; private set; }
-        public PdfIconView IconView { get; private set; }
-        public Document Document { get; private set; }
+        public DocumentView IconView { get; private set; }
         public MetadataEditorBox EditorBox { get; private set; }
-        public static Configuration Configuration { get; private set; }
 
-        public event EventHandler DocumentLoaded;
+        static Client ()
+        {
+            Gtk.Application.Init ();
+            ThreadAssist.InitializeMainThread ();
+            ThreadAssist.ProxyToMainHandler = RunIdle;
+            Hyena.Log.Notify += OnLogNotify;
+            Gtk.Window.DefaultIconName = "pdfmod";
+        }
 
-        public PdfMod ()
+        public Client () : this (false)
+        {
+        }
+
+        internal Client (bool loadFiles)
         {
             app_count++;
 
-            Window = new Gtk.Window (WindowType.Toplevel);
+            Window = new Gtk.Window (Gtk.WindowType.Toplevel);
             Window.Title = Catalog.GetString ("PDF Mod");
-            Window.DefaultIconName = "pdfmod";
             Window.SetSizeRequest (640, 480);
             Window.DeleteEvent += delegate (object o, DeleteEventArgs args) {
                 Quit ();
@@ -74,7 +58,7 @@ namespace PdfMod
             };
 
             // PDF Icon View
-            IconView = new PdfIconView (this);
+            IconView = new DocumentView (this);
             var iconview_sw = new Gtk.ScrolledWindow ();
             iconview_sw.Child = IconView;
 
@@ -91,7 +75,7 @@ namespace PdfMod
             // ActionManager
             ActionManager = new Hyena.Gui.ActionManager ();
             Window.AddAccelGroup (ActionManager.UIManager.AccelGroup);
-            GlobalActions = new GlobalActions (this, ActionManager);
+            Actions = new Actions (this, ActionManager);
 
             EditorBox = new MetadataEditorBox (this) { NoShowAll = true };
             EditorBox.Hide ();
@@ -117,6 +101,11 @@ namespace PdfMod
             Window.Add (vbox);
 
             Window.ShowAll ();
+
+            if (loadFiles) {
+                RunIdle (LoadFiles);
+                Application.Run ();
+            }
         }
 
         public void ToggleMatchQuery ()
@@ -172,7 +161,7 @@ namespace PdfMod
                 message_dialog.Destroy ();
                 switch (response) {
                     case ResponseType.Ok:
-                        GlobalActions["SaveAs"].Activate ();
+                        Actions["SaveAs"].Activate ();
                         return PromptIfUnsavedChanges ();
                     case ResponseType.Close:
                         return false;
@@ -184,12 +173,8 @@ namespace PdfMod
             return false;
         }
 
-        private void LoadFiles ()
+        protected override void LoadFiles (IList<string> files)
         {
-            // This variable should probably be marked volatile
-            Hyena.Log.Debugging = true;
-
-            var files = ApplicationContext.CommandLine.Files;
             if (files.Count == 1) {
                 LoadPath (files[0]);
             } else if (files.Count > 1) {
@@ -216,19 +201,13 @@ namespace PdfMod
             }
         }
 
-        // TODO support password protected docs
-        public void LoadPath (string path)
-        {
-            LoadPath (path, null);
-        }
-
         private bool loading;
-        public void LoadPath (string path, string suggestedFilename)
+        public override void LoadPath (string path, string suggestedFilename)
         {
             lock (this) {
                 // One document per window
                 if (loading || Document != null) {
-                    new PdfMod ().LoadPath (path, suggestedFilename);
+                    new Client ().LoadPath (path, suggestedFilename);
                     return;
                 }
 
@@ -250,11 +229,7 @@ namespace PdfMod
                         IconView.SetDocument (Document);
                         Document.Changed += UpdateForDocument;
                         UpdateForDocument ();
-
-                        var handler = DocumentLoaded;
-                        if (handler != null) {
-                            handler (this, EventArgs.Empty);
-                        }
+                        OnDocumentLoaded ();
                     });
                 } catch (Exception e) {
                     Document = null;
@@ -366,60 +341,6 @@ namespace PdfMod
                 dialog.Run ();
                 dialog.Destroy ();
             });
-        }
-
-        private static void InitCatalog (params string [] dirs)
-        {
-            foreach (var dir in dirs) {
-                var test_file = Path.Combine (dir, "fr/LC_MESSAGES/pdfmod.mo");
-                if (File.Exists (test_file)) {
-                    Log.DebugFormat ("Initializing i18n catalog from {0}", dir);
-                    Catalog.Init ("pdfmod", dir);
-                    break;
-                }
-            }
-        }
-
-        private static void InitCache ()
-        {
-            // Remove the old "cache" dir that really ended up being ~/.config/
-            if (Directory.Exists (old_cache_dir)) {
-                try {
-                    Directory.Delete (old_cache_dir);
-                } catch {}
-            }
-
-            // Make sure the new one exists
-            try {
-                Directory.CreateDirectory (CacheDir);
-                Log.DebugFormat ("Cache directory set to {0}", CacheDir);
-
-                // Remove any tmp files that haven't been touched in three days
-                var too_old = DateTime.Now;
-                too_old.AddDays (-3);
-                foreach (string file in Directory.GetFiles (CacheDir)) {
-                    if (file.Contains ("tmpfile-")) {
-                        if (File.GetLastAccessTime (file) < too_old) {
-                            File.Delete (file);
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                Log.Exception (String.Format ("Unable to create cache directory: {0}", CacheDir), e);
-            }
-        }
-
-        public static string GetTmpFilename ()
-        {
-            string filename = null;
-            int i = 0;
-            while (filename == null) {
-                filename = Path.Combine (CacheDir, "tmpfile-" + i++);
-                if (File.Exists (filename)) {
-                    filename = null;
-                }
-            }
-            return filename;
         }
 
         public static void RunIdle (InvokeHandler handler)

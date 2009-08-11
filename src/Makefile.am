@@ -6,49 +6,49 @@ EXTRA_DIST =
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
-ASSEMBLY = ../../bin/PdfMod.exe
+ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
-PROJECT_REFERENCES = ../../bin/PdfSharp.dll
-BUILD_DIR = ../../bin
+PROJECT_REFERENCES = ../bin/PdfSharp.dll
+BUILD_DIR = ../bin
 
-PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
-PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
-HYENA_DLL_SOURCE=../../lib/Hyena.dll
-HYENA_DLL_MDB_SOURCE=../../lib/Hyena.dll.mdb
-MONO_DATA_SQLITE_DLL_SOURCE=../../lib/Mono.Data.Sqlite.dll
-MONO_DATA_SQLITE_DLL_MDB_SOURCE=../../lib/Mono.Data.Sqlite.dll.mdb
-HYENA_GUI_DLL_SOURCE=../../lib/Hyena.Gui.dll
-HYENA_GUI_DLL_CONFIG_SOURCE=../../lib/Hyena.Gui.dll.config
-HYENA_GUI_DLL_MDB_SOURCE=../../lib/Hyena.Gui.dll.mdb
-POPPLER_SHARP_DLL_SOURCE=../../lib/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG_SOURCE=../../lib/poppler-sharp.dll.config
-PDFMOD_EXE_MDB_SOURCE=../../bin/PdfMod.exe.mdb
+PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
+PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
+HYENA_DLL_SOURCE=../lib/Hyena.dll
+HYENA_DLL_MDB_SOURCE=../lib/Hyena.dll.mdb
+MONO_DATA_SQLITE_DLL_SOURCE=../lib/Mono.Data.Sqlite.dll
+MONO_DATA_SQLITE_DLL_MDB_SOURCE=../lib/Mono.Data.Sqlite.dll.mdb
+HYENA_GUI_DLL_SOURCE=../lib/Hyena.Gui.dll
+HYENA_GUI_DLL_CONFIG_SOURCE=../lib/Hyena.Gui.dll.config
+HYENA_GUI_DLL_MDB_SOURCE=../lib/Hyena.Gui.dll.mdb
+POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp.dll
+POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp.dll.config
+PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 
 endif
 
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug -define:DEBUG
-ASSEMBLY = ../../bin/PdfMod.exe
+ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
 PROJECT_REFERENCES =  \
-	../../bin/PdfSharp.dll
-BUILD_DIR = ../../bin
+	../bin/PdfSharp.dll
+BUILD_DIR = ../bin
 
-PDFSHARP_DLL_SOURCE=../../bin/PdfSharp.dll
-PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
-HYENA_DLL_SOURCE=../../lib/Hyena.dll
-HYENA_DLL_MDB_SOURCE=../../lib/Hyena.dll.mdb
-MONO_DATA_SQLITE_DLL_SOURCE=../../lib/Mono.Data.Sqlite.dll
-MONO_DATA_SQLITE_DLL_MDB_SOURCE=../../lib/Mono.Data.Sqlite.dll.mdb
-HYENA_GUI_DLL_SOURCE=../../lib/Hyena.Gui.dll
-HYENA_GUI_DLL_CONFIG_SOURCE=../../lib/Hyena.Gui.dll.config
-HYENA_GUI_DLL_MDB_SOURCE=../../lib/Hyena.Gui.dll.mdb
-POPPLER_SHARP_DLL_SOURCE=../../lib/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG_SOURCE=../../lib/poppler-sharp.dll.config
-PDFMOD_EXE_MDB_SOURCE=../../bin/PdfMod.exe.mdb
+PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
+PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
+HYENA_DLL_SOURCE=../lib/Hyena.dll
+HYENA_DLL_MDB_SOURCE=../lib/Hyena.dll.mdb
+MONO_DATA_SQLITE_DLL_SOURCE=../lib/Mono.Data.Sqlite.dll
+MONO_DATA_SQLITE_DLL_MDB_SOURCE=../lib/Mono.Data.Sqlite.dll.mdb
+HYENA_GUI_DLL_SOURCE=../lib/Hyena.Gui.dll
+HYENA_GUI_DLL_CONFIG_SOURCE=../lib/Hyena.Gui.dll.config
+HYENA_GUI_DLL_MDB_SOURCE=../lib/Hyena.Gui.dll.mdb
+POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp.dll
+POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp.dll.config
+PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 
 endif
 
@@ -78,26 +78,28 @@ RESGEN=resgen2
 all: $(ASSEMBLY) $(PROGRAMFILES) $(BINARIES) 
 
 FILES =  \
-	PdfMod.Actions/BasePageAction.cs \
-	PdfMod.Actions/ExportImagesAction.cs \
-	PdfMod.Actions/MoveAction.cs \
-	PdfMod.Actions/RemoveAction.cs \
-	PdfMod.Actions/RotateAction.cs \
-	PdfMod/AssemblyInfo.cs \
-	PdfMod/CellRendererCairo.cs \
-	PdfMod/CellRendererPage.cs \
-	PdfMod/Configuration.cs \
-	PdfMod/Defines.cs \
-	PdfMod/Document.cs \
-	PdfMod/GlobalActions.cs \
-	PdfMod/MetadataEditorBox.cs \
-	PdfMod/Page.cs \
-	PdfMod/PageLabels.cs \
-	PdfMod/PageThumbnail.cs \
-	PdfMod/PdfIconView.cs \
-	PdfMod/PdfListStore.cs \
-	PdfMod/PdfMod.cs \
-	PdfMod/QueryBox.cs 
+	PdfMod/Core/AssemblyInfo.cs \
+	PdfMod/Core/Client.cs \
+	PdfMod/Core/Configuration.cs \
+	PdfMod/Core/Defines.cs \
+	PdfMod/Gui/Actions.cs \
+	PdfMod/Gui/CairoCell.cs \
+	PdfMod/Gui/Client.cs \
+	PdfMod/Gui/DocumentView.cs \
+	PdfMod/Gui/ListStore.cs \
+	PdfMod/Gui/MetadataEditorBox.cs \
+	PdfMod/Gui/PageCell.cs \
+	PdfMod/Gui/SelectMatchingBox.cs \
+	PdfMod/Main.cs \
+	PdfMod/Pdf/Actions/BasePageAction.cs \
+	PdfMod/Pdf/Actions/ExportImagesAction.cs \
+	PdfMod/Pdf/Actions/MoveAction.cs \
+	PdfMod/Pdf/Actions/RemoveAction.cs \
+	PdfMod/Pdf/Actions/RotateAction.cs \
+	PdfMod/Pdf/Document.cs \
+	PdfMod/Pdf/Page.cs \
+	PdfMod/Pdf/PageLabels.cs \
+	PdfMod/Pdf/PageThumbnail.cs 
 
 DATA_FILES = 
 
@@ -119,10 +121,10 @@ REFERENCES =  \
 	System.Drawing
 
 DLL_REFERENCES =  \
-	../../lib/Hyena.dll \
-	../../lib/Hyena.Gui.dll \
-	../../lib/Mono.Data.Sqlite.dll \
-	../../lib/poppler-sharp.dll
+	../lib/Hyena.dll \
+	../lib/Hyena.Gui.dll \
+	../lib/Mono.Data.Sqlite.dll \
+	../lib/poppler-sharp.dll
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES)
 

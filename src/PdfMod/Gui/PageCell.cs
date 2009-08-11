@@ -8,16 +8,18 @@ using Cairo;
 using Hyena;
 using Hyena.Collections;
 
-namespace PdfMod
+using PdfMod.Pdf;
+
+namespace PdfMod.Gui
 {
-    public class CellRendererPage : CellRendererCairo, IDisposable
+    public class PageCell : CairoCell, IDisposable
     {
         const int scale_every = 400;
 
         private ThumbnailLruCache surface_cache;
         private IconView parent;
 
-        public CellRendererPage (IconView parent)
+        public PageCell (IconView parent)
         {
             this.parent = parent;
             surface_cache = new ThumbnailLruCache ();
@@ -70,7 +72,7 @@ namespace PdfMod
                 // Create a new thumbnail surface, but only on 200px boundaries, then we scale down if needed
                 var w = width + (width % scale_every);
                 var h = height + (height % scale_every);
-                cache_obj = Page.Document.GetSurface (Page, (int)w, (int)h);
+                cache_obj = Page.Document.GetSurface (Page, (int)w, (int)h, DocumentView.MIN_WIDTH);
                 if (cache_obj == null) {
                     return;
                 }

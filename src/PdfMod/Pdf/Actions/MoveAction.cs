@@ -10,7 +10,7 @@ using Hyena.Gui;
 
 using PdfMod;
 
-namespace PdfMod.Actions
+namespace PdfMod.Pdf.Actions
 {
     public class MoveAction : BasePageAction
     {
@@ -22,7 +22,7 @@ namespace PdfMod.Actions
             this.to_index = to_index;
             // Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
             Description = String.Format (Catalog.GetPluralString ("Move {1}", "Move {1}", Pages.Count),
-                Pages.Count, GlobalActions.GetPageSummary (Pages, 5));
+                Pages.Count, Document.GetPageSummary (Pages, 5));
         }
 
         public override void Undo ()

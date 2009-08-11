@@ -1,7 +1,7 @@
 
 using System;
 
-namespace PdfMod
+namespace PdfMod.Pdf
 {
     public class PageThumbnail : IDisposable
     {

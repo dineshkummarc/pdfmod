@@ -41,7 +41,7 @@ using System.Linq;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
 
-namespace PdfMod.Actions
+namespace PdfMod.Pdf.Actions
 {
     public class ExportImagesAction
     {

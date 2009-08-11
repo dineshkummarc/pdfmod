@@ -6,26 +6,26 @@ EXTRA_DIST =
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:TRACE;DEBUG;GDI;UseGdiObjects"
-ASSEMBLY = ../../../bin/PdfSharp.dll
+ASSEMBLY = ../../bin/PdfSharp.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../../../bin
+BUILD_DIR = ../../bin
 
-PDFSHARP_DLL_MDB_SOURCE=../../../bin/PdfSharp.dll.mdb
+PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
 
 endif
 
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = gmcs
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:TRACE;GDI;DEBUG;UseGdiObjects"
-ASSEMBLY = ../../../bin/PdfSharp.dll
+ASSEMBLY = ../../bin/PdfSharp.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES = 
-BUILD_DIR = ../../../bin
+BUILD_DIR = ../../bin
 
-PDFSHARP_DLL_MDB_SOURCE=../../../bin/PdfSharp.dll.mdb
+PDFSHARP_DLL_MDB_SOURCE=../../bin/PdfSharp.dll.mdb
 
 endif
 
