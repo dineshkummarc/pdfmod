@@ -450,6 +450,9 @@ namespace PdfMod
             if (document == null)
                 return;
 
+            if ((app.GlobalActions["ZoomFit"] as ToggleAction).Active == false)
+                return;
+
             zoom_manually_set = false;
             // Try to fit all pages into the view, with a minimum size
             var n = (double)document.Count;
