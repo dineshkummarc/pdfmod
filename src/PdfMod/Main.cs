@@ -17,6 +17,8 @@ namespace PdfMod
 
             InitCatalog ("/usr/local/share/locale/", Core.Defines.PREFIX + "/share/locale/");
 
+            // TODO could have a command line client here by checking CommandLine.Contains ("--headless") or something,
+            // and implementing a subclass of Core.Client that does the rotate/remove/extract actions
             new Gui.Client (true);
         }
 
