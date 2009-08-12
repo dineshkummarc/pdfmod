@@ -11,6 +11,7 @@ Features:
 * Open in Viewer action that launches the default app
 * Remembers last folder a doc was opened from
 * Remembers if the toolbar was hidden
+* Remember accelerator customizations
 
 Bugs Fixed:
 * Uses the XDG cache dir for storing tmp files
