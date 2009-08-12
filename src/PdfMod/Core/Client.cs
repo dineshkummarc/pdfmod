@@ -59,7 +59,11 @@ namespace PdfMod.Core
             // Remove the old "cache" dir that really ended up being ~/.config/
             if (Directory.Exists (old_cache_dir)) {
                 try {
-                    Directory.Delete (old_cache_dir);
+                    foreach (string file in Directory.GetFiles (CacheDir)) {
+                        if (file.Contains ("tmpfile-")) {
+                            File.Delete (file);
+                        }
+                    }
                 } catch {}
             }
 

@@ -19,6 +19,8 @@ namespace PdfMod.Gui
     public class Client : Core.Client
     {
         private static int app_count = 0;
+        private static string accel_map_file = Path.Combine (Path.Combine (
+            XdgBaseDirectorySpec.GetUserDirectory ("XDG_CONFIG_HOME", ".config"), "pdfmod"), "gtk_accel_map");
 
         private Gtk.MenuBar menu_bar;
         private Gtk.Label status_label;
@@ -39,6 +41,15 @@ namespace PdfMod.Gui
             ThreadAssist.ProxyToMainHandler = RunIdle;
             Hyena.Log.Notify += OnLogNotify;
             Gtk.Window.DefaultIconName = "pdfmod";
+
+            try {
+                if (System.IO.File.Exists (accel_map_file)) {
+                    Gtk.AccelMap.Load (accel_map_file);
+                    Hyena.Log.DebugFormat ("Loaded custom AccelMap from {0}", accel_map_file);
+                }
+            } catch (Exception e) {
+                Hyena.Log.Exception ("Failed to load custom AccelMap", e);
+            }
         }
 
         public Client () : this (false)
@@ -141,6 +152,13 @@ namespace PdfMod.Gui
             Window = null;
 
             if (--app_count == 0) {
+                try {
+                    Directory.CreateDirectory (Path.GetDirectoryName (accel_map_file));
+                    Gtk.AccelMap.Save (accel_map_file);
+                } catch (Exception e) {
+                    Hyena.Log.Exception ("Failed to save custom AccelMap", e);
+                }
+
                 Application.Quit ();
             }
         }
