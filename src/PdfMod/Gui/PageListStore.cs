@@ -1,9 +1,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 
 using Mono.Unix;
@@ -13,13 +10,13 @@ using PdfMod.Pdf;
 
 namespace PdfMod.Gui
 {
-    public class PdfListStore : ListStore
+    public class PageListStore : ListStore
     {
         public const int SortColumn = 0;
         public const int TooltipColumn = 1;
         public const int PageColumn = 2;
 
-        public PdfListStore () : base (typeof (int), typeof (string), typeof (Page))
+        public PageListStore () : base (typeof (int), typeof (string), typeof (Page))
         {
             SetSortColumnId (SortColumn, SortType.Ascending);
         }

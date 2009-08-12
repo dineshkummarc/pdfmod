@@ -31,7 +31,7 @@ namespace PdfMod.Gui
         public Actions Actions { get; private set; }
         public Gtk.Statusbar StatusBar { get; private set; }
         public Gtk.Window Window { get; private set; }
-        public DocumentView IconView { get; private set; }
+        public DocumentIconView IconView { get; private set; }
         public MetadataEditorBox EditorBox { get; private set; }
 
         static Client ()
@@ -69,7 +69,7 @@ namespace PdfMod.Gui
             };
 
             // PDF Icon View
-            IconView = new DocumentView (this);
+            IconView = new DocumentIconView (this);
             var iconview_sw = new Gtk.ScrolledWindow ();
             iconview_sw.Child = IconView;
 

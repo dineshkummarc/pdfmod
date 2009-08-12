@@ -85,10 +85,10 @@ FILES =  \
 	PdfMod/Gui/Actions.cs \
 	PdfMod/Gui/CairoCell.cs \
 	PdfMod/Gui/Client.cs \
-	PdfMod/Gui/DocumentView.cs \
-	PdfMod/Gui/ListStore.cs \
+	PdfMod/Gui/DocumentIconView.cs \
 	PdfMod/Gui/MetadataEditorBox.cs \
 	PdfMod/Gui/PageCell.cs \
+	PdfMod/Gui/PageListStore.cs \
 	PdfMod/Gui/SelectMatchingBox.cs \
 	PdfMod/Main.cs \
 	PdfMod/Pdf/Actions/BasePageAction.cs \
@@ -112,13 +112,11 @@ REFERENCES =  \
 	Mono.Cairo \
 	Mono.Posix \
 	-pkg:gconf-sharp-2.0 \
-	-pkg:glade-sharp-2.0 \
 	-pkg:glib-sharp-2.0 \
 	-pkg:gnome-sharp-2.0 \
 	-pkg:gtk-sharp-2.0 \
 	System \
-	System.Core \
-	System.Drawing
+	System.Core
 
 DLL_REFERENCES =  \
 	../lib/Hyena.dll \

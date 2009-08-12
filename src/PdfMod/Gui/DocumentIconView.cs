@@ -22,7 +22,7 @@ namespace PdfMod.Gui
         All
     }
 
-    public class DocumentView : Gtk.IconView, IDisposable
+    public class DocumentIconView : Gtk.IconView, IDisposable
     {
         public const int MIN_WIDTH = 128;
         public const int MAX_WIDTH = 2054;
@@ -41,12 +41,12 @@ namespace PdfMod.Gui
 
         private Client app;
         private Document document;
-        private PdfListStore store;
+        private PageListStore store;
         private PageCell page_renderer;
         private PageSelectionMode page_selection_mode = PageSelectionMode.None;
         private bool highlighted;
 
-        public PdfListStore Store { get { return store; } }
+        public PageListStore Store { get { return store; } }
         public bool CanZoomIn { get; private set; }
         public bool CanZoomOut { get; private set; }
 
@@ -56,7 +56,7 @@ namespace PdfMod.Gui
                 foreach (var path in SelectedItems) {
                     TreeIter iter;
                     store.GetIter (out iter, path);
-                    pages.Add (store.GetValue (iter, PdfListStore.PageColumn) as Page);
+                    pages.Add (store.GetValue (iter, PageListStore.PageColumn) as Page);
                 }
                 pages.Sort ((a, b) => { return a.Index < b.Index ? -1 : 1; });
                 return pages;
@@ -65,21 +65,21 @@ namespace PdfMod.Gui
 
         public event System.Action ZoomChanged;
 
-        public DocumentView (Client app) : base ()
+        public DocumentIconView (Client app) : base ()
         {
             this.app = app;
 
-            TooltipColumn = PdfListStore.TooltipColumn;
+            TooltipColumn = PageListStore.TooltipColumn;
             SelectionMode = SelectionMode.Multiple;
             ColumnSpacing = RowSpacing = Margin;
-            Model = store = new PdfListStore ();
+            Model = store = new PageListStore ();
             CanZoomIn = CanZoomOut = true;
             Reorderable = false;
             Spacing = 0;
 
             page_renderer = new PageCell (this);
             PackStart (page_renderer, true);
-            AddAttribute (page_renderer, "page", PdfListStore.PageColumn);
+            AddAttribute (page_renderer, "page", PageListStore.PageColumn);
 
             // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
             EnableModelDragSource (Gdk.ModifierType.None, new TargetEntry [] { move_internal_target, move_external_target, uri_src_target }, Gdk.DragAction.Default | Gdk.DragAction.Move);
@@ -268,7 +268,7 @@ namespace PdfMod.Gui
             if (TreeIter.Zero.Equals (iter))
                 return -1;
 
-            var to_index = (store.GetValue (iter, PdfListStore.PageColumn) as Page).Index;
+            var to_index = (store.GetValue (iter, PageListStore.PageColumn) as Page).Index;
             if (pos == IconViewDropPosition.DropRight) {
                 to_index++;
             }
@@ -528,7 +528,7 @@ namespace PdfMod.Gui
                         select = (i % 2) == 1;
                         break;
                     case PageSelectionMode.Matching:
-                        select = matches.Contains (store.GetValue (iter, PdfListStore.PageColumn) as Page);
+                        select = matches.Contains (store.GetValue (iter, PageListStore.PageColumn) as Page);
                         break;
                     }
 

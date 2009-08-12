@@ -72,7 +72,7 @@ namespace PdfMod.Gui
                 // Create a new thumbnail surface, but only on 200px boundaries, then we scale down if needed
                 var w = width + (width % scale_every);
                 var h = height + (height % scale_every);
-                cache_obj = Page.Document.GetSurface (Page, (int)w, (int)h, DocumentView.MIN_WIDTH);
+                cache_obj = Page.Document.GetSurface (Page, (int)w, (int)h, DocumentIconView.MIN_WIDTH);
                 if (cache_obj == null) {
                     return;
                 }
