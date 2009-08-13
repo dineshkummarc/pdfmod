@@ -184,7 +184,7 @@ namespace PdfMod.Gui
         private void OnOpen (object o, EventArgs args)
         {
             var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
-            chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
+            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
             chooser.SelectMultiple = false;
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
