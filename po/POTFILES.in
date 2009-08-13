@@ -6,7 +6,7 @@ src/PdfMod/Pdf/Actions/ExportImagesAction.cs
 src/PdfMod/Pdf/Actions/MoveAction.cs
 src/PdfMod/Pdf/Actions/RemoveAction.cs
 src/PdfMod/Gui/Actions.cs
-src/PdfMod/Gui/ListStore.cs
+src/PdfMod/Gui/PageListStore.cs
 src/PdfMod/Gui/Client.cs
 src/PdfMod/Gui/SelectMatchingBox.cs
 src/PdfMod/Gui/MetadataEditorBox.cs
