@@ -9,18 +9,12 @@ ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-
 ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
-PROJECT_REFERENCES = ../bin/PdfSharp.dll
+PROJECT_REFERENCES = \
+	../bin/PdfSharp.dll
 BUILD_DIR = ../bin
 
 PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
-HYENA_DLL_SOURCE=../lib/Hyena.dll
-HYENA_DLL_MDB_SOURCE=../lib/Hyena.dll.mdb
-MONO_DATA_SQLITE_DLL_SOURCE=../lib/Mono.Data.Sqlite.dll
-MONO_DATA_SQLITE_DLL_MDB_SOURCE=../lib/Mono.Data.Sqlite.dll.mdb
-HYENA_GUI_DLL_SOURCE=../lib/Hyena.Gui.dll
-HYENA_GUI_DLL_CONFIG_SOURCE=../lib/Hyena.Gui.dll.config
-HYENA_GUI_DLL_MDB_SOURCE=../lib/Hyena.Gui.dll.mdb
 POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp.dll
 POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
@@ -39,13 +33,6 @@ BUILD_DIR = ../bin
 
 PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
-HYENA_DLL_SOURCE=../lib/Hyena.dll
-HYENA_DLL_MDB_SOURCE=../lib/Hyena.dll.mdb
-MONO_DATA_SQLITE_DLL_SOURCE=../lib/Mono.Data.Sqlite.dll
-MONO_DATA_SQLITE_DLL_MDB_SOURCE=../lib/Mono.Data.Sqlite.dll.mdb
-HYENA_GUI_DLL_SOURCE=../lib/Hyena.Gui.dll
-HYENA_GUI_DLL_CONFIG_SOURCE=../lib/Hyena.Gui.dll.config
-HYENA_GUI_DLL_MDB_SOURCE=../lib/Hyena.Gui.dll.mdb
 POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp.dll
 POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
@@ -58,13 +45,6 @@ SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
 PROGRAMFILES = \
 	$(PDFSHARP_DLL) \
 	$(PDFSHARP_DLL_MDB) \
-	$(HYENA_DLL) \
-	$(HYENA_DLL_MDB) \
-	$(MONO_DATA_SQLITE_DLL) \
-	$(MONO_DATA_SQLITE_DLL_MDB) \
-	$(HYENA_GUI_DLL) \
-	$(HYENA_GUI_DLL_CONFIG) \
-	$(HYENA_GUI_DLL_MDB) \
 	$(POPPLER_SHARP_DLL) \
 	$(POPPLER_SHARP_DLL_CONFIG) \
 	$(PDFMOD_EXE_MDB)  
@@ -116,12 +96,11 @@ REFERENCES =  \
 	-pkg:gnome-sharp-2.0 \
 	-pkg:gtk-sharp-2.0 \
 	System \
+	$(HYENA_LIBS) \
+	$(HYENA_GUI_LIBS) \
 	System.Core
 
 DLL_REFERENCES =  \
-	../lib/Hyena.dll \
-	../lib/Hyena.Gui.dll \
-	../lib/Mono.Data.Sqlite.dll \
 	../lib/poppler-sharp.dll
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES)
@@ -130,25 +109,11 @@ include $(top_srcdir)/Makefile.include
 
 PDFSHARP_DLL = $(BUILD_DIR)/PdfSharp.dll
 PDFSHARP_DLL_MDB = $(BUILD_DIR)/PdfSharp.dll.mdb
-HYENA_DLL = $(BUILD_DIR)/Hyena.dll
-HYENA_DLL_MDB = $(BUILD_DIR)/Hyena.dll.mdb
-MONO_DATA_SQLITE_DLL = $(BUILD_DIR)/Mono.Data.Sqlite.dll
-MONO_DATA_SQLITE_DLL_MDB = $(BUILD_DIR)/Mono.Data.Sqlite.dll.mdb
-HYENA_GUI_DLL = $(BUILD_DIR)/Hyena.Gui.dll
-HYENA_GUI_DLL_CONFIG = $(BUILD_DIR)/Hyena.Gui.dll.config
-HYENA_GUI_DLL_MDB = $(BUILD_DIR)/Hyena.Gui.dll.mdb
 POPPLER_SHARP_DLL = $(BUILD_DIR)/poppler-sharp.dll
 POPPLER_SHARP_DLL_CONFIG = $(BUILD_DIR)/poppler-sharp.dll.config
 PDFMOD_EXE_MDB = $(BUILD_DIR)/PdfMod.exe.mdb
 PDFMOD = $(BUILD_DIR)/pdfmod
 
-$(eval $(call emit-deploy-target,HYENA_DLL))
-$(eval $(call emit-deploy-target,HYENA_DLL_MDB))
-$(eval $(call emit-deploy-target,MONO_DATA_SQLITE_DLL))
-$(eval $(call emit-deploy-target,MONO_DATA_SQLITE_DLL_MDB))
-$(eval $(call emit-deploy-target,HYENA_GUI_DLL))
-$(eval $(call emit-deploy-target,HYENA_GUI_DLL_CONFIG))
-$(eval $(call emit-deploy-target,HYENA_GUI_DLL_MDB))
 $(eval $(call emit-deploy-target,POPPLER_SHARP_DLL))
 $(eval $(call emit-deploy-target,POPPLER_SHARP_DLL_CONFIG))
 $(eval $(call emit-deploy-wrapper,PDFMOD,pdfmod,x))
@@ -163,3 +128,5 @@ $(ASSEMBLY_MDB): $(ASSEMBLY)
 $(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
 	mkdir -p $(shell dirname $(ASSEMBLY))
 	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
+	cp $(BUNDLE_ASSEMBLIES) $(BUILD_DIR)
+	cp $(BUNDLE_FILES) $(BUILD_DIR)

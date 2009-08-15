@@ -14,13 +14,8 @@ run:
 EXTRA_DIST = \
 	gnome-doc-utils.make \
 	icon-theme-installer \
-	lib/Hyena.dll \
-	lib/Hyena.dll.mdb \
-	lib/Hyena.Gui.dll \
-	lib/Hyena.Gui.dll.mdb \
-	lib/Hyena.Gui.dll.config \
-	lib/Mono.Data.Sqlite.dll \
-	lib/Mono.Data.Sqlite.dll.mdb \
+	$(BUNDLE_ASSEMBLIES) \
+	$(BUNDLE_FILES) \
 	lib/poppler-sharp.dll \
 	lib/poppler-sharp.dll.config \
 	intltool-extract.in \

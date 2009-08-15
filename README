@@ -8,6 +8,7 @@ Dependencies:
  * poppler
  * gnome-doc-utils-devel
  * gnome-common (if building from git)
+ * Hyena (http://gitorious.org/hyena)
 
 To build from git:
 
