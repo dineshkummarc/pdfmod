@@ -283,7 +283,7 @@ msgstr "{0} (original {1})"
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} Seite"
-msgstr[1] "{1} Seiten"
+msgstr[1] "{0} Seiten"
 
 #: ../src/PdfMod/Gui/Client.cs:308
 msgid "Document is Encrypted"
