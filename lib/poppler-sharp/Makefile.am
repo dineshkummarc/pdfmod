@@ -114,7 +114,6 @@ POPPLER_SHARP_DLL = $(BUILD_DIR)/poppler-sharp.dll
 POPPLER_SHARP_DLL_CONFIG = $(BUILD_DIR)/poppler-sharp.dll.config
 POPPLER_SHARP_DLL_MDB = $(BUILD_DIR)/poppler-sharp.dll.mdb
 
-$(eval $(call emit-deploy-target,POPPLER_SHARP_DLL))
 $(eval $(call emit-deploy-target,POPPLER_SHARP_DLL_CONFIG))
 
 
