@@ -15,8 +15,8 @@ BUILD_DIR = ../bin
 
 PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
-POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp.dll.config
+POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll
+POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 
 endif
@@ -33,8 +33,8 @@ BUILD_DIR = ../bin
 
 PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
 PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
-POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp.dll.config
+POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll
+POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 
 endif
@@ -96,12 +96,12 @@ REFERENCES =  \
 	-pkg:gnome-sharp-2.0 \
 	-pkg:gtk-sharp-2.0 \
 	System \
-	$(HYENA_LIBS) \
-	$(HYENA_GUI_LIBS) \
 	System.Core
 
 DLL_REFERENCES =  \
-	../lib/poppler-sharp.dll
+	$(BUILD_DIR)/poppler-sharp.dll \
+	$(BUILD_DIR)/Hyena.dll \
+	$(BUILD_DIR)/Hyena.Gui.dll
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES)
 
@@ -127,6 +127,6 @@ $(ASSEMBLY_MDB): $(ASSEMBLY)
 
 $(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
 	mkdir -p $(shell dirname $(ASSEMBLY))
+	cp -t $(BUILD_DIR) $(BUNDLE_ASSEMBLIES)
+	cp -t $(BUILD_DIR) $(BUNDLE_FILES)
 	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
-	cp $(BUNDLE_ASSEMBLIES) $(BUILD_DIR)
-	cp $(BUNDLE_FILES) $(BUILD_DIR)

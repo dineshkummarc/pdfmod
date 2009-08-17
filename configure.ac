@@ -140,6 +140,7 @@ data/Makefile
 data/pdfmod.desktop.in
 data/icons/Makefile
 lib/PdfSharp/Makefile
+lib/poppler-sharp/Makefile
 src/PdfMod/Core/Defines.cs
 src/pdfmod
 src/Makefile

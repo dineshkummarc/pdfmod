@@ -2,22 +2,33 @@
 
 #Warning: This is an automatically generated file, do not edit!
 if ENABLE_DEBUG
- SUBDIRS =  lib/PdfSharp src po docs data
+ SUBDIRS =  lib/PdfSharp lib/poppler-sharp src po docs data
 endif
 if ENABLE_RELEASE
- SUBDIRS =  lib/PdfSharp src po docs data
+ SUBDIRS =  lib/PdfSharp lib/poppler-sharp src po docs data
 endif
+
+INSTALL_DIR_RESOLVED = $(firstword $(subst , $(DEFAULT_INSTALL_DIR), $(INSTALL_DIR)))
 
 run:
 	cd bin; mono --debug PdfMod.exe;
 
+install-data-hook:
+	for ASM in $(BUNDLE_ASSEMBLIES); do \
+		$(INSTALL) -m 0755 $$ASM $(DESTDIR)$(INSTALL_DIR_RESOLVED); \
+	done; \
+	for ASM in $(BUNDLE_FILES); do \
+		$(INSTALL) -m 0644 $$ASM $(DESTDIR)$(INSTALL_DIR_RESOLVED); \
+	done;
+
+uninstall-hook:
+	for ASM in "$(BUNDLE_ASSEMBLIES) $(BUNDLE_FILES)"; do \
+		rm -f $(DESTDIR)$(INSTALL_DIR_RESOLVED)/`basename $$ASM`; \
+	done;
+
 EXTRA_DIST = \
 	gnome-doc-utils.make \
 	icon-theme-installer \
-	$(BUNDLE_ASSEMBLIES) \
-	$(BUNDLE_FILES) \
-	lib/poppler-sharp.dll \
-	lib/poppler-sharp.dll.config \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
