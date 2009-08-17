@@ -27,6 +27,7 @@ uninstall-hook:
 	done;
 
 EXTRA_DIST = \
+	lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config \
 	gnome-doc-utils.make \
 	icon-theme-installer \
 	intltool-extract.in \

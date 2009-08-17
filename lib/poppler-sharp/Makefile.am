@@ -1,25 +1,25 @@
 
-EXTRA_DIST =
+EXTRA_DIST = 
 
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = $(MCS)
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -unsafe -debug "-define:DEBUG"
-ASSEMBLY = ../bin/poppler-sharp.dll
+ASSEMBLY = ../../bin/poppler-sharp.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES =  
-BUILD_DIR = ../bin
+BUILD_DIR = ../../bin
 
 endif
 
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = $(MCS)
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -unsafe -debug -define:DEBUG
-ASSEMBLY = ../bin/poppler-sharp.dll
+ASSEMBLY = ../../bin/poppler-sharp.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
 PROJECT_REFERENCES =  
-BUILD_DIR = ../bin
+BUILD_DIR = ../../bin
 
 endif
 
@@ -34,8 +34,64 @@ RESGEN=resgen2
 all: $(ASSEMBLY) $(PROGRAMFILES) $(BINARIES) 
 
 FILES =  \
-	poppler-sharp/generated/*.cs \
-	poppler-sharp/Document.cs
+	poppler-sharp/Document.cs \
+	poppler-sharp/generated/Action.cs \
+	poppler-sharp/generated/ActionAny.cs \
+	poppler-sharp/generated/ActionGotoDest.cs \
+	poppler-sharp/generated/ActionGotoRemote.cs \
+	poppler-sharp/generated/ActionLaunch.cs \
+	poppler-sharp/generated/ActionMovie.cs \
+	poppler-sharp/generated/ActionNamed.cs \
+	poppler-sharp/generated/ActionType.cs \
+	poppler-sharp/generated/ActionUri.cs \
+	poppler-sharp/generated/Annot.cs \
+	poppler-sharp/generated/AnnotCalloutLine.cs \
+	poppler-sharp/generated/AnnotExternalDataType.cs \
+	poppler-sharp/generated/AnnotFlag.cs \
+	poppler-sharp/generated/AnnotFreeText.cs \
+	poppler-sharp/generated/AnnotFreeTextQuadding.cs \
+	poppler-sharp/generated/AnnotMapping.cs \
+	poppler-sharp/generated/AnnotMarkup.cs \
+	poppler-sharp/generated/AnnotMarkupReplyType.cs \
+	poppler-sharp/generated/AnnotText.cs \
+	poppler-sharp/generated/AnnotTextState.cs \
+	poppler-sharp/generated/AnnotType.cs \
+	poppler-sharp/generated/Attachment.cs \
+	poppler-sharp/generated/AttachmentSaveFunc.cs \
+	poppler-sharp/generated/Backend.cs \
+	poppler-sharp/generated/Color.cs \
+	poppler-sharp/generated/Dest.cs \
+	poppler-sharp/generated/DestType.cs \
+	poppler-sharp/generated/Document.cs \
+	poppler-sharp/generated/Error.cs \
+	poppler-sharp/generated/FontInfo.cs \
+	poppler-sharp/generated/FontType.cs \
+	poppler-sharp/generated/FontsIter.cs \
+	poppler-sharp/generated/FormButtonType.cs \
+	poppler-sharp/generated/FormChoiceType.cs \
+	poppler-sharp/generated/FormField.cs \
+	poppler-sharp/generated/FormFieldMapping.cs \
+	poppler-sharp/generated/FormFieldType.cs \
+	poppler-sharp/generated/FormTextType.cs \
+	poppler-sharp/generated/Global.cs \
+	poppler-sharp/generated/ImageMapping.cs \
+	poppler-sharp/generated/IndexIter.cs \
+	poppler-sharp/generated/Layer.cs \
+	poppler-sharp/generated/LayersIter.cs \
+	poppler-sharp/generated/LinkMapping.cs \
+	poppler-sharp/generated/Orientation.cs \
+	poppler-sharp/generated/PSFile.cs \
+	poppler-sharp/generated/Page.cs \
+	poppler-sharp/generated/PageLayout.cs \
+	poppler-sharp/generated/PageMode.cs \
+	poppler-sharp/generated/PageTransition.cs \
+	poppler-sharp/generated/PageTransitionAlignment.cs \
+	poppler-sharp/generated/PageTransitionDirection.cs \
+	poppler-sharp/generated/PageTransitionType.cs \
+	poppler-sharp/generated/PopplerSharp.AttachmentSaveFuncNative.cs \
+	poppler-sharp/generated/Rectangle.cs \
+	poppler-sharp/generated/SelectionStyle.cs \
+	poppler-sharp/generated/ViewerPreferences.cs
 
 DATA_FILES = 
 

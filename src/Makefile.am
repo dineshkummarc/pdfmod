@@ -13,10 +13,6 @@ PROJECT_REFERENCES = \
 	../bin/PdfSharp.dll
 BUILD_DIR = ../bin
 
-PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
-PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
-POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 
 endif
@@ -31,10 +27,6 @@ PROJECT_REFERENCES =  \
 	../bin/PdfSharp.dll
 BUILD_DIR = ../bin
 
-PDFSHARP_DLL_SOURCE=../bin/PdfSharp.dll
-PDFSHARP_DLL_MDB_SOURCE=../bin/PdfSharp.dll.mdb
-POPPLER_SHARP_DLL_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG_SOURCE=../lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 
 endif
@@ -43,10 +35,6 @@ AL=al2
 SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
 
 PROGRAMFILES = \
-	$(PDFSHARP_DLL) \
-	$(PDFSHARP_DLL_MDB) \
-	$(POPPLER_SHARP_DLL) \
-	$(POPPLER_SHARP_DLL_CONFIG) \
 	$(PDFMOD_EXE_MDB)  
 
 BINARIES = \
@@ -95,13 +83,14 @@ REFERENCES =  \
 	-pkg:glib-sharp-2.0 \
 	-pkg:gnome-sharp-2.0 \
 	-pkg:gtk-sharp-2.0 \
+	-r:$(PDFSHARP_DLL) \
+	-r:$(POPPLER_SHARP_DLL) \
+	-r:$(BUILD_DIR)/Hyena.dll \
+	-r:$(BUILD_DIR)/Hyena.Gui.dll \
 	System \
 	System.Core
 
-DLL_REFERENCES =  \
-	$(BUILD_DIR)/poppler-sharp.dll \
-	$(BUILD_DIR)/Hyena.dll \
-	$(BUILD_DIR)/Hyena.Gui.dll
+DLL_REFERENCES = 
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES)
 
@@ -110,12 +99,9 @@ include $(top_srcdir)/Makefile.include
 PDFSHARP_DLL = $(BUILD_DIR)/PdfSharp.dll
 PDFSHARP_DLL_MDB = $(BUILD_DIR)/PdfSharp.dll.mdb
 POPPLER_SHARP_DLL = $(BUILD_DIR)/poppler-sharp.dll
-POPPLER_SHARP_DLL_CONFIG = $(BUILD_DIR)/poppler-sharp.dll.config
 PDFMOD_EXE_MDB = $(BUILD_DIR)/PdfMod.exe.mdb
 PDFMOD = $(BUILD_DIR)/pdfmod
 
-$(eval $(call emit-deploy-target,POPPLER_SHARP_DLL))
-$(eval $(call emit-deploy-target,POPPLER_SHARP_DLL_CONFIG))
 $(eval $(call emit-deploy-wrapper,PDFMOD,pdfmod,x))
 
 
