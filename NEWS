@@ -5,7 +5,7 @@ Version 0.6 - Aug ?, 2009
 =========================
 
 Contributors:
-Łukasz Jernaś, Sandy Armstrong, Igor Vatavuk
+Łukasz Jernaś, Sandy Armstrong, Igor Vatavuk, Bertrand Lorentz
 
 Features:
 * Open in Viewer action that launches the default app
@@ -18,6 +18,8 @@ Bugs Fixed:
 * Does a better job of cleaning up tmp files
 * Fix bug with installing to custom prefix
 * Fix some zoom inconsistencies
+* Got rid of bundled binaries;
+    Hyena from http://gitorious.org/hyena is build dep
 
 =========================
 Version 0.5 - Aug 7, 2009
