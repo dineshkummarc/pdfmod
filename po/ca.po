@@ -1,0 +1,329 @@
+# Pdf Mod UI Catalan Translation.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the PDF Mod package.
+# Andreu Correa Casablanca <castarco@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pdf Mod 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-17 13:49+0200\n"
+"PO-Revision-Date: 2009-08-17 13:50+0200\n"
+"Last-Translator: Andreu Correa Casablanca <castarco@gmail.com >\n"
+"Language-Team: Català <gnome@llistes.softcatala.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "Modificador de fitxers PDF"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Podeu suprimir, extreure i capgirar pàgines en documents PDF"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "Es mou {1}"
+msgstr[1] "Es mouen {1}"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "S'ha produït un error en provar de desfer un moviment de pàgines"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "S'ha produït un error en provar de moure pàgines"
+
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "S'ha produït un error en provar de suprimir pàgines del document"
+
+#: ../src/PdfMod/Gui/Actions.cs:46
+msgid "Open a document"
+msgstr "Obre un document"
+
+#: ../src/PdfMod/Gui/Actions.cs:47
+msgid "_Insert From..."
+msgstr "_Insereix des de..."
+
+#: ../src/PdfMod/Gui/Actions.cs:47
+msgid "Insert pages from another document"
+msgstr "Insereix pàgines d'un altre document"
+
+#: ../src/PdfMod/Gui/Actions.cs:48
+msgid "Save changes to this document, overwriting the existing file"
+msgstr ""
+"Desa els canvis realitzats al document, se sobreescriurà el fitxer existent"
+
+#: ../src/PdfMod/Gui/Actions.cs:49
+msgid "Save this document to a new file"
+msgstr "Desa aquest document en un fitxer nou"
+
+#: ../src/PdfMod/Gui/Actions.cs:51
+msgid "_File"
+msgstr "_Fitxer"
+
+#: ../src/PdfMod/Gui/Actions.cs:52
+msgid "Recent _Files"
+msgstr "_Fitxers Recents"
+
+#: ../src/PdfMod/Gui/Actions.cs:56
+msgid "Rotate Right"
+msgstr "Gira a la dreta"
+
+#: ../src/PdfMod/Gui/Actions.cs:56
+msgid "Rotate right"
+msgstr "Gira a la dreta"
+
+#: ../src/PdfMod/Gui/Actions.cs:57
+msgid "Rotate Left"
+msgstr "Gira a l'esquerra"
+
+#: ../src/PdfMod/Gui/Actions.cs:57
+msgid "Rotate left"
+msgstr "Gira a l'esquerra"
+
+#: ../src/PdfMod/Gui/Actions.cs:58
+msgid "Export Images"
+msgstr "Exporta imatges"
+
+#: ../src/PdfMod/Gui/Actions.cs:58
+msgid "Save all images in this document to a new folder"
+msgstr ""
+"Desa totes les imatges que hi ha en aquest document en una carpeta nova"
+
+#: ../src/PdfMod/Gui/Actions.cs:60
+msgid "_Edit"
+msgstr "_Edita"
+
+#: ../src/PdfMod/Gui/Actions.cs:62
+msgid "Select Even Pages"
+msgstr "Sel·lecciona les pàgines parelles"
+
+#: ../src/PdfMod/Gui/Actions.cs:63
+msgid "Select Odd Pages"
+msgstr "Sel·lecciona les pàgines senars"
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "Select Matching..."
+msgstr "Sel·lecciona per coincidència..."
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "_View"
+msgstr "_Visualitza"
+
+#: ../src/PdfMod/Gui/Actions.cs:72
+msgid "_Help"
+msgstr "A_juda"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "_Contents"
+msgstr "_Continguts"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Open in Viewer"
+msgstr "Obre en el visualitzador"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Open in viewer"
+msgstr "Obre en el visualitzador"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "View and edit the title, keywords, and more for this document"
+msgstr ""
+"Visualitza el document i edita'n el títol, les paraules clau i d'altres dades"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
+msgid "Toolbar"
+msgstr "Barra d'eines"
+
+#: ../src/PdfMod/Gui/Actions.cs:155
+msgid "_Undo"
+msgstr "_Desfer"
+
+#: ../src/PdfMod/Gui/Actions.cs:156
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Desfer {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:160
+msgid "_Redo"
+msgstr "_Torna a fer"
+
+#: ../src/PdfMod/Gui/Actions.cs:161
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Torna a fer {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:169
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Suprimeix la pàgina"
+msgstr[1] "Suprimeix les {0} pàgines"
+
+#: ../src/PdfMod/Gui/Actions.cs:172
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Suprimeix la pàgina sel·leccionada"
+msgstr[1] "Suprimeix les pàgines {0} sel·leccionades"
+
+#: ../src/PdfMod/Gui/Actions.cs:175
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Extreu la pàgina"
+msgstr[1] "Extreu les {0} pàgines"
+
+#: ../src/PdfMod/Gui/Actions.cs:178
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Extreu la pàgina sel·leccionada"
+msgstr[1] "Extreu les {0} pàgines sel·leccionades"
+
+#: ../src/PdfMod/Gui/Actions.cs:186 ../src/PdfMod/Gui/Actions.cs:215
+msgid "Select PDF"
+msgstr "Sel·lecciona el PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:187
+msgid "PDF Documents"
+msgstr "Documents PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:188 ../src/PdfMod/Gui/Actions.cs:217
+#: ../src/PdfMod/Gui/Actions.cs:247
+msgid "All Files"
+msgstr "Tots els fitxers"
+
+#: ../src/PdfMod/Gui/Actions.cs:241
+msgid "Save as..."
+msgstr "Anomena i desa..."
+
+#: ../src/PdfMod/Gui/Actions.cs:382
+msgid "Error opening help"
+msgstr "S'ha produït un error en obrir l'ajuda"
+
+#: ../src/PdfMod/Gui/Actions.cs:383
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Voleu obrir l'ajuda en línia del PDF Mod?"
+
+#: ../src/PdfMod/Gui/Actions.cs:404
+msgid "Visit Website"
+msgstr "Visita el lloc web"
+
+#: ../src/PdfMod/Gui/Actions.cs:406
+msgid "Primary Development:"
+msgstr "Desenvolupament inicial:"
+
+#: ../src/PdfMod/Gui/Actions.cs:409
+msgid "Contributors:"
+msgstr "Contribuïdors:"
+
+#: ../src/PdfMod/Gui/Actions.cs:422
+msgid "translator-credits"
+msgstr "Andreu Correa Casablanca <castarco@gmail.com>"
+
+#: ../src/PdfMod/Gui/Client.cs:64
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/Gui/Client.cs:171
+msgid "Save the changes made to this document?"
+msgstr "Voleu desar els canvis realitzats en aquest document?"
+
+#: ../src/PdfMod/Gui/Client.cs:174
+msgid "Close _Without Saving"
+msgstr "Tancar _sense desar"
+
+#: ../src/PdfMod/Gui/Client.cs:203
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Continua i obre el document {0} en una finestra separada?"
+msgstr[1] "Continua i obre els documents {0} en finestres separades?"
+
+#: ../src/PdfMod/Gui/Client.cs:207
+msgid "Open _First"
+msgstr "Obre _primer"
+
+#: ../src/PdfMod/Gui/Client.cs:208
+msgid "Open _All"
+msgstr "Obre'ls _tots"
+
+#: ../src/PdfMod/Gui/Client.cs:236
+msgid "Loading document..."
+msgstr "S'està carregant el document..."
+
+#: ../src/PdfMod/Gui/Client.cs:259
+msgid "Error Loading Document"
+msgstr "S'ha produït un error en carregar el document"
+
+#: ../src/PdfMod/Gui/Client.cs:260
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "S'ha produit un error en carregar {0}"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:287
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (originalment {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:292
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} pàgina"
+msgstr[1] "{0} pàgines"
+
+#: ../src/PdfMod/Gui/Client.cs:308
+msgid "Document is Encrypted"
+msgstr "El document és encriptat"
+
+#: ../src/PdfMod/Gui/Client.cs:309
+msgid "Enter the document's password to open it:"
+msgstr "Introdueix la contrasenya del document per obrir-lo:"
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:26
+msgid "Select Matching"
+msgstr "Sel·lecciona per coincidència"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:48
+msgid "_Title:"
+msgstr "_Títol"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:49
+msgid "_Author:"
+msgstr "_Autor:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:50
+msgid "_Keywords:"
+msgstr "Paraules _clau:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:51
+msgid "_Subject:"
+msgstr "_Assumpte:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:71
+msgid "_Revert Properties"
+msgstr "_Reverteix les propietats"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:72
+msgid "Change the document's properties back to the original values"
+msgstr ""
+"Canvia les propietats del document per tornar-les als seus valors originals"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:77
+msgid "_Close"
+msgstr "_Tanca"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:78
+msgid "Hide the document's properties"
+msgstr "Oculta les propietats del document"
