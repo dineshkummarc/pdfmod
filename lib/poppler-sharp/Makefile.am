@@ -116,7 +116,6 @@ POPPLER_SHARP_DLL_MDB = $(BUILD_DIR)/poppler-sharp.dll.mdb
 
 $(eval $(call emit-deploy-target,POPPLER_SHARP_DLL))
 $(eval $(call emit-deploy-target,POPPLER_SHARP_DLL_CONFIG))
-$(eval $(call emit-deploy-wrapper,PDFMOD,pdfmod,x))
 
 
 $(eval $(call emit_resgen_targets))

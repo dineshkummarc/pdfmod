@@ -37,6 +37,7 @@ EXTRA_DIST = \
 	HACKING
 
 CLEANFILES = \
+	bin/* \
 	intltool-extract \
 	intltool-update \
 	intltool-merge
