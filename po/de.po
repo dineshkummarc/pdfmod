@@ -1,376 +1,346 @@
 # German translation for PDF Mod, a PDF modifier
 # Copyright (C) 2009
 # This file is distributed under the same license as the PDF Mod package.
-# Benjamin Elbers <elbersb@gmail.com>, 2009
+# Benjamin Elbers <elbersb@gmail.com>, 2009.
+# Mario Blättermann <mariobl@gnome.org>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.2\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=pdfmod&component=general\n"
-"POT-Creation-Date: 2009-08-07 02:50+0000\n"
-"PO-Revision-Date: 2009-07-29 09:50+0100\n"
-"Last-Translator: Benjamin Elbers <elbersb@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-17 21:00+0200\n"
+"PO-Revision-Date: 2009-08-17 21:18+0100\n"
+"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../data/pdfmod.desktop.in.h:1
+#: ../data/pdfmod.desktop.in.in.h:1
 msgid "PDF Modifier"
-msgstr "PDF Bearbeitung"
+msgstr "PDF-Bearbeitung"
 
-#: ../data/pdfmod.desktop.in.h:2
+#: ../data/pdfmod.desktop.in.in.h:2
 msgid "Remove, extract, and rotate pages in PDF documents"
 msgstr "Seiten in PDF-Dokumenten entfernen, extrahieren und drehen"
 
 #. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
-#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:24
-#, fuzzy, csharp-format
-#| msgid "Page {1}"
-#| msgid_plural "Page {1}"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
 msgid "Move {1}"
 msgid_plural "Move {1}"
-msgstr[0] "Seite {1}"
-msgstr[1] "Seite {1}"
+msgstr[0] "{1}  verschieben"
+msgstr[1] "{1} verschieben"
 
 # not sure. what does it mean?
-#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:31
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
 msgid "Error trying to unmove pages"
-msgstr "Fehler beim Zurückverschieben von Seiten"
+msgstr "Fehler beim Versuch, Seiten zurück zu verschieben"
 
-#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:41
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
 msgid "Error trying to move pages"
-msgstr "Fehler beim Verschieben von Seiten"
+msgstr "Fehler beim Versuch, Seiten zu verschieben"
 
-#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "Fehler beim Löschen von Seiten aus dem Dokument"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:45
+#: ../src/PdfMod/Gui/Actions.cs:46
 msgid "Open a document"
 msgstr "Ein Dokument öffnen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+#: ../src/PdfMod/Gui/Actions.cs:47
 msgid "_Insert From..."
-msgstr "_Einfügen aus..."
+msgstr "_Einfügen aus …"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
-#, fuzzy
-#| msgid "Save the changes made to this document?"
+#: ../src/PdfMod/Gui/Actions.cs:47
 msgid "Insert pages from another document"
-msgstr "Veränderungen in diesem Dokument speichern?"
+msgstr "Seiten aus einem anderen Dokument einfügen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+#: ../src/PdfMod/Gui/Actions.cs:48
 msgid "Save changes to this document, overwriting the existing file"
 msgstr "Veränderungen speichern, bestehendes Dokument überschreiben"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:48
+#: ../src/PdfMod/Gui/Actions.cs:49
 msgid "Save this document to a new file"
-msgstr "Dokument in eine neue Datei speichern"
+msgstr "Dieses Dokument in eine neue Datei speichern"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:50
+#: ../src/PdfMod/Gui/Actions.cs:51
 msgid "_File"
 msgstr "_Datei"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:51
+#: ../src/PdfMod/Gui/Actions.cs:52
 msgid "Recent _Files"
-msgstr "Zuletzt bearbeitete _Dokumente"
+msgstr "Zuletzt geöffnete _Dateien"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+#: ../src/PdfMod/Gui/Actions.cs:56
 msgid "Rotate Right"
 msgstr "Nach rechts drehen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+#: ../src/PdfMod/Gui/Actions.cs:56
 msgid "Rotate right"
 msgstr "Nach rechts drehen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+#: ../src/PdfMod/Gui/Actions.cs:57
 msgid "Rotate Left"
 msgstr "Nach links drehen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+#: ../src/PdfMod/Gui/Actions.cs:57
 msgid "Rotate left"
 msgstr "Nach links drehen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
-#, fuzzy
-#| msgid "Export Images..."
+#: ../src/PdfMod/Gui/Actions.cs:58
 msgid "Export Images"
-msgstr "Bilder exportieren..."
+msgstr "Bilder exportieren"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
-#, fuzzy
-#| msgid "Save this document to a new file"
+#: ../src/PdfMod/Gui/Actions.cs:58
 msgid "Save all images in this document to a new folder"
-msgstr "Dokument in eine neue Datei speichern"
+msgstr "Alle Bilder in diesem Dokument in einem neuen Ordner speichern"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:59
+#: ../src/PdfMod/Gui/Actions.cs:60
 msgid "_Edit"
 msgstr "_Bearbeiten"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:61
+#: ../src/PdfMod/Gui/Actions.cs:62
 msgid "Select Even Pages"
-msgstr "Seiten mit _geraden Nummern auswählen"
+msgstr "Seiten mit geraden Nummern auswählen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+#: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Select Odd Pages"
-msgstr "Seiten mit _ungeraden Nummern auswählen"
+msgstr "Seiten mit ungeraden Nummern auswählen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:63
+#: ../src/PdfMod/Gui/Actions.cs:64
 msgid "Select Matching..."
-msgstr "Passende Seiten auswählen..."
+msgstr "Passende Seiten auswählen …"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:67
+#: ../src/PdfMod/Gui/Actions.cs:68
 msgid "_View"
-msgstr "_Betrachten"
+msgstr "_Ansicht"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:71
+#: ../src/PdfMod/Gui/Actions.cs:72
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:72
+#: ../src/PdfMod/Gui/Actions.cs:73
 msgid "_Contents"
-msgstr "_Inhalt"
+msgstr "_Inhalte"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:79
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Open in Viewer"
+msgstr "Im Betrachter öffnen"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Open in viewer"
+msgstr "Im Betrachter öffnen"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
 msgid "View and edit the title, keywords, and more for this document"
-msgstr "Titel, Schlüsselwörter usw. betrachten und bearbeiten"
+msgstr ""
+"Titel, Schlüsselwörter usw. für dieses Dokument betrachten und bearbeiten"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:81
+#: ../src/PdfMod/Gui/Actions.cs:84
 msgid "Toolbar"
-msgstr "Toolbar"
+msgstr "Werkzeugleiste"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:152
+#: ../src/PdfMod/Gui/Actions.cs:155
 msgid "_Undo"
 msgstr "_Rückgängig"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:153
+#: ../src/PdfMod/Gui/Actions.cs:156
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Rückgängig {0}"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:157
+#: ../src/PdfMod/Gui/Actions.cs:160
 msgid "_Redo"
 msgstr "_Wiederholen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:158
-#, fuzzy, csharp-format
-#| msgid "Page {0}"
+#: ../src/PdfMod/Gui/Actions.cs:161
+#, csharp-format
 msgid "Redo {0}"
-msgstr "Seite {0}"
+msgstr "{0} wiederholen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:166
+#: ../src/PdfMod/Gui/Actions.cs:169
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Seite entfernen"
 msgstr[1] "{0} Seiten entfernen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:169
+#: ../src/PdfMod/Gui/Actions.cs:172
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "Ausgewählte Seite entfernen"
 msgstr[1] "{0} ausgewählte Seiten entfernen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:175
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "Seite extrahieren"
 msgstr[1] "{0} Seiten extrahieren"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:175
+#: ../src/PdfMod/Gui/Actions.cs:178
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Ausgewählte Seite extrahieren"
 msgstr[1] "{0} ausgewählte Seiten extrahieren"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:183
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:202
+#: ../src/PdfMod/Gui/Actions.cs:186 ../src/PdfMod/Gui/Actions.cs:215
 msgid "Select PDF"
 msgstr "PDF auswählen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:185
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:204
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:233
+#: ../src/PdfMod/Gui/Actions.cs:187
+msgid "PDF Documents"
+msgstr "PDF-Dokumente"
+
+#: ../src/PdfMod/Gui/Actions.cs:188 ../src/PdfMod/Gui/Actions.cs:217
+#: ../src/PdfMod/Gui/Actions.cs:247
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:227
+#: ../src/PdfMod/Gui/Actions.cs:241
 msgid "Save as..."
-msgstr "Speichern unter..."
+msgstr "Speichern unter …"
 
-#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:292
-#, csharp-format
-msgid "Page {1}"
-msgid_plural "Page {1}"
-msgstr[0] "Seite {1}"
-msgstr[1] "Seite {1}"
-
-#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
-#. eg Pages 3 - 7
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:296
-#, csharp-format
-msgid "Pages {1} - {2}"
-msgid_plural "Pages {1} - {2}"
-msgstr[0] "Seiten {1} - {2}"
-msgstr[1] "Seiten {1} - {2}"
-
-#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:301
-#, csharp-format
-msgid "Pages {1}"
-msgid_plural "Pages {1}"
-msgstr[0] "Seiten {1}"
-msgstr[1] "Seiten {1}"
-
-#. Translators: {0} is the number of pages, eg 12 Pages
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:304
-#, fuzzy, csharp-format
-#| msgid "{0} Page"
-#| msgid_plural "{0} Pages}"
-msgid "{0} Page"
-msgid_plural "{0} Pages"
-msgstr[0] "{0} Seite"
-msgstr[1] "{1} Seiten"
-
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:392
+#: ../src/PdfMod/Gui/Actions.cs:382
 msgid "Error opening help"
 msgstr "Fehler beim Öffnen der Hilfe"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:393
+#: ../src/PdfMod/Gui/Actions.cs:383
 msgid "Would you like to open PDF Mod's online documentation?"
-msgstr "Möchten Sie PDF Mods Online-Dokumentation öffnen?"
+msgstr "Möchten Sie die Online-Dokumentation von PDF Mod öffnen?"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:414
+#: ../src/PdfMod/Gui/Actions.cs:404
 msgid "Visit Website"
 msgstr "Website besuchen"
 
-#: ../src/PdfMod/PdfMod/GlobalActions.cs:428
+#: ../src/PdfMod/Gui/Actions.cs:406
+msgid "Primary Development:"
+msgstr "Hauptentwickler:"
+
+#: ../src/PdfMod/Gui/Actions.cs:409
+msgid "Contributors:"
+msgstr "Mitwirkende:"
+
+#: ../src/PdfMod/Gui/Actions.cs:422
 msgid "translator-credits"
-msgstr "Benjamin Elbers <elbersb@gmail.com>, 2009"
+msgstr ""
+"Benjamin Elbers <elbersb@gmail.com>\n"
+"Mario Blättermann <mariobl@gnome.org>"
 
-#: ../src/PdfMod/PdfMod/PdfListStore.cs:55
-#: ../src/PdfMod/PdfMod/PdfListStore.cs:63
-#, csharp-format
-msgid "Page {0}"
-msgstr "Seite {0}"
-
-#: ../src/PdfMod/PdfMod/PdfMod.cs:68
+#: ../src/PdfMod/Gui/Client.cs:64
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:162
+#: ../src/PdfMod/Gui/Client.cs:171
 msgid "Save the changes made to this document?"
 msgstr "Veränderungen in diesem Dokument speichern?"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:165
+#: ../src/PdfMod/Gui/Client.cs:174
 msgid "Close _Without Saving"
-msgstr "Schließen _ohne Speichern"
+msgstr "S_chließen, ohne zu speichern"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:198
+#: ../src/PdfMod/Gui/Client.cs:203
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "Fortsetzen und {0} Dokument in einem getrennten Fenster öffnen?"
 msgstr[1] "Fortsetzen und alle {0} Dokumente in getrennten Fenstern öffnen?"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:202
+#: ../src/PdfMod/Gui/Client.cs:207
 msgid "Open _First"
 msgstr "Das _Erste öffnen"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:203
+#: ../src/PdfMod/Gui/Client.cs:208
 msgid "Open _All"
 msgstr "_Alle öffnen"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:236
-#, fuzzy
-#| msgid "Error Loading Document"
+#: ../src/PdfMod/Gui/Client.cs:236
 msgid "Loading document..."
-msgstr "Fehler beim Laden des Dokuments"
+msgstr "Dokument wird geladen …"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:263
+#: ../src/PdfMod/Gui/Client.cs:259
 msgid "Error Loading Document"
 msgstr "Fehler beim Laden des Dokuments"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:264
+#: ../src/PdfMod/Gui/Client.cs:260
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Fehler beim Laden von {0}"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/PdfMod/PdfMod.cs:291
+#: ../src/PdfMod/Gui/Client.cs:287
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (original {1})"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:296
-#, fuzzy, csharp-format
-#| msgid "{0} Page"
-#| msgid_plural "{0} Pages}"
+#: ../src/PdfMod/Gui/Client.cs:292
+#, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} Seite"
 msgstr[1] "{1} Seiten"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:312
+#: ../src/PdfMod/Gui/Client.cs:308
 msgid "Document is Encrypted"
 msgstr "Dokument ist verschlüsselt"
 
-#: ../src/PdfMod/PdfMod/PdfMod.cs:313
+#: ../src/PdfMod/Gui/Client.cs:309
 msgid "Enter the document's password to open it:"
 msgstr "Geben Sie das Passwort des Dokuments ein, um es zu öffnen:"
 
 # not sure. where is this string used?
-#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:26
 msgid "Select Matching"
 msgstr "Passende auswählen"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:46
-#, fuzzy
-#| msgid "_File"
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:48
 msgid "_Title:"
-msgstr "_Datei"
+msgstr "_Titel:"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:47
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:49
 msgid "_Author:"
 msgstr "_Autor:"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:48
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:50
 msgid "_Keywords:"
-msgstr "_Schlüsselwörter"
+msgstr "_Schlüsselwörter:"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:49
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:51
 msgid "_Subject:"
-msgstr "_Thema:"
+msgstr "_Betreff:"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:69
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:71
 msgid "_Revert Properties"
 msgstr "_Eigenschaften zurücksetzen"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:70
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:72
 msgid "Change the document's properties back to the original values"
 msgstr "Eigenschaften des Dokumentes zu den vorherigen Werten ändern"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:75
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:77
 msgid "_Close"
 msgstr "S_chließen"
 
-#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:76
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:78
 msgid "Hide the document's properties"
 msgstr "Eigenschaften des Dokuments verbergen"
 
-#~ msgid "/Subtype"
-#~ msgstr "/Untertyp"
+#~ msgid "Page {1}"
+#~ msgid_plural "Page {1}"
+#~ msgstr[0] "Seite {1}"
+#~ msgstr[1] "Seite {1}"
 
-#~ msgid "{0} - Images for {1}"
-#~ msgstr "{0} - Bilder aus {1}"
+#~ msgid "Pages {1} - {2}"
+#~ msgid_plural "Pages {1} - {2}"
+#~ msgstr[0] "Seiten {1} - {2}"
+#~ msgstr[1] "Seiten {1} - {2}"
 
-#~ msgid "Loading {0}"
-#~ msgstr "Laden von {0}"
-
+#~ msgid "Pages {1}"
+#~ msgid_plural "Pages {1}"
+#~ msgstr[0] "Seiten {1}"
+#~ msgstr[1] "Seiten {1}"
