@@ -8,7 +8,7 @@ if ENABLE_RELEASE
  SUBDIRS =  lib/PdfSharp lib/poppler-sharp src po docs data
 endif
 
-INSTALL_DIR_RESOLVED = $(firstword $(subst , $(DEFAULT_INSTALL_DIR), $(INSTALL_DIR)))
+INSTALL_DIR_RESOLVED = $(firstword $(subst , $(pkglibdir), $(INSTALL_DIR)))
 
 run:
 	cd bin; mono --debug PdfMod.exe;
@@ -22,7 +22,10 @@ install-data-hook:
 	done;
 
 uninstall-hook:
-	for ASM in "$(BUNDLE_ASSEMBLIES) $(BUNDLE_FILES)"; do \
+	for ASM in $(BUNDLE_ASSEMBLIES); do \
+		rm -f $(DESTDIR)$(INSTALL_DIR_RESOLVED)/`basename $$ASM`; \
+	done;
+	for ASM in $(BUNDLE_FILES); do \
 		rm -f $(DESTDIR)$(INSTALL_DIR_RESOLVED)/`basename $$ASM`; \
 	done;
 
