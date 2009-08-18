@@ -115,6 +115,6 @@ $(ASSEMBLY_MDB): $(ASSEMBLY)
 
 $(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
 	mkdir -p $(shell dirname $(ASSEMBLY))
-	cp -t $(BUILD_DIR) $(BUNDLE_ASSEMBLIES)
-	cp -t $(BUILD_DIR) $(BUNDLE_FILES)
+	cp $(BUNDLE_ASSEMBLIES) $(BUILD_DIR)
+	cp $(BUNDLE_FILES) $(BUILD_DIR)
 	$(ASSEMBLY_COMPILER_COMMAND) $(ASSEMBLY_COMPILER_FLAGS) -out:$(ASSEMBLY) -target:$(COMPILE_TARGET) $(build_sources_embed) $(build_resources_embed) $(build_references_ref)
