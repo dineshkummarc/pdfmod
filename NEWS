@@ -17,7 +17,7 @@ Bugs Fixed:
 * Fix bug with installing to custom prefix
 * Fix some zoom inconsistencies
 * Got rid of bundled binaries;
-    Hyena from http://gitorious.org/hyena is build dep
+    Hyena from http://git.gnome.org/cgit/hyena is build dep
 
 =========================
 Version 0.5 - Aug 7, 2009
