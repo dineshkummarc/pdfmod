@@ -35,7 +35,8 @@ AL=al2
 SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
 
 PROGRAMFILES = \
-	$(PDFMOD_EXE_MDB)  
+	$(PDFMOD_EXE_MDB) \
+	$(POPPLER_SHARP_DLL_CONFIG)
 
 BINARIES = \
 	$(PDFMOD)  
@@ -99,6 +100,7 @@ include $(top_srcdir)/Makefile.include
 PDFSHARP_DLL = $(BUILD_DIR)/PdfSharp.dll
 PDFSHARP_DLL_MDB = $(BUILD_DIR)/PdfSharp.dll.mdb
 POPPLER_SHARP_DLL = $(BUILD_DIR)/poppler-sharp.dll
+POPPLER_SHARP_DLL_CONFIG = $(BUILD_DIR)/poppler-sharp.dll.config
 PDFMOD_EXE_MDB = $(BUILD_DIR)/PdfMod.exe.mdb
 PDFMOD = $(BUILD_DIR)/pdfmod
 
