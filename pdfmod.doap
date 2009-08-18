@@ -19,11 +19,11 @@
   <!-- Current Releases -->
   <release>
     <Version>
-      <name>0.3</name>
+      <name>0.6</name>
       <branch>stable</branch>
-      <created>2009-07-27</created>
-      <revision>0.3</revision>
-      <file-release rdf:resource="http://banshee-project.org/~gburt/pdfmod/pdfmod-0.3.tar.bz2" />
+      <created>2009-08-18</created>
+      <revision>0.6</revision>
+      <file-release rdf:resource="http://ftp.gnome.org/pub/GNOME/sources/pdfmod/" />
     </Version>
   </release>
 
