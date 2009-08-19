@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{66F96404-B9F5-435D-AC89-769246F65FF4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>poppler-sharp</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp poppler-sharp/poppler-sharp.dll.config ${TargetDir}" workingdir="${ProjectDir}" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp poppler-sharp/poppler-sharp.dll.config ${TargetDir}" workingdir="${ProjectDir}" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="poppler-sharp\generated\Action.cs" />
+    <Compile Include="poppler-sharp\generated\ActionAny.cs" />
+    <Compile Include="poppler-sharp\generated\ActionGotoDest.cs" />
+    <Compile Include="poppler-sharp\generated\ActionGotoRemote.cs" />
+    <Compile Include="poppler-sharp\generated\ActionLaunch.cs" />
+    <Compile Include="poppler-sharp\generated\ActionMovie.cs" />
+    <Compile Include="poppler-sharp\generated\ActionNamed.cs" />
+    <Compile Include="poppler-sharp\generated\ActionType.cs" />
+    <Compile Include="poppler-sharp\generated\ActionUri.cs" />
+    <Compile Include="poppler-sharp\generated\Annot.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotCalloutLine.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotExternalDataType.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotFlag.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotFreeText.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotFreeTextQuadding.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotMapping.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotMarkup.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotMarkupReplyType.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotText.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotTextState.cs" />
+    <Compile Include="poppler-sharp\generated\AnnotType.cs" />
+    <Compile Include="poppler-sharp\generated\Attachment.cs" />
+    <Compile Include="poppler-sharp\generated\AttachmentSaveFunc.cs" />
+    <Compile Include="poppler-sharp\generated\Backend.cs" />
+    <Compile Include="poppler-sharp\generated\Color.cs" />
+    <Compile Include="poppler-sharp\generated\Dest.cs" />
+    <Compile Include="poppler-sharp\generated\DestType.cs" />
+    <Compile Include="poppler-sharp\generated\Document.cs" />
+    <Compile Include="poppler-sharp\generated\Error.cs" />
+    <Compile Include="poppler-sharp\generated\FontInfo.cs" />
+    <Compile Include="poppler-sharp\generated\FontsIter.cs" />
+    <Compile Include="poppler-sharp\generated\FontType.cs" />
+    <Compile Include="poppler-sharp\generated\FormButtonType.cs" />
+    <Compile Include="poppler-sharp\generated\FormChoiceType.cs" />
+    <Compile Include="poppler-sharp\generated\FormField.cs" />
+    <Compile Include="poppler-sharp\generated\FormFieldMapping.cs" />
+    <Compile Include="poppler-sharp\generated\FormFieldType.cs" />
+    <Compile Include="poppler-sharp\generated\FormTextType.cs" />
+    <Compile Include="poppler-sharp\generated\Global.cs" />
+    <Compile Include="poppler-sharp\generated\ImageMapping.cs" />
+    <Compile Include="poppler-sharp\generated\IndexIter.cs" />
+    <Compile Include="poppler-sharp\generated\LinkMapping.cs" />
+    <Compile Include="poppler-sharp\generated\Orientation.cs" />
+    <Compile Include="poppler-sharp\generated\Page.cs" />
+    <Compile Include="poppler-sharp\generated\PageLayout.cs" />
+    <Compile Include="poppler-sharp\generated\PageMode.cs" />
+    <Compile Include="poppler-sharp\generated\PageTransition.cs" />
+    <Compile Include="poppler-sharp\generated\PageTransitionAlignment.cs" />
+    <Compile Include="poppler-sharp\generated\PageTransitionDirection.cs" />
+    <Compile Include="poppler-sharp\generated\PageTransitionType.cs" />
+    <Compile Include="poppler-sharp\generated\PopplerSharp.AttachmentSaveFuncNative.cs" />
+    <Compile Include="poppler-sharp\generated\PSFile.cs" />
+    <Compile Include="poppler-sharp\generated\Rectangle.cs" />
+    <Compile Include="poppler-sharp\generated\SelectionStyle.cs" />
+    <Compile Include="poppler-sharp\generated\ViewerPreferences.cs" />
+    <Compile Include="poppler-sharp\Document.cs" />
+    <Compile Include="poppler-sharp\generated\Layer.cs" />
+    <Compile Include="poppler-sharp\generated\LayersIter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sources\poppler-sharp.sources" />
+  </ItemGroup>
+</Project>

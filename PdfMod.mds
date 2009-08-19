@@ -1,24 +1,28 @@
 <Combine fileversion="2.0">
   <Policies>
-    <DotNetNamingPolicy DirectoryNamespaceAssociation="Flat" ResourceNamePolicy="FileFormatDefault" />
     <StandardHeader Text="" inheritsSet="MITX11License" />
+    <DotNetNamingPolicy DirectoryNamespaceAssociation="Flat" ResourceNamePolicy="FileFormatDefault" />
   </Policies>
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="PdfMod" configuration="Debug" />
       <Entry build="True" name="PdfSharp" configuration="Debug" />
+      <Entry build="True" name="poppler-sharp" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="PdfMod" configuration="Release" />
       <Entry build="True" name="PdfSharp" configuration="Release" />
+      <Entry build="True" name="poppler-sharp" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="PdfMod" single="True">
     <Execute type="None" entry="PdfMod" />
     <Execute type="None" entry="PdfSharp" />
+    <Execute type="None" entry="poppler-sharp" />
   </StartMode>
   <Entries>
     <Entry filename="src/PdfMod.mdp" />
     <Entry filename="lib/PdfSharp/PdfSharp.csproj" />
+    <Entry filename="lib/poppler-sharp/poppler-sharp.csproj" />
   </Entries>
 </Combine>
