@@ -9,8 +9,9 @@ ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-
 ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
-PROJECT_REFERENCES = \
-	../bin/PdfSharp.dll
+PROJECT_REFERENCES =  \
+	../bin/PdfSharp.dll \
+	../bin/poppler-sharp.dll
 BUILD_DIR = ../bin
 
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
@@ -24,7 +25,8 @@ ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
 PROJECT_REFERENCES =  \
-	../bin/PdfSharp.dll
+	../bin/PdfSharp.dll \
+	../bin/poppler-sharp.dll
 BUILD_DIR = ../bin
 
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
@@ -84,10 +86,8 @@ REFERENCES =  \
 	-pkg:glib-sharp-2.0 \
 	-pkg:gnome-sharp-2.0 \
 	-pkg:gtk-sharp-2.0 \
-	-r:$(PDFSHARP_DLL) \
-	-r:$(POPPLER_SHARP_DLL) \
-	-r:$(BUILD_DIR)/Hyena.dll \
-	-r:$(BUILD_DIR)/Hyena.Gui.dll \
+	-pkg:hyena \
+	-pkg:hyena.gui \
 	System \
 	System.Core
 

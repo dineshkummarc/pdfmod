@@ -29,6 +29,9 @@ uninstall-hook:
 		rm -f $(DESTDIR)$(INSTALL_DIR_RESOLVED)/`basename $$ASM`; \
 	done;
 
+clean-local:
+	rm -rf $(top_builddir)/bin
+
 EXTRA_DIST = \
 	lib/poppler-sharp/poppler-sharp/poppler-sharp.dll.config \
 	gnome-doc-utils.make \
@@ -40,7 +43,6 @@ EXTRA_DIST = \
 	HACKING
 
 CLEANFILES = \
-	bin/* \
 	intltool-extract \
 	intltool-update \
 	intltool-merge
