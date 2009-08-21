@@ -245,6 +245,7 @@ namespace PdfMod.Gui
 
                     ThreadAssist.ProxyToMain (delegate {
                         IconView.SetDocument (Document);
+                        RecentManager.Default.AddItem (Document.Uri);
                         Document.Changed += UpdateForDocument;
                         UpdateForDocument ();
                         OnDocumentLoaded ();
