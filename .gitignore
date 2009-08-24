@@ -47,3 +47,7 @@ gnome-doc-utils.make
 docs/*/.xml2po.mo
 docs/*/pdfmod.xml
 po/.intltool-merge-cache
+poppler-api.xml
+poppler-sharp.dll
+*.gz
+*.bz2
