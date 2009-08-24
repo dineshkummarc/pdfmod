@@ -414,7 +414,9 @@ namespace PdfMod.Gui
                     "\tIgor Vatavuk",
                     "\tBertrand Lorentz",
                     "\tMichael McKinley",
-                    "\tŁukasz Jernaś"
+                    "\tŁukasz Jernaś",
+                    "\tRomain Tartière",
+                    "\tRobert Dyer"
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },

@@ -1,4 +1,19 @@
 ==========================
+Version 0.7 - Aug ??, 2009
+==========================
+
+Contributors:
+Romain Tartière, Bertrand Lorentz, Robert Dyer
+
+Features:
+*
+
+Bugs Fixed:
+* Build fixes for *bsd
+* Update recent files list after opening a document
+* libdir expansion issue fixed in Hyena
+
+==========================
 Version 0.6 - Aug 18, 2009
 ==========================
 
