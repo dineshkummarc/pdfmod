@@ -254,12 +254,18 @@ namespace PdfMod.Gui
                     Document = null;
                     ThreadAssist.ProxyToMain (delegate {
                         status_label.Text = "";
+                        if (e is System.IO.FileNotFoundException) {
+                            try {
+                                RecentManager.Default.RemoveItem (new Uri(path).AbsoluteUri);
+                            } catch {}
+                        }
                     });
+
                     Hyena.Log.Exception (e);
                     Hyena.Log.Error (
                         Catalog.GetString ("Error Loading Document"),
-                            String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (path ?? "")), true
-                                );
+                        String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (path ?? "")), true
+                    );
                 } finally {
                     lock (this) {
                         loading = false;
