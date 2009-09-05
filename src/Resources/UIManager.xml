@@ -37,6 +37,7 @@
       <separator/>
       <menuitem action="OpenInViewer"/>
       <separator/>
+      <menuitem action="FullScreenView"/>
       <menuitem action="ViewToolbar"/>
     </menu>
     <menu action="HelpMenu">

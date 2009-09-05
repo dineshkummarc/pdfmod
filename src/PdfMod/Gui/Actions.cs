@@ -81,7 +81,8 @@ namespace PdfMod.Gui
             AddImportant (
                 new ToggleActionEntry ("Properties", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
                 new ToggleActionEntry ("ZoomFit", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
-                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, Client.Configuration.ShowToolbar)
+                new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, Client.Configuration.ShowToolbar),
+                new ToggleActionEntry ("FullScreenView", null, Catalog.GetString ("Fullscreen"), "F11", null, OnFullScreenView, false)
             );
 
             this["RotateRight"].IconName = "object-rotate-right";
@@ -208,6 +209,17 @@ namespace PdfMod.Gui
         private void OnOpenInViewer (object o, EventArgs args)
         {
             System.Diagnostics.Process.Start (app.Document.CurrentStateUri);
+        }
+
+        private void OnFullScreenView (object o, EventArgs args)
+        {
+            bool fullscreen = (this["FullScreenView"] as ToggleAction).Active;
+
+            if (fullscreen) {
+                this.app.Window.Fullscreen ();
+            } else {
+                this.app.Window.Unfullscreen ();
+            }
         }
 
         private void OnInsertFrom (object o, EventArgs args)
@@ -416,7 +428,8 @@ namespace PdfMod.Gui
                     "\tMichael McKinley",
                     "\tŁukasz Jernaś",
                     "\tRomain Tartière",
-                    "\tRobert Dyer"
+                    "\tRobert Dyer",
+                    "\tAndreu Correa Casablanca"
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
