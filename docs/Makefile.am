@@ -6,4 +6,4 @@ DOC_ENTITIES =
 DOC_INCLUDES = 
 DOC_FIGURES =
 
-DOC_LINGUAS = de es fr hr pl sv
+DOC_LINGUAS = ca de es fr hr pl sv
