@@ -216,9 +216,9 @@ namespace PdfMod.Gui
             bool fullscreen = (this["FullScreenView"] as ToggleAction).Active;
 
             if (fullscreen) {
-                this.app.Window.Fullscreen ();
+                app.Window.Fullscreen ();
             } else {
-                this.app.Window.Unfullscreen ();
+                app.Window.Unfullscreen ();
             }
         }
 
