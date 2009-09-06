@@ -1,0 +1,344 @@
+# Catalan translation for pdfmod.
+# Copyright (C) 2009 pdfmod's COPYRIGHT HOLDER
+# This file is distributed under the same license as the pdfmod package.
+# Andreu Correa Casablanca <castarco@gmail.com>, 2009.
+#
+# Andreu Correa Casablanca <castarco@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod help\n"
+"POT-Creation-Date: 2009-08-22 10:32+0000\n"
+"PO-Revision-Date: 2009-08-18 18:13+0200\n"
+"Last-Translator: Andreu Correa Casablanca <castarco@gmail.com>\n"
+"Language-Team: Catalan <gnome-dl@llistes.softcatala.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C/pdfmod.xml:6(title)
+msgid "The PDF Mod Manual"
+msgstr "El manual del PDF Mod"
+
+#: C/pdfmod.xml:8(para)
+msgid ""
+"This is the user's manual for PDF Mod, a simple tool for manipulating PDF "
+"documents."
+msgstr ""
+"Aquest es el manual d'usuari del PDF Mod, una eina simple per a manipular "
+"documents PDF."
+
+#: C/pdfmod.xml:10(subtitle)
+msgid "Quick, Easy PDF Modification"
+msgstr "Modificació ràpida i fàcil de PDF"
+
+#: C/pdfmod.xml:12(year)
+msgid "2009"
+msgstr "2009"
+
+#: C/pdfmod.xml:13(holder) C/pdfmod.xml:23(orgname)
+msgid "Novell, Inc."
+msgstr "Novel, Inc."
+
+#: C/pdfmod.xml:16(publishername)
+msgid "GNOME Documentation Project"
+msgstr "Projecte de documentació del GNOME"
+
+#: C/pdfmod.xml:20(firstname)
+msgid "Gabriel"
+msgstr "Gabriel"
+
+#: C/pdfmod.xml:21(surname)
+msgid "Burt"
+msgstr "Burt"
+
+#: C/pdfmod.xml:29(revnumber)
+msgid "0.2"
+msgstr "0.2"
+
+#: C/pdfmod.xml:30(date)
+msgid "2009-07-29"
+msgstr "29-07-2009"
+
+#: C/pdfmod.xml:33(revnumber)
+msgid "0.1"
+msgstr "0.1"
+
+#: C/pdfmod.xml:34(date)
+msgid "2009-07-25"
+msgstr "25-07-2009"
+
+#: C/pdfmod.xml:40(title)
+msgid "Introduction"
+msgstr "Introducció"
+
+#: C/pdfmod.xml:41(para)
+msgid ""
+"PDF Mod is a simple tool for doing basic manipulations of PDF documents."
+msgstr ""
+"El PDF Mod es una eina senzilla per a realitzar manipulacions bàsiques de "
+"documents PDF."
+
+#: C/pdfmod.xml:45(para)
+msgid ""
+"With this tool, you can rotate, remove, or extract pages in a PDF document. "
+"You can also add pages from another document."
+msgstr ""
+"Amb aquesta eina podeu girar, suprimir o extreure pàgines d'un document PDF. "
+"També podeu afegir pàgines procedents d'un altre document."
+
+#: C/pdfmod.xml:50(para)
+msgid ""
+"You can start PDF Mod from your applications menu or launcher, or by right "
+"clicking on one or more PDF documents in the file browser, and choosing to "
+"open with PDF Mod."
+msgstr ""
+"Podeu iniciar el PDF Mod des del menú d'aplicacions del sistema, des d'un "
+"llançador o bé fent clic amb el botó secundari del ratolí sobre un document "
+"PDF en el navegador de fitxers i escollint obrir-lo amb el PDF Mod."
+
+#: C/pdfmod.xml:56(para)
+msgid ""
+"Like a normal editor application, you must save the changes you make using "
+"PDF Mod. If you want to keep the original document and save your changes to "
+"a new file, use Save As."
+msgstr ""
+"Com en una aplicació d'edició normal, heu de desar els canvis que hagueu "
+"realitzat amb el PDF Mod. Si voleu conservar el document original sense "
+"canvis i desar els canvis en un nou fitxer, utilitzeu l'opció Anomena i desa."
+
+#: C/pdfmod.xml:63(title)
+msgid "Usage"
+msgstr "Ús"
+
+#: C/pdfmod.xml:66(title)
+msgid "Opening a Document"
+msgstr "Obertura d'un document"
+
+#: C/pdfmod.xml:67(para)
+msgid "To open a document in PDF Mod:"
+msgstr "Per obrir un document amb el PDF Mod:"
+
+#: C/pdfmod.xml:72(para)
+msgid ""
+"Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></"
+"menuchoice> and select your document, or"
+msgstr ""
+"Seleccioneu <menuchoice><guimenu>Fitxer</guimenu><guimenuitem>Obrir</"
+"guimenuitem></menuchoice> i sel·leccioneu el document, o"
+
+#: C/pdfmod.xml:77(para)
+msgid ""
+"Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> and "
+"select your document, or"
+msgstr ""
+"Teclegeu <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> i "
+"sel·leccioneu el document, o"
+
+#: C/pdfmod.xml:87(para)
+msgid ""
+"Drag a PDF document from your Desktop or file browser into a PDF Mod window "
+"that doesn't already have a document loaded, or"
+msgstr ""
+"Arrossegueu un document PDF des de l'escriptori o el navegador de fitxers "
+"cap a una finestra del PDF Mod que no tingui cap document obert, o"
+
+#: C/pdfmod.xml:92(para)
+msgid ""
+"Choose a document from <menuchoice><guimenu>File</"
+"guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>."
+msgstr ""
+"Seleccioneu un document des del menú <menuchoice><guimenu>Fitxer</"
+"guimenu><guimenuitem>Documents recents</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:100(title)
+msgid "Zooming"
+msgstr "Ampliar"
+
+#: C/pdfmod.xml:101(para)
+msgid ""
+"Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in "
+"Best Fit mode, where it tries to make all the pages visible at once."
+msgstr ""
+"L'ampliació farà que les miniatures de les pàgines siguin més grans o més "
+"petites. El PDF Mod s'inicia en el mode de millor ajustament, que intenta "
+"que es vegin totes les pàgines a la vegada."
+
+#: C/pdfmod.xml:104(para)
+msgid ""
+"You can zoom in or out with the options under <menuchoice><guimenu>View</"
+"guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your "
+"mouse's scroll wheel."
+msgstr ""
+"Podeu ampliar o reduir la visualització amb les opcions disponibles a "
+"<menuchoice><guimenu>Visualitza</guimenu></menuchoice> o teclejant "
+"<keycap>Ctrl</keycap> i movent la rodeta del ratolí."
+
+#: C/pdfmod.xml:110(title)
+msgid "Viewing and Editing Properties"
+msgstr "Visualització i edició de les propietats"
+
+#: C/pdfmod.xml:111(para)
+msgid ""
+"You can view and edit the Title, Author, Keywords, and Subject of the "
+"document by opening the properties. To do so, choose "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></"
+"menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></"
+"keycombo>, or click the Properties button on the toolbar."
+msgstr ""
+"Podeu visualitzar i editar el títol, l'autor, les paraules claus i "
+"l'assumpte del document si obriu les seves propietats. Per anar-hi "
+"seleccioneu <menuchoice><guimenu>Fitxer</guimenu><guimenuitem>Propietats</"
+"guimenuitem></menuchoice>, teclegeu <keycombo><keycap>Alt</"
+"keycap><keycap>Retorn</keycap></keycombo>, o feu clic al botó de Propietats "
+"que hi ha a la barra d'eines."
+
+#: C/pdfmod.xml:119(title)
+msgid "Selecting Pages"
+msgstr "Sel·lecció de pàgines"
+
+#: C/pdfmod.xml:120(para)
+msgid ""
+"PDF Mod can automatically select all pages, even-numbered pages, odd-"
+"numbered pages, or pages containing a search term. These options are "
+"available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
+msgstr ""
+"El PDF Mod pot sel·leccionar automàticament totes les pàgines, les pàgines "
+"parells, les pàgines senars o pàgines que continguin certs termes de cerca. "
+"Aquestes opcions son disponibles a <menuchoice><guimenu>Edita</guimenu></"
+"menuchoice>."
+
+#: C/pdfmod.xml:124(para)
+msgid ""
+"You can select pages manually using the keyboard and mouse as well. Use "
+"<keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
+msgstr ""
+"Podeu sel·leccionar pàgines manualment utilitzant el teclat i el ratolí. "
+"Premeu les tecles <keycap>Ctrl</keycap> o <keycap>Majúscules</keycap> per "
+"sel·leccionar més d'una pàgina."
+
+#: C/pdfmod.xml:130(title)
+msgid "Moving Pages"
+msgstr "Moure pàgines"
+
+#: C/pdfmod.xml:131(para)
+msgid ""
+"To move (aka reorder) the selected page or pages, drag them to the position "
+"in the document to which you want them moved."
+msgstr ""
+"Per moure (reordenar) les pàgines sel·leccionades arrossegueu-les des de la "
+"posició on són fins la posició desitjada."
+
+#: C/pdfmod.xml:135(para)
+msgid ""
+"All editing actions except removing pages can be undone by choosing "
+"<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></"
+"menuchoice> or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Z</"
+"keycap></keycombo>."
+msgstr ""
+"Totes les accions d'edició excepte la supressió de pàgines poden ser "
+"desfetes si seleccioneu <menuchoice><guimenu>Edita</"
+"guimenu><guimenuitem>Desfés</guimenuitem></menuchoice> o si teclegeu "
+"<keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+
+#: C/pdfmod.xml:144(title)
+msgid "Extracting Pages"
+msgstr "Extreure pàgines"
+
+#: C/pdfmod.xml:145(para)
+msgid ""
+"Extracting the selected page or pages will open a new PDF Mod window with "
+"just the selected pages in a new document, ready for further editing or to "
+"save."
+msgstr ""
+"Quant s'extreguin les pàgines sel·leccionades s'obrirà una finestra nova del "
+"PDF Mod mostrant un document nou amb les pàgines que s'hagin extret apunt "
+"per ser modificat o desat."
+
+#: C/pdfmod.xml:148(para)
+msgid ""
+"To extract the selected page or pages, choose <menuchoice><guimenu>Edit</"
+"guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
+msgstr ""
+"Per extreure les pàgines sel·leccionades seleccioneu "
+"<menuchoice><guimenu>Edita</guimenu><guimenuitem>Extreu la pàgina</"
+"guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:152(para)
+msgid ""
+"All of the editing and selection actions available under "
+"<menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right "
+"clicking on a page. Some actions are available on the toolbar as well."
+msgstr ""
+"Totes les accions d'edició i sel·lecció són disponibles al menú "
+"<menuchoice><guimenu>Edita</guimenu></menuchoice> com també són disponibles "
+"fent clic amb el botó secundari sobre una pàgina. Algunes d'aquestes accions "
+"també estan disponibles a la barra d'eines."
+
+#: C/pdfmod.xml:160(title)
+msgid "Rotating Pages"
+msgstr "Rotació de pàgines"
+
+#: C/pdfmod.xml:161(para)
+msgid ""
+"To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</"
+"guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press "
+"<keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and "
+"<keycombo><keycap>]</keycap></keycombo> to rotate right (CW)."
+msgstr ""
+"Per girar les pàgines sel·leccionades seleccioneu "
+"<menuchoice><guimenu>Edita</guimenu><guimenuitem>Gira la pàgina</"
+"guimenuitem></menuchoice>o teclegeu <keycombo><keycap>[</keycap></keycombo> "
+"per girar a l'esquerra i <keycombo><keycap>[</keycap></keycombo> per girar a "
+"al dreta."
+
+#: C/pdfmod.xml:168(title)
+msgid "Removing Pages"
+msgstr "Supressió de pàgines"
+
+#: C/pdfmod.xml:169(para)
+msgid ""
+"To remove the selected page or pages, press <keycap>Delete</keycap> or "
+"choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Per a suprimir les pàgines sel·leccionades teclegeu <keycap>Suprimir</"
+"keycap> o seleccioneu <menuchoice><guimenu>Edita</"
+"guimenu><guimenuitem>Suprimeix la pàgina</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:174(para)
+msgid ""
+"It is not currently possible to undo this action via "
+"<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></"
+"menuchoice>. You can close the document without saving and open it again to "
+"get your page back, though you will lose any other changes you have made."
+msgstr ""
+"Actualment no és possible desfer l'acció amb <menuchoice><guimenu>Edita</"
+"guimenu><guimenuitem>Desfés</guimenuitem></menuchoice>. Podeu tancar el "
+"document sense desar els canvis i obrir-lo un altre cop per recuperar "
+"l'estat anterior del document, tot i que perdrà tots els altres canvis que "
+"s'hagin fet."
+
+#: C/pdfmod.xml:182(title)
+msgid "Saving"
+msgstr "Desat"
+
+#: C/pdfmod.xml:183(para)
+msgid ""
+"After making changes to the document, there are two ways to save your work. "
+"You can overwrite the original document by choosing "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></"
+"menuchoice>, or you can save your changes to a new file by choosing "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Després de fer canvis al document hi ha dues maneres de desar-ne els canvis. "
+"Podeu sobreescriure el document original si seleccioneu "
+"<menuchoice><guimenu>Fitxer</guimenu><guimenuitem>Desa</guimenuitem></"
+"menuchoice> o bé podeu desar els canvis en un fitxer nou si seleccioneu "
+"<menuchoice><guimenu>Fitxer</guimenu><guimenuitem>Anomena i desa</"
+"guimenuitem></menuchoice>."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: C/pdfmod.xml:0(None)
+msgid "translator-credits"
+msgstr "Andreu Correa Casablanca <castarco@gmail.com>, 2009"
