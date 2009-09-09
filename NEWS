@@ -1,5 +1,5 @@
 ==========================
-Version 0.7 - Sept ?, 2009
+Version 0.7 - Sept 9, 2009
 ==========================
 
 Contributors:
@@ -7,11 +7,18 @@ Romain Tartière, Bertrand Lorentz, Robert Dyer, Andreu Correa Casablanca
 
 Features:
 * View Fullscreen option
+* User docs translated into ca
 
 Bugs Fixed:
 * Build fixes for *bsd
 * Update recent files list after opening a document
-* libdir expansion issue fixed in Hyena
+* libdir expansion issue fixed in Hyena, depend on 0.2
+
+Translations:
+* es (Andreu Correa Casablanca)
+* pt (Filipe Gomes)
+* sv (Daniel Nylander)
+
 
 ==========================
 Version 0.6 - Aug 18, 2009
