@@ -208,7 +208,7 @@ namespace PdfMod.Gui
             var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
-            chooser.SelectMultiple = false;
+            chooser.SelectMultiple = true;
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.Open, ResponseType.Ok);
             chooser.DefaultResponse = ResponseType.Ok;
@@ -219,11 +219,11 @@ namespace PdfMod.Gui
             }
 
             var response = chooser.Run ();
-            string filename = chooser.Filename;
+            IList<string> filenames = chooser.Filenames;
             chooser.Destroy ();
 
             if (response == (int)ResponseType.Ok) {
-                Client.RunIdle (delegate { app.LoadPath (filename); });
+                Client.RunIdle (delegate { app.LoadFiles (filenames); });
             }
         }
 

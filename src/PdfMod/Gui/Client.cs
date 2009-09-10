@@ -208,7 +208,7 @@ namespace PdfMod.Gui
             return false;
         }
 
-        protected override void LoadFiles (IList<string> files)
+        public override void LoadFiles (IList<string> files)
         {
             if (files.Count == 1) {
                 LoadPath (files[0]);

@@ -61,7 +61,7 @@ namespace PdfMod.Core
             LoadFiles (ApplicationContext.CommandLine.Files);
         }
 
-        protected abstract void LoadFiles (IList<string> files);
+        public abstract void LoadFiles (IList<string> files);
 
         public void LoadPath (string path)
         {
