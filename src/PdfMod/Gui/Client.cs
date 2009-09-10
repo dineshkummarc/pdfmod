@@ -319,7 +319,10 @@ namespace PdfMod.Gui
 
             var title = Document.Title;
             var filename = Document.Filename;
-            Window.Title = title == null ? filename : String.Format ("{0} ({1})", title, filename);
+            if (Document.HasUnsavedChanged) {
+                filename = "*" + filename;
+            }
+            Window.Title = title == null ? filename : String.Format ("{0} - {1}", filename, title);
         }
 
         public void PasswordProvider (PdfPasswordProviderArgs args)
