@@ -1,4 +1,22 @@
 ==========================
+Version 0.8 - not yet released
+==========================
+
+Contributors:
+Robert Dyer, Andreu Correa Casablanca
+
+Features:
+* Add * to beginning of window title when unsaved
+* Can select more than one file in Open dialog
+* shift-ctrl-z now also works for Redo
+
+Bugs Fixed:
+* 
+
+Translators:
+Jorge González, Łukasz Jernaś, Daniel Nylander
+
+==========================
 Version 0.7 - Sept 9, 2009
 ==========================
 
@@ -14,10 +32,8 @@ Bugs Fixed:
 * Update recent files list after opening a document
 * libdir expansion issue fixed in Hyena, depend on 0.2
 
-Translations:
-* es (Andreu Correa Casablanca)
-* pt (Filipe Gomes)
-* sv (Daniel Nylander)
+Translators:
+Andreu Correa Casablanca, Filipe Gomes, Daniel Nylander
 
 ==========================
 Version 0.6 - Aug 18, 2009
