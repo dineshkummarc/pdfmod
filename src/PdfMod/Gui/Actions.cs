@@ -219,11 +219,15 @@ namespace PdfMod.Gui
             }
 
             var response = chooser.Run ();
-            IList<string> filenames = chooser.Filenames;
+            var filenames = chooser.Filenames;
             chooser.Destroy ();
 
             if (response == (int)ResponseType.Ok) {
-                Client.RunIdle (delegate { app.LoadFiles (filenames); });
+                Client.RunIdle (delegate {
+                    foreach (var file in filenames) {
+                        app.LoadPath (file);
+                    }
+                });
             }
         }
 
