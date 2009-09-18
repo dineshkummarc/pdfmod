@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-20 22:26+0200\n"
-"PO-Revision-Date: 2009-08-20 22:28+0100\n"
+"POT-Creation-Date: 2009-09-18 13:01+0200\n"
+"PO-Revision-Date: 2009-09-18 13:01+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -44,188 +44,192 @@ msgstr "Fel vid försök att flytta sidor"
 msgid "Error trying to remove pages from document"
 msgstr "Fel vid försök att flytta sidor från dokumentet"
 
-#: ../src/PdfMod/Gui/Actions.cs:46
+#: ../src/PdfMod/Gui/Actions.cs:64
 msgid "Open a document"
 msgstr "Öppna ett dokument"
 
-#: ../src/PdfMod/Gui/Actions.cs:47
+#: ../src/PdfMod/Gui/Actions.cs:65
 msgid "_Insert From..."
 msgstr "_Infoga från..."
 
-#: ../src/PdfMod/Gui/Actions.cs:47
+#: ../src/PdfMod/Gui/Actions.cs:65
 msgid "Insert pages from another document"
 msgstr "Infoga sidor från annat dokument"
 
-#: ../src/PdfMod/Gui/Actions.cs:48
+#: ../src/PdfMod/Gui/Actions.cs:66
 msgid "Save changes to this document, overwriting the existing file"
 msgstr "Spara ändringar i detta dokument och skriv över den befintliga filen"
 
-#: ../src/PdfMod/Gui/Actions.cs:49
+#: ../src/PdfMod/Gui/Actions.cs:67
 msgid "Save this document to a new file"
 msgstr "Spara detta dokument som en ny fil"
 
-#: ../src/PdfMod/Gui/Actions.cs:51
+#: ../src/PdfMod/Gui/Actions.cs:69
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../src/PdfMod/Gui/Actions.cs:52
+#: ../src/PdfMod/Gui/Actions.cs:70
 msgid "Recent _Files"
 msgstr "Tidigare _filer"
 
-#: ../src/PdfMod/Gui/Actions.cs:56
+#: ../src/PdfMod/Gui/Actions.cs:74
 msgid "Rotate Right"
 msgstr "Rotera åt höger"
 
-#: ../src/PdfMod/Gui/Actions.cs:56
+#: ../src/PdfMod/Gui/Actions.cs:74
 msgid "Rotate right"
 msgstr "Rotera åt höger"
 
-#: ../src/PdfMod/Gui/Actions.cs:57
+#: ../src/PdfMod/Gui/Actions.cs:75
 msgid "Rotate Left"
 msgstr "Rotera åt vänster"
 
-#: ../src/PdfMod/Gui/Actions.cs:57
+#: ../src/PdfMod/Gui/Actions.cs:75
 msgid "Rotate left"
 msgstr "Rotera åt vänster"
 
-#: ../src/PdfMod/Gui/Actions.cs:58
+#: ../src/PdfMod/Gui/Actions.cs:76
 msgid "Export Images"
 msgstr "Exportera bilder"
 
-#: ../src/PdfMod/Gui/Actions.cs:58
+#: ../src/PdfMod/Gui/Actions.cs:76
 msgid "Save all images in this document to a new folder"
 msgstr "Spara alla bilder i detta dokument till en ny mapp"
 
-#: ../src/PdfMod/Gui/Actions.cs:60
+#: ../src/PdfMod/Gui/Actions.cs:78
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: ../src/PdfMod/Gui/Actions.cs:62
+#: ../src/PdfMod/Gui/Actions.cs:80
 msgid "Select Even Pages"
 msgstr "Markera jämna sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:63
+#: ../src/PdfMod/Gui/Actions.cs:81
 msgid "Select Odd Pages"
 msgstr "Markera udda sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:64
+#: ../src/PdfMod/Gui/Actions.cs:82
 msgid "Select Matching..."
 msgstr "Markera matchande..."
 
-#: ../src/PdfMod/Gui/Actions.cs:68
+#: ../src/PdfMod/Gui/Actions.cs:86
 msgid "_View"
 msgstr "_Visa"
 
-#: ../src/PdfMod/Gui/Actions.cs:72
+#: ../src/PdfMod/Gui/Actions.cs:90
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/PdfMod/Gui/Actions.cs:73
+#: ../src/PdfMod/Gui/Actions.cs:91
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: ../src/PdfMod/Gui/Actions.cs:78
+#: ../src/PdfMod/Gui/Actions.cs:96
 msgid "Open in Viewer"
 msgstr "Öppna i visare"
 
-#: ../src/PdfMod/Gui/Actions.cs:78
+#: ../src/PdfMod/Gui/Actions.cs:96
 msgid "Open in viewer"
 msgstr "Öppna i visare"
 
-#: ../src/PdfMod/Gui/Actions.cs:82
+#: ../src/PdfMod/Gui/Actions.cs:100
 msgid "View and edit the title, keywords, and more for this document"
 msgstr "Visa och redigera titeln, nyckelord och annat i detta dokument"
 
-#: ../src/PdfMod/Gui/Actions.cs:84
+#: ../src/PdfMod/Gui/Actions.cs:102
 msgid "Toolbar"
 msgstr "Verktygsrad"
 
-#: ../src/PdfMod/Gui/Actions.cs:155
+#: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Fullscreen"
+msgstr "Helskärm"
+
+#: ../src/PdfMod/Gui/Actions.cs:174
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: ../src/PdfMod/Gui/Actions.cs:156
+#: ../src/PdfMod/Gui/Actions.cs:175
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Ångra {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:160
+#: ../src/PdfMod/Gui/Actions.cs:179
 msgid "_Redo"
 msgstr "_Gör om"
 
-#: ../src/PdfMod/Gui/Actions.cs:161
+#: ../src/PdfMod/Gui/Actions.cs:180
 #, csharp-format
 msgid "Redo {0}"
 msgstr "Gör om {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:169
+#: ../src/PdfMod/Gui/Actions.cs:188
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Ta bort sida"
 msgstr[1] "Ta bort {0} sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:191
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "Ta bort markerad sida"
 msgstr[1] "Ta bort {0} markerade sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:175
+#: ../src/PdfMod/Gui/Actions.cs:194
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "Extrahera sida"
 msgstr[1] "Extrahera {0} sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:197
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Extrahera markerad sida"
 msgstr[1] "Extrahera {0} markerade sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:186
-#: ../src/PdfMod/Gui/Actions.cs:215
+#: ../src/PdfMod/Gui/Actions.cs:205
+#: ../src/PdfMod/Gui/Actions.cs:245
 msgid "Select PDF"
 msgstr "Välj PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:187
+#: ../src/PdfMod/Gui/Actions.cs:206
 msgid "PDF Documents"
 msgstr "PDF-dokument"
 
-#: ../src/PdfMod/Gui/Actions.cs:188
-#: ../src/PdfMod/Gui/Actions.cs:217
+#: ../src/PdfMod/Gui/Actions.cs:207
 #: ../src/PdfMod/Gui/Actions.cs:247
+#: ../src/PdfMod/Gui/Actions.cs:277
 msgid "All Files"
 msgstr "Alla filer"
 
-#: ../src/PdfMod/Gui/Actions.cs:241
+#: ../src/PdfMod/Gui/Actions.cs:271
 msgid "Save as..."
 msgstr "Spara som..."
 
-#: ../src/PdfMod/Gui/Actions.cs:382
+#: ../src/PdfMod/Gui/Actions.cs:412
 msgid "Error opening help"
 msgstr "Fel vid öppnandet av hjälp"
 
-#: ../src/PdfMod/Gui/Actions.cs:383
+#: ../src/PdfMod/Gui/Actions.cs:413
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Vill du öppna nätdokumentationen för PDF Mod?"
 
-#: ../src/PdfMod/Gui/Actions.cs:404
+#: ../src/PdfMod/Gui/Actions.cs:434
 msgid "Visit Website"
 msgstr "Besök webbplatsen"
 
-#: ../src/PdfMod/Gui/Actions.cs:406
+#: ../src/PdfMod/Gui/Actions.cs:436
 msgid "Primary Development:"
 msgstr "Primära utvecklare:"
 
-#: ../src/PdfMod/Gui/Actions.cs:409
+#: ../src/PdfMod/Gui/Actions.cs:439
 msgid "Contributors:"
 msgstr "Bidragsgivare:"
 
-#: ../src/PdfMod/Gui/Actions.cs:422
+#: ../src/PdfMod/Gui/Actions.cs:455
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -233,100 +237,100 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../src/PdfMod/Gui/Client.cs:64
+#: ../src/PdfMod/Gui/Client.cs:81
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:171
+#: ../src/PdfMod/Gui/Client.cs:188
 msgid "Save the changes made to this document?"
 msgstr "Spara ändringarna gjorda i detta dokument?"
 
-#: ../src/PdfMod/Gui/Client.cs:174
+#: ../src/PdfMod/Gui/Client.cs:191
 msgid "Close _Without Saving"
 msgstr "Stäng _utan att spara"
 
-#: ../src/PdfMod/Gui/Client.cs:203
+#: ../src/PdfMod/Gui/Client.cs:220
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "Fortsätt och öppna {0} dokument i separat fönster?"
 msgstr[1] "Fortsätt och öppna alla {0} dokument i separata fönster?"
 
-#: ../src/PdfMod/Gui/Client.cs:207
+#: ../src/PdfMod/Gui/Client.cs:224
 msgid "Open _First"
 msgstr "Öppna _första"
 
-#: ../src/PdfMod/Gui/Client.cs:208
+#: ../src/PdfMod/Gui/Client.cs:225
 msgid "Open _All"
 msgstr "Öppna _alla"
 
-#: ../src/PdfMod/Gui/Client.cs:236
+#: ../src/PdfMod/Gui/Client.cs:253
 msgid "Loading document..."
 msgstr "Läser in dokument..."
 
-#: ../src/PdfMod/Gui/Client.cs:259
+#: ../src/PdfMod/Gui/Client.cs:283
 msgid "Error Loading Document"
 msgstr "Fel vid inläsning av dokumentet"
 
-#: ../src/PdfMod/Gui/Client.cs:260
+#: ../src/PdfMod/Gui/Client.cs:284
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Det uppstod ett fel vid inläsning av {0}"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:287
+#: ../src/PdfMod/Gui/Client.cs:311
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (ursprungligen {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:292
+#: ../src/PdfMod/Gui/Client.cs:316
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} sida"
 msgstr[1] "{0} sidor"
 
-#: ../src/PdfMod/Gui/Client.cs:308
+#: ../src/PdfMod/Gui/Client.cs:335
 msgid "Document is Encrypted"
 msgstr "Dokumentet är krypterat"
 
-#: ../src/PdfMod/Gui/Client.cs:309
+#: ../src/PdfMod/Gui/Client.cs:336
 msgid "Enter the document's password to open it:"
 msgstr "Ange dokumentets lösenord för att öppna det:"
 
-#: ../src/PdfMod/Gui/SelectMatchingBox.cs:26
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:42
 msgid "Select Matching"
 msgstr "Välj matchande"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:48
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
 msgid "_Title:"
 msgstr "_Titel:"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:49
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
 msgid "_Author:"
 msgstr "_Författare:"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:50
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
 msgid "_Keywords:"
 msgstr "_Nyckelord:"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:51
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:66
 msgid "_Subject:"
 msgstr "_Ämne:"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:71
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
 msgid "_Revert Properties"
 msgstr "_Återställ egenskaper"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:72
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:87
 msgid "Change the document's properties back to the original values"
 msgstr "Ändra tillbaka dokumentets egenskaper till dess ursprungsvärden"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:77
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:92
 msgid "_Close"
 msgstr "S_täng"
 
-#: ../src/PdfMod/Gui/MetadataEditorBox.cs:78
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:93
 msgid "Hide the document's properties"
 msgstr "Dölj dokumentets egenskaper"
 
