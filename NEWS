@@ -3,7 +3,7 @@ Version 0.8 - not yet released
 ==========================
 
 Contributors:
-Robert Dyer, Andreu Correa Casablanca
+Robert Dyer, Andreu Correa Casablanca, Gabriel Burt
 
 Features:
 * Add * to beginning of window title when unsaved
@@ -21,7 +21,8 @@ Version 0.7 - Sept 9, 2009
 ==========================
 
 Contributors:
-Romain Tartière, Bertrand Lorentz, Robert Dyer, Andreu Correa Casablanca
+Romain Tartière, Bertrand Lorentz, Robert Dyer, Andreu Correa Casablanca,
+Gabriel Burt
 
 Features:
 * View Fullscreen option
@@ -40,7 +41,7 @@ Version 0.6 - Aug 18, 2009
 ==========================
 
 Contributors:
-Łukasz Jernaś, Sandy Armstrong, Igor Vatavuk, Bertrand Lorentz
+Łukasz Jernaś, Sandy Armstrong, Igor Vatavuk, Bertrand Lorentz, Gabriel Burt
 
 Features:
 * Open in Viewer action that launches the default app
@@ -61,7 +62,7 @@ Version 0.5 - Aug 7, 2009
 =========================
 
 Contributors:
-Bertrand Lorentz, Michael McKinley
+Bertrand Lorentz, Michael McKinley, Gabriel Burt
 
 Features:
 * Password-protected PDFs can be opened
@@ -85,7 +86,7 @@ bugzilla, mailing list, IRC, release tarballs, and wiki.  See
 http://live.gnome.org/PdfMod for more information.
 
 Contributors:
-Julien Rebetez, Igor Vatavuk
+Julien Rebetez, Igor Vatavuk, Gabriel Burt
 
 Features:
 * Insert external documents via menu/toolbar
@@ -108,7 +109,7 @@ Version 0.3 - Jul 28, 2009
 ==========================
 
 Contributors:
-Sandy Armstrong, Aaron Bockover, Olivier Le Thanh Duong
+Sandy Armstrong, Aaron Bockover, Olivier Le Thanh Duong, Gabriel Burt
 
 Features:
 * Convenience keybindings for zoom/quit
@@ -131,11 +132,18 @@ Bugs Fixed:
 Version 0.2 - Jul 24, 2009
 ==========================
 
+Contributors:
+Gabriel Burt
+
+Bugs Fixed:
 * Fix not-installed .desktop file
 
 ==========================
 Version 0.1 - Jul 24, 2009
 ==========================
+
+Contributors:
+Gabriel Burt
 
 * Initial release
 * Support for removing, rotating, moving, and extracting pages
