@@ -40,6 +40,7 @@ po/Makefile.in.in
 po/stamp-it
 data/pdfmod.desktop
 data/pdfmod.desktop.in
+data/pdfmod.desktop.in.in.h
 src/pdfmod
 src/PdfMod/Core/Defines.cs
 *.resources
