@@ -1,6 +1,7 @@
 <Combine fileversion="2.0">
   <Policies>
     <StandardHeader Text="" inheritsSet="MITX11License" />
+    <TextStylePolicy FileWidth="120" TabWidth="4" TabsToSpaces="True" NoTabsAfterNonTabs="False" RemoveTrailingWhitespace="True" EolMarker="Native" />
     <DotNetNamingPolicy DirectoryNamespaceAssociation="Flat" ResourceNamePolicy="FileFormatDefault" />
   </Policies>
   <Configurations active="Debug">
