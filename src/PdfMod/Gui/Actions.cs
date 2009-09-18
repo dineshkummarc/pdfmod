@@ -138,6 +138,9 @@ namespace PdfMod.Gui
             item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/Close");
             item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.q, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
 
+            item = ActionManager.UIManager.GetWidget ("/MainMenu/EditMenu/Redo");
+            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask, Gtk.AccelFlags.Visible);
+
             // Set up recent documents menu
             MenuItem recent_item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/RecentMenu") as MenuItem;
             var recent_chooser_item = new RecentChooserMenu (RecentManager.Default) {
