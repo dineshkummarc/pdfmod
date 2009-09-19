@@ -46,7 +46,6 @@ namespace PdfMod.Gui
             cr.Rectangle (cell_area.X, cell_area.Y, cell_area.Width, cell_area.Height);
             cr.Clip ();
             cr.Translate (cell_area.X, cell_area.Y);
-            //cr.Save ();
 
             if (state == CellRendererState.Selected) {
                 Theme.DrawRowSelection (cr, 0, 0, cell_area.Width, cell_area.Height, true);
@@ -61,7 +60,6 @@ namespace PdfMod.Gui
 
             Render (cr, width, height, state);
 
-            //cr.Restore ();
             Hyena.Gui.CairoExtensions.DisposeContext (cr);
         }
 

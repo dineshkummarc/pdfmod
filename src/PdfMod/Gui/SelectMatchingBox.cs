@@ -32,11 +32,10 @@ namespace PdfMod.Gui
         {
             this.app = app;
             AppPaintable = true;
-            hbox = new HBox ();
-            hbox.BorderWidth = 6;
 
-            Entry = new Gtk.Entry ();
-            Entry.WidthChars = 40;
+            hbox = new HBox () { BorderWidth = 6 };
+
+            Entry = new Gtk.Entry () { WidthChars = 40 };
             Entry.Activated += OnActivated;
 
             var query_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("Select Matching"), Gtk.Stock.Find);

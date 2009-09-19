@@ -81,8 +81,7 @@ namespace PdfMod.Gui
         {
             app_count++;
 
-            Window = new Gtk.Window (Gtk.WindowType.Toplevel);
-            Window.Title = Catalog.GetString ("PDF Mod");
+            Window = new Gtk.Window (Gtk.WindowType.Toplevel) { Title = Catalog.GetString ("PDF Mod") };
             Window.SetSizeRequest (640, 480);
             Window.DeleteEvent += delegate (object o, DeleteEventArgs args) {
                 Quit ();
@@ -91,16 +90,14 @@ namespace PdfMod.Gui
 
             // PDF Icon View
             IconView = new DocumentIconView (this);
-            var iconview_sw = new Gtk.ScrolledWindow ();
-            iconview_sw.Child = IconView;
+            var iconview_sw = new Gtk.ScrolledWindow () { Child = IconView };
 
             query_box = new QueryBox (this) { NoShowAll = true };
             query_box.Hide ();
 
             // Status bar
             StatusBar = new Gtk.Statusbar () { HasResizeGrip = true };
-            status_label = new Label ();
-            status_label.Xalign = 0.0f;
+            status_label = new Label () { Xalign = 0.0f };
             StatusBar.PackStart (status_label, true, true, 6);
             StatusBar.ReorderChild (status_label, 0);
 
@@ -328,7 +325,11 @@ namespace PdfMod.Gui
 
         public void PasswordProvider (PdfPasswordProviderArgs args)
         {
+            // This method is called from some random thread, but we need
+            // to do the dialog on the GUI thread; use the reset_event
+            // to block this thread until the user is done with the dialog.
             var reset_event = new System.Threading.ManualResetEvent (false);
+
             ThreadAssist.ProxyToMain (delegate {
                 Log.Debug ("Password requested to open document");
                 var dialog = new Hyena.Widgets.HigMessageDialog (
@@ -338,8 +339,7 @@ namespace PdfMod.Gui
                 );
                 dialog.Image = Gtk.IconTheme.Default.LoadIcon ("dialog-password", 48, 0);
 
-                var password_entry = new Entry ();
-                password_entry.Visibility = false;
+                var password_entry = new Entry () { Visibility = false };
                 password_entry.Show ();
                 dialog.LabelVBox.PackStart (password_entry, false, false, 12);
 
@@ -358,6 +358,7 @@ namespace PdfMod.Gui
                 }
                 reset_event.Set ();
             });
+
             reset_event.WaitOne ();
         }
 
@@ -368,16 +369,16 @@ namespace PdfMod.Gui
                 var entry = args.Entry;
 
                 switch (entry.Type) {
-                case LogEntryType.Warning:
-                    mtype = Gtk.MessageType.Warning;
-                    break;
-                case LogEntryType.Information:
-                    mtype = Gtk.MessageType.Info;
-                    break;
-                case LogEntryType.Error:
-                default:
-                    mtype = Gtk.MessageType.Error;
-                    break;
+                    case LogEntryType.Warning:
+                        mtype = Gtk.MessageType.Warning;
+                        break;
+                    case LogEntryType.Information:
+                        mtype = Gtk.MessageType.Info;
+                        break;
+                    case LogEntryType.Error:
+                    default:
+                        mtype = Gtk.MessageType.Error;
+                        break;
                 }
 
                 Hyena.Widgets.HigMessageDialog dialog = new Hyena.Widgets.HigMessageDialog (

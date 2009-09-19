@@ -51,9 +51,7 @@ namespace PdfMod.Gui
             "Remove", "Extract", "RotateRight", "RotateLeft"
         };
 
-        public UndoManager UndoManager {
-            get { return undo_manager; }
-        }
+        public UndoManager UndoManager { get { return undo_manager; } }
 
         public Actions (Client app, ActionManager action_manager) : base (action_manager, "Global")
         {
@@ -205,13 +203,15 @@ namespace PdfMod.Gui
 
         void OnOpen (object o, EventArgs args)
         {
-            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
+            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open) {
+                SelectMultiple = true,
+                DefaultResponse = ResponseType.Ok
+            };
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
-            chooser.SelectMultiple = true;
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.Open, ResponseType.Ok);
-            chooser.DefaultResponse = ResponseType.Ok;
+
             if (app.Document != null) {
                 chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
             } else {
@@ -249,14 +249,15 @@ namespace PdfMod.Gui
 
         void OnInsertFrom (object o, EventArgs args)
         {
-            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
+            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open) {
+                SelectMultiple = false,
+                DefaultResponse = ResponseType.Ok
+            };
             chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
-            chooser.SelectMultiple = false;
             chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.Open, ResponseType.Ok);
-            chooser.DefaultResponse = ResponseType.Ok;
 
             var response = chooser.Run ();
             string filename = chooser.Filename;
@@ -275,16 +276,17 @@ namespace PdfMod.Gui
 
         void OnSaveAs (object o, EventArgs args)
         {
-            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Save as..."), app.Window, FileChooserAction.Save);
-            chooser.SelectMultiple = false;
-            chooser.DoOverwriteConfirmation = true;
+            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Save as..."), app.Window, FileChooserAction.Save) {
+                SelectMultiple = false,
+                DoOverwriteConfirmation = true,
+                CurrentName = System.IO.Path.GetFileName (app.Document.SuggestedSavePath),
+                DefaultResponse = ResponseType.Ok
+            };
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.SaveAs, ResponseType.Ok);
             chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
             chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
-            chooser.CurrentName = System.IO.Path.GetFileName (app.Document.SuggestedSavePath);
-            chooser.DefaultResponse = ResponseType.Ok;
 
             var response = chooser.Run ();
             string filename = chooser.Filename;

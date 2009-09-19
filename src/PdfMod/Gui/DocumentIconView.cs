@@ -30,8 +30,7 @@ using PdfMod.Pdf.Actions;
 
 namespace PdfMod.Gui
 {
-    public enum PageSelectionMode
-    {
+    public enum PageSelectionMode {
         None,
         Evens,
         Odds,
@@ -90,9 +89,10 @@ namespace PdfMod.Gui
             SelectionMode = SelectionMode.Multiple;
             ColumnSpacing = RowSpacing = Margin;
             Model = store = new PageListStore ();
-            CanZoomIn = CanZoomOut = true;
             Reorderable = false;
             Spacing = 0;
+
+            CanZoomIn = CanZoomOut = true;
 
             page_renderer = new PageCell (this);
             PackStart (page_renderer, true);
@@ -348,20 +348,20 @@ namespace PdfMod.Gui
 
         #region Document event handling
 
-        public void SetDocument (Document document)
+        public void SetDocument (Document new_doc)
         {
-            if (this.document != null) {
-                this.document.PagesAdded   -= OnPagesAdded;
-                this.document.PagesChanged -= OnPagesChanged;
-                this.document.PagesRemoved -= OnPagesRemoved;
-                this.document.PagesMoved   -= OnPagesMoved;
+            if (document != null) {
+                document.PagesAdded   -= OnPagesAdded;
+                document.PagesChanged -= OnPagesChanged;
+                document.PagesRemoved -= OnPagesRemoved;
+                document.PagesMoved   -= OnPagesMoved;
             }
 
-            this.document = document;
-            this.document.PagesAdded   += OnPagesAdded;
-            this.document.PagesChanged += OnPagesChanged;
-            this.document.PagesRemoved += OnPagesRemoved;
-            this.document.PagesMoved   += OnPagesMoved;
+            document = new_doc;
+            document.PagesAdded   += OnPagesAdded;
+            document.PagesChanged += OnPagesChanged;
+            document.PagesRemoved += OnPagesRemoved;
+            document.PagesMoved   += OnPagesMoved;
 
             store.SetDocument (document);
             page_selection_mode = PageSelectionMode.None;
@@ -381,13 +381,6 @@ namespace PdfMod.Gui
 
         void OnPagesChanged (Page [] pages)
         {
-            /*foreach (var page in pages) {
-                var iter = store.GetIterForPage (page);
-                if (!TreeIter.Zero.Equals (iter)) {
-                    store.EmitRowChanged (store.GetPath (iter), iter);
-                }
-            }*/
-
             Refresh ();
         }
 
@@ -415,6 +408,7 @@ namespace PdfMod.Gui
             if (!zoom_manually_set) {
                 ZoomFit ();
             }
+
             RefreshSelection ();
         }
 
@@ -524,29 +518,30 @@ namespace PdfMod.Gui
         void RefreshSelection ()
         {
             refreshing_selection = true;
-            if (page_selection_mode == PageSelectionMode.None) {
-            } else if (page_selection_mode == PageSelectionMode.All) {
+
+            if (page_selection_mode == PageSelectionMode.All) {
                 SelectAll ();
-            } else {
+            } else if (page_selection_mode != PageSelectionMode.None) {
                 List<Page> matches = null;
                 if (page_selection_mode == PageSelectionMode.Matching) {
                     matches = new List<Page> (app.Document.FindPagesMatching (selection_match_query));
                 }
+
                 int i = 1;
                 foreach (var iter in store.TreeIters) {
                     var path = store.GetPath (iter);
                     bool select = false;
 
                     switch (page_selection_mode) {
-                    case PageSelectionMode.Evens:
-                        select = (i % 2) == 0;
-                        break;
-                    case PageSelectionMode.Odds:
-                        select = (i % 2) == 1;
-                        break;
-                    case PageSelectionMode.Matching:
-                        select = matches.Contains (store.GetValue (iter, PageListStore.PageColumn) as Page);
-                        break;
+                        case PageSelectionMode.Evens:
+                            select = (i % 2) == 0;
+                            break;
+                        case PageSelectionMode.Odds:
+                            select = (i % 2) == 1;
+                            break;
+                        case PageSelectionMode.Matching:
+                            select = matches.Contains (store.GetValue (iter, PageListStore.PageColumn) as Page);
+                            break;
                     }
 
                     if (select) {
@@ -557,8 +552,8 @@ namespace PdfMod.Gui
                     i++;
                 }
             }
-            refreshing_selection = false;
 
+            refreshing_selection = false;
             QueueDraw ();
         }
 

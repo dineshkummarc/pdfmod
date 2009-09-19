@@ -107,12 +107,12 @@ namespace PdfMod.Pdf.Actions
         {
             string filter = image.ImageObject.Elements.GetName("/Filter");
             switch (filter) {
-            case "/DCTDecode":
-                ExportJpegImage (image, GetFilename (image, to_path, "jpg"));
-                break;
-            case "/FlateDecode":
-                ExportAsPngImage (image, GetFilename (image, to_path, "png"));
-                break;
+                case "/DCTDecode":
+                    ExportJpegImage (image, GetFilename (image, to_path, "jpg"));
+                    break;
+                case "/FlateDecode":
+                    ExportAsPngImage (image, GetFilename (image, to_path, "png"));
+                    break;
             }
         }
 

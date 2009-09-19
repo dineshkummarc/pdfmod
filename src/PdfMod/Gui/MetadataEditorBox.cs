@@ -38,12 +38,11 @@ namespace PdfMod.Gui
             this.app = app;
             app.DocumentLoaded += HandleDocumentLoaded;
 
-            table = new Table (2, 5, false) {
+            Child = table = new Table (2, 5, false) {
                 RowSpacing = 6,
                 ColumnSpacing = 6,
                 BorderWidth = 6
             };
-            Child = table;
 
             BuildEditor ();
             BuildButtons ();
@@ -83,17 +82,13 @@ namespace PdfMod.Gui
 
         void BuildButtons ()
         {
-            revert_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Revert Properties"), "revert") {
-                TooltipText = Catalog.GetString ("Change the document's properties back to the original values")
-            };
+            revert_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Revert Properties"), "revert");
+            revert_button.TooltipText = Catalog.GetString ("Change the document's properties back to the original values");
             revert_button.Clicked += HandleRevert;
-
 
             var close_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Close"), Gtk.Stock.Close);
             close_button.TooltipText = Catalog.GetString ("Hide the document's properties");
-            close_button.Clicked += delegate {
-                Hide ();
-            };
+            close_button.Clicked += delegate { Hide (); };
 
             table.Attach (revert_button, 4, 5, 0, 1, AttachOptions.Fill, 0, 0, 0);
             table.Attach (close_button, 4, 5, 1, 2, AttachOptions.Fill, 0, 0, 0);
