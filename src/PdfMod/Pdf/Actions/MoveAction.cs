@@ -14,8 +14,8 @@ namespace PdfMod.Pdf.Actions
 {
     public class MoveAction : BasePageAction
     {
-        private int [] old_indices;
-        private int to_index;
+        int [] old_indices;
+        int to_index;
 
         public MoveAction (Document document, IEnumerable<Page> pages, int to_index) : base (document, pages)
         {

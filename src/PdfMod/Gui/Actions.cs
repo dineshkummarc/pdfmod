@@ -38,16 +38,16 @@ namespace PdfMod.Gui
 {
     public class Actions : HyenaActionGroup
     {
-        private Client app;
-        private UndoManager undo_manager;
-        private const string WIKI_URL = "http://live.gnome.org/PdfMod";
+        Client app;
+        UndoManager undo_manager;
+        const string WIKI_URL = "http://live.gnome.org/PdfMod";
 
-        private static string [] require_doc_actions = new string[] {
+        static string [] require_doc_actions = new string[] {
             "Save", "SaveAs", "Properties", "Undo", "Redo", "ZoomFit", "OpenInViewer",
             "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "InsertFrom", "ExportImages"
         };
 
-        private static string [] require_page_actions = new string[] {
+        static string [] require_page_actions = new string[] {
             "Remove", "Extract", "RotateRight", "RotateLeft"
         };
 
@@ -154,12 +154,12 @@ namespace PdfMod.Gui
             recent_item.Submenu = recent_chooser_item;
         }
 
-        private void OnChanged (object o, EventArgs args)
+        void OnChanged (object o, EventArgs args)
         {
             Update ();
         }
 
-        private void Update ()
+        void Update ()
         {
             bool have_doc = app.Document != null;
             foreach (string action in require_doc_actions)
@@ -203,7 +203,7 @@ namespace PdfMod.Gui
 
 #region Action Handlers
 
-        private void OnOpen (object o, EventArgs args)
+        void OnOpen (object o, EventArgs args)
         {
             var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
@@ -231,12 +231,12 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnOpenInViewer (object o, EventArgs args)
+        void OnOpenInViewer (object o, EventArgs args)
         {
             System.Diagnostics.Process.Start (app.Document.CurrentStateUri);
         }
 
-        private void OnFullScreenView (object o, EventArgs args)
+        void OnFullScreenView (object o, EventArgs args)
         {
             bool fullscreen = (this["FullScreenView"] as ToggleAction).Active;
 
@@ -247,7 +247,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnInsertFrom (object o, EventArgs args)
+        void OnInsertFrom (object o, EventArgs args)
         {
             var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open);
             chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
@@ -267,13 +267,13 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnSave (object o, EventArgs args)
+        void OnSave (object o, EventArgs args)
         {
             app.Document.Save (app.Document.SuggestedSavePath);
             undo_manager.Clear ();
         }
 
-        private void OnSaveAs (object o, EventArgs args)
+        void OnSaveAs (object o, EventArgs args)
         {
             var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Save as..."), app.Window, FileChooserAction.Save);
             chooser.SelectMultiple = false;
@@ -297,7 +297,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnProperties (object o, EventArgs args)
+        void OnProperties (object o, EventArgs args)
         {
             app.EditorBox.Visible = (this["Properties"] as ToggleAction).Active;
             if (app.EditorBox.Visible) {
@@ -305,7 +305,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnRemove (object o, EventArgs args)
+        void OnRemove (object o, EventArgs args)
         {
             var action = new RemoveAction (app.Document, app.IconView.SelectedPages);
             action.Do ();
@@ -313,7 +313,7 @@ namespace PdfMod.Gui
             //undo_manager.AddUndoAction (action);
         }
 
-        private void OnExtractPages (object o, EventArgs args)
+        void OnExtractPages (object o, EventArgs args)
         {
             var doc = new PdfDocument ();
             var pages = new List<Page> (app.IconView.SelectedPages);
@@ -333,7 +333,7 @@ namespace PdfMod.Gui
             ));
         }
 
-        private void OnExportImages (object o, EventArgs args)
+        void OnExportImages (object o, EventArgs args)
         {
             var action = new ExportImagesAction (app.Document, app.Document.Pages);
             if (action.ExportableImageCount == 0) {
@@ -364,20 +364,20 @@ namespace PdfMod.Gui
             System.Diagnostics.Process.Start (export_path);
         }
 
-        private void OnUndo (object o, EventArgs args)
+        void OnUndo (object o, EventArgs args)
         {
             undo_manager.Undo ();
         }
 
-        private void OnRedo (object o, EventArgs args)
+        void OnRedo (object o, EventArgs args)
         {
             undo_manager.Redo ();
         }
 
         [DllImport ("glib-2.0.dll")]
-        private static extern IntPtr g_get_language_names ();
+        static extern IntPtr g_get_language_names ();
 
-        private string CombinePaths (params string [] parts)
+        string CombinePaths (params string [] parts)
         {
             string path = parts[0];
             for (int i = 1; i < parts.Length; i++) {
@@ -386,7 +386,7 @@ namespace PdfMod.Gui
             return path;
         }
 
-        private void OnHelp (object o, EventArgs args)
+        void OnHelp (object o, EventArgs args)
         {
             bool shown = false;
             try {
@@ -430,7 +430,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnAbout (object o, EventArgs args)
+        void OnAbout (object o, EventArgs args)
         {
             Gtk.AboutDialog.SetUrlHook ((dlg, link) => { System.Diagnostics.Process.Start (link); });
 
@@ -483,63 +483,63 @@ namespace PdfMod.Gui
             dialog.Destroy ();
         }
 
-        private void OnPageContextMenu (object o, EventArgs args)
+        void OnPageContextMenu (object o, EventArgs args)
         {
             ShowContextMenu ("/PageContextMenu");
         }
 
-        private void OnSelectAll (object o, EventArgs args)
+        void OnSelectAll (object o, EventArgs args)
         {
             app.IconView.SetPageSelectionMode (PageSelectionMode.All);
         }
 
-        private void OnSelectEvens (object o, EventArgs args)
+        void OnSelectEvens (object o, EventArgs args)
         {
             app.IconView.SetPageSelectionMode (PageSelectionMode.Evens);
         }
 
-        private void OnSelectOdds (object o, EventArgs args)
+        void OnSelectOdds (object o, EventArgs args)
         {
             app.IconView.SetPageSelectionMode (PageSelectionMode.Odds);
         }
 
-        private void OnSelectMatching (object o, EventArgs args)
+        void OnSelectMatching (object o, EventArgs args)
         {
             app.ToggleMatchQuery ();
         }
 
-        private void OnZoomIn (object o, EventArgs args)
+        void OnZoomIn (object o, EventArgs args)
         {
             app.IconView.Zoom (10);
         }
 
-        private void OnZoomOut (object o, EventArgs args)
+        void OnZoomOut (object o, EventArgs args)
         {
             app.IconView.Zoom (-10);
         }
 
-        private void OnZoomFit (object o, EventArgs args)
+        void OnZoomFit (object o, EventArgs args)
         {
             app.IconView.ZoomFit ();
         }
 
-        private void OnViewToolbar (object o, EventArgs args)
+        void OnViewToolbar (object o, EventArgs args)
         {
             bool show = (this["ViewToolbar"] as ToggleAction).Active;
             Client.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
         }
 
-        private void OnRotateRight (object o, EventArgs args)
+        void OnRotateRight (object o, EventArgs args)
         {
             Rotate (90);
         }
 
-        private void OnRotateLeft (object o, EventArgs args)
+        void OnRotateLeft (object o, EventArgs args)
         {
             Rotate (-90);
         }
 
-        private void Rotate (int degrees)
+        void Rotate (int degrees)
         {
             if (!(app.Window.Focus is Gtk.Entry)) {
                 var action = new RotateAction (app.Document, app.IconView.SelectedPages, degrees);
@@ -548,7 +548,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void OnClose (object o, EventArgs args)
+        void OnClose (object o, EventArgs args)
         {
             app.Quit ();
         }

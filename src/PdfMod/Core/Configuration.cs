@@ -20,14 +20,14 @@ namespace PdfMod.Core
 {    
     public class Configuration
     {
-        private GConf.Client client = new GConf.Client ();
-        private string ns = "/apps/pdfmod/";
+        GConf.Client client = new GConf.Client ();
+        string ns = "/apps/pdfmod/";
 
         public Configuration()
         {
         }
 
-        private T Get<T> (string key, T fallback)
+        T Get<T> (string key, T fallback)
         {
             try {
                 return (T) client.Get (ns + key);
@@ -36,7 +36,7 @@ namespace PdfMod.Core
             }
         }
 
-        private void Set<T> (string key, T val)
+        void Set<T> (string key, T val)
         {
             client.Set (ns + key, val);
         }

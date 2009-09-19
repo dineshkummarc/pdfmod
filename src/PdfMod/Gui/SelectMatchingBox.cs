@@ -24,8 +24,8 @@ namespace PdfMod.Gui
 {
     public class QueryBox : EventBox
     {
-        private Client app;
-        private HBox hbox;
+        Client app;
+        HBox hbox;
         public Entry Entry { get; private set; }
 
         public QueryBox (Client app)
@@ -67,7 +67,7 @@ namespace PdfMod.Gui
             app.IconView.GrabFocus ();
         }
 
-        private void OnActivated (object o, EventArgs args)
+        void OnActivated (object o, EventArgs args)
         {
             Hide ();
             if (!String.IsNullOrEmpty (Entry.Text.Trim ())) {
@@ -75,7 +75,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private bool changing_style;
+        bool changing_style;
         protected override void OnStyleSet (Style style)
         {
             if (!changing_style) {

@@ -45,7 +45,7 @@ namespace PdfMod.Pdf.Actions
 {
     public class ExportImagesAction
     {
-        private List<ImageInfo> image_objects;
+        List<ImageInfo> image_objects;
 
         public ExportImagesAction (Document document, IEnumerable<Page> pages)
         {
@@ -63,7 +63,7 @@ namespace PdfMod.Pdf.Actions
             }
         }
 
-        private IEnumerable<ImageInfo> GetImageObjectsFrom (IEnumerable<Page> pages)
+        IEnumerable<ImageInfo> GetImageObjectsFrom (IEnumerable<Page> pages)
         {
             // Doesn't seem like you can get the images just on one page; the following
             // gets all the images in the whole document, so only need to do it from one page
@@ -94,7 +94,7 @@ namespace PdfMod.Pdf.Actions
             //}
         }
 
-        private bool IsExportable (ImageInfo image)
+        bool IsExportable (ImageInfo image)
         {
             var filter = image.ImageObject.Elements.GetName("/Filter");
             return filter == "/DCTDecode" || filter == "/FlateDecode";
@@ -116,7 +116,7 @@ namespace PdfMod.Pdf.Actions
             }
         }
 
-        private static string GetFilename (ImageInfo image, string to_path, string ext)
+        static string GetFilename (ImageInfo image, string to_path, string ext)
         {
             var name = image.ImageObject.Elements.GetName ("/Name");
             var name_fragment = String.IsNullOrEmpty (name) ? null : String.Format (" ({0})", name);
@@ -162,7 +162,7 @@ namespace PdfMod.Pdf.Actions
             }
         }
 
-        private class ImageInfo {
+        class ImageInfo {
             public Page Page { get; set; }
             public PdfDictionary ImageObject { get; set; }
             public int PageIndex { get; set; }

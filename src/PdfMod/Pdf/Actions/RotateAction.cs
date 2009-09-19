@@ -8,7 +8,7 @@ namespace PdfMod.Pdf.Actions
 {
     public class RotateAction : BasePageAction
     {
-        private int rotation;
+        int rotation;
 
         public RotateAction (Document document, IEnumerable<Page> pages, int rotation) : base (document, pages)
         {

@@ -44,24 +44,24 @@ namespace PdfMod.Gui
         public const int MIN_WIDTH = 128;
         public const int MAX_WIDTH = 2054;
 
-        private enum Target {
+        enum Target {
             UriSrc,
             UriDest,
             MoveInternal,
             MoveExternal
         }
 
-        private static readonly TargetEntry uri_src_target = new TargetEntry ("text/uri-list", 0, (uint)Target.UriSrc);
-        private static readonly TargetEntry uri_dest_target = new TargetEntry ("text/uri-list", TargetFlags.OtherApp, (uint)Target.UriDest);
-        private static readonly TargetEntry move_internal_target = new TargetEntry ("pdfmod/page-list", TargetFlags.Widget, (uint)Target.MoveInternal);
-        private static readonly TargetEntry move_external_target = new TargetEntry ("pdfmod/page-list-external", 0, (uint)Target.MoveExternal);
+        static readonly TargetEntry uri_src_target = new TargetEntry ("text/uri-list", 0, (uint)Target.UriSrc);
+        static readonly TargetEntry uri_dest_target = new TargetEntry ("text/uri-list", TargetFlags.OtherApp, (uint)Target.UriDest);
+        static readonly TargetEntry move_internal_target = new TargetEntry ("pdfmod/page-list", TargetFlags.Widget, (uint)Target.MoveInternal);
+        static readonly TargetEntry move_external_target = new TargetEntry ("pdfmod/page-list-external", 0, (uint)Target.MoveExternal);
 
-        private Client app;
-        private Document document;
-        private PageListStore store;
-        private PageCell page_renderer;
-        private PageSelectionMode page_selection_mode = PageSelectionMode.None;
-        private bool highlighted;
+        Client app;
+        Document document;
+        PageListStore store;
+        PageCell page_renderer;
+        PageSelectionMode page_selection_mode = PageSelectionMode.None;
+        bool highlighted;
 
         public PageListStore Store { get { return store; } }
         public bool CanZoomIn { get; private set; }
@@ -129,21 +129,21 @@ namespace PdfMod.Gui
             }
         }
 
-        private void HandleSizeAllocated (object o, EventArgs args)
+        void HandleSizeAllocated (object o, EventArgs args)
         {
             if (!zoom_manually_set) {
                 ZoomFit ();
             }
         }
 
-        private void HandleSelectionChanged (object o, EventArgs args)
+        void HandleSelectionChanged (object o, EventArgs args)
         {
             if (!refreshing_selection) {
                 page_selection_mode = PageSelectionMode.None;
             }
         }
 
-        private void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
+        void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
         {
             if (args.Event.Button == 3) {
                 var path = GetPathAtPos ((int)args.Event.X, (int)args.Event.Y);
@@ -176,7 +176,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void HandlePopupMenu (object o, PopupMenuArgs args)
+        void HandlePopupMenu (object o, PopupMenuArgs args)
         {
             app.Actions["PageContextMenu"].Activate ();
         }
@@ -185,7 +185,7 @@ namespace PdfMod.Gui
 
         #region Drag and Drop event handling
 
-        private void HandleDragLeave (object o, DragLeaveArgs args)
+        void HandleDragLeave (object o, DragLeaveArgs args)
         {
             if (highlighted) {
                 Gtk.Drag.Unhighlight (this);
@@ -231,7 +231,7 @@ namespace PdfMod.Gui
             return false;
         }
 
-        private void SetDestInfo (int x, int y)
+        void SetDestInfo (int x, int y)
         {
             TreePath path;
             IconViewDropPosition pos;
@@ -239,7 +239,7 @@ namespace PdfMod.Gui
             SetDragDestItem (path, pos);
         }
 
-        private void HandleDragDataGet(object o, DragDataGetArgs args)
+        void HandleDragDataGet(object o, DragDataGetArgs args)
         {
             if (args.Info == move_internal_target.Info) {
                 var pages = new Hyena.Gui.DragDropList<Page> ();
@@ -257,7 +257,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void GetCorrectedPathAndPosition (int x, int y, out TreePath path, out IconViewDropPosition pos)
+        void GetCorrectedPathAndPosition (int x, int y, out TreePath path, out IconViewDropPosition pos)
         {
             GetDestItemAtPos (x, y, out path, out pos);
 
@@ -271,7 +271,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private int GetDropIndex (int x, int y)
+        int GetDropIndex (int x, int y)
         {
             TreePath path;
             TreeIter iter;
@@ -293,8 +293,8 @@ namespace PdfMod.Gui
             return to_index;
         }
 
-        private static string [] newline = new string [] { "\r\n" };
-        private void HandleDragDataReceived (object o, DragDataReceivedArgs args)
+        static string [] newline = new string [] { "\r\n" };
+        void HandleDragDataReceived (object o, DragDataReceivedArgs args)
         {
             args.RetVal = false;
             string target = (string)args.SelectionData.Target;
@@ -369,7 +369,7 @@ namespace PdfMod.Gui
             GrabFocus ();
         }
 
-        private void OnPagesAdded (int index, Page [] pages)
+        void OnPagesAdded (int index, Page [] pages)
         {
             foreach (var page in pages) {
                 store.InsertWithValues (index, store.GetValuesForPage (page));
@@ -379,7 +379,7 @@ namespace PdfMod.Gui
             Refresh ();
         }
 
-        private void OnPagesChanged (Page [] pages)
+        void OnPagesChanged (Page [] pages)
         {
             /*foreach (var page in pages) {
                 var iter = store.GetIterForPage (page);
@@ -391,7 +391,7 @@ namespace PdfMod.Gui
             Refresh ();
         }
 
-        private void OnPagesRemoved (Page [] pages)
+        void OnPagesRemoved (Page [] pages)
         {
             foreach (var page in pages) {
                 var iter = store.GetIterForPage (page);
@@ -404,13 +404,13 @@ namespace PdfMod.Gui
             Refresh ();
         }
 
-        private void OnPagesMoved ()
+        void OnPagesMoved ()
         {
             UpdateAllPages ();
             Refresh ();
         }
 
-        private void Refresh ()
+        void Refresh ()
         {
             if (!zoom_manually_set) {
                 ZoomFit ();
@@ -418,7 +418,7 @@ namespace PdfMod.Gui
             RefreshSelection ();
         }
 
-        private void UpdateAllPages ()
+        void UpdateAllPages ()
         {
             foreach (var page in document.Pages) {
                 var iter = store.GetIterForPage (page);
@@ -431,7 +431,7 @@ namespace PdfMod.Gui
 
         #endregion
 
-        private bool zoom_manually_set;
+        bool zoom_manually_set;
         public void Zoom (int pixels)
         {
             CanZoomIn = CanZoomOut = true;
@@ -462,7 +462,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private int last_zoom, before_last_zoom;
+        int last_zoom, before_last_zoom;
         public void ZoomFit ()
         {
             if (document == null)
@@ -507,7 +507,7 @@ namespace PdfMod.Gui
 
         #region Selection
 
-        private string selection_match_query;
+        string selection_match_query;
         public void SetSelectionMatchQuery (string query)
         {
             selection_match_query = query;
@@ -520,8 +520,8 @@ namespace PdfMod.Gui
             RefreshSelection ();
         }
 
-        private bool refreshing_selection;
-        private void RefreshSelection ()
+        bool refreshing_selection;
+        void RefreshSelection ()
         {
             refreshing_selection = true;
             if (page_selection_mode == PageSelectionMode.None) {

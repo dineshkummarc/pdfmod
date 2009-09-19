@@ -35,13 +35,17 @@ namespace PdfMod.Gui
 {
     public class Client : Core.Client
     {
-        private static int app_count = 0;
-        private static string accel_map_file = Path.Combine (Path.Combine (
+        static int app_count = 0;
+        static string accel_map_file = Path.Combine (Path.Combine (
             XdgBaseDirectorySpec.GetUserDirectory ("XDG_CONFIG_HOME", ".config"), "pdfmod"), "gtk_accel_map");
 
-        private Gtk.MenuBar menu_bar;
-        private Gtk.Label status_label;
-        private QueryBox query_box;
+        Gtk.MenuBar menu_bar;
+        Gtk.Label status_label;
+        QueryBox query_box;
+
+        bool loading;
+        string original_size_string = null;
+        long original_size;
 
         public ActionManager ActionManager { get; private set; }
         public Gtk.Toolbar HeaderToolbar;
@@ -180,7 +184,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private bool PromptIfUnsavedChanges ()
+        bool PromptIfUnsavedChanges ()
         {
             if (Document != null && Document.HasUnsavedChanged) {
                 var message_dialog = new Hyena.Widgets.HigMessageDialog (
@@ -236,7 +240,6 @@ namespace PdfMod.Gui
             }
         }
 
-        private bool loading;
         public override void LoadPath (string path, string suggestedFilename)
         {
             lock (this) {
@@ -291,9 +294,7 @@ namespace PdfMod.Gui
             });
         }
 
-        private string original_size_string = null;
-        private long original_size;
-        private void UpdateForDocument ()
+        void UpdateForDocument ()
         {
             var current_size = Document.FileSize;
             string size_str = null;
@@ -360,7 +361,7 @@ namespace PdfMod.Gui
             reset_event.WaitOne ();
         }
 
-        private static void OnLogNotify (LogNotifyArgs args)
+        static void OnLogNotify (LogNotifyArgs args)
         {
             ThreadAssist.ProxyToMain (delegate {
                 Gtk.MessageType mtype;

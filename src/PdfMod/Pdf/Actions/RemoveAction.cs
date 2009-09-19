@@ -13,7 +13,7 @@ namespace PdfMod.Pdf.Actions
 {
     public class RemoveAction : BasePageAction
     {
-        private int [] old_indices;
+        int [] old_indices;
 
         public RemoveAction (Document document, IEnumerable<Page> pages) : base (document, pages)
         {

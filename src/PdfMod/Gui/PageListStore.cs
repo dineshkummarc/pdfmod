@@ -64,7 +64,7 @@ namespace PdfMod.Gui
             }
         }
         
-        private string GetPageTooltip (Page page)
+        string GetPageTooltip (Page page)
         {
             var label = page.Document.Labels[page];
             string page_no = Catalog.GetString (String.Format ("Page {0}", page.Index + 1));

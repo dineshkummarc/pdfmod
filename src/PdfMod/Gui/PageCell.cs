@@ -31,8 +31,8 @@ namespace PdfMod.Gui
     {
         const int scale_every = 400;
 
-        private ThumbnailLruCache surface_cache;
-        private IconView parent;
+        ThumbnailLruCache surface_cache;
+        IconView parent;
 
         public PageCell (IconView parent)
         {
@@ -120,7 +120,7 @@ namespace PdfMod.Gui
             cr.Paint ();
         }
 
-        private void PaintDocumentBorder (Context cr, double doc_width, double doc_height, double border_width)
+        void PaintDocumentBorder (Context cr, double doc_width, double doc_height, double border_width)
         {
             // Paint a nice document-like border around it
             var thin = 0.25 * border_width;
@@ -147,7 +147,7 @@ namespace PdfMod.Gui
             cr.Translate (border_width, border_width);
         }
 
-        private class ThumbnailLruCache : LruCache<Page, PageThumbnail>
+        class ThumbnailLruCache : LruCache<Page, PageThumbnail>
         {
             public ThumbnailLruCache () : base (60, 0.8)
             {

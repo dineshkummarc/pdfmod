@@ -39,7 +39,7 @@ namespace PdfMod
             new Gui.Client (true);
         }
 
-        private static void InitCatalog (params string [] dirs)
+        static void InitCatalog (params string [] dirs)
         {
             foreach (var dir in dirs) {
                 var test_file = Path.Combine (dir, "fr/LC_MESSAGES/pdfmod.mo");

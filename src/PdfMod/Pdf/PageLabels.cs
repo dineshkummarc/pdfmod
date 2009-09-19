@@ -34,25 +34,25 @@ namespace PdfMod.Pdf
 
     public class PageLabels
     {
-        private const string name_labels = "/PageLabels";
-        private const string name_numtree = "/Nums";
+        const string name_labels = "/PageLabels";
+        const string name_numtree = "/Nums";
 
         // Keys (PdfNames) for formatting attributes
-        private const string name_fmt = "/S";
-        private const string name_start_at = "/St";
-        private const string name_prefix = "/P";
+        const string name_fmt = "/S";
+        const string name_start_at = "/St";
+        const string name_prefix = "/P";
 
         // Possible values for the numbering style
-        private const string alpha_upper = "/A";
-        private const string alpha_lower = "/a";
-        private const string roman_upper = "/R";
-        private const string roman_lower = "/r";
-        private const string arabic = "/D";
+        const string alpha_upper = "/A";
+        const string alpha_lower = "/a";
+        const string roman_upper = "/R";
+        const string roman_lower = "/r";
+        const string arabic = "/D";
 
-        private SortedDictionary<int, PageLabelFormat> page_labels;
-        private PdfDictionary.DictionaryElements pdf_elements;
-        private PdfDocument pdf_document;
-        private bool edited;
+        SortedDictionary<int, PageLabelFormat> page_labels;
+        PdfDictionary.DictionaryElements pdf_elements;
+        PdfDocument pdf_document;
+        bool edited;
 
         public string this[Page page] { get { return this[page.Index]; } }
 
@@ -145,7 +145,7 @@ namespace PdfMod.Pdf
         }
 
         // Determine which formatting rules apply to page index.  Returns the start of the formatting range
-        private int GetFormat (int index)
+        int GetFormat (int index)
         {
             // TODO: find the correct range using a binary search
 
@@ -161,7 +161,7 @@ namespace PdfMod.Pdf
         }
 
         // Render the value index in the proper format (case-agnostic)
-        private string RenderVal (int index, string fmt)
+        string RenderVal (int index, string fmt)
         {
             if (arabic == fmt) {
                 return index.ToString ();
@@ -175,7 +175,7 @@ namespace PdfMod.Pdf
         }
 
         // Convert val into Roman numerals
-        private string ToRoman (int val)
+        string ToRoman (int val)
         {
             StringBuilder roman_val = new StringBuilder ();
             // TODO: see if there's a more elegant conversion
@@ -233,7 +233,7 @@ namespace PdfMod.Pdf
         }
 
         // Convert val into the alpha representation. 1 -> a, 2 -> b, ... 26 -> z, 27 -> aa, 28 -> bb, etc.
-        private string ToAlpha (int val)
+        string ToAlpha (int val)
         {
             char letter = (char)((val - 1) % 26 + 'a');
             int rep_count = (val - 1)/26 + 1;

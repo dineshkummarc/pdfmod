@@ -30,11 +30,14 @@ namespace PdfMod.Pdf
 {
     public class Document : IDisposable
     {
-        private PdfDocument pdf_document;
-        private List<Page> pages = new List<Page> ();
-        private string tmp_path;
-        private string tmp_uri;
-        private PageLabels page_labels;
+        PdfDocument pdf_document;
+        List<Page> pages = new List<Page> ();
+        string tmp_path;
+        string tmp_uri;
+        PageLabels page_labels;
+        Poppler.Document poppler_doc;
+        uint save_timeout_id = 0;
+
         internal string CurrentStateUri { get { return tmp_uri ?? Uri; } }
 
         public PageLabels Labels { get { return page_labels; } }
@@ -315,8 +318,7 @@ namespace PdfMod.Pdf
             }
         }
 
-        private Poppler.Document poppler_doc;
-        private Poppler.Document PopplerDoc {
+        Poppler.Document PopplerDoc {
             get {
                 if (poppler_doc == null) {
                     poppler_doc = Poppler.Document.NewFromFile (tmp_uri ?? Uri, Password ?? "");
@@ -325,7 +327,7 @@ namespace PdfMod.Pdf
             }
         }
 
-        private void ExpireThumbnails (IEnumerable<Page> update_pages)
+        void ExpireThumbnails (IEnumerable<Page> update_pages)
         {
             if (poppler_doc != null) {
                 poppler_doc.Dispose ();
@@ -357,15 +359,14 @@ namespace PdfMod.Pdf
             }
         }
 
-        private void Reindex ()
+        void Reindex ()
         {
             for (int i = 0; i < pages.Count; i++) {
                 pages[i].Index = i;
             }
         }
 
-        private uint save_timeout_id = 0;
-        private void StartSaveTempTimeout ()
+        void StartSaveTempTimeout ()
         {
             if (save_timeout_id != 0) {
                 GLib.Source.Remove (save_timeout_id);
@@ -374,14 +375,14 @@ namespace PdfMod.Pdf
             save_timeout_id = GLib.Timeout.Add (100, OnSaveTempTimeout);
         }
 
-        private bool OnSaveTempTimeout ()
+        bool OnSaveTempTimeout ()
         {
             save_timeout_id = 0;
             SaveTemp ();
             return false;
         }
 
-        private void SaveTemp ()
+        void SaveTemp ()
         {
             try {
                 if (tmp_path == null) {
@@ -401,7 +402,7 @@ namespace PdfMod.Pdf
             }
         }
 
-        private void OnPagesChanged (Page [] changed_pages)
+        void OnPagesChanged (Page [] changed_pages)
         {
             Reindex ();
             SaveTemp ();
@@ -414,7 +415,7 @@ namespace PdfMod.Pdf
             OnChanged ();
         }
 
-        private void OnChanged ()
+        void OnChanged ()
         {
             var handler = Changed;
             if (handler != null) {

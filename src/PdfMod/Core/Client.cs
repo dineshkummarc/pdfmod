@@ -28,8 +28,8 @@ namespace PdfMod.Core
 {
     public abstract class Client
     {
-        private static readonly string old_cache_dir = Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
-        private static readonly string CacheDir = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory ("XDG_CACHE_HOME", ".cache"), "pdfmod");
+        static readonly string old_cache_dir = Path.Combine (System.Environment.GetFolderPath (System.Environment.SpecialFolder.ApplicationData), "pdfmod");
+        static readonly string CacheDir = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory ("XDG_CACHE_HOME", ".cache"), "pdfmod");
 
         public Document Document { get; protected set; }
         public static Configuration Configuration { get; private set; }
@@ -70,7 +70,7 @@ namespace PdfMod.Core
 
         public abstract void LoadPath (string path, string suggestedFilename);
 
-        private static void InitCache ()
+        static void InitCache ()
         {
             // Remove the old "cache" dir that really ended up being ~/.config/
             if (Directory.Exists (old_cache_dir)) {

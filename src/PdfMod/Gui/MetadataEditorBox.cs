@@ -25,13 +25,13 @@ namespace PdfMod.Gui
 {
     public class MetadataEditorBox : EventBox
     {
-        private Client app;
-        private Table table;
-        private Button revert_button;
-        private Document doc;
+        Client app;
+        Table table;
+        Button revert_button;
+        Document doc;
 
-        private TextProperty [] properties;
-        private TextProperty title, author, keywords, subject;
+        TextProperty [] properties;
+        TextProperty title, author, keywords, subject;
 
         public MetadataEditorBox (Client app)
         {
@@ -58,7 +58,7 @@ namespace PdfMod.Gui
             ShowAll ();
         }
 
-        private void BuildEditor ()
+        void BuildEditor ()
         {
             title    = new TextProperty (Catalog.GetString ("_Title:"),    t => doc.Title = t);
             author   = new TextProperty (Catalog.GetString ("_Author:"),   t => doc.Author = t);
@@ -81,7 +81,7 @@ namespace PdfMod.Gui
             }
         }
 
-        private void BuildButtons ()
+        void BuildButtons ()
         {
             revert_button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Revert Properties"), "revert") {
                 TooltipText = Catalog.GetString ("Change the document's properties back to the original values")
@@ -99,7 +99,7 @@ namespace PdfMod.Gui
             table.Attach (close_button, 4, 5, 1, 2, AttachOptions.Fill, 0, 0, 0);
         }
 
-        private void UpdateSensitivity ()
+        void UpdateSensitivity ()
         {
             Sensitive = app.Document != null;
 
@@ -112,7 +112,7 @@ namespace PdfMod.Gui
 
         #region Event handlers
 
-        private void HandleDocumentLoaded (object o, EventArgs e)
+        void HandleDocumentLoaded (object o, EventArgs e)
         {
             doc = app.Document;
             var pdf = app.Document.Pdf;
@@ -154,7 +154,7 @@ namespace PdfMod.Gui
             UpdateSensitivity ();
         }
 
-        private void HandleRevert (object o, EventArgs args)
+        void HandleRevert (object o, EventArgs args)
         {
             foreach (var prop in properties) {
                 prop.Revert ();
@@ -180,14 +180,14 @@ namespace PdfMod.Gui
 
         #endregion
 
-        private class TextProperty
+        class TextProperty
         {
             public Entry Entry { get; private set; }
             public Label Label { get; private set; }
-            private string initial_value;
+            string initial_value;
 
-            private Hyena.Gui.EditableUndoAdapter<Entry> undo_adapter;
-            private Action<string> on_updated;
+            Hyena.Gui.EditableUndoAdapter<Entry> undo_adapter;
+            Action<string> on_updated;
 
             public TextProperty (string label, Action<string> onUpdated)
             {
