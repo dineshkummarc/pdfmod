@@ -41,6 +41,7 @@ namespace PdfMod.Gui
         Client app;
         UndoManager undo_manager;
         const string WIKI_URL = "http://live.gnome.org/PdfMod";
+        const string DOCS_URL = "http://library.gnome.org/users/pdfmod/";
 
         static string [] require_doc_actions = new string[] {
             "Save", "SaveAs", "Properties", "Undo", "Redo", "ZoomFit", "OpenInViewer",
@@ -427,7 +428,7 @@ namespace PdfMod.Gui
                 var response = (ResponseType) message_dialog.Run ();
                 message_dialog.Destroy ();
                 if (response == ResponseType.Yes) {
-                    System.Diagnostics.Process.Start (WIKI_URL);
+                    System.Diagnostics.Process.Start (DOCS_URL);
                 }
             }
         }
