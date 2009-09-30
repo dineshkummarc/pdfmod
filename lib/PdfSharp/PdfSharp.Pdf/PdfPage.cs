@@ -55,7 +55,7 @@ namespace PdfSharp.Pdf
       Elements.SetName(Keys.Type, "/Page");
 
       // TODO: Can I get default paper size from something like CultureInfo??
-      if (RegionInfo.CurrentRegion.IsMetric)
+      if (RegionInfo.CurrentRegion != null && RegionInfo.CurrentRegion.IsMetric)
         Size = PageSize.A4;
       else
         Size = PageSize.Letter;
@@ -72,7 +72,7 @@ namespace PdfSharp.Pdf
       Elements.SetName(Keys.Type, "/Page");
       Elements[PdfPage.Keys.Parent] = document.Pages.Reference;
 
-      if (RegionInfo.CurrentRegion.IsMetric)
+      if (RegionInfo.CurrentRegion != null && RegionInfo.CurrentRegion.IsMetric)
         Size = PageSize.A4;
       else
         Size = PageSize.Letter;
