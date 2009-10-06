@@ -6,10 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-17 21:00+0200\n"
-"PO-Revision-Date: 2009-08-17 21:18+0100\n"
+"Project-Id-Version: 0.8\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&component=general\n"
+"POT-Creation-Date: 2009-09-06 00:04+0000\n"
+"PO-Revision-Date: 2009-10-06 20:37+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -143,90 +144,94 @@ msgstr ""
 msgid "Toolbar"
 msgstr "Werkzeugleiste"
 
-#: ../src/PdfMod/Gui/Actions.cs:155
+#: ../src/PdfMod/Gui/Actions.cs:85
+msgid "Fullscreen"
+msgstr "Vollbild"
+
+#: ../src/PdfMod/Gui/Actions.cs:156
 msgid "_Undo"
 msgstr "_Rückgängig"
 
-#: ../src/PdfMod/Gui/Actions.cs:156
+#: ../src/PdfMod/Gui/Actions.cs:157
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Rückgängig {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:160
+#: ../src/PdfMod/Gui/Actions.cs:161
 msgid "_Redo"
 msgstr "_Wiederholen"
 
-#: ../src/PdfMod/Gui/Actions.cs:161
+#: ../src/PdfMod/Gui/Actions.cs:162
 #, csharp-format
 msgid "Redo {0}"
 msgstr "{0} wiederholen"
 
-#: ../src/PdfMod/Gui/Actions.cs:169
+#: ../src/PdfMod/Gui/Actions.cs:170
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Seite entfernen"
 msgstr[1] "{0} Seiten entfernen"
 
-#: ../src/PdfMod/Gui/Actions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:173
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "Ausgewählte Seite entfernen"
 msgstr[1] "{0} ausgewählte Seiten entfernen"
 
-#: ../src/PdfMod/Gui/Actions.cs:175
+#: ../src/PdfMod/Gui/Actions.cs:176
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "Seite extrahieren"
 msgstr[1] "{0} Seiten extrahieren"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:179
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Ausgewählte Seite extrahieren"
 msgstr[1] "{0} ausgewählte Seiten extrahieren"
 
-#: ../src/PdfMod/Gui/Actions.cs:186 ../src/PdfMod/Gui/Actions.cs:215
+#: ../src/PdfMod/Gui/Actions.cs:187 ../src/PdfMod/Gui/Actions.cs:227
 msgid "Select PDF"
 msgstr "PDF auswählen"
 
-#: ../src/PdfMod/Gui/Actions.cs:187
+#: ../src/PdfMod/Gui/Actions.cs:188
 msgid "PDF Documents"
 msgstr "PDF-Dokumente"
 
-#: ../src/PdfMod/Gui/Actions.cs:188 ../src/PdfMod/Gui/Actions.cs:217
-#: ../src/PdfMod/Gui/Actions.cs:247
+#: ../src/PdfMod/Gui/Actions.cs:189 ../src/PdfMod/Gui/Actions.cs:229
+#: ../src/PdfMod/Gui/Actions.cs:259
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../src/PdfMod/Gui/Actions.cs:241
+#: ../src/PdfMod/Gui/Actions.cs:253
 msgid "Save as..."
 msgstr "Speichern unter …"
 
-#: ../src/PdfMod/Gui/Actions.cs:382
+#: ../src/PdfMod/Gui/Actions.cs:394
 msgid "Error opening help"
 msgstr "Fehler beim Öffnen der Hilfe"
 
-#: ../src/PdfMod/Gui/Actions.cs:383
+#: ../src/PdfMod/Gui/Actions.cs:395
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Möchten Sie die Online-Dokumentation von PDF Mod öffnen?"
 
-#: ../src/PdfMod/Gui/Actions.cs:404
+#: ../src/PdfMod/Gui/Actions.cs:416
 msgid "Visit Website"
 msgstr "Website besuchen"
 
-#: ../src/PdfMod/Gui/Actions.cs:406
+#: ../src/PdfMod/Gui/Actions.cs:418
 msgid "Primary Development:"
 msgstr "Hauptentwickler:"
 
-#: ../src/PdfMod/Gui/Actions.cs:409
+#: ../src/PdfMod/Gui/Actions.cs:421
 msgid "Contributors:"
 msgstr "Mitwirkende:"
 
-#: ../src/PdfMod/Gui/Actions.cs:422
+#: ../src/PdfMod/Gui/Actions.cs:437
 msgid "translator-credits"
 msgstr ""
 "Benjamin Elbers <elbersb@gmail.com>\n"
@@ -263,33 +268,33 @@ msgstr "_Alle öffnen"
 msgid "Loading document..."
 msgstr "Dokument wird geladen …"
 
-#: ../src/PdfMod/Gui/Client.cs:259
+#: ../src/PdfMod/Gui/Client.cs:266
 msgid "Error Loading Document"
 msgstr "Fehler beim Laden des Dokuments"
 
-#: ../src/PdfMod/Gui/Client.cs:260
+#: ../src/PdfMod/Gui/Client.cs:267
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Fehler beim Laden von {0}"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:287
+#: ../src/PdfMod/Gui/Client.cs:294
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (original {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:292
+#: ../src/PdfMod/Gui/Client.cs:299
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} Seite"
 msgstr[1] "{0} Seiten"
 
-#: ../src/PdfMod/Gui/Client.cs:308
+#: ../src/PdfMod/Gui/Client.cs:315
 msgid "Document is Encrypted"
 msgstr "Dokument ist verschlüsselt"
 
-#: ../src/PdfMod/Gui/Client.cs:309
+#: ../src/PdfMod/Gui/Client.cs:316
 msgid "Enter the document's password to open it:"
 msgstr "Geben Sie das Passwort des Dokuments ein, um es zu öffnen:"
 
