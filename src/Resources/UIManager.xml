@@ -28,6 +28,7 @@
       <menuitem action="SelectOdds"/>
       <menuitem action="SelectEvens"/>
       <menuitem action="SelectMatching"/>
+      <menuitem action="SelectInverse"/>
       <separator/>
     </menu>
     <menu action="ViewMenu">

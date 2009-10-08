@@ -45,7 +45,7 @@ namespace PdfMod.Gui
 
         static string [] require_doc_actions = new string[] {
             "Save", "SaveAs", "Properties", "Undo", "Redo", "ZoomFit", "OpenInViewer",
-            "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "InsertFrom", "ExportImages"
+            "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "SelectInverse", "InsertFrom", "ExportImages"
         };
 
         static string [] require_page_actions = new string[] {
@@ -79,6 +79,7 @@ namespace PdfMod.Gui
                 new ActionEntry ("SelectEvens", null, Catalog.GetString ("Select Even Pages"), null, null, OnSelectEvens),
                 new ActionEntry ("SelectOdds", null, Catalog.GetString ("Select Odd Pages"), null, null, OnSelectOdds),
                 new ActionEntry ("SelectMatching", null, Catalog.GetString ("Select Matching..."), "<control>F", null, OnSelectMatching),
+                new ActionEntry ("SelectInverse", null, Catalog.GetString ("_Invert Selection"), "<shift><control>I", null, OnSelectInverse),
                 new ActionEntry ("Undo", Stock.Undo, null, "<control>z", null, OnUndo),
                 new ActionEntry ("Redo", Stock.Redo, null, "<control>y", null, OnRedo),
 
@@ -509,6 +510,11 @@ namespace PdfMod.Gui
         void OnSelectMatching (object o, EventArgs args)
         {
             app.ToggleMatchQuery ();
+        }
+
+        void OnSelectInverse (object o, EventArgs args)
+        {
+            app.IconView.SetPageSelectionMode (PageSelectionMode.Inverse);
         }
 
         void OnZoomIn (object o, EventArgs args)

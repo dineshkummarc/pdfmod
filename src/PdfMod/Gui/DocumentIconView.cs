@@ -35,6 +35,7 @@ namespace PdfMod.Gui
         Evens,
         Odds,
         Matching,
+        Inverse,
         All
     }
 
@@ -541,6 +542,9 @@ namespace PdfMod.Gui
                             break;
                         case PageSelectionMode.Matching:
                             select = matches.Contains (store.GetValue (iter, PageListStore.PageColumn) as Page);
+                            break;
+                        case PageSelectionMode.Inverse:
+                            select = !PathIsSelected (path);
                             break;
                     }
 
