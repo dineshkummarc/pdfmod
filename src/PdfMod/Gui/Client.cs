@@ -249,8 +249,10 @@ namespace PdfMod.Gui
                 loading = true;
             }
             
-            path = System.IO.Path.GetFullPath (path);
-
+            if (!path.StartsWith ("file://")) {
+                path = System.IO.Path.GetFullPath (path);
+            }
+            
             Configuration.LastOpenFolder = System.IO.Path.GetDirectoryName (suggestedFilename ?? path);
             status_label.Text = Catalog.GetString ("Loading document...");
 
