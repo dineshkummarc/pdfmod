@@ -1,0 +1,341 @@
+# Czech help translation for pdfmod.
+# Copyright (C) 2009 the author(s) of pdfmod.
+# This file is distributed under the same license as the pdfmod help.
+# Marek Černocký <marek@manet.cz>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod master\n"
+"POT-Creation-Date: 2009-09-26 00:46+0000\n"
+"PO-Revision-Date: 2009-10-05 07:54+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: C/pdfmod.xml:6(title)
+msgid "The PDF Mod Manual"
+msgstr "Příručka k aplikaci PDF Mod"
+
+#: C/pdfmod.xml:8(para)
+msgid ""
+"This is the user's manual for PDF Mod, a simple tool for manipulating PDF "
+"documents."
+msgstr ""
+"Toto je uživatelská příručka k PDF Mod, jednoduchému nástroji pro manipulaci "
+"s dokumenty PDF."
+
+#: C/pdfmod.xml:10(subtitle)
+msgid "Quick, Easy PDF Modification"
+msgstr "Rychlá a snadná úprava PDF"
+
+#: C/pdfmod.xml:12(year)
+msgid "2009"
+msgstr "2009"
+
+#: C/pdfmod.xml:13(holder) C/pdfmod.xml:23(orgname)
+msgid "Novell, Inc."
+msgstr "Novell, Inc."
+
+#: C/pdfmod.xml:16(publishername)
+msgid "GNOME Documentation Project"
+msgstr "Dokumentační projekt GNOME"
+
+#: C/pdfmod.xml:20(firstname)
+msgid "Gabriel"
+msgstr "Gabriel"
+
+#: C/pdfmod.xml:21(surname)
+msgid "Burt"
+msgstr "Burt"
+
+#: C/pdfmod.xml:29(revnumber)
+msgid "0.2"
+msgstr "0.2"
+
+#: C/pdfmod.xml:30(date)
+msgid "2009-07-29"
+msgstr "29.7.2008"
+
+#: C/pdfmod.xml:33(revnumber)
+msgid "0.1"
+msgstr "0.1"
+
+#: C/pdfmod.xml:34(date)
+msgid "2009-07-25"
+msgstr "25.7.2009"
+
+#: C/pdfmod.xml:40(title)
+msgid "Introduction"
+msgstr "Úvod"
+
+#: C/pdfmod.xml:41(para)
+msgid ""
+"PDF Mod is a simple tool for doing basic manipulations of PDF documents."
+msgstr ""
+"PDF Mod je jednoduchý nástroj na provádění základních změn v dokumentech PDF."
+
+#: C/pdfmod.xml:45(para)
+msgid ""
+"With this tool, you can rotate, remove, or extract pages in a PDF document. "
+"You can also add pages from another document."
+msgstr ""
+"S tímto nástrojem můžete otáčet, odstraňovat a nebo extrahovat stránky v "
+"dokumentech PDF. Můžete také přidávat stránky z jiného dokumentu."
+
+#: C/pdfmod.xml:50(para)
+msgid ""
+"You can start PDF Mod from your applications menu or launcher, or by right "
+"clicking on one or more PDF documents in the file browser, and choosing to "
+"open with PDF Mod."
+msgstr ""
+"Aplikaci PDF Mod můžete spustit ze své aplikační nabídky nebo spouštěče a "
+"nebo kliknutím pravým tlačítkem na jeden nebo více dokumentů PDF ve správci "
+"souborů a volbou Otevřít s PDF Mod."
+
+#: C/pdfmod.xml:56(para)
+msgid ""
+"Like a normal editor application, you must save the changes you make using "
+"PDF Mod. If you want to keep the original document and save your changes to "
+"a new file, use Save As."
+msgstr ""
+"Podobně jako v jiných aplikacích určených k editaci, musíte změny, které v "
+"PDF Mod provedete, uložit. Pokud chcete původní dokument zachovat jak je a "
+"změny uložit do nového souboru, použijte Uložit jako."
+
+#: C/pdfmod.xml:63(title)
+msgid "Usage"
+msgstr "Použití"
+
+#: C/pdfmod.xml:66(title)
+msgid "Opening a Document"
+msgstr "Otevírání dokumentu"
+
+#: C/pdfmod.xml:67(para)
+msgid "To open a document in PDF Mod:"
+msgstr "Pokud chcete otevřít dokument v PDF Mod:"
+
+#: C/pdfmod.xml:72(para)
+msgid ""
+"Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></"
+"menuchoice> and select your document, or"
+msgstr ""
+"Zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Otevřít</"
+"guimenuitem></menuchoice> a vyberte svůj dokument nebo"
+
+#: C/pdfmod.xml:77(para)
+msgid ""
+"Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> and "
+"select your document, or"
+msgstr ""
+"Zmáčkněte <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> a "
+"vyberte svůj dokument nebo"
+
+#: C/pdfmod.xml:87(para)
+msgid ""
+"Drag a PDF document from your Desktop or file browser into a PDF Mod window "
+"that doesn't already have a document loaded, or"
+msgstr ""
+"Přetáhněte dokument PDF ze své pracovní plochy nebo správce souborů do okna "
+"PDF Mod, ve kterém zatím není načtený žádný dokument, nebo"
+
+#: C/pdfmod.xml:92(para)
+msgid ""
+"Choose a document from <menuchoice><guimenu>File</"
+"guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>."
+msgstr ""
+"Zvolte dokument z nabídky <menuchoice><guimenu>Soubor</"
+"guimenu><guimenuitem>Nedávné dokumenty</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:100(title)
+msgid "Zooming"
+msgstr "Přibližování"
+
+#: C/pdfmod.xml:101(para)
+msgid ""
+"Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in "
+"Best Fit mode, where it tries to make all the pages visible at once."
+msgstr ""
+"Přibližováním můžete zvětšovat nebo zmenšovat náhledy stránek. PDF Mod se "
+"spouští s režimem Přizpůsobit, kdy se pokusí zobrazit stránky tak, aby byly "
+"vidět všechny naráz."
+
+#: C/pdfmod.xml:104(para)
+msgid ""
+"You can zoom in or out with the options under <menuchoice><guimenu>View</"
+"guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your "
+"mouse's scroll wheel."
+msgstr ""
+"Zvětšovat a zmenšovat můžete pomocí voleb v nabídce "
+"<menuchoice><guimenu>Zobrazit</guimenu></menuchoice> nebo zmáčknutím "
+"<keycap>Ctrl</keycap> a současným otáčením kolečka na myši."
+
+#: C/pdfmod.xml:110(title)
+msgid "Viewing and Editing Properties"
+msgstr "Zobrazování a úprava vlastností"
+
+#: C/pdfmod.xml:111(para)
+msgid ""
+"You can view and edit the Title, Author, Keywords, and Subject of the "
+"document by opening the properties. To do so, choose "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></"
+"menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></"
+"keycombo>, or click the Properties button on the toolbar."
+msgstr ""
+"Po otevření vlastností můžete zobrazit a upravit název, autora, klíčová "
+"slova a subjekt dokumentu. To provedete tak, že zvolíte "
+"<menuchoice><guimenu>Soubor</guimenu><guimenuitem>Vlastnosti</guimenuitem></"
+"menuchoice>, zmáčknete <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></"
+"keycombo> nebo kliknete na tlačítko Vlastnosti na panelu nástrojů."
+
+#: C/pdfmod.xml:119(title)
+msgid "Selecting Pages"
+msgstr "Vybírání stránek"
+
+#: C/pdfmod.xml:120(para)
+msgid ""
+"PDF Mod can automatically select all pages, even-numbered pages, odd-"
+"numbered pages, or pages containing a search term. These options are "
+"available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
+msgstr ""
+"Aplikace PDF Mod umí automaticky vybrat všechny stránky, sudé stránky, liché "
+"stránky nebo stránky obsahující hledaný výraz. Tyto volby jsou k dispozici v "
+"nabídce <menuchoice><guimenu>Úpravy</guimenu></menuchoice>."
+
+#: C/pdfmod.xml:124(para)
+msgid ""
+"You can select pages manually using the keyboard and mouse as well. Use "
+"<keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
+msgstr ""
+"Stránky můžete vybírat i ručně pomocí klávesnice nebo myši. V případě, že "
+"chcete vybrat více stránek, použijte <keycap>Ctrl</keycap> nebo "
+"<keycap>Shift</keycap>."
+
+#: C/pdfmod.xml:130(title)
+msgid "Moving Pages"
+msgstr "Přesouvání stránek"
+
+#: C/pdfmod.xml:131(para)
+msgid ""
+"To move (aka reorder) the selected page or pages, drag them to the position "
+"in the document to which you want them moved."
+msgstr ""
+"Pokud chcete přesunout (přeuspořádat) vybranou stránku nebo stránky, "
+"přetáhněte je v dokumentu na místo, kde je chcete mít."
+
+#: C/pdfmod.xml:135(para)
+msgid ""
+"All editing actions except removing pages can be undone by choosing "
+"<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></"
+"menuchoice> or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Z</"
+"keycap></keycombo>."
+msgstr ""
+"Všechny úpravy, vyjma odstraňování stránek, lze vrátit zpět volbou "
+"<menuchoice><guimenu>Upravit</guimenu><guimenuitem>Zpět</guimenuitem></"
+"menuchoice> nebo zmáčknutím <keycombo><keycap>Ctrl</keycap><keycap>Z</"
+"keycap></keycombo>."
+
+#: C/pdfmod.xml:144(title)
+msgid "Extracting Pages"
+msgstr "Extrahování stránek"
+
+#: C/pdfmod.xml:145(para)
+msgid ""
+"Extracting the selected page or pages will open a new PDF Mod window with "
+"just the selected pages in a new document, ready for further editing or to "
+"save."
+msgstr ""
+"Extrahování vybrané stránky nebo stránek otevře nové okno PDF Mod s právě "
+"vybranými stránkami v novém dokumentu, který je připravený pro pozdější "
+"uložení."
+
+#: C/pdfmod.xml:148(para)
+msgid ""
+"To extract the selected page or pages, choose <menuchoice><guimenu>Edit</"
+"guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
+msgstr ""
+"Pokud chcete extrahovat vybranou stránku nebo stránky, zvolte "
+"<menuchoice><guimenu>Upravit</guimenu><guimenuitem>Extrahovat stránku</"
+"guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:152(para)
+msgid ""
+"All of the editing and selection actions available under "
+"<menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right "
+"clicking on a page. Some actions are available on the toolbar as well."
+msgstr ""
+"Všechny funkce pro úpravy a výběr dostupné v nabídce "
+"<menuchoice><guimenu>Upravit</guimenu></menuchoice> jsou k dispozici i po "
+"kliknutí pravým tlačítkem na stránce. Některé funkce jsou dostupné i na "
+"panelu nástrojů."
+
+#: C/pdfmod.xml:160(title)
+msgid "Rotating Pages"
+msgstr "Otáčení stránek"
+
+#: C/pdfmod.xml:161(para)
+msgid ""
+"To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</"
+"guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press "
+"<keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and "
+"<keycombo><keycap>]</keycap></keycombo> to rotate right (CW)."
+msgstr ""
+"Pokud chcete otočit vybranou stránku nebo stránky, zvolte "
+"<menuchoice><guimenu>Upravit</guimenu><guimenuitem>Otočit stránku</"
+"guimenuitem></menuchoice> nebo zmáčkněte <keycombo><keycap>[</keycap></"
+"keycombo> pro otočení vlevo (proti směru hodinových ručiček) a "
+"<keycombo><keycap>]</keycap></keycombo> pro otočení vpravo (po směru "
+"hodinových ručiček)."
+
+#: C/pdfmod.xml:168(title)
+msgid "Removing Pages"
+msgstr "Odstraňování stránek"
+
+#: C/pdfmod.xml:169(para)
+msgid ""
+"To remove the selected page or pages, press <keycap>Delete</keycap> or "
+"choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"Pokud chcete odstranit vybranou stránku nebo stránky, zmáčkněte "
+"<keycap>Delete</keycap> nebo zvolte <menuchoice><guimenu>Upravit</"
+"guimenu><guimenuitem>Odstranit stránku</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:174(para)
+msgid ""
+"It is not currently possible to undo this action via "
+"<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></"
+"menuchoice>. You can close the document without saving and open it again to "
+"get your page back, though you will lose any other changes you have made."
+msgstr ""
+"V současnosti není možné tuto akci vrátit pomocí "
+"<menuchoice><guimenu>Upravit</guimenu><guimenuitem>Zpět</guimenuitem></"
+"menuchoice>. Místo toho můžete dokument zavřít bez ukládání a otevřít jej "
+"znovu se všemi stránky, čímž ale přijdete o ostatní změny, které jste v "
+"dokumentu provedli."
+
+#: C/pdfmod.xml:182(title)
+msgid "Saving"
+msgstr "Ukládání"
+
+#: C/pdfmod.xml:183(para)
+msgid ""
+"After making changes to the document, there are two ways to save your work. "
+"You can overwrite the original document by choosing "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></"
+"menuchoice>, or you can save your changes to a new file by choosing "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"Po provedení změn v dokumentu máte dvě možnosti, jak svoji práci uložit. "
+"Můžete přepsat původní dokument volbou <menuchoice><guimenu>Soubor</"
+"guimenu><guimenuitem>Uložit</guimenuitem></menuchoice>, nebo můžete své změny "
+"uložit do nového souboru volbou <menuchoice><guimenu>Soubor</"
+"guimenu><guimenuitem>Uložit jako</guimenuitem></menuchoice>."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/pdfmod.xml:0(None)
+msgid "translator-credits"
+msgstr "Marek Černocký <marek@manet.cz>, 2009"
