@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-06 00:49+0200\n"
-"PO-Revision-Date: 2009-10-04 21:50+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&component=general\n"
+"POT-Creation-Date: 2009-10-10 16:05+0000\n"
+"PO-Revision-Date: 2009-10-14 12:12+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -115,57 +116,61 @@ msgstr "Vybrat liché stránky"
 msgid "Select Matching..."
 msgstr "Vybrat odpovídající…"
 
-#: ../src/PdfMod/Gui/Actions.cs:85
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "_Invert Selection"
+msgstr "_Invertovat výběr"
+
+#: ../src/PdfMod/Gui/Actions.cs:86
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: ../src/PdfMod/Gui/Actions.cs:89
+#: ../src/PdfMod/Gui/Actions.cs:90
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../src/PdfMod/Gui/Actions.cs:90
+#: ../src/PdfMod/Gui/Actions.cs:91
 msgid "_Contents"
 msgstr "_Obsah"
 
-#: ../src/PdfMod/Gui/Actions.cs:95
+#: ../src/PdfMod/Gui/Actions.cs:96
 msgid "Open in Viewer"
 msgstr "Zobrazit v prohlížeči"
 
-#: ../src/PdfMod/Gui/Actions.cs:95
+#: ../src/PdfMod/Gui/Actions.cs:96
 msgid "Open in viewer"
 msgstr "Zobrazit v prohlížeči"
 
-#: ../src/PdfMod/Gui/Actions.cs:99
+#: ../src/PdfMod/Gui/Actions.cs:100
 msgid "View and edit the title, keywords, and more for this document"
 msgstr "Zobrazit a upravit název, klíčová slova a další údaje tohoto dokumentu"
 
-#: ../src/PdfMod/Gui/Actions.cs:101
+#: ../src/PdfMod/Gui/Actions.cs:102
 msgid "Toolbar"
 msgstr "Panel nástrojů"
 
-#: ../src/PdfMod/Gui/Actions.cs:102
+#: ../src/PdfMod/Gui/Actions.cs:103
 msgid "Fullscreen"
 msgstr "Přes celou obrazovku"
 
-#: ../src/PdfMod/Gui/Actions.cs:176
+#: ../src/PdfMod/Gui/Actions.cs:177
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:178
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Zpět {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:181
+#: ../src/PdfMod/Gui/Actions.cs:182
 msgid "_Redo"
 msgstr "Zn_ovu"
 
-#: ../src/PdfMod/Gui/Actions.cs:182
+#: ../src/PdfMod/Gui/Actions.cs:183
 #, csharp-format
 msgid "Redo {0}"
 msgstr "Znovu {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:190
+#: ../src/PdfMod/Gui/Actions.cs:191
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
@@ -173,7 +178,7 @@ msgstr[0] "Odstranit stránku"
 msgstr[1] "Odstranit {0} stránky"
 msgstr[2] "Odstranit {0} stránek"
 
-#: ../src/PdfMod/Gui/Actions.cs:193
+#: ../src/PdfMod/Gui/Actions.cs:194
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
@@ -181,7 +186,7 @@ msgstr[0] "Odstranit vybranou stránku"
 msgstr[1] "Odstranit {0}vybrané stránky"
 msgstr[2] "Odstranit {0} vybraných stránek"
 
-#: ../src/PdfMod/Gui/Actions.cs:196
+#: ../src/PdfMod/Gui/Actions.cs:197
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
@@ -189,7 +194,7 @@ msgstr[0] "Extrahovat stránku"
 msgstr[1] "Extrahovat {0} stránky"
 msgstr[2] "Extrahovat {0} stránek"
 
-#: ../src/PdfMod/Gui/Actions.cs:199
+#: ../src/PdfMod/Gui/Actions.cs:200
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
@@ -197,44 +202,44 @@ msgstr[0] "Extrahovat vybranou stránku"
 msgstr[1] "Extrahovat {0} vybrané stránky"
 msgstr[2] "Extrahovat {0} vybraných stránek"
 
-#: ../src/PdfMod/Gui/Actions.cs:207 ../src/PdfMod/Gui/Actions.cs:253
+#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
 msgid "Select PDF"
 msgstr "Výběr PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:211
+#: ../src/PdfMod/Gui/Actions.cs:212
 msgid "PDF Documents"
 msgstr "Dokumenty PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:212 ../src/PdfMod/Gui/Actions.cs:258
-#: ../src/PdfMod/Gui/Actions.cs:289
+#: ../src/PdfMod/Gui/Actions.cs:213 ../src/PdfMod/Gui/Actions.cs:259
+#: ../src/PdfMod/Gui/Actions.cs:290
 msgid "All Files"
 msgstr "Všechny soubory"
 
-#: ../src/PdfMod/Gui/Actions.cs:280
+#: ../src/PdfMod/Gui/Actions.cs:281
 msgid "Save as..."
 msgstr "Uložení jako…"
 
-#: ../src/PdfMod/Gui/Actions.cs:422
+#: ../src/PdfMod/Gui/Actions.cs:423
 msgid "Error opening help"
 msgstr "Chyba při otevírání nápovědy"
 
-#: ../src/PdfMod/Gui/Actions.cs:423
+#: ../src/PdfMod/Gui/Actions.cs:424
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Chtěli byste otevřít on-line dokumentaci k PDF Mod?"
 
-#: ../src/PdfMod/Gui/Actions.cs:444
+#: ../src/PdfMod/Gui/Actions.cs:445
 msgid "Visit Website"
 msgstr "Navštívit webové stránky"
 
-#: ../src/PdfMod/Gui/Actions.cs:446
+#: ../src/PdfMod/Gui/Actions.cs:447
 msgid "Primary Development:"
 msgstr "Hlavní vývoj:"
 
-#: ../src/PdfMod/Gui/Actions.cs:449
+#: ../src/PdfMod/Gui/Actions.cs:450
 msgid "Contributors:"
 msgstr "Přispěvatelé:"
 
-#: ../src/PdfMod/Gui/Actions.cs:465
+#: ../src/PdfMod/Gui/Actions.cs:466
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
@@ -266,26 +271,26 @@ msgstr "Otevřít _první"
 msgid "Open _All"
 msgstr "Otevřít _vše"
 
-#: ../src/PdfMod/Gui/Client.cs:253
+#: ../src/PdfMod/Gui/Client.cs:257
 msgid "Loading document..."
 msgstr "Načítá se dokument…"
 
-#: ../src/PdfMod/Gui/Client.cs:283
+#: ../src/PdfMod/Gui/Client.cs:287
 msgid "Error Loading Document"
 msgstr "Chyba při načítání dokumentu"
 
-#: ../src/PdfMod/Gui/Client.cs:284
+#: ../src/PdfMod/Gui/Client.cs:288
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Vyskytla se chyba během načítání {0}"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:309
+#: ../src/PdfMod/Gui/Client.cs:313
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (původně {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:314
+#: ../src/PdfMod/Gui/Client.cs:318
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
@@ -293,11 +298,11 @@ msgstr[0] "{0} stránka"
 msgstr[1] "{0} stránky"
 msgstr[2] "{0} stránek"
 
-#: ../src/PdfMod/Gui/Client.cs:337
+#: ../src/PdfMod/Gui/Client.cs:341
 msgid "Document is Encrypted"
 msgstr "Dokument je šifrovaný"
 
-#: ../src/PdfMod/Gui/Client.cs:338
+#: ../src/PdfMod/Gui/Client.cs:342
 msgid "Enter the document's password to open it:"
 msgstr "Pro otevření zadejte heslo k dokumentu:"
 
@@ -336,3 +341,4 @@ msgstr "_Zavřít"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "Skrýt vlastnosti dokumentu"
+
