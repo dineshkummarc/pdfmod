@@ -1,0 +1,321 @@
+# Bengali (India) translation of pdfmod.
+# Copyright (C) 2009 pdfmod's COPYRIGHT HOLDER
+# This file is distributed under the same license as the pdfmod package.
+#
+# sankarshan mukhopadhyay <sankarshan@fedoraproject.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=pdfmod&component=general\n"
+"POT-Creation-Date: 2009-08-02 21:56+0000\n"
+"PO-Revision-Date: 2009-08-04 14:48+0530\n"
+"Last-Translator: sankarshan mukhopadhyay <sankarshan@fedoraproject."
+"org>\n"
+"Language-Team: Bengali (India) <anubad@lists.ankur.org.in>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 0.3\n"
+
+#: ../data/pdfmod.desktop.in.h:1
+msgid "PDF Modifier"
+msgstr "PDF পরিবর্তক"
+
+#: ../data/pdfmod.desktop.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "PDF ডকুমেন্ট থেকে পৃষ্ঠা অপসারণ, এক্সট্র্যাক্ট ও আবর্তন করুন"
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:28
+msgid "Error trying to unmove pages"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:38
+msgid "Error trying to move pages"
+msgstr "পৃষ্ঠা অপসারণ করতে ত্রুটি হয়েছে"
+
+#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "ডকুমেন্ট থেকে পৃষ্ঠা মুছে ফেলতে ত্রুটি হয়েছে"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "Open a document"
+msgstr "ডকুমেন্ট খুলুন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "_Insert From..."
+msgstr "সন্নিবেশ করুন(_I)..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "Insert pages from another document"
+msgstr "অন্য ডকুমেন্ট থেকে পৃষ্ঠা সন্নিবেশ করুন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:48
+msgid "Save changes to this document, overwriting the existing file"
+msgstr ""
+"উপস্থিত ফাইলটিকে নতুন করে লিখে ডকুমেন্টের পরিবর্তন সংরক্ষণ করুন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:49
+msgid "Save this document to a new file"
+msgstr "এই ডকুমেন্টটি একটি নতুন ফাইলে সংরক্ষণ করুন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:51
+msgid "_File"
+msgstr "ফাইল(_F)"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:52
+msgid "Recent _Files"
+msgstr "তৎকাল ফাইল (_F)"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate Right"
+msgstr "ডানদিকে ঘুরিয়ে নিন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate right"
+msgstr "ডানদিকে ঘুরিয়ে নিন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Rotate Left"
+msgstr "বাঁদিকে ঘুরিয়ে নিন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Rotate left"
+msgstr "বাঁদিকে ঘুরিয়ে নিন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:58
+msgid "Export Images..."
+msgstr "ছবি এক্সপোর্ট করুন..."
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:60
+msgid "_Edit"
+msgstr "সম্পাদনা করুন(_E)"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+msgid "Select Even Pages"
+msgstr "জোড় পৃষ্ঠা বেছে নিন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:63
+msgid "Select Odd Pages"
+msgstr "বেজোড় পৃষ্ঠা বেছে নিন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:64
+msgid "Select Matching..."
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:68
+msgid "_View"
+msgstr "প্রদর্শন(_V)"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:72
+msgid "_Help"
+msgstr "সহায়িকা(_H)"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:73
+msgid "_Contents"
+msgstr "বিষয়বস্তু(_C)"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:80
+msgid "View and edit the title, keywords, and more for this document"
+msgstr ""
+"এই ডকুমেন্টের টাইটেল, কী-ওয়ার্ড ও অন্যান্য পড়ুন ও সম্পাদনা করুন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:82
+msgid "Toolbar"
+msgstr "টুলবার"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:158
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "পৃষ্ঠাটি মুছে ফেলুন"
+msgstr[1] "{0} পৃষ্ঠা মুছে ফেলুন"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:161
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:164
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:167
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:175
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:194
+msgid "Select PDF"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:177
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:196
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:225
+msgid "All Files"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:219
+msgid "Save as..."
+msgstr ""
+
+#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:284
+#, csharp-format
+msgid "Page {1}"
+msgid_plural "Page {1}"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+#. eg Pages 3 - 7
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:288
+#, csharp-format
+msgid "Pages {1} - {2}"
+msgid_plural "Pages {1} - {2}"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:293
+#, csharp-format
+msgid "Pages {1}"
+msgid_plural "Pages {1}"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: {0} is the number of pages, eg 12 Pages
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:296
+#, csharp-format
+msgid "{0} Page"
+msgid_plural "{0} Pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: This is used for creating a folder name, be careful!
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:313
+#, csharp-format
+msgid "{0} - Images for {1}"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:380
+msgid "Error opening help"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:381
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:402
+msgid "Visit Website"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:414
+msgid "translator-credits"
+msgstr "সঙ্কর্ষণ মুখোপাধ্যায় (sankarshan@randomink.org)"
+
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:55
+#: ../src/PdfMod/PdfMod/PdfListStore.cs:63
+#, csharp-format
+msgid "Page {0}"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:64
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:158
+msgid "Save the changes made to this document?"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:161
+msgid "Close _Without Saving"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:194
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:198
+msgid "Open _First"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:199
+msgid "Open _All"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:228
+#, csharp-format
+msgid "Loading {0}"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:248
+msgid "Error Loading Document"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:249
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr ""
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/PdfMod/PdfMod.cs:272
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:277
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+msgid "Select Matching"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:46
+msgid "_Title:"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:47
+msgid "_Author:"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:48
+msgid "_Keywords:"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:49
+msgid "_Subject:"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:69
+msgid "_Revert Properties"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:70
+msgid "Change the document's properties back to the original values"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:75
+msgid "_Close"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:76
+msgid "Hide the document's properties"
+msgstr ""
+
