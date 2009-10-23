@@ -1,0 +1,353 @@
+# translation of Pdflmod into Russian
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod 0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-10 14:29+0400\n"
+"PO-Revision-Date: 2009-08-10 17:00+0400\n"
+"Last-Translator: Alexandre Prokoudine <alexandre.prokoudine@gmail.com>\n"
+"Language-Team: Russian <gnome-cyr@lists.gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../data/pdfmod.desktop.in.h:1
+msgid "PDF Modifier"
+msgstr ""
+
+#: ../data/pdfmod.desktop.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr ""
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod.Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod.Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:45
+msgid "Open a document"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "_Insert From..."
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:46
+msgid "Insert pages from another document"
+msgstr "Вставить страницы из другого документа"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:47
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Сохранить изменения в документе, перезаписав существующий файл"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:48
+msgid "Save this document to a new file"
+msgstr "Сохранить этот документ в новый файл"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:50
+msgid "_File"
+msgstr "_Файл"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:51
+msgid "Recent _Files"
+msgstr "_Недавние файлы"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate Right"
+msgstr "Повернуть вправо"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:55
+msgid "Rotate right"
+msgstr "Повернуть вправо"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate Left"
+msgstr "Повернуть влево"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:56
+msgid "Rotate left"
+msgstr "Повернуть влево"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Export Images"
+msgstr "Экспортировать изображения"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:57
+msgid "Save all images in this document to a new folder"
+msgstr "Сохранить все изображения этого документа в новую папку"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:59
+msgid "_Edit"
+msgstr "_Правка"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:61
+msgid "Select Even Pages"
+msgstr "Выбрать четные страницы"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:62
+msgid "Select Odd Pages"
+msgstr "Выбрать нечетные страницы"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:63
+msgid "Select Matching..."
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:67
+msgid "_View"
+msgstr "_Вид"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:71
+msgid "_Help"
+msgstr "_Справка"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:72
+msgid "_Contents"
+msgstr "_Содержание"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:79
+msgid "View and edit the title, keywords, and more for this document"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:81
+msgid "Toolbar"
+msgstr "Панель инструментов"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:152
+msgid "_Undo"
+msgstr "_Отменить"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:153
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Отменить {0}"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:157
+msgid "_Redo"
+msgstr "Ве_рнуть"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:158
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Вернуть {0}"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:166
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Удалить {0} страницу"
+msgstr[1] "Удалить {0} страницы"
+msgstr[2] "Удалить {0} страниц"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:169
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Удалить {0} выбранную страницу"
+msgstr[1] "Удалить {0} выбранных страницы"
+msgstr[2] "Удалить {0} выбранных страниц"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:172
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:175
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:183
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:202
+msgid "Select PDF"
+msgstr "Выберите PDF"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:185
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:204
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:233
+msgid "All Files"
+msgstr "Все файлы"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:227
+msgid "Save as..."
+msgstr "Сохранить как..."
+
+#. Translators: {0} is the number of pages (always 1), and {1} is the page number, eg Page 1, or Page 5
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:292
+#, csharp-format
+msgid "Page {1}"
+msgid_plural "Page {1}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. Translators: {0} is the number of pages, and {1} is the first page, {2} is the last page,
+#. eg Pages 3 - 7
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:296
+#, csharp-format
+msgid "Pages {1} - {2}"
+msgid_plural "Pages {1} - {2}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. Translators: {0} is the number of pages, {1} is a comma separated list of page numbers, eg Pages 1, 4, 9
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:301
+#, csharp-format
+msgid "Pages {1}"
+msgid_plural "Pages {1}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. Translators: {0} is the number of pages, eg 12 Pages
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:304
+#, csharp-format
+msgid "{0} Page"
+msgid_plural "{0} Pages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:392
+msgid "Error opening help"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:393
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:414
+msgid "Visit Website"
+msgstr "Посетить сайт проекта"
+
+#: ../src/PdfMod/PdfMod/GlobalActions.cs:430
+msgid "translator-credits"
+msgstr "Александр Прокудин <alexandre.prokoudine@gmail.com>, 2009"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:68
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:162
+msgid "Save the changes made to this document?"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:165
+msgid "Close _Without Saving"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:198
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:202
+msgid "Open _First"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:203
+msgid "Open _All"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:236
+msgid "Loading document..."
+msgstr "Загружается документ..."
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:263
+msgid "Error Loading Document"
+msgstr "Ошибка при загрузке документа"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:264
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "При загрузке {0} возникла ошибка"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/PdfMod/PdfMod.cs:291
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:296
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:312
+msgid "Document is Encrypted"
+msgstr "Документ зашифрован"
+
+#: ../src/PdfMod/PdfMod/PdfMod.cs:313
+msgid "Enter the document's password to open it:"
+msgstr "Введите пароль для открытия документа:"
+
+#: ../src/PdfMod/PdfMod/QueryBox.cs:26
+msgid "Select Matching"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:46
+msgid "_Title:"
+msgstr "_Название:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:47
+msgid "_Author:"
+msgstr "_Автор:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:48
+msgid "_Keywords:"
+msgstr "_Ключевые слова:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:49
+msgid "_Subject:"
+msgstr "_Тема:"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:69
+msgid "_Revert Properties"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:70
+msgid "Change the document's properties back to the original values"
+msgstr ""
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:75
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: ../src/PdfMod/PdfMod/MetadataEditorBox.cs:76
+msgid "Hide the document's properties"
+msgstr "Скрыть свойства документа"
