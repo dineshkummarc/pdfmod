@@ -1,0 +1,333 @@
+# pdfmod ja.po.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the pdfmod package.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-05 06:15+0900\n"
+"PO-Revision-Date: 2009-11-05 06:15+0900\n"
+"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "PDF の変更"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "PDF ドキュメントのページの削除/展開/回転を行います"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "{1}の移動"
+msgstr[1] "{1}の移動"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "ページ移動のアンドゥ・エラー"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "ページの移動エラー"
+
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "ドキュメントからページの削除エラー"
+
+#: ../src/PdfMod/Gui/Actions.cs:63
+msgid "Open a document"
+msgstr "ドキュメントを開きます"
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "_Insert From..."
+msgstr "別の PDF を挿入する(_I)..."
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "Insert pages from another document"
+msgstr "別のドキュメントのページを挿入します"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "このドキュメントの変更点を保存します (既存のファイルを上書きします)"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+msgid "Save this document to a new file"
+msgstr "このドキュメントを新しいファイルとして保存します"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "_File"
+msgstr "ファイル(_F)"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr "最近開いたファイル(_F)"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate Right"
+msgstr "時計回りに回転する"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate right"
+msgstr "時計回りに回転させます"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate Left"
+msgstr "反時計回りに回転する"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate left"
+msgstr "反時計回りに回転させます"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Export Images"
+msgstr "画像のエキスポート"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Save all images in this document to a new folder"
+msgstr "ドキュメントに含まれている全ての画像を任意のフォルダに保存します"
+
+#: ../src/PdfMod/Gui/Actions.cs:77
+msgid "_Edit"
+msgstr "編集(_E)"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Select Even Pages"
+msgstr "偶数ページの選択"
+
+#: ../src/PdfMod/Gui/Actions.cs:80
+msgid "Select Odd Pages"
+msgstr "奇数ページの選択"
+
+#: ../src/PdfMod/Gui/Actions.cs:81
+msgid "Select Matching..."
+msgstr "検索して選択..."
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "_Invert Selection"
+msgstr "検索の反転(_I)"
+
+#: ../src/PdfMod/Gui/Actions.cs:86
+msgid "_View"
+msgstr "表示(_V)"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: ../src/PdfMod/Gui/Actions.cs:91
+msgid "_Contents"
+msgstr "目次(_C)"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+msgid "Open in Viewer"
+msgstr "ビューアで開く"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+msgid "Open in viewer"
+msgstr "選択したページをビューアの中に開きます"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "このドキュメントのタイトルやキーワード等の情報を表示したり編集します"
+
+#: ../src/PdfMod/Gui/Actions.cs:102
+msgid "Toolbar"
+msgstr "ツールバー"
+
+#: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Fullscreen"
+msgstr "フルスクリーン表示"
+
+#: ../src/PdfMod/Gui/Actions.cs:177
+msgid "_Undo"
+msgstr "元に戻す(_U)"
+
+#: ../src/PdfMod/Gui/Actions.cs:178
+#, csharp-format
+msgid "Undo {0}"
+msgstr "\"{0}\" を元に戻す"
+
+#: ../src/PdfMod/Gui/Actions.cs:182
+msgid "_Redo"
+msgstr "やり直す(_R)"
+
+#: ../src/PdfMod/Gui/Actions.cs:183
+#, csharp-format
+msgid "Redo {0}"
+msgstr "\"{0}\" をやり直す"
+
+#: ../src/PdfMod/Gui/Actions.cs:191
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "ページの削除"
+msgstr[1] "{0}ページの削除"
+
+#: ../src/PdfMod/Gui/Actions.cs:194
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "選択したページを削除します"
+msgstr[1] "選択した{0}ページを削除します"
+
+#: ../src/PdfMod/Gui/Actions.cs:197
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "ページを抜き出す"
+msgstr[1] "{0}ページ抜き出す"
+
+#: ../src/PdfMod/Gui/Actions.cs:200
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "選択したページを抜き出します"
+msgstr[1] "選択した{0}ページを抜き出します"
+
+#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
+msgid "Select PDF"
+msgstr "PDF の選択"
+
+#: ../src/PdfMod/Gui/Actions.cs:212
+msgid "PDF Documents"
+msgstr "PDF ドキュメント"
+
+#: ../src/PdfMod/Gui/Actions.cs:213 ../src/PdfMod/Gui/Actions.cs:259
+#: ../src/PdfMod/Gui/Actions.cs:290
+msgid "All Files"
+msgstr "全てのファイル"
+
+#: ../src/PdfMod/Gui/Actions.cs:281
+msgid "Save as..."
+msgstr "別名で保存..."
+
+#: ../src/PdfMod/Gui/Actions.cs:423
+msgid "Error opening help"
+msgstr "ヘルプの表示エラー"
+
+#: ../src/PdfMod/Gui/Actions.cs:424
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "PDF Mod のオンライン・ドキュメントを開きますか？"
+
+#: ../src/PdfMod/Gui/Actions.cs:445
+msgid "Visit Website"
+msgstr "ホームページを開く"
+
+#: ../src/PdfMod/Gui/Actions.cs:447
+msgid "Primary Development:"
+msgstr "メインの開発者:"
+
+#: ../src/PdfMod/Gui/Actions.cs:450
+msgid "Contributors:"
+msgstr "その他の貢献者:"
+
+#: ../src/PdfMod/Gui/Actions.cs:466
+msgid "translator-credits"
+msgstr "相花 毅 <takeshi.aihana@gmail.com>"
+
+#: ../src/PdfMod/Gui/Client.cs:84
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/Gui/Client.cs:189
+msgid "Save the changes made to this document?"
+msgstr "このドキュメントの変更点を保存しますか？"
+
+#: ../src/PdfMod/Gui/Client.cs:192
+msgid "Close _Without Saving"
+msgstr "保存せずに閉じる(_W)"
+
+#: ../src/PdfMod/Gui/Client.cs:221
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "{0} のドキュメントを別々のウィンドウで開きますか？"
+msgstr[1] "{0} の全てのドキュメントを別々のウィンドウで開きますか？"
+
+#: ../src/PdfMod/Gui/Client.cs:225
+msgid "Open _First"
+msgstr "先頭を開く(_F)"
+
+#: ../src/PdfMod/Gui/Client.cs:226
+msgid "Open _All"
+msgstr "全て開く(_A)"
+
+#: ../src/PdfMod/Gui/Client.cs:257
+msgid "Loading document..."
+msgstr "ドキュメントの読み込み中..."
+
+#: ../src/PdfMod/Gui/Client.cs:287
+msgid "Error Loading Document"
+msgstr "ドキュメントの読み込みエラー"
+
+#: ../src/PdfMod/Gui/Client.cs:288
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "{0} を読み込んでいる最中にエラーが発生しました。"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:313
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (もともとは {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:318
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0}ページ"
+msgstr[1] "{0}ページ"
+
+#: ../src/PdfMod/Gui/Client.cs:341
+msgid "Document is Encrypted"
+msgstr "ドキュメントは暗号化されています"
+
+#: ../src/PdfMod/Gui/Client.cs:342
+msgid "Enter the document's password to open it:"
+msgstr "ドキュメントを開く際のパスワードを入力して下さい:"
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+msgid "Select Matching"
+msgstr "検索して選択する"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "タイトル(_T):"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "作者(_A):"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "キーワード(_K):"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "サブタイトル(_S):"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+msgid "_Revert Properties"
+msgstr "元に戻す(_R)"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr "ドキュメントのプロパティに対する変更点を元に戻します"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+msgid "Hide the document's properties"
+msgstr "ドキュメントのプロパティ表示を OFF にします"
