@@ -44,16 +44,16 @@ namespace PdfMod.Gui
         QueryBox query_box;
 
         bool loading;
-        string original_size_string = null;
         long original_size;
+        string original_size_string = null;
 
-        public ActionManager ActionManager { get; private set; }
-        public Gtk.Toolbar HeaderToolbar;
-        public Actions Actions { get; private set; }
-        public Gtk.Statusbar StatusBar { get; private set; }
-        public Gtk.Window Window { get; private set; }
-        public DocumentIconView IconView { get; private set; }
-        public MetadataEditorBox EditorBox { get; private set; }
+        public ActionManager     ActionManager { get; private set; }
+        public Gtk.Toolbar       HeaderToolbar { get; private set; }
+        public Actions           Actions       { get; private set; }
+        public Gtk.Statusbar     StatusBar     { get; private set; }
+        public Gtk.Window        Window        { get; private set; }
+        public DocumentIconView  IconView      { get; private set; }
+        public MetadataEditorBox EditorBox     { get; private set; }
 
         static Client ()
         {
@@ -184,17 +184,18 @@ namespace PdfMod.Gui
         bool PromptIfUnsavedChanges ()
         {
             if (Document != null && Document.HasUnsavedChanged) {
-                var message_dialog = new Hyena.Widgets.HigMessageDialog (
+                var dialog = new Hyena.Widgets.HigMessageDialog (
                     Window, DialogFlags.Modal, MessageType.Warning, ButtonsType.None,
                     Catalog.GetString ("Save the changes made to this document?"),
                     String.Empty
                 );
-                message_dialog.AddButton (Catalog.GetString ("Close _Without Saving"), ResponseType.Close, false);
-                message_dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
-                message_dialog.AddButton (Stock.SaveAs, ResponseType.Ok, true);
+                dialog.AddButton (Catalog.GetString ("Close _Without Saving"), ResponseType.Close, false);
+                dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
+                dialog.AddButton (Stock.SaveAs, ResponseType.Ok, true);
 
-                var response = (ResponseType) message_dialog.Run ();
-                message_dialog.Destroy ();
+                var response = (ResponseType) dialog.Run ();
+                dialog.Destroy ();
+
                 switch (response) {
                     case ResponseType.Ok:
                         Actions["SaveAs"].Activate ();
@@ -215,17 +216,17 @@ namespace PdfMod.Gui
                 LoadPath (files[0]);
             } else if (files.Count > 1) {
                 // Make sure the user wants to open N windows
-                var message_dialog = new Hyena.Widgets.HigMessageDialog (
+                var dialog = new Hyena.Widgets.HigMessageDialog (
                     Window, DialogFlags.Modal, MessageType.Question, ButtonsType.None,
                     String.Format (Catalog.GetPluralString (
                         "Continue, opening {0} document in separate windows?", "Continue, opening all {0} documents in separate windows?", files.Count),
                         files.Count),
                     String.Empty);
-                message_dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
-                message_dialog.AddButton (Catalog.GetString ("Open _First"), ResponseType.Accept, false);
-                message_dialog.AddButton (Catalog.GetString ("Open _All"), ResponseType.Ok, true);
-                var response = message_dialog.Run ();
-                message_dialog.Destroy ();
+                dialog.AddButton (Stock.Cancel, ResponseType.Cancel, false);
+                dialog.AddButton (Catalog.GetString ("Open _First"), ResponseType.Accept, false);
+                dialog.AddButton (Catalog.GetString ("Open _All"), ResponseType.Ok, true);
+                var response = dialog.Run ();
+                dialog.Destroy ();
 
                 if ((Gtk.ResponseType)response == Gtk.ResponseType.Ok) {
                     foreach (string file in files) {
