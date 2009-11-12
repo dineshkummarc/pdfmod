@@ -1,20 +1,27 @@
 ==========================
-Version 0.8 - not yet released
+Version 0.8 - Nov 11, 2009
 ==========================
 
 Contributors:
-Robert Dyer, Andreu Correa Casablanca, Gabriel Burt
+Robert Dyer, Andreu Correa Casablanca, Bertrand Lorentz, Gabriel Burt
 
 Features:
 * Add * to beginning of window title when unsaved
 * Can select more than one file in Open dialog
 * shift-ctrl-z now also works for Redo
+* Online docs now hosted on library.gnome.org
+* Add Invert Selection action
 
 Bugs Fixed:
-* 
+* Launching with relative filepaths in args work
+
+New Translations:
+Bengali, Czech, Japanese, Russian
 
 Translators:
-Jorge González, Łukasz Jernaś, Daniel Nylander
+Alexandre Prokoudine, Daniel Nylander, Jorge González, Kris Thomsen,
+Łukasz Jernaś, Marek Černocký, Mario Blättermann, Og B. Maciel, Petr Kovar,
+Runa Bhattacharjee, Sankarshan Mukhopadhyay, Takeshi AIHANA
 
 ==========================
 Version 0.7 - Sept 9, 2009
