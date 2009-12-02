@@ -1,0 +1,354 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Andrej Žnidaršič <andrej.znidaris@gmail.com>, 2009
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pdfmod\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=pdfmod&component=general\n"
+"POT-Creation-Date: 2009-11-12 01:38+0000\n"
+"PO-Revision-Date: 2009-12-01 18:45+0100\n"
+"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
+"X-Poedit-Country: SLOVENIA\n"
+"X-Poedit-Language: Slovenian\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "Urejevalnik PDF"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+#, fuzzy
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Odstranjevanje, izvleka in vrtenje strani v dokumentih PDF"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "Premik {1}"
+msgstr[1] "Premik {1}"
+msgstr[2] "Premik {1}"
+msgstr[3] "Premik {1}"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "Napaka med razveljavitvijo premika strani"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "Napaka med premikanjem strani"
+
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "Napaka med poskusom odstranjevanja strani iz dokumenta"
+
+#: ../src/PdfMod/Gui/Actions.cs:63
+msgid "Open a document"
+msgstr "Odpri dokument"
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "_Insert From..."
+msgstr "_Vstavi iz ..."
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "Insert pages from another document"
+msgstr "Vstavljanje strani iz drugega dokumenta"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Shranjevanje sprememb tega dokumenta, prepiše prejšnjo datoteko"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+msgid "Save this document to a new file"
+msgstr "Shrani dokument v novo datoteko"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "_File"
+msgstr "_Datoteka"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr "_Nedavne datoteke"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate Right"
+msgstr "Vrtenje desno"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate right"
+msgstr "Vrtenje desno"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate Left"
+msgstr "Vrtenje levo"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate left"
+msgstr "Vrtenje levo"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Export Images"
+msgstr "Izvozi slike"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Save all images in this document to a new folder"
+msgstr "Shranjevanje vseh slik v tem dokumentu v novo mapo"
+
+#: ../src/PdfMod/Gui/Actions.cs:77
+msgid "_Edit"
+msgstr "_Uredi"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Select Even Pages"
+msgstr "Izberi sode strani"
+
+#: ../src/PdfMod/Gui/Actions.cs:80
+msgid "Select Odd Pages"
+msgstr "Izberi lihe strani"
+
+#: ../src/PdfMod/Gui/Actions.cs:81
+msgid "Select Matching..."
+msgstr "Izberi skladne ..."
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "_Invert Selection"
+msgstr "Obrni _izbor"
+
+#: ../src/PdfMod/Gui/Actions.cs:86
+msgid "_View"
+msgstr "_Pogled"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "_Help"
+msgstr "Pomo_č"
+
+#: ../src/PdfMod/Gui/Actions.cs:91
+msgid "_Contents"
+msgstr "_Vsebina"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+msgid "Open in Viewer"
+msgstr "Odpri v pregledovalniku"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+msgid "Open in viewer"
+msgstr "Odpri v pregledovalniku"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "Ogled in urejanje naslova, ključnih besed in več za ta dokument"
+
+#: ../src/PdfMod/Gui/Actions.cs:102
+msgid "Toolbar"
+msgstr "Orodna vrstica"
+
+#: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Fullscreen"
+msgstr "Celozaslonski način"
+
+#: ../src/PdfMod/Gui/Actions.cs:177
+msgid "_Undo"
+msgstr "_Razveljavi"
+
+#: ../src/PdfMod/Gui/Actions.cs:178
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Razveljavitev {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:182
+msgid "_Redo"
+msgstr "_Uveljavi"
+
+#: ../src/PdfMod/Gui/Actions.cs:183
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Uveljavitev {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:191
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Odstrani {0} strani"
+msgstr[1] "Odstrani {0} stran"
+msgstr[2] "Odstrani {0} strani"
+msgstr[3] "Odstrani {0} strani"
+
+#: ../src/PdfMod/Gui/Actions.cs:194
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Odstranitev {0} izbranih strani"
+msgstr[1] "Odstranitev {0} izbrane strani"
+msgstr[2] "Odstranitev {0} izbranih strani"
+msgstr[3] "Odstranitev {0} izbranih strani"
+
+#: ../src/PdfMod/Gui/Actions.cs:197
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Izvleci {0} strani"
+msgstr[1] "Izvleci {0} stran"
+msgstr[2] "Izvleci {0} strani"
+msgstr[3] "Izvleci {0} strani"
+
+#: ../src/PdfMod/Gui/Actions.cs:200
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Izvleci {0} izbranih strani"
+msgstr[1] "Izvleci {0} izbrano stran"
+msgstr[2] "Izvleci {0} izbrani strani"
+msgstr[3] "Izvleci {0} izbrane strani"
+
+#: ../src/PdfMod/Gui/Actions.cs:208
+#: ../src/PdfMod/Gui/Actions.cs:254
+msgid "Select PDF"
+msgstr "Izbor PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:212
+msgid "PDF Documents"
+msgstr "Dokumenti PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:213
+#: ../src/PdfMod/Gui/Actions.cs:259
+#: ../src/PdfMod/Gui/Actions.cs:290
+msgid "All Files"
+msgstr "Vse datoteke"
+
+#: ../src/PdfMod/Gui/Actions.cs:281
+msgid "Save as..."
+msgstr "Shrani kot ..."
+
+#: ../src/PdfMod/Gui/Actions.cs:423
+msgid "Error opening help"
+msgstr "Napaka med odpiranjem pomoči"
+
+#: ../src/PdfMod/Gui/Actions.cs:424
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Ali želite odpreti spletno dokumentacijo programa?"
+
+#: ../src/PdfMod/Gui/Actions.cs:445
+msgid "Visit Website"
+msgstr "Obisk spletišča"
+
+#: ../src/PdfMod/Gui/Actions.cs:447
+msgid "Primary Development:"
+msgstr "Osnovni razvoj:"
+
+#: ../src/PdfMod/Gui/Actions.cs:450
+msgid "Contributors:"
+msgstr "Sodelavci:"
+
+#: ../src/PdfMod/Gui/Actions.cs:466
+msgid "translator-credits"
+msgstr "Andrej Žnidaršič <andrej.znidarsic@gmail.com>"
+
+#: ../src/PdfMod/Gui/Client.cs:84
+msgid "PDF Mod"
+msgstr "PDF urejevalnik"
+
+#: ../src/PdfMod/Gui/Client.cs:189
+msgid "Save the changes made to this document?"
+msgstr "Shrani spremembe dokumenta?"
+
+#: ../src/PdfMod/Gui/Client.cs:192
+msgid "Close _Without Saving"
+msgstr "Zapri _brez shranjevanja"
+
+#: ../src/PdfMod/Gui/Client.cs:222
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Nadaljevanje odpiranja vseh {0} dokumentov v ločenih oknih?"
+msgstr[1] "Nadaljevanje odpiranja {0} dokumenta v ločenih oknih?"
+msgstr[2] "Nadaljevanje odpiranja {0} dokumentov v ločenih oknih?"
+msgstr[3] "Nadaljevanje odpiranja {0} dokumentov v ločenih oknih?"
+
+#: ../src/PdfMod/Gui/Client.cs:226
+msgid "Open _First"
+msgstr "Odpri _prvo"
+
+#: ../src/PdfMod/Gui/Client.cs:227
+msgid "Open _All"
+msgstr "Odpri _vse"
+
+#: ../src/PdfMod/Gui/Client.cs:258
+msgid "Loading document..."
+msgstr "Nalaganje dokumenta ..."
+
+#: ../src/PdfMod/Gui/Client.cs:288
+msgid "Error Loading Document"
+msgstr "Napaka nalaganja dokumenta"
+
+#: ../src/PdfMod/Gui/Client.cs:289
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Prišlo je do napake pri nalaganju {0}"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:314
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (izvirno {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:319
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} strani"
+msgstr[1] "{0} stran"
+msgstr[2] "{0} strani"
+msgstr[3] "{0} strani"
+
+#: ../src/PdfMod/Gui/Client.cs:342
+msgid "Document is Encrypted"
+msgstr "Dokument je šifriran"
+
+#: ../src/PdfMod/Gui/Client.cs:343
+msgid "Enter the document's password to open it:"
+msgstr "Vnesite geslo za odpiranje dokumenta:"
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+msgid "Select Matching"
+msgstr "Izbor skladnih"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "_Naslov:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "_Avtor:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "_Ključne besede:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "_Zadeva:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+msgid "_Revert Properties"
+msgstr "_Povrni lastnosti"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr "Sprememba lastnosti dokumenta nazaj na izvirne vrednosti"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "_Zapri"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+msgid "Hide the document's properties"
+msgstr "Skrij lastnosti dokumenta"
+
