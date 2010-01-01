@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the pdfmod package.
 # Andrej Žnidaršič <andrej.znidaris@gmail.com>, 2009
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Pdfmod\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=pdfmod&component=general\n"
-"POT-Creation-Date: 2009-11-12 01:38+0000\n"
-"PO-Revision-Date: 2009-12-01 18:45+0100\n"
+"POT-Creation-Date: 2009-12-02 17:31+0000\n"
+"PO-Revision-Date: 2009-12-28 14:40+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,6 @@ msgid "PDF Modifier"
 msgstr "Urejevalnik PDF"
 
 #: ../data/pdfmod.desktop.in.in.h:2
-#, fuzzy
 msgid "Remove, extract, and rotate pages in PDF documents"
 msgstr "Odstranjevanje, izvleka in vrtenje strani v dokumentih PDF"
 
