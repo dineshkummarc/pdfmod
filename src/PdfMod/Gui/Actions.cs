@@ -107,12 +107,7 @@ namespace PdfMod.Gui
             this["RotateLeft"].IconName = "object-rotate-left";
             this["ExportImages"].IconName = "image-x-generic";
 
-            // Don't show Help unless we can at least access some of the GNOME api
-            UpdateAction ("Help", false);
-            try {
-                Gnome.Program.Get ();
-                UpdateAction ("Help", true);
-            } catch {}
+            UpdateAction ("Help", true);
 
             Update ();
             app.IconView.SelectionChanged += OnChanged;
