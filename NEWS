@@ -1,4 +1,25 @@
 ==========================
+Version 0.9 - NOT YET RELEASED
+==========================
+
+Contributors:
+Gabriel Burt
+
+Features:
+* Remove gnome-sharp dep
+
+Bugs Fixed:
+* Fix InvalidCastException crash when opening some documents
+
+New Translations:
+Simplified Chinese
+Slovenian
+
+Translators:
+Andrej Žnidaršič
+Aron Xu
+
+==========================
 Version 0.8 - Nov 11, 2009
 ==========================
 
