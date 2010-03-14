@@ -1,0 +1,346 @@
+# Norwegian translation of pdfmod (bokmål dialect).
+# Copyright (C) 2000-2003, 2005 Free Software Foundation, Inc.
+# Kjartan Maraas <kmaraas@gnome.org>, 2000-2010.
+# Terance Edward Sola <terance@lyse.net>, 2005.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod 0.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-14 11:44+0100\n"
+"PO-Revision-Date: 2010-03-14 11:47+0100\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Language-Team: Norwegian bokmal <i18n-nb@lster.ping.uio.no>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "PDF-redigering"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr ""
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr ""
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr ""
+
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:63
+msgid "Open a document"
+msgstr "Åpne et dokument"
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "_Insert From..."
+msgstr "Sett _inn fra..."
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+#, fuzzy
+msgid "Insert pages from another document"
+msgstr "Forstørr dokumentet"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "Save changes to this document, overwriting the existing file"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+#, fuzzy
+msgid "Save this document to a new file"
+msgstr "Lagrer dokumentet til %s"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "_File"
+msgstr "_Fil"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate Right"
+msgstr "Roter til høyre"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate right"
+msgstr "Roter til høyre"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate Left"
+msgstr "Roter til venstre"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate left"
+msgstr "Roter til venstre"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Export Images"
+msgstr "Eksporter bilder"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Save all images in this document to a new folder"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:77
+msgid "_Edit"
+msgstr "R_ediger"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Select Even Pages"
+msgstr "Velg like sider"
+
+#: ../src/PdfMod/Gui/Actions.cs:80
+msgid "Select Odd Pages"
+msgstr "Velg ulike sider"
+
+#: ../src/PdfMod/Gui/Actions.cs:81
+#, fuzzy
+msgid "Select Matching..."
+msgstr "Velg side"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+#, fuzzy
+msgid "_Invert Selection"
+msgstr "Ugyldig sideutvalg"
+
+#: ../src/PdfMod/Gui/Actions.cs:86
+msgid "_View"
+msgstr "_Vis"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: ../src/PdfMod/Gui/Actions.cs:91
+msgid "_Contents"
+msgstr "_Innhold"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+#, fuzzy
+msgid "Open in Viewer"
+msgstr "Dokumentvisning"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+#, fuzzy
+msgid "Open in viewer"
+msgstr "Åpne i nytt _vindu"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "View and edit the title, keywords, and more for this document"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:102
+msgid "Toolbar"
+msgstr "Verktøylinje"
+
+#: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Fullscreen"
+msgstr "Fullskjerm"
+
+#: ../src/PdfMod/Gui/Actions.cs:172
+msgid "_Undo"
+msgstr "_Angre"
+
+#: ../src/PdfMod/Gui/Actions.cs:173
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Angre {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:177
+msgid "_Redo"
+msgstr "Gjenopp_rett"
+
+#: ../src/PdfMod/Gui/Actions.cs:178
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Gjenopprett {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Fjern side"
+msgstr[1] "Fjern {0} sider"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, fuzzy, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Fjern valgt verktøylinje"
+msgstr[1] "Fjern valgt verktøylinje"
+
+#: ../src/PdfMod/Gui/Actions.cs:192
+#, fuzzy, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "_Neste side"
+msgstr[1] "_Neste side"
+
+#: ../src/PdfMod/Gui/Actions.cs:195
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:249
+msgid "Select PDF"
+msgstr "Velg PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:207
+msgid "PDF Documents"
+msgstr "PDF-dokumenter"
+
+#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
+#: ../src/PdfMod/Gui/Actions.cs:285
+msgid "All Files"
+msgstr "Alle filer"
+
+#: ../src/PdfMod/Gui/Actions.cs:276
+msgid "Save as..."
+msgstr "Lagre som..."
+
+#: ../src/PdfMod/Gui/Actions.cs:418
+msgid "Error opening help"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:419
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:440
+msgid "Visit Website"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:442
+msgid "Primary Development:"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:445
+#, fuzzy
+msgid "Contributors:"
+msgstr "_Sammenhengende"
+
+#: ../src/PdfMod/Gui/Actions.cs:461
+msgid "translator-credits"
+msgstr "Kjartan Maraas <kmaraas@gnome.org>"
+
+#: ../src/PdfMod/Gui/Client.cs:84
+msgid "PDF Mod"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Client.cs:189
+msgid "Save the changes made to this document?"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Client.cs:192
+msgid "Close _Without Saving"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Client.cs:222
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/Gui/Client.cs:226
+msgid "Open _First"
+msgstr "Åpne _første"
+
+#: ../src/PdfMod/Gui/Client.cs:227
+msgid "Open _All"
+msgstr "Åpne _alle"
+
+#: ../src/PdfMod/Gui/Client.cs:258
+msgid "Loading document..."
+msgstr "Laster dokument..."
+
+#: ../src/PdfMod/Gui/Client.cs:288
+#, fuzzy
+msgid "Error Loading Document"
+msgstr "Laster ned dokument (%d%%)"
+
+#: ../src/PdfMod/Gui/Client.cs:289
+#, fuzzy, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Det oppsto en feil ved visning av hjelp"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:314
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Client.cs:319
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/Gui/Client.cs:342
+msgid "Document is Encrypted"
+msgstr "Dokumentet er kryptert"
+
+#: ../src/PdfMod/Gui/Client.cs:343
+msgid "Enter the document's password to open it:"
+msgstr ""
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+#, fuzzy
+msgid "Select Matching"
+msgstr "Velg side"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "_Tittel:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "Forf_atter:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "Nø_kkelord:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "_Emne:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+#, fuzzy
+msgid "_Revert Properties"
+msgstr "Egenskaper"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr ""
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "_Lukk"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+#, fuzzy
+msgid "Hide the document's properties"
+msgstr "Overstyr begrensninger satt for dokumentet"
+
