@@ -109,6 +109,7 @@ namespace PdfMod.Gui
             SelectionChanged += HandleSelectionChanged;
             DragDataReceived += HandleDragDataReceived;
             DragDataGet += HandleDragDataGet;
+            DragBegin += HandleDragBegin;
             DragLeave += HandleDragLeave;
         }
 
@@ -185,6 +186,14 @@ namespace PdfMod.Gui
         #endregion
 
         #region Drag and Drop event handling
+
+        void HandleDragBegin (object o, DragBeginArgs args)
+        {
+            // Set the drag icon, otherwise it will be a whole page cell rendering,
+            // which can be quite large and obscure the drop points
+            bool single = SelectedItems.Length == 1;
+            Gtk.Drag.SetIconStock (args.Context, single ? Stock.Dnd : Stock.DndMultiple, 0, 0);
+        }
 
         void HandleDragLeave (object o, DragLeaveArgs args)
         {
