@@ -261,7 +261,15 @@ namespace PdfMod.Gui
             chooser.Destroy();
 
             if (response == (int)ResponseType.Ok) {
-                app.Document.AddFromUri (new Uri (filename));
+                try {
+                    app.Document.AddFromUri (new Uri (filename));
+                } catch (Exception e) {
+                    Hyena.Log.Exception (e);
+                    Hyena.Log.Error (
+                        Catalog.GetString ("Error Loading Document"),
+                        String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (filename ?? "")), true
+                    );
+                }
             }
         }
 
