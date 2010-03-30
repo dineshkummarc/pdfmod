@@ -3,8 +3,7 @@ Version 0.8.1 - Mar 24, 2010
 ============================
 
 Contributors:
-Gabriel Burt
-Bertrand Lorentz
+Bertrand Lorentz, Gabriel Burt
 
 Features:
 * Remove gnome-sharp dep
@@ -13,17 +12,10 @@ Bugs Fixed:
 * Fix InvalidCastException crash when opening some documents
 
 New Translations:
-Galician
-Norwegian bokmål
-Simplified Chinese
-Slovenian
+Galician, Norwegian bokmål, Simplified Chinese, Slovenian
 
 Translators:
-Andrej Žnidaršič
-Aron Xu
-Fran Diéguez
-Kjartan Maraas
-Matej Urbančič
+Andrej Žnidaršič, Aron Xu, Fran Diéguez, Kjartan Maraas, Matej Urbančič
 
 ==========================
 Version 0.8 - Nov 11, 2009

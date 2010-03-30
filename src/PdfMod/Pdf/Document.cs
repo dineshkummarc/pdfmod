@@ -1,4 +1,4 @@
-// Copyright (C) 2009 Novell, Inc.
+// Copyright (C) 2009-2010 Novell, Inc.
 // Copyright (C) 2009 Julien Rebetez
 // Copyright (C) 2009 Michael McKinley
 //
