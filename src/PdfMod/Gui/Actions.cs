@@ -452,7 +452,12 @@ namespace PdfMod.Gui
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
-                Copyright = "Copyright 2009 Novell Inc.",
+                Copyright = String.Format (
+                    // Translators: {0} and {1} are the years the copyright assertion covers; put into
+                    // variables so you don't have to re-translate this every year
+                    Catalog.GetString ("Copyright {0} Novell Inc.\nCopyright {1} Other PDF Mod Contributors"),
+                    "2009-2010", "2009"
+                ),
                 TranslatorCredits = Catalog.GetString ("translator-credits")
             };
 
@@ -463,7 +468,8 @@ namespace PdfMod.Gui
             string [] license_paths = new string [] {
                 Core.Defines.PREFIX + "/share/doc/packages/pdfmod/COPYING",
                 "/usr/local/share/doc/packages/pdfmod/COPYING",
-                "COPYING"
+                "COPYING",
+                "../COPYING"
             };
 
             foreach (var path in license_paths) {
