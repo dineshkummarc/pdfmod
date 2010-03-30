@@ -1,4 +1,4 @@
-// Copyright (C) 2009 Novell, Inc.
+// Copyright (C) 2009-2010 Novell, Inc.
 // Copyright (C) 2009 Robert Dyer
 //
 // This program is free software; you can redistribute it and/or
@@ -16,6 +16,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
@@ -249,11 +250,11 @@ namespace PdfMod.Gui
 
                 loading = true;
             }
-            
+
             if (!path.StartsWith ("file://")) {
                 path = System.IO.Path.GetFullPath (path);
             }
-            
+
             Configuration.LastOpenFolder = System.IO.Path.GetDirectoryName (suggestedFilename ?? path);
             status_label.Text = Catalog.GetString ("Loading document...");
 
@@ -365,6 +366,23 @@ namespace PdfMod.Gui
             });
 
             reset_event.WaitOne ();
+        }
+
+        public Gtk.FileChooserDialog CreateChooser (string title, FileChooserAction action)
+        {
+            var chooser = new Gtk.FileChooserDialog (title, this.Window, action) {
+                DefaultResponse = ResponseType.Ok
+            };
+            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
+            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
+
+            var dirs = new string [] { "DOWNLOAD", "DOCUMENTS" }.Select (s =>
+                XdgBaseDirectorySpec.GetXdgDirectoryUnderHome (String.Format ("XDG_{0}_DIR", s), null)
+            ).Where (d => d != null).ToArray ();
+            Hyena.Gui.GtkUtilities.SetChooserShortcuts (chooser, dirs);
+
+            return chooser;
         }
 
         static void OnLogNotify (LogNotifyArgs args)

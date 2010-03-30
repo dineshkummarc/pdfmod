@@ -1,4 +1,4 @@
-// Copyright (C) 2009 Novell, Inc.
+// Copyright (C) 2009-2010 Novell, Inc.
 // Copyright (C) 2009 Julien Rebetez
 // Copyright (C) 2009 Łukasz Jernaś
 // Copyright (C) 2009 Andreu Correa Casablanca
@@ -200,13 +200,8 @@ namespace PdfMod.Gui
 
         void OnOpen (object o, EventArgs args)
         {
-            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open) {
-                SelectMultiple = true,
-                DefaultResponse = ResponseType.Ok
-            };
-            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
-            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
-            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            var chooser = app.CreateChooser (Catalog.GetString ("Select PDF"), FileChooserAction.Open);
+            chooser.SelectMultiple = true;
             chooser.AddButton (Stock.Open, ResponseType.Ok);
 
             if (app.Document != null) {
@@ -246,15 +241,12 @@ namespace PdfMod.Gui
 
         void OnInsertFrom (object o, EventArgs args)
         {
-            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Select PDF"), app.Window, FileChooserAction.Open) {
-                SelectMultiple = false,
-                DefaultResponse = ResponseType.Ok
-            };
-            chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
-            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
+            var chooser = app.CreateChooser (Catalog.GetString ("Select PDF"), FileChooserAction.Open);
+            chooser.SelectMultiple = false;
             chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
-            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Stock.Open, ResponseType.Ok);
+            // TODO will uncomment this later; don't want to break string freeze now
+            //chooser.AddButton (Catalog.GetString ("_Insert"), ResponseType.Ok);
 
             var response = chooser.Run ();
             string filename = chooser.Filename;
@@ -281,16 +273,11 @@ namespace PdfMod.Gui
 
         void OnSaveAs (object o, EventArgs args)
         {
-            var chooser = new Gtk.FileChooserDialog (Catalog.GetString ("Save as..."), app.Window, FileChooserAction.Save) {
-                SelectMultiple = false,
-                DoOverwriteConfirmation = true,
-                CurrentName = System.IO.Path.GetFileName (app.Document.SuggestedSavePath),
-                DefaultResponse = ResponseType.Ok
-            };
-            chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
+            var chooser = app.CreateChooser (Catalog.GetString ("Save as..."), FileChooserAction.Save);
+            chooser.SelectMultiple = false;
+            chooser.DoOverwriteConfirmation = true;
+            chooser.CurrentName = System.IO.Path.GetFileName (app.Document.SuggestedSavePath);
             chooser.AddButton (Stock.SaveAs, ResponseType.Ok);
-            chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
-            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
             chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
 
             var response = chooser.Run ();
