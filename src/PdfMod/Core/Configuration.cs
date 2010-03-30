@@ -48,7 +48,13 @@ namespace PdfMod.Core
 
         public string LastOpenFolder {
             get { return Get<string> ("last_folder", System.Environment.GetFolderPath (System.Environment.SpecialFolder.Desktop)); }
-            set { Set<string> ("last_folder", value); }
+            set {
+                if (value != null && value.StartsWith ("file:/") && !value.StartsWith ("file://")) {
+                    value = "file://" + value.Substring (6);
+                }
+
+                Set<string> ("last_folder", value);
+            }
         }
     }
 }
