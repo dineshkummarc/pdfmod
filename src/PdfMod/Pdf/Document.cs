@@ -270,6 +270,8 @@ namespace PdfMod.Pdf
                     tmp_uri = tmp_path = null;
                 }
             }
+
+            OnChanged ();
         }
 
         public void AddFromUri (Uri uri)
