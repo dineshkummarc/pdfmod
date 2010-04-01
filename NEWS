@@ -1,4 +1,24 @@
 ============================
+Version 0.8.2 - NOT YET RELEASED
+============================
+
+Contributors:
+Gabriel Burt, Robert Dyer
+
+Enhancements:
+* Use the stock Dnd icons instead of thumbnails
+* Add Documents and Download dirs to the shortcuts list in chooser dialogs
+
+Bugs Fixed:
+* Fix a crash when the default RegionInfo is null (bgo#596912)
+* Catch exceptions when inserting doc (bgo#614009)
+* Raise Document.Changed after Save
+* Fix issue with remembering last directory
+
+Translators:
+Jorge González, Mario Blättermann
+
+============================
 Version 0.8.1 - Mar 24, 2010
 ============================
 
