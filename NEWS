@@ -1,6 +1,6 @@
-============================
-Version 0.8.2 - NOT YET RELEASED
-============================
+===========================
+Version 0.8.2 - May 6, 2010
+===========================
 
 Contributors:
 Gabriel Burt, Robert Dyer
@@ -12,11 +12,11 @@ Enhancements:
 Bugs Fixed:
 * Fix a crash when the default RegionInfo is null (bgo#596912)
 * Catch exceptions when inserting doc (bgo#614009)
-* Raise Document.Changed after Save
+* Raise Document.Changed after Save so '*' in Title goes away
 * Fix issue with remembering last directory
 
 Translators:
-Jorge González, Mario Blättermann
+Andrej Žnidaršič, Jorge González, Marek Černocký, Mario Blättermann
 
 ============================
 Version 0.8.1 - Mar 24, 2010
