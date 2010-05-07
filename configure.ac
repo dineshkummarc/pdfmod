@@ -111,13 +111,13 @@ PKG_CHECK_MODULES([GLIB_SHARP_20], [glib-sharp-2.0])
 PKG_CHECK_MODULES([GCONF_SHARP_20], [gconf-sharp-2.0])
 
 dnl package checks, per config
-PKG_CHECK_MODULES(HYENA, hyena >= 0.2)
+PKG_CHECK_MODULES(HYENA, hyena >= 0.3)
 HYENA_ASSEMBLIES="`$PKG_CONFIG --variable=Assemblies hyena`"
 HYENA_FILES="`$PKG_CONFIG --variable=Files hyena`"
 AC_SUBST(HYENA_ASSEMBLIES)
 AC_SUBST(HYENA_FILES)
 
-PKG_CHECK_MODULES(HYENA_GUI, hyena.gui >= 0.2)
+PKG_CHECK_MODULES(HYENA_GUI, hyena.gui >= 0.3)
 HYENA_GUI_ASSEMBLIES="`$PKG_CONFIG --variable=Assemblies hyena.gui`"
 HYENA_GUI_FILES="`$PKG_CONFIG --variable=Files hyena.gui`"
 AC_SUBST(HYENA_GUI_ASSEMBLIES)
