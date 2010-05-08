@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Mono.Unix;
 using Gtk;
 
 using PdfMod.Pdf;
@@ -63,14 +62,12 @@ namespace PdfMod.Gui
                 }
             }
         }
-        
+
         string GetPageTooltip (Page page)
         {
-            var label = page.Document.Labels[page];
-            string page_no = Catalog.GetString (String.Format ("Page {0}", page.Index + 1));
-            return ((null == label) ? page_no : String.Format ("{0} ({1})", label, page_no));
+            return page.Name;
         }
-        
+
         public void UpdateForPage (TreeIter iter, Page page)
         {
             SetValue (iter, SortColumn, page.Index);

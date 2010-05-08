@@ -16,6 +16,8 @@
 
 using System;
 
+using Mono.Unix;
+
 using PdfSharp.Pdf;
 
 namespace PdfMod.Pdf
@@ -27,6 +29,14 @@ namespace PdfMod.Pdf
         public Document Document { get; internal set; }
         public int Index { get; internal set; }
         public bool SurfaceDirty { get; internal set; }
+
+        public string Name {
+            get {
+                var label = Document.Labels[this];
+                string page_num = String.Format (Catalog.GetString ("Page {0}"), Index + 1);
+                return label == null ? page_num : String.Format ("{0} ({1})", label, page_num);
+            }
+        }
 
         public Page (PdfPage pdf_page)
         {
