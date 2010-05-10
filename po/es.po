@@ -4,13 +4,14 @@
 #
 # Andreu Correa Casablanca <castarco@gmail.com>, 2009.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: pdf mod doc 0.5\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-03-30 21:27+0000\n"
-"PO-Revision-Date: 2010-03-31 08:41+0200\n"
+"POT-Creation-Date: 2010-05-08 01:29+0000\n"
+"PO-Revision-Date: 2010-05-10 20:13+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +46,13 @@ msgstr "Error intentando mover páginas"
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "Error intentando eliminar páginas del documento"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+#| msgid "Page {1}"
+#| msgid_plural "Page {1}"
+msgid "Page {0}"
+msgstr "Página {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Open a document"
@@ -248,8 +256,8 @@ msgstr ""
 #: ../src/PdfMod/Gui/Actions.cs:461
 msgid "translator-credits"
 msgstr ""
-"Andreu Correa Casablanca <castarco@gmail.com>, 2009\n"
-"Jorge González <jorgegonz@svn.gnome.org>, 2009"
+"Jorge González <jorgegonz@svn.gnome.org>, 2009-2010\n"
+"Andreu Correa Casablanca <castarco@gmail.com>, 2009"
 
 #: ../src/PdfMod/Gui/Client.cs:85
 msgid "PDF Mod"
@@ -345,11 +353,6 @@ msgstr "Ocultar las propiedades del documento"
 
 #~ msgid "PDF Documents"
 #~ msgstr "Documentos pdf"
-
-#~ msgid "Page {1}"
-#~ msgid_plural "Page {1}"
-#~ msgstr[0] "Página {1}"
-#~ msgstr[1] "Página {1}"
 
 #~ msgid "Pages {1} - {2}"
 #~ msgid_plural "Pages {1} - {2}"
