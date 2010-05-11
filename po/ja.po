@@ -1,14 +1,14 @@
 # pdfmod ja.po.
-# Copyright (C) 2009 Free Software Foundation, Inc.
+# Copyright (C) 2009,2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the pdfmod package.
-# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2009.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2009,2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-05 06:15+0900\n"
-"PO-Revision-Date: 2009-11-05 06:15+0900\n"
+"POT-Creation-Date: 2010-05-11 23:40+0900\n"
+"PO-Revision-Date: 2010-05-11 23:39+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +43,11 @@ msgstr "ページの移動エラー"
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "ドキュメントからページの削除エラー"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "{0}ページ"
 
 #: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Open a document"
@@ -148,153 +153,159 @@ msgstr "ツールバー"
 msgid "Fullscreen"
 msgstr "フルスクリーン表示"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:172
 msgid "_Undo"
 msgstr "元に戻す(_U)"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:173
 #, csharp-format
 msgid "Undo {0}"
 msgstr "\"{0}\" を元に戻す"
 
-#: ../src/PdfMod/Gui/Actions.cs:182
+#: ../src/PdfMod/Gui/Actions.cs:177
 msgid "_Redo"
 msgstr "やり直す(_R)"
 
-#: ../src/PdfMod/Gui/Actions.cs:183
+#: ../src/PdfMod/Gui/Actions.cs:178
 #, csharp-format
 msgid "Redo {0}"
 msgstr "\"{0}\" をやり直す"
 
-#: ../src/PdfMod/Gui/Actions.cs:191
+#: ../src/PdfMod/Gui/Actions.cs:186
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "ページの削除"
 msgstr[1] "{0}ページの削除"
 
-#: ../src/PdfMod/Gui/Actions.cs:194
+#: ../src/PdfMod/Gui/Actions.cs:189
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "選択したページを削除します"
 msgstr[1] "選択した{0}ページを削除します"
 
-#: ../src/PdfMod/Gui/Actions.cs:197
+#: ../src/PdfMod/Gui/Actions.cs:192
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "ページを抜き出す"
 msgstr[1] "{0}ページ抜き出す"
 
-#: ../src/PdfMod/Gui/Actions.cs:200
+#: ../src/PdfMod/Gui/Actions.cs:195
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "選択したページを抜き出します"
 msgstr[1] "選択した{0}ページを抜き出します"
 
-#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
+#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:244
 msgid "Select PDF"
 msgstr "PDF の選択"
 
-#: ../src/PdfMod/Gui/Actions.cs:212
-msgid "PDF Documents"
-msgstr "PDF ドキュメント"
+#: ../src/PdfMod/Gui/Actions.cs:261 ../src/PdfMod/Gui/Client.cs:289
+msgid "Error Loading Document"
+msgstr "ドキュメントの読み込みエラー"
 
-#: ../src/PdfMod/Gui/Actions.cs:213 ../src/PdfMod/Gui/Actions.cs:259
-#: ../src/PdfMod/Gui/Actions.cs:290
-msgid "All Files"
-msgstr "全てのファイル"
+#: ../src/PdfMod/Gui/Actions.cs:262 ../src/PdfMod/Gui/Client.cs:290
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "{0} を読み込んでいる最中にエラーが発生しました。"
 
-#: ../src/PdfMod/Gui/Actions.cs:281
+#: ../src/PdfMod/Gui/Actions.cs:276
 msgid "Save as..."
 msgstr "別名で保存..."
 
-#: ../src/PdfMod/Gui/Actions.cs:423
+#: ../src/PdfMod/Gui/Actions.cs:413
 msgid "Error opening help"
 msgstr "ヘルプの表示エラー"
 
-#: ../src/PdfMod/Gui/Actions.cs:424
+#: ../src/PdfMod/Gui/Actions.cs:414
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "PDF Mod のオンライン・ドキュメントを開きますか？"
 
-#: ../src/PdfMod/Gui/Actions.cs:445
+#: ../src/PdfMod/Gui/Actions.cs:435
 msgid "Visit Website"
 msgstr "ホームページを開く"
 
-#: ../src/PdfMod/Gui/Actions.cs:447
+#: ../src/PdfMod/Gui/Actions.cs:437
 msgid "Primary Development:"
 msgstr "メインの開発者:"
 
-#: ../src/PdfMod/Gui/Actions.cs:450
+#: ../src/PdfMod/Gui/Actions.cs:440
 msgid "Contributors:"
 msgstr "その他の貢献者:"
 
-#: ../src/PdfMod/Gui/Actions.cs:466
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:458
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} その他の貢献者"
+
+#: ../src/PdfMod/Gui/Actions.cs:461
 msgid "translator-credits"
 msgstr "相花 毅 <takeshi.aihana@gmail.com>"
 
-#: ../src/PdfMod/Gui/Client.cs:84
+#: ../src/PdfMod/Gui/Client.cs:85
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:189
+#: ../src/PdfMod/Gui/Client.cs:190
 msgid "Save the changes made to this document?"
 msgstr "このドキュメントの変更点を保存しますか？"
 
-#: ../src/PdfMod/Gui/Client.cs:192
+#: ../src/PdfMod/Gui/Client.cs:193
 msgid "Close _Without Saving"
 msgstr "保存せずに閉じる(_W)"
 
-#: ../src/PdfMod/Gui/Client.cs:221
+#: ../src/PdfMod/Gui/Client.cs:223
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "{0} のドキュメントを別々のウィンドウで開きますか？"
 msgstr[1] "{0} の全てのドキュメントを別々のウィンドウで開きますか？"
 
-#: ../src/PdfMod/Gui/Client.cs:225
+#: ../src/PdfMod/Gui/Client.cs:227
 msgid "Open _First"
 msgstr "先頭を開く(_F)"
 
-#: ../src/PdfMod/Gui/Client.cs:226
+#: ../src/PdfMod/Gui/Client.cs:228
 msgid "Open _All"
 msgstr "全て開く(_A)"
 
-#: ../src/PdfMod/Gui/Client.cs:257
+#: ../src/PdfMod/Gui/Client.cs:259
 msgid "Loading document..."
 msgstr "ドキュメントの読み込み中..."
 
-#: ../src/PdfMod/Gui/Client.cs:287
-msgid "Error Loading Document"
-msgstr "ドキュメントの読み込みエラー"
-
-#: ../src/PdfMod/Gui/Client.cs:288
-#, csharp-format
-msgid "There was an error loading {0}"
-msgstr "{0} を読み込んでいる最中にエラーが発生しました。"
-
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:313
+#: ../src/PdfMod/Gui/Client.cs:315
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (もともとは {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:318
+#: ../src/PdfMod/Gui/Client.cs:320
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0}ページ"
 msgstr[1] "{0}ページ"
 
-#: ../src/PdfMod/Gui/Client.cs:341
+#: ../src/PdfMod/Gui/Client.cs:343
 msgid "Document is Encrypted"
 msgstr "ドキュメントは暗号化されています"
 
-#: ../src/PdfMod/Gui/Client.cs:342
+#: ../src/PdfMod/Gui/Client.cs:344
 msgid "Enter the document's password to open it:"
 msgstr "ドキュメントを開く際のパスワードを入力して下さい:"
+
+#: ../src/PdfMod/Gui/Client.cs:378
+msgid "All Files"
+msgstr "全てのファイル"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
 msgid "Select Matching"
