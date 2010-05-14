@@ -374,7 +374,7 @@ namespace PdfMod.Gui
                 DefaultResponse = ResponseType.Ok
             };
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
-            chooser.AddFilter (GtkUtilities.GetFileFilter ("PDF Documents", new string [] {"pdf"}));
+            chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
 
             var dirs = new string [] { "DOWNLOAD", "DOCUMENTS" }.Select (s =>
