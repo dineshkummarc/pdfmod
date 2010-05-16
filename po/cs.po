@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-04-03 06:36+0000\n"
-"PO-Revision-Date: 2010-04-07 14:57+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-17 00:28+0200\n"
+"PO-Revision-Date: 2010-05-09 17:01+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,6 +46,11 @@ msgstr "Chyba při pokusu o přesun stránek"
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "Chyba při pokusu o odstranění stránek z dokumentu"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Stránka {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Open a document"
@@ -308,6 +312,10 @@ msgstr "Dokument je šifrovaný"
 msgid "Enter the document's password to open it:"
 msgstr "Pro otevření zadejte heslo k dokumentu:"
 
+#: ../src/PdfMod/Gui/Client.cs:377
+msgid "PDF Documents"
+msgstr ""
+
 #: ../src/PdfMod/Gui/Client.cs:378
 msgid "All Files"
 msgstr "Všechny soubory"
@@ -347,4 +355,3 @@ msgstr "_Zavřít"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "Skrýt vlastnosti dokumentu"
-
