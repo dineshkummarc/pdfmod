@@ -1,0 +1,351 @@
+# Dutch translation for Pdfmod
+#
+# This file is distributed under the same license as the pdfmod package.
+#
+# Wouter Bolsterlee <wbolster@gnome.org>, 2010
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-17 22:11+0200\n"
+"PO-Revision-Date: 2010-05-17 22:12+0200\n"
+"Last-Translator: Wouter Bolsterlee <wbolster@gnome.org>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "PDF Modifier"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Pagina's in PDF-documenten verwijderen, loshalen en roteren"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "{1} verplaatsen"
+msgstr[1] "{1} verplaatsen"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "Fout bij terugplaatsen van pagina's"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "Fout bij verplaatsen van pagina's"
+
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "Fout bij verwijderen van pagina's uit het document"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Pagina {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:63
+msgid "Open a document"
+msgstr "Document openen"
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "_Insert From..."
+msgstr "_Invoegen vanuit…"
+
+#: ../src/PdfMod/Gui/Actions.cs:64
+msgid "Insert pages from another document"
+msgstr "Pagina's vanuit een ander document invoegen"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Wijzigingen in dit document opslaan door het bestaande bestand te overschrijven"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+msgid "Save this document to a new file"
+msgstr "Dit document als een nieuw bestand opslaan"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "_File"
+msgstr "_Bestand"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr "Recente _bestanden"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate Right"
+msgstr "Naar rechts draaien"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "Rotate right"
+msgstr "Naar rechts draaien"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate Left"
+msgstr "Naar links draaien"
+
+#: ../src/PdfMod/Gui/Actions.cs:74
+msgid "Rotate left"
+msgstr "Naar links draaien"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Export Images"
+msgstr "Afbeeldingen exporteren"
+
+#: ../src/PdfMod/Gui/Actions.cs:75
+msgid "Save all images in this document to a new folder"
+msgstr "Alle afbeeldingen in dit document in een nieuwe map opslaan"
+
+#: ../src/PdfMod/Gui/Actions.cs:77
+msgid "_Edit"
+msgstr "Be_werken"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Select Even Pages"
+msgstr "Even pagina's selecteren"
+
+#: ../src/PdfMod/Gui/Actions.cs:80
+msgid "Select Odd Pages"
+msgstr "Oneven pagina's selecteren"
+
+# Hmmm… is dit zinnig? (Komt twee keer voor!) — Wouter Bolsterlee
+#: ../src/PdfMod/Gui/Actions.cs:81
+msgid "Select Matching..."
+msgstr "Selecteren…"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "_Invert Selection"
+msgstr "Selectie _omkeren"
+
+#: ../src/PdfMod/Gui/Actions.cs:86
+msgid "_View"
+msgstr "Beel_d"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "_Help"
+msgstr "_Hulp"
+
+#: ../src/PdfMod/Gui/Actions.cs:91
+msgid "_Contents"
+msgstr "I_nhoud"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+msgid "Open in Viewer"
+msgstr "In viewer openen"
+
+#: ../src/PdfMod/Gui/Actions.cs:96
+msgid "Open in viewer"
+msgstr "In viewer openen"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "De titel, sleutelwoorden en andere eigenschappen van dit document bekijken en wijzigen"
+
+#: ../src/PdfMod/Gui/Actions.cs:102
+msgid "Toolbar"
+msgstr "Werkbalk"
+
+#: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Fullscreen"
+msgstr "Volledig scherm"
+
+#: ../src/PdfMod/Gui/Actions.cs:172
+msgid "_Undo"
+msgstr "_Ongedaan maken"
+
+#: ../src/PdfMod/Gui/Actions.cs:173
+#, csharp-format
+msgid "Undo {0}"
+msgstr "{0} ongedaan maken"
+
+#: ../src/PdfMod/Gui/Actions.cs:177
+msgid "_Redo"
+msgstr "Op_nieuw"
+
+#: ../src/PdfMod/Gui/Actions.cs:178
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Opnieuw {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Pagina verwijderen"
+msgstr[1] "{0} Pagina's verwijderen"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "De geselecteerde pagina verwijderen"
+msgstr[1] "De {0} geselecteerde pagina's verwijderen"
+
+#: ../src/PdfMod/Gui/Actions.cs:192
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Pagina loshalen"
+msgstr[1] "{0} pagina's loshalen"
+
+#: ../src/PdfMod/Gui/Actions.cs:195
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "De geselecteerde pagina loshalen"
+msgstr[1] "De {0} geselecteerde pagina's loshalen"
+
+#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:244
+msgid "Select PDF"
+msgstr "PDF selecteren"
+
+#: ../src/PdfMod/Gui/Actions.cs:261 ../src/PdfMod/Gui/Client.cs:289
+msgid "Error Loading Document"
+msgstr "Fout bij laden van document"
+
+#: ../src/PdfMod/Gui/Actions.cs:262 ../src/PdfMod/Gui/Client.cs:290
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Er is een fout opgetreden bij het laden van {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:276
+msgid "Save as..."
+msgstr "Opslaan als…"
+
+#: ../src/PdfMod/Gui/Actions.cs:413
+msgid "Error opening help"
+msgstr "Fout bij openen van hulp"
+
+#: ../src/PdfMod/Gui/Actions.cs:414
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Wilt u de online documentatie voor PDF Mod openen?"
+
+#: ../src/PdfMod/Gui/Actions.cs:435
+msgid "Visit Website"
+msgstr "Website bezoeken"
+
+#: ../src/PdfMod/Gui/Actions.cs:437
+msgid "Primary Development:"
+msgstr "Hoofdontwikkeling:"
+
+#: ../src/PdfMod/Gui/Actions.cs:440
+msgid "Contributors:"
+msgstr "Bijdragen van:"
+
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:458
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+
+#: ../src/PdfMod/Gui/Actions.cs:461
+msgid "translator-credits"
+msgstr "Wouter Bolsterlee"
+
+#: ../src/PdfMod/Gui/Client.cs:85
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/Gui/Client.cs:190
+msgid "Save the changes made to this document?"
+msgstr "De wijzigingen aan dit document opslaan?"
+
+#: ../src/PdfMod/Gui/Client.cs:193
+msgid "Close _Without Saving"
+msgstr "Sluiten _zonder opslaan"
+
+#: ../src/PdfMod/Gui/Client.cs:223
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Doorgaan met openen van {0} document in aparte vensters"
+msgstr[1] "Doorgaan met openen van {0} documenten in aparte vensters"
+
+#: ../src/PdfMod/Gui/Client.cs:227
+msgid "Open _First"
+msgstr "_Eerste openen"
+
+#: ../src/PdfMod/Gui/Client.cs:228
+msgid "Open _All"
+msgstr "_Alle openen"
+
+#: ../src/PdfMod/Gui/Client.cs:259
+msgid "Loading document..."
+msgstr "Document laden…"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:315
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (oorspronkelijk {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:320
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} pagina"
+msgstr[1] "{0} pagina's"
+
+#: ../src/PdfMod/Gui/Client.cs:343
+msgid "Document is Encrypted"
+msgstr "Document is versleuteld"
+
+#: ../src/PdfMod/Gui/Client.cs:344
+msgid "Enter the document's password to open it:"
+msgstr "Geef het wachtwoord om dit documents te openen:"
+
+#: ../src/PdfMod/Gui/Client.cs:377
+msgid "PDF Documents"
+msgstr "PDF-documenten"
+
+#: ../src/PdfMod/Gui/Client.cs:378
+msgid "All Files"
+msgstr "Alle bestanden"
+
+# Hmmm… is dit zinnig? (Komt twee keer voor!) — Wouter Bolsterlee
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+msgid "Select Matching"
+msgstr "Selecteren"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "_Titel:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "_Auteur:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "_Sleutelwoorden:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "_Onderwerp:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+msgid "_Revert Properties"
+msgstr "Eigenschappen _terugzetten"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr "De documenteigenschappen terugzetten naar de oorspronkelijke waardes"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "Sl_uiten"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+msgid "Hide the document's properties"
+msgstr "De documenteigenschappen verbergen"
