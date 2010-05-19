@@ -377,12 +377,21 @@ namespace PdfMod.Gui
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("PDF Documents"), new string [] {"pdf"}));
             chooser.AddFilter (GtkUtilities.GetFileFilter (Catalog.GetString ("All Files"), new string [] {"*"}));
 
-            var dirs = new string [] { "DOWNLOAD", "DOCUMENTS" }.Select (s =>
-                XdgBaseDirectorySpec.GetXdgDirectoryUnderHome (String.Format ("XDG_{0}_DIR", s), null)
-            ).Where (d => d != null).ToArray ();
+            var dirs = new string [] { "DOWNLOAD", "DOCUMENTS" }.Select (s => GetXdgDir (s))
+                                                                .Where (d => d != null)
+                                                                .ToArray ();
             Hyena.Gui.GtkUtilities.SetChooserShortcuts (chooser, dirs);
 
             return chooser;
+        }
+
+        private string GetXdgDir (string type)
+        {
+            try {
+                return XdgBaseDirectorySpec.GetXdgDirectoryUnderHome (String.Format ("XDG_{0}_DIR", type), null);
+            } catch {
+                return null;
+            }
         }
 
         static void OnLogNotify (LogNotifyArgs args)
