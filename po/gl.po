@@ -6,19 +6,19 @@
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://trasno.net
 # Fran Diéguez <frandieguez@ubuntu.com>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-02-26 21:36+0000\n"
-"PO-Revision-Date: 2010-03-04 14:33+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-24 12:27+0200\n"
+"PO-Revision-Date: 2010-05-24 12:27+0200\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
-"Language-Team: Galician <gnome@g11n.net>\n"
+"Language-Team: Galician <gnome@g11.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\\n"
 
 #: ../data/pdfmod.desktop.in.in.h:1
 msgid "PDF Modifier"
@@ -47,6 +47,11 @@ msgstr "Produciuse un erro ao intentar mover as páxinas"
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "Produciuse un erro ao intentar eliminar páxinas do documento"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Páxina {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Open a document"
@@ -198,42 +203,53 @@ msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Extraer a páxina seleccionada"
 msgstr[1] "Extraer as {0} páxinas seleccionadas"
 
-#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:249
+#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:244
 msgid "Select PDF"
 msgstr "Seleccionar PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:207
-msgid "PDF Documents"
-msgstr "Documentos PDF"
+#: ../src/PdfMod/Gui/Actions.cs:261 ../src/PdfMod/Gui/Client.cs:289
+msgid "Error Loading Document"
+msgstr "Produciuse un erro ao cargar o documento"
 
-#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
-#: ../src/PdfMod/Gui/Actions.cs:285
-msgid "All Files"
-msgstr "Todos os ficheiros"
+#: ../src/PdfMod/Gui/Actions.cs:262 ../src/PdfMod/Gui/Client.cs:290
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Produciuse un erro ao cargar {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:276
 msgid "Save as..."
 msgstr "Gardar como..."
 
-#: ../src/PdfMod/Gui/Actions.cs:418
+#: ../src/PdfMod/Gui/Actions.cs:413
 msgid "Error opening help"
 msgstr "Produciuse un erro ao abrir a axuda"
 
-#: ../src/PdfMod/Gui/Actions.cs:419
+#: ../src/PdfMod/Gui/Actions.cs:414
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Desexa abrir a documentación en liña de PDF Mod?"
 
-#: ../src/PdfMod/Gui/Actions.cs:440
+#: ../src/PdfMod/Gui/Actions.cs:435
 msgid "Visit Website"
 msgstr "Visitar sitio web"
 
-#: ../src/PdfMod/Gui/Actions.cs:442
+#: ../src/PdfMod/Gui/Actions.cs:437
 msgid "Primary Development:"
 msgstr "Desenvolvemento primario:"
 
-#: ../src/PdfMod/Gui/Actions.cs:445
+#: ../src/PdfMod/Gui/Actions.cs:440
 msgid "Contributors:"
 msgstr "Colaboradores:"
+
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:458
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Outros contribuidores de PDF Mod"
 
 #: ../src/PdfMod/Gui/Actions.cs:461
 msgid "translator-credits"
@@ -245,66 +261,65 @@ msgstr ""
 "desexas colaborar connosco, podes atopar máis información\n"
 "en http://trasno.net"
 
-#: ../src/PdfMod/Gui/Client.cs:84
+#: ../src/PdfMod/Gui/Client.cs:85
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:189
+#: ../src/PdfMod/Gui/Client.cs:190
 msgid "Save the changes made to this document?"
 msgstr "Desexa gardar os cambios realizados ao documento?"
 
-#: ../src/PdfMod/Gui/Client.cs:192
+#: ../src/PdfMod/Gui/Client.cs:193
 msgid "Close _Without Saving"
 msgstr "Pechar _sen gardar"
 
-#: ../src/PdfMod/Gui/Client.cs:222
+#: ../src/PdfMod/Gui/Client.cs:223
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "Continuar ca apertura de {0} documento en xanelas separadas?"
 msgstr[1] "Continuar ca apertura de {0} documentos en xanelas separadas?"
 
-#: ../src/PdfMod/Gui/Client.cs:226
+#: ../src/PdfMod/Gui/Client.cs:227
 msgid "Open _First"
 msgstr "Abrir _primeiro"
 
-#: ../src/PdfMod/Gui/Client.cs:227
+#: ../src/PdfMod/Gui/Client.cs:228
 msgid "Open _All"
 msgstr "_Abrir todo"
 
-#: ../src/PdfMod/Gui/Client.cs:258
+#: ../src/PdfMod/Gui/Client.cs:259
 msgid "Loading document..."
 msgstr "Cargando o documento..."
 
-#: ../src/PdfMod/Gui/Client.cs:288
-msgid "Error Loading Document"
-msgstr "Produciuse un erro ao cargar o documento"
-
-#: ../src/PdfMod/Gui/Client.cs:289
-#, csharp-format
-msgid "There was an error loading {0}"
-msgstr "Produciuse un erro ao cargar {0}"
-
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:314
+#: ../src/PdfMod/Gui/Client.cs:315
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (antes ocupaba {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:319
+#: ../src/PdfMod/Gui/Client.cs:320
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} páxina"
 msgstr[1] "{0} páxinas"
 
-#: ../src/PdfMod/Gui/Client.cs:342
+#: ../src/PdfMod/Gui/Client.cs:343
 msgid "Document is Encrypted"
 msgstr "O documento está cifrado"
 
-#: ../src/PdfMod/Gui/Client.cs:343
+#: ../src/PdfMod/Gui/Client.cs:344
 msgid "Enter the document's password to open it:"
 msgstr "Introduza o contrasinal do documento para abrilo:"
+
+#: ../src/PdfMod/Gui/Client.cs:377
+msgid "PDF Documents"
+msgstr "Documentos PDF"
+
+#: ../src/PdfMod/Gui/Client.cs:378
+msgid "All Files"
+msgstr "Todos os ficheiros"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
 msgid "Select Matching"
@@ -341,4 +356,3 @@ msgstr "_Pechar"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "Ocultar as propiedades do documento"
-
