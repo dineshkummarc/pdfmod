@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-17 00:28+0200\n"
-"PO-Revision-Date: 2010-05-09 17:01+0100\n"
+"POT-Creation-Date: 2010-05-31 23:17+0200\n"
+"PO-Revision-Date: 2010-05-17 08:14+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -314,7 +314,7 @@ msgstr "Pro otevření zadejte heslo k dokumentu:"
 
 #: ../src/PdfMod/Gui/Client.cs:377
 msgid "PDF Documents"
-msgstr ""
+msgstr "Dokumenty PDF"
 
 #: ../src/PdfMod/Gui/Client.cs:378
 msgid "All Files"
