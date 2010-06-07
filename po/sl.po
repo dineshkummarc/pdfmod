@@ -1,15 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
+# Slovenian translation of pdfmod.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pdfmod package.
-# Andrej Žnidaršič <andrej.znidaris@gmail.com>, 2009
+#
+# Andrej Žnidaršič <andrej.znidaris@gmail.com>, 2009 - 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Pdfmod\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=pdfmod&component=general\n"
 "POT-Creation-Date: 2010-05-08 01:29+0000\n"
-"PO-Revision-Date: 2010-05-08 09:49+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"PO-Revision-Date: 2010-06-04 18:57+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr "Urejevalnik PDF"
 
 #: ../data/pdfmod.desktop.in.in.h:2
 msgid "Remove, extract, and rotate pages in PDF documents"
-msgstr "Odstranjevanje, razširjanje in vrtenje strani v dokumentih PDF"
+msgstr "Odstranjevanje, razširjanje in vrtenje strani v dokumentih PDF."
 
 #. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
@@ -84,19 +85,19 @@ msgstr "_Nedavne datoteke"
 
 #: ../src/PdfMod/Gui/Actions.cs:73
 msgid "Rotate Right"
-msgstr "Vrtenje desno"
+msgstr "Zavrti desno"
 
 #: ../src/PdfMod/Gui/Actions.cs:73
 msgid "Rotate right"
-msgstr "Vrtenje desno"
+msgstr "Vrtenje slike desno"
 
 #: ../src/PdfMod/Gui/Actions.cs:74
 msgid "Rotate Left"
-msgstr "Vrtenje levo"
+msgstr "Zavrti levo"
 
 #: ../src/PdfMod/Gui/Actions.cs:74
 msgid "Rotate left"
-msgstr "Vrtenje levo"
+msgstr "Vrtenje slike levo"
 
 #: ../src/PdfMod/Gui/Actions.cs:75
 msgid "Export Images"
@@ -226,7 +227,7 @@ msgstr "Napaka nalaganja dokumenta"
 #: ../src/PdfMod/Gui/Client.cs:290
 #, csharp-format
 msgid "There was an error loading {0}"
-msgstr "Prišlo je do napake pri nalaganju {0}"
+msgstr "Prišlo je do napake med nalaganjem {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:276
 msgid "Save as..."
@@ -250,7 +251,7 @@ msgstr "Osnovni razvoj:"
 
 #: ../src/PdfMod/Gui/Actions.cs:440
 msgid "Contributors:"
-msgstr "Sodelavci:"
+msgstr "Sodelujoči:"
 
 #. Translators: {0} and {1} are the years the copyright assertion covers; put into
 #. variables so you don't have to re-translate this every year
@@ -273,7 +274,7 @@ msgstr "PDF urejevalnik"
 
 #: ../src/PdfMod/Gui/Client.cs:190
 msgid "Save the changes made to this document?"
-msgstr "Shrani spremembe dokumenta?"
+msgstr "Ali naj se shranijo spremembe dokumenta?"
 
 #: ../src/PdfMod/Gui/Client.cs:193
 msgid "Close _Without Saving"
@@ -283,10 +284,10 @@ msgstr "Zapri _brez shranjevanja"
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
-msgstr[0] "Nadaljevanje odpiranja vseh {0} dokumentov v ločenih oknih?"
-msgstr[1] "Nadaljevanje odpiranja {0} dokumenta v ločenih oknih?"
-msgstr[2] "Nadaljevanje odpiranja {0} dokumentov v ločenih oknih?"
-msgstr[3] "Nadaljevanje odpiranja {0} dokumentov v ločenih oknih?"
+msgstr[0] "Ali naj se nadaljuje odpiranje vseh {0} dokumentov v ločenih oknih?"
+msgstr[1] "Ali naj se nadaljuje odpiranje {0} dokumenta v ločenih oknih?"
+msgstr[2] "Ali naj se nadaljuje odpiranje {0} dokumentov v ločenih oknih?"
+msgstr[3] "Ali naj se nadaljuje odpiranje {0} dokumentov v ločenih oknih?"
 
 #: ../src/PdfMod/Gui/Client.cs:227
 msgid "Open _First"
@@ -304,7 +305,7 @@ msgstr "Nalaganje dokumenta ..."
 #: ../src/PdfMod/Gui/Client.cs:315
 #, csharp-format
 msgid "{0} (originally {1})"
-msgstr "{0} (izvirno {1})"
+msgstr "{0} (izvorno {1})"
 
 #: ../src/PdfMod/Gui/Client.cs:320
 #, csharp-format
@@ -353,7 +354,7 @@ msgstr "_Povrni lastnosti"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
 msgid "Change the document's properties back to the original values"
-msgstr "Sprememba lastnosti dokumenta nazaj na izvirne vrednosti"
+msgstr "Sprememba lastnosti dokumenta nazaj na izvorne vrednosti"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
 msgid "_Close"
@@ -365,4 +366,3 @@ msgstr "Skrij lastnosti dokumenta"
 
 #~ msgid "PDF Documents"
 #~ msgstr "Dokumenti PDF"
-
