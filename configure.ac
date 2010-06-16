@@ -123,7 +123,29 @@ HYENA_GUI_FILES="`$PKG_CONFIG --variable=Files hyena.gui`"
 AC_SUBST(HYENA_GUI_ASSEMBLIES)
 AC_SUBST(HYENA_GUI_FILES)
 
-BUNDLE_ASSEMBLIES="$HYENA_ASSEMBLIES $HYENA_GUI_ASSEMBLIES"
+dnl choose between bundled or system poppler-sharp
+AC_ARG_ENABLE([external-poppler-sharp],
+	AC_HELP_STRING([--enable-external-poppler-sharp],
+		[Enable using the external poppler-sharp. [[default=auto]]]),,
+	enable_external_poppler_sharp=auto)
+
+if test "$enable_external_poppler_sharp" = "auto"; then
+	PKG_CHECK_MODULES(POPPLER, poppler-sharp,
+		enable_external_poppler_sharp=yes,
+		enable_external_poppler_sharp=no)
+elif test "$enable_external_poppler_sharp" = "yes"; then
+	PKG_CHECK_MODULES(POPPLER, poppler-sharp)
+fi
+
+if test "$enable_external_poppler_sharp" = "yes"; then
+	POPPLER_ASSEMBLIES="`$PKG_CONFIG --variable=Libraries poppler-sharp`"
+	AC_SUBST(POPPLER_ASSEMBLIES)
+fi
+
+AM_CONDITIONAL(USE_BUNDLED_POPPLER,
+	test "$enable_external_poppler_sharp" = "no")
+
+BUNDLE_ASSEMBLIES="$HYENA_ASSEMBLIES $HYENA_GUI_ASSEMBLIES $POPPLER_ASSEMBLIES"
 BUNDLE_FILES="$HYENA_FILES $HYENA_GUI_FILES"
 AC_SUBST(BUNDLE_ASSEMBLIES)
 AC_SUBST(BUNDLE_FILES)

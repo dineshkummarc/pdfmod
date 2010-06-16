@@ -1,6 +1,7 @@
 
 EXTRA_DIST = 
 
+if USE_BUNDLED_POPPLER
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = $(MCS)
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -unsafe -debug "-define:DEBUG"
@@ -31,7 +32,9 @@ BINARIES =
 
 RESGEN=resgen2
 	
-all: $(ASSEMBLY) $(PROGRAMFILES) $(BINARIES) 
+all: $(ASSEMBLY) $(PROGRAMFILES) $(BINARIES)
+
+endif
 
 FILES =  \
 	poppler-sharp/Document.cs \
