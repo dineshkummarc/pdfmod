@@ -6,6 +6,9 @@ Dependencies:
  * Mono
  * Gtk#
  * poppler
+ * poppler-sharp
+   - http://github.com/jacintos/poppler-sharp
+   - optional: if not installed, will use bundled version
  * gnome-doc-utils-devel
  * gnome-common (if building from git)
  * Hyena (http://git.gnome.org/cgit/hyena)
