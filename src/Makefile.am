@@ -3,35 +3,15 @@
 #
 EXTRA_DIST =
 
-if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = $(MCS)
 ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:DEBUG"
 ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
-PROJECT_REFERENCES =  \
-	../bin/PdfSharp.dll \
-	../bin/poppler-sharp.dll
+PROJECT_REFERENCES = ../bin/PdfSharp.dll
 BUILD_DIR = ../bin
 
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
-
-endif
-
-if ENABLE_RELEASE
-ASSEMBLY_COMPILER_COMMAND = $(MCS)
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug -define:DEBUG
-ASSEMBLY = ../bin/PdfMod.exe
-ASSEMBLY_MDB = $(ASSEMBLY).mdb
-COMPILE_TARGET = exe
-PROJECT_REFERENCES =  \
-	../bin/PdfSharp.dll \
-	../bin/poppler-sharp.dll
-BUILD_DIR = ../bin
-
-PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
-
-endif
 
 AL=al2
 SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
@@ -89,6 +69,12 @@ REFERENCES =  \
 	-pkg:hyena.gui \
 	System \
 	System.Core
+
+if USE_BUNDLED_POPPLER
+PROJECT_REFERENCES += ../bin/poppler-sharp.dll
+else
+REFERENCES += -pkg:poppler-sharp
+endif
 
 DLL_REFERENCES = 
 
