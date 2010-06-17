@@ -16,9 +16,7 @@ PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
 AL=al2
 SATELLITE_ASSEMBLY_NAME=$(notdir $(basename $(ASSEMBLY))).resources.dll
 
-PROGRAMFILES = \
-	$(PDFMOD_EXE_MDB) \
-	$(POPPLER_SHARP_DLL_CONFIG)
+PROGRAMFILES = $(PDFMOD_EXE_MDB)
 
 BINARIES = \
 	$(PDFMOD)  
@@ -72,6 +70,8 @@ REFERENCES =  \
 
 if USE_BUNDLED_POPPLER
 PROJECT_REFERENCES += ../bin/poppler-sharp.dll
+PROGRAMFILES += $(POPPLER_SHARP_DLL_CONFIG)
+
 else
 REFERENCES += -pkg:poppler-sharp
 endif
