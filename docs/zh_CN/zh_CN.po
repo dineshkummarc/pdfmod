@@ -1,0 +1,315 @@
+# Chinese (China) translation for pdfmod.
+# Copyright (C) 2010 pdfmod's COPYRIGHT HOLDER
+# This file is distributed under the same license as the pdfmod package.
+# GrayWaLL <graywall@ymail.com>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod master\n"
+"POT-Creation-Date: 2010-01-01 08:52+0000\n"
+"PO-Revision-Date: 2010-07-06 20:59+0800\n"
+"Last-Translator: GrayWaLL <graywall@ymail.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C/pdfmod.xml:6(title)
+msgid "The PDF Mod Manual"
+msgstr "PDF 修改工具手册"
+
+#: C/pdfmod.xml:8(para)
+msgid ""
+"This is the user's manual for PDF Mod, a simple tool for manipulating PDF "
+"documents."
+msgstr "这是 PDF 修改者用户手册。PDF 修改者是一个操纵 PDF 文件的简易工具。"
+
+#: C/pdfmod.xml:10(subtitle)
+msgid "Quick, Easy PDF Modification"
+msgstr "快速、简单的 PDF 修改工具"
+
+#: C/pdfmod.xml:12(year)
+msgid "2009"
+msgstr "2009"
+
+#: C/pdfmod.xml:13(holder) C/pdfmod.xml:23(orgname)
+msgid "Novell, Inc."
+msgstr "Novell, Inc"
+
+#: C/pdfmod.xml:16(publishername)
+msgid "GNOME Documentation Project"
+msgstr "GNOME 文档项目"
+
+#: C/pdfmod.xml:20(firstname)
+msgid "Gabriel"
+msgstr "Gabriel"
+
+#: C/pdfmod.xml:21(surname)
+msgid "Burt"
+msgstr "Burt"
+
+#: C/pdfmod.xml:29(revnumber)
+msgid "0.2"
+msgstr "0.2"
+
+#: C/pdfmod.xml:30(date)
+msgid "2009-07-29"
+msgstr "2009-07-29"
+
+#: C/pdfmod.xml:33(revnumber)
+msgid "0.1"
+msgstr "0.1"
+
+#: C/pdfmod.xml:34(date)
+msgid "2009-07-25"
+msgstr "2009-07-25"
+
+#: C/pdfmod.xml:40(title)
+msgid "Introduction"
+msgstr "介绍"
+
+#: C/pdfmod.xml:41(para)
+msgid ""
+"PDF Mod is a simple tool for doing basic manipulations of PDF documents."
+msgstr "PDF 修改工具是一个可以对 PDF 文档进行简单修改的工具软件。"
+
+#: C/pdfmod.xml:45(para)
+msgid ""
+"With this tool, you can rotate, remove, or extract pages in a PDF document. "
+"You can also add pages from another document."
+msgstr ""
+"使用此工具，您可以旋转、移除、或提取 PDF 文档中的页面。您也可以从其它文档中加入"
+"页面到当前文档。"
+
+#: C/pdfmod.xml:50(para)
+msgid ""
+"You can start PDF Mod from your applications menu or launcher, or by right "
+"clicking on one or more PDF documents in the file browser, and choosing to "
+"open with PDF Mod."
+msgstr ""
+"您可以从应用程序菜单或启动器启动 PDF 修改工具，或通过右击一个或多个 PDF 文件，然后"
+"选择用 PDF 修改工具打开。"
+
+#: C/pdfmod.xml:56(para)
+msgid ""
+"Like a normal editor application, you must save the changes you make using "
+"PDF Mod. If you want to keep the original document and save your changes to "
+"a new file, use Save As."
+msgstr ""
+"像其它编辑器一样，在修改文档之后，您必须保存您所做的更改。如果您还想保留原来"
+"的文件，请使用另存为。"
+
+#: C/pdfmod.xml:63(title)
+msgid "Usage"
+msgstr "使用方法"
+
+#: C/pdfmod.xml:66(title)
+msgid "Opening a Document"
+msgstr "打开文档"
+
+#: C/pdfmod.xml:67(para)
+msgid "To open a document in PDF Mod:"
+msgstr "在 PDF 修改工具中打开文档："
+
+#: C/pdfmod.xml:72(para)
+msgid ""
+"Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></"
+"menuchoice> and select your document, or"
+msgstr ""
+"选择 <menuchoice><guimenu>文件</guimenu><guimenuitem>打开</guimenuitem></"
+"menuchoice> 然后选择您的文档，或者"
+
+#: C/pdfmod.xml:77(para)
+msgid ""
+"Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> and "
+"select your document, or"
+msgstr ""
+"输入 <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> 然后选择文"
+"档, 或者"
+
+#: C/pdfmod.xml:87(para)
+msgid ""
+"Drag a PDF document from your Desktop or file browser into a PDF Mod window "
+"that doesn't already have a document loaded, or"
+msgstr "将 PDF 文档拖入一个尚未载入任何文档的 PDF 修改工具的窗口，或者"
+
+#: C/pdfmod.xml:92(para)
+msgid ""
+"Choose a document from <menuchoice><guimenu>File</"
+"guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>."
+msgstr ""
+"从<menuchoice><guimenu>文件</guimenu><guimenuitem>最近文档</guimenuitem></"
+"menuchoice>中选择一个文档。"
+
+#: C/pdfmod.xml:100(title)
+msgid "Zooming"
+msgstr "缩放"
+
+#: C/pdfmod.xml:101(para)
+msgid ""
+"Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in "
+"Best Fit mode, where it tries to make all the pages visible at once."
+msgstr ""
+"缩放可以使页面缩略图放大或缩小，PDF 修改工具初始值为最适模式，即争取一次显示所有"
+"页面。"
+
+#: C/pdfmod.xml:104(para)
+msgid ""
+"You can zoom in or out with the options under <menuchoice><guimenu>View</"
+"guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your "
+"mouse's scroll wheel."
+msgstr ""
+"您可以通过<menuchoice><guimenu>查看</guimenu></menuchoice>放大或缩小页面，或"
+"通过按下 <keycap>Ctrl</keycap> 然后滚动鼠标中键来放大或缩小。"
+
+#: C/pdfmod.xml:110(title)
+msgid "Viewing and Editing Properties"
+msgstr "查看编辑属性"
+
+#: C/pdfmod.xml:111(para)
+msgid ""
+"You can view and edit the Title, Author, Keywords, and Subject of the "
+"document by opening the properties. To do so, choose "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></"
+"menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></"
+"keycombo>, or click the Properties button on the toolbar."
+msgstr ""
+"您可以通过打开属性查看或编辑标题、 作者、关键字、文档标题。您可以选择 "
+"<menuchoice><guimenu>文件</guimenu><guimenuitem>属性</guimenuitem></"
+"menuchoice>，或通过快捷键 <keycombo><keycap>Alt</keycap><keycap>Enter</"
+"keycap></keycombo>，也可以直接点击工具栏中的属性按钮。"
+
+#: C/pdfmod.xml:119(title)
+msgid "Selecting Pages"
+msgstr "选择页面"
+
+#: C/pdfmod.xml:120(para)
+msgid ""
+"PDF Mod can automatically select all pages, even-numbered pages, odd-"
+"numbered pages, or pages containing a search term. These options are "
+"available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
+msgstr ""
+"PDF 修改工具可以自动选择所有页面、双数页面、单数页面，或者是包含搜索词的页面。这"
+"些选项可以在<menuchoice><guimenu>编辑</guimenu></menuchoice>菜单下找到。"
+
+#: C/pdfmod.xml:124(para)
+msgid ""
+"You can select pages manually using the keyboard and mouse as well. Use "
+"<keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
+msgstr ""
+"您也可以使用键盘或鼠标手动选择页面，使用 <keycap>Ctrl</keycap> 或 "
+"<keycap>Shift</keycap> 来选择多个页面。"
+
+#: C/pdfmod.xml:130(title)
+msgid "Moving Pages"
+msgstr "移动页面"
+
+#: C/pdfmod.xml:131(para)
+msgid ""
+"To move (aka reorder) the selected page or pages, drag them to the position "
+"in the document to which you want them moved."
+msgstr "要移动(或重新排序)选择的页面，将页面拖到文档中 您想要的位置即可。"
+
+#: C/pdfmod.xml:135(para)
+msgid ""
+"All editing actions except removing pages can be undone by choosing "
+"<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></"
+"menuchoice> or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Z</"
+"keycap></keycombo>."
+msgstr ""
+"除了移除页面外，所有的编辑操作都可通过选择 <menuchoice><guimenu>编辑</"
+"guimenu><guimenuitem>撤销</guimenuitem></menuchoice>来取消您的操作，或通过按"
+"下 <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>。"
+
+#: C/pdfmod.xml:144(title)
+msgid "Extracting Pages"
+msgstr "提取页面"
+
+#: C/pdfmod.xml:145(para)
+msgid ""
+"Extracting the selected page or pages will open a new PDF Mod window with "
+"just the selected pages in a new document, ready for further editing or to "
+"save."
+msgstr ""
+"提取选择的页面会打开一个新的 PDF 修改工具页面， 新窗口将只有您选择好的页面，以等"
+"待进一步的编辑或 保存。"
+
+#: C/pdfmod.xml:148(para)
+msgid ""
+"To extract the selected page or pages, choose <menuchoice><guimenu>Edit</"
+"guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
+msgstr ""
+"要提取选择的页面，选择 <menuchoice><guimenu>编辑</guimenu><guimenuitem>释放页"
+"面</guimenuitem></menuchoice>。"
+
+#: C/pdfmod.xml:152(para)
+msgid ""
+"All of the editing and selection actions available under "
+"<menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right "
+"clicking on a page. Some actions are available on the toolbar as well."
+msgstr ""
+"所有编辑和选择操作可以在 <menuchoice><guimenu>编辑</guimenu></menuchoice>下找"
+"到，或者 通过右击页面。有一些操作也可以在工具栏找到。"
+
+#: C/pdfmod.xml:160(title)
+msgid "Rotating Pages"
+msgstr "旋转页面"
+
+#: C/pdfmod.xml:161(para)
+msgid ""
+"To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</"
+"guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press "
+"<keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and "
+"<keycombo><keycap>]</keycap></keycombo> to rotate right (CW)."
+msgstr ""
+"要旋转已选择的页面，选择　<menuchoice><guimenu>编辑</guimenu><guimenuitem>旋"
+"转页面</guimenuitem></menuchoice> 或按下 <keycombo><keycap>[</keycap></"
+"keycombo>键向左旋转， 按<keycombo><keycap>]</keycap></keycombo>键向右旋转。"
+
+#: C/pdfmod.xml:168(title)
+msgid "Removing Pages"
+msgstr "移除页面"
+
+#: C/pdfmod.xml:169(para)
+msgid ""
+"To remove the selected page or pages, press <keycap>Delete</keycap> or "
+"choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</"
+"guimenuitem></menuchoice>."
+msgstr ""
+"要移动已选择的页面，按下 <keycap>Delete</keycap>键， 或 选择 "
+"<menuchoice><guimenu>编辑</guimenu><guimenuitem>移除页面</guimenuitem></"
+"menuchoice>。"
+
+#: C/pdfmod.xml:174(para)
+msgid ""
+"It is not currently possible to undo this action via "
+"<menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></"
+"menuchoice>. You can close the document without saving and open it again to "
+"get your page back, though you will lose any other changes you have made."
+msgstr ""
+"目前还不能通过使用 <menuchoice><guimenu>编辑</guimenu><guimenuitem>撤销</"
+"guimenuitem></menuchoice>来撤销这个动作。您可以选择不保存而关闭并重新打开 文"
+"件来找回您的页面，不过这样可以会丢失一些您并不想撤销的修改。"
+
+#: C/pdfmod.xml:182(title)
+msgid "Saving"
+msgstr "保存"
+
+#: C/pdfmod.xml:183(para)
+msgid ""
+"After making changes to the document, there are two ways to save your work. "
+"You can overwrite the original document by choosing "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></"
+"menuchoice>, or you can save your changes to a new file by choosing "
+"<menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></"
+"menuchoice>."
+msgstr ""
+"修改完文档之后，您有两种方式来保存您的劳动成果. 您可以覆盖原来的文件，选择 "
+"<menuchoice><guimenu>文件</guimenu><guimenuitem>保存</guimenuitem></"
+"menuchoice>, 或者保存到一个新文件，选择 <menuchoice><guimenu>文件</"
+"guimenu><guimenuitem>另存为</guimenuitem></menuchoice>。"
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/pdfmod.xml:0(None)
+msgid "translator-credits"
+msgstr "GrayWaLL <graywall@ymail.com>, 2010"
