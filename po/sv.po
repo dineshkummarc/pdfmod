@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-05 07:37+0100\n"
-"PO-Revision-Date: 2009-11-05 07:38+0100\n"
+"POT-Creation-Date: 2010-08-05 17:39+0200\n"
+"PO-Revision-Date: 2010-08-06 16:02+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +43,11 @@ msgstr "Fel vid försök att flytta sidor"
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "Fel vid försök att flytta sidor från dokumentet"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Sida {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Open a document"
@@ -148,92 +153,104 @@ msgstr "Verktygsrad"
 msgid "Fullscreen"
 msgstr "Helskärm"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:172
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:173
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Ångra {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:182
+#: ../src/PdfMod/Gui/Actions.cs:177
 msgid "_Redo"
 msgstr "_Gör om"
 
-#: ../src/PdfMod/Gui/Actions.cs:183
+#: ../src/PdfMod/Gui/Actions.cs:178
 #, csharp-format
 msgid "Redo {0}"
 msgstr "Gör om {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:191
+#: ../src/PdfMod/Gui/Actions.cs:186
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Ta bort sida"
 msgstr[1] "Ta bort {0} sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:194
+#: ../src/PdfMod/Gui/Actions.cs:189
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "Ta bort markerad sida"
 msgstr[1] "Ta bort {0} markerade sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:197
+#: ../src/PdfMod/Gui/Actions.cs:192
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "Extrahera sida"
 msgstr[1] "Extrahera {0} sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:200
+#: ../src/PdfMod/Gui/Actions.cs:195
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Extrahera markerad sida"
 msgstr[1] "Extrahera {0} markerade sidor"
 
-#: ../src/PdfMod/Gui/Actions.cs:208
-#: ../src/PdfMod/Gui/Actions.cs:254
+#: ../src/PdfMod/Gui/Actions.cs:203
+#: ../src/PdfMod/Gui/Actions.cs:244
 msgid "Select PDF"
 msgstr "Välj PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:212
-msgid "PDF Documents"
-msgstr "PDF-dokument"
+#: ../src/PdfMod/Gui/Actions.cs:261
+#: ../src/PdfMod/Gui/Client.cs:289
+msgid "Error Loading Document"
+msgstr "Fel vid inläsning av dokumentet"
 
-#: ../src/PdfMod/Gui/Actions.cs:213
-#: ../src/PdfMod/Gui/Actions.cs:259
-#: ../src/PdfMod/Gui/Actions.cs:290
-msgid "All Files"
-msgstr "Alla filer"
+#: ../src/PdfMod/Gui/Actions.cs:262
+#: ../src/PdfMod/Gui/Client.cs:290
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Det uppstod ett fel vid inläsning av {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:281
+#: ../src/PdfMod/Gui/Actions.cs:276
 msgid "Save as..."
 msgstr "Spara som..."
 
-#: ../src/PdfMod/Gui/Actions.cs:423
+#: ../src/PdfMod/Gui/Actions.cs:413
 msgid "Error opening help"
 msgstr "Fel vid öppnandet av hjälp"
 
-#: ../src/PdfMod/Gui/Actions.cs:424
+#: ../src/PdfMod/Gui/Actions.cs:414
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Vill du öppna nätdokumentationen för PDF Mod?"
 
-#: ../src/PdfMod/Gui/Actions.cs:445
+#: ../src/PdfMod/Gui/Actions.cs:435
 msgid "Visit Website"
 msgstr "Besök webbplatsen"
 
-#: ../src/PdfMod/Gui/Actions.cs:447
+#: ../src/PdfMod/Gui/Actions.cs:437
 msgid "Primary Development:"
 msgstr "Primära utvecklare:"
 
-#: ../src/PdfMod/Gui/Actions.cs:450
+#: ../src/PdfMod/Gui/Actions.cs:440
 msgid "Contributors:"
 msgstr "Bidragsgivare:"
 
-#: ../src/PdfMod/Gui/Actions.cs:466
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:458
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Övriga bidragsgivare till PDF Mod"
+
+#: ../src/PdfMod/Gui/Actions.cs:461
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -241,66 +258,65 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../src/PdfMod/Gui/Client.cs:84
+#: ../src/PdfMod/Gui/Client.cs:85
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:189
+#: ../src/PdfMod/Gui/Client.cs:190
 msgid "Save the changes made to this document?"
 msgstr "Spara ändringarna gjorda i detta dokument?"
 
-#: ../src/PdfMod/Gui/Client.cs:192
+#: ../src/PdfMod/Gui/Client.cs:193
 msgid "Close _Without Saving"
 msgstr "Stäng _utan att spara"
 
-#: ../src/PdfMod/Gui/Client.cs:221
+#: ../src/PdfMod/Gui/Client.cs:223
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "Fortsätt och öppna {0} dokument i separat fönster?"
 msgstr[1] "Fortsätt och öppna alla {0} dokument i separata fönster?"
 
-#: ../src/PdfMod/Gui/Client.cs:225
+#: ../src/PdfMod/Gui/Client.cs:227
 msgid "Open _First"
 msgstr "Öppna _första"
 
-#: ../src/PdfMod/Gui/Client.cs:226
+#: ../src/PdfMod/Gui/Client.cs:228
 msgid "Open _All"
 msgstr "Öppna _alla"
 
-#: ../src/PdfMod/Gui/Client.cs:257
+#: ../src/PdfMod/Gui/Client.cs:259
 msgid "Loading document..."
 msgstr "Läser in dokument..."
 
-#: ../src/PdfMod/Gui/Client.cs:287
-msgid "Error Loading Document"
-msgstr "Fel vid inläsning av dokumentet"
-
-#: ../src/PdfMod/Gui/Client.cs:288
-#, csharp-format
-msgid "There was an error loading {0}"
-msgstr "Det uppstod ett fel vid inläsning av {0}"
-
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:313
+#: ../src/PdfMod/Gui/Client.cs:315
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (ursprungligen {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:318
+#: ../src/PdfMod/Gui/Client.cs:320
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} sida"
 msgstr[1] "{0} sidor"
 
-#: ../src/PdfMod/Gui/Client.cs:341
+#: ../src/PdfMod/Gui/Client.cs:343
 msgid "Document is Encrypted"
 msgstr "Dokumentet är krypterat"
 
-#: ../src/PdfMod/Gui/Client.cs:342
+#: ../src/PdfMod/Gui/Client.cs:344
 msgid "Enter the document's password to open it:"
 msgstr "Ange dokumentets lösenord för att öppna det:"
+
+#: ../src/PdfMod/Gui/Client.cs:377
+msgid "PDF Documents"
+msgstr "PDF-dokument"
+
+#: ../src/PdfMod/Gui/Client.cs:378
+msgid "All Files"
+msgstr "Alla filer"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
 msgid "Select Matching"
@@ -342,10 +358,6 @@ msgstr "Dölj dokumentets egenskaper"
 #~ msgid_plural "Pages {1} - {2}"
 #~ msgstr[0] "Sidor {1} - {2}"
 #~ msgstr[1] "Sidor {1} - {2}"
-#~ msgid "Pages {1}"
-#~ msgid_plural "Pages {1}"
-#~ msgstr[0] "Sidor {1}"
-#~ msgstr[1] "Sidor {1}"
 #~ msgid "{0} Page"
 #~ msgid_plural "{0} Pages"
 #~ msgstr[0] "{0} sida"
