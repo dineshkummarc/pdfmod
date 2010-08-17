@@ -339,14 +339,31 @@ namespace PdfMod.Gui
                     args.RetVal = true;
                 } else {
                     int to_index = GetDropIndex (args.X, args.Y);
-                    if (to_index < 0)
-                        return;
-                    // TODO somehow ask user for which pages of the docs to insert?
-                    // TODO pwd handling - keyring#?
-                    // TODO make action/undoable
-                    foreach (var uri in uris) {
-                        document.AddFromUri (new Uri (uri), to_index);
+                    int uri_i = 0;
+
+                    var add_pages = new System.Action (delegate {
+                        // TODO somehow ask user for which pages of the docs to insert?
+                        // TODO pwd handling - keyring#?
+                        // TODO make action/undoable
+                        for (; uri_i < uris.Length; uri_i++) {
+                            var before_count = document.Count;
+                            document.AddFromUri (new Uri (uris[uri_i]), to_index);
+                            to_index += document.Count - before_count;
+                        }
+                    });
+
+                    if (document == null || to_index < 0) {
+                        // Load the first page, then add the other pages to it
+                        app.LoadPath (uris[uri_i++], null, delegate {
+                            if (document != null) {
+                                to_index = document.Count;
+                                add_pages ();
+                            }
+                        });
+                    } else {
+                        add_pages ();
                     }
+
                     args.RetVal = true;
                 }
             }

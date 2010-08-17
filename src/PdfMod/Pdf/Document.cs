@@ -274,6 +274,11 @@ namespace PdfMod.Pdf
             OnChanged ();
         }
 
+        public void AppendFromUri (Uri uri)
+        {
+            AddFromUri (uri, Count);
+        }
+
         public void AddFromUri (Uri uri)
         {
             AddFromUri (uri, 0);

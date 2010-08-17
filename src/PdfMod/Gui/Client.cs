@@ -239,7 +239,7 @@ namespace PdfMod.Gui
             }
         }
 
-        public override void LoadPath (string path, string suggestedFilename)
+        public override void LoadPath (string path, string suggestedFilename, System.Action finishedCallback)
         {
             lock (this) {
                 // One document per window
@@ -266,7 +266,7 @@ namespace PdfMod.Gui
                         Document.SuggestedSavePath = suggestedFilename;
                     }
 
-                    ThreadAssist.ProxyToMain (delegate {
+                    ThreadAssist.BlockingProxyToMain (delegate {
                         IconView.SetDocument (Document);
                         RecentManager.Default.AddItem (Document.Uri);
                         Document.Changed += UpdateForDocument;
@@ -275,7 +275,7 @@ namespace PdfMod.Gui
                     });
                 } catch (Exception e) {
                     Document = null;
-                    ThreadAssist.ProxyToMain (delegate {
+                    ThreadAssist.BlockingProxyToMain (delegate {
                         status_label.Text = "";
                         if (e is System.IO.FileNotFoundException) {
                             try {
@@ -293,6 +293,9 @@ namespace PdfMod.Gui
                     lock (this) {
                         loading = false;
                     }
+
+                    if (finishedCallback != null)
+                        finishedCallback ();
                 }
             });
         }

@@ -68,7 +68,12 @@ namespace PdfMod.Core
             LoadPath (path, null);
         }
 
-        public abstract void LoadPath (string path, string suggestedFilename);
+        public void LoadPath (string path, string suggestedFilename)
+        {
+            LoadPath (path, suggestedFilename, null);
+        }
+
+        public abstract void LoadPath (string path, string suggestedFilename, System.Action finishedCallback);
 
         static void InitCache ()
         {
