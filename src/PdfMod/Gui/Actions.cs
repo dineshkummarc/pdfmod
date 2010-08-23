@@ -339,7 +339,8 @@ namespace PdfMod.Gui
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 // Translators: This is used for creating a folder name, be careful!
                 //String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages, 10))
-                app.Document.Title ?? System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename)
+                Hyena.StringUtil.EscapeFilename (
+                    app.Document.Title ?? System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename))
             );
 
             var export_path = export_path_base;

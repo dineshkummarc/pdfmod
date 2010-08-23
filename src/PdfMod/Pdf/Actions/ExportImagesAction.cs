@@ -122,8 +122,8 @@ namespace PdfMod.Pdf.Actions
             var name_fragment = String.IsNullOrEmpty (name) ? null : String.Format (" ({0})", name);
             var path = Path.Combine (
                 to_path,
-                String.Format ("{0:00}{1}.{2}",
-                    image.PageIndex, name_fragment, ext)
+                Hyena.StringUtil.EscapeFilename (
+                    String.Format ("{0:00}{1}.{2}", image.PageIndex, name_fragment, ext))
                 //String.Format ("Page {0} - #{1:00}{2}.{3}",
                     //image.Page.Index, image.PageIndex, name_fragment, ext)
             );
