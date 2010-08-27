@@ -40,14 +40,8 @@ RESGEN=resgen2
 all: $(ASSEMBLY) $(PROGRAMFILES) 
 
 FILES = \
-	AgInternals/AgExtensions.cs \
-	AgInternals/AgHacks.cs \
-	AgInternals/DrawingContext.cs \
-	AgInternals/DrawingVisual.cs \
-	AgInternals/Typeface.cs \
-	AssemblyInfo-AG.cs \
-	internal/Directives.cs \
-	internal/TargetContext.cs \
+	!internal/Directives.cs \
+	!internal/TargetContext.cs \
 	PdfSharp.Drawing.BarCodes/BarCode.cs \
 	PdfSharp.Drawing.BarCodes/BarCodeRenderInfo.cs \
 	PdfSharp.Drawing.BarCodes/BcgSR.cs \
@@ -162,27 +156,6 @@ FILES = \
 	PdfSharp.Fonts.OpenType/OpenTypeFontWriter.cs \
 	PdfSharp.Fonts.OpenType/OpenTypeStructures.cs \
 	PdfSharp.Fonts.OpenType/TableDirectoryEntry.cs \
-	PdfSharp.Fonts.TrueType/enums/TableTag.cs \
-	PdfSharp.Fonts.TrueType/enums/TableTagNames.cs \
-	PdfSharp.Fonts.TrueType/ExternalHelper.cs \
-	PdfSharp.Fonts.TrueType/FontData.cs \
-	PdfSharp.Fonts.TrueType/FontDescriptor.cs \
-	PdfSharp.Fonts.TrueType/FontDescriptorStock.cs \
-	PdfSharp.Fonts.TrueType/GenericFontTable.cs \
-	PdfSharp.Fonts.TrueType/GlyphDataTable.cs \
-	PdfSharp.Fonts.TrueType/IndexToLocationTable.cs \
-	PdfSharp.Fonts.TrueType/IRefFontTable.cs \
-	PdfSharp.Fonts.TrueType/TableDirectoryEntry.cs \
-	PdfSharp.Fonts.TrueType/TrueTypeDescriptor.cs \
-	PdfSharp.Fonts.TrueType/TrueTypeFontTable.cs \
-	PdfSharp.Fonts.TrueType/TrueTypeFontWriter.cs \
-	PdfSharp.Fonts.TrueType/TrueTypeStructures.cs \
-	PdfSharp.Forms/ColorComboBox.cs \
-	PdfSharp.Forms/DeviceInfos.cs \
-	PdfSharp.Forms/enums/RenderMode.cs \
-	PdfSharp.Forms/enums/Zoom.cs \
-	PdfSharp.Forms/PagePreviewCanvas.cs \
-	PdfSharp.Forms/PagePreview.cs \
 	PdfSharp.Internal/Calc.cs \
 	PdfSharp.Internal/ColorHelper.cs \
 	PdfSharp.Internal/DoubleUtil.cs \
