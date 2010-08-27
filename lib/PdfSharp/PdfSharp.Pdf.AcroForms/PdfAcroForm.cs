@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -48,7 +48,7 @@ namespace PdfSharp.Pdf.AcroForms
       this.document = document;
     }
 
-    PdfAcroForm(PdfDictionary dictionary) : base(dictionary)
+    internal PdfAcroForm(PdfDictionary dictionary) : base(dictionary)
     {
     }
 

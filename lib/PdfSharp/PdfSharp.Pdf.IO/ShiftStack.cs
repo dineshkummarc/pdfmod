@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -37,7 +38,7 @@ using PdfSharp.Pdf;
 namespace PdfSharp.Pdf.IO
 {
   /// <summary>
-  /// Represents the stack for the shift-reduce parser. It seems that it is only neede for
+  /// Represents the stack for the shift-reduce parser. It seems that it is only needed for
   /// reduction of indirect references.
   /// </summary>
   internal class ShiftStack
@@ -46,7 +47,7 @@ namespace PdfSharp.Pdf.IO
 
     public ShiftStack()
     {
-      this.items = new ArrayList();
+      this.items = new List<PdfItem>();
     }
 
     public PdfItem[] ToArray(int start, int length)
@@ -66,7 +67,7 @@ namespace PdfSharp.Pdf.IO
     }
 
     /// <summary>
-    /// Gets the value at the specifed index. Valid index is in range 0 up to sp-1.
+    /// Gets the value at the specified index. Valid index is in range 0 up to sp-1.
     /// </summary>
     public PdfItem this[int index]
     {
@@ -99,7 +100,7 @@ namespace PdfSharp.Pdf.IO
     }
 
     /// <summary>
-    /// Pushs the specified item onto the stack.
+    /// Pushes the specified item onto the stack.
     /// </summary>
     public void Shift(PdfItem item)
     {
@@ -138,6 +139,6 @@ namespace PdfSharp.Pdf.IO
     /// <summary>
     /// An array representing the stack.
     /// </summary>
-    ArrayList items;
+    List<PdfItem> items;
   }
 }

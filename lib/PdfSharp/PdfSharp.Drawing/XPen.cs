@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -244,7 +244,7 @@ namespace PdfSharp.Drawing
 #if GDI
 #if UseGdiObjects
     /// <summary>
-    /// Implicit convertion from Pen to XPen
+    /// Implicit conversion from Pen to XPen
     /// </summary>
     public static implicit operator XPen(Pen pen)
     {
@@ -309,7 +309,8 @@ namespace PdfSharp.Drawing
 #if WPF
     internal System.Windows.Media.Pen RealizeWpfPen()
     {
-      if (this.dirty || !this.dirty) // TODOWPF
+#if !SILVERLIGHT
+      if (this.dirty || !this.dirty) // TODOWPF: XPen is frozen by design, WPF Pen can change
       {
         //if (this.wpfPen == null)
         this.wpfPen = new System.Windows.Media.Pen(new SolidColorBrush(this.color.ToWpfColor()), this.width);
@@ -324,7 +325,7 @@ namespace PdfSharp.Drawing
         this.wpfPen.LineJoin = XConvert.ToPenLineJoin(this.lineJoin);
         if (this.dashStyle == XDashStyle.Custom)
         {
-          // TODOWPF
+          // TODOWPF: does not work in all cases
           this.wpfPen.DashStyle = new System.Windows.Media.DashStyle(this.dashPattern, this.dashOffset);
         }
         else
@@ -357,6 +358,9 @@ namespace PdfSharp.Drawing
           }
         }
       }
+#else
+      this.wpfPen = new System.Windows.Media.Pen(new SolidColorBrush(this.color.ToWpfColor()), this.width);
+#endif
       return this.wpfPen;
     }
 #endif
@@ -366,7 +370,7 @@ namespace PdfSharp.Drawing
 #if GDI
     System.Drawing.Pen gdiPen;
 #endif
-#if WPF
+#if WPF //&& !SILVERLIGHT
     System.Windows.Media.Pen wpfPen;
 #endif
   }

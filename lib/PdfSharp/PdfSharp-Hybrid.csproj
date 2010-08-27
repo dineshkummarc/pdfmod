@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4C6B899E-D8F5-439E-ACA1-6C9D4CF79407}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -75,7 +75,6 @@
     <Compile Include="PdfSharp.Drawing.Pdf\enums\StreamMode.cs" />
     <Compile Include="PdfSharp.Drawing.Pdf\PdfGraphicsState.cs" />
     <Compile Include="PdfSharp.Drawing.Pdf\XGraphicsPdfRenderer.cs" />
-    <Compile Include="PdfSharp.Drawing.Rtf\XGraphicsRtfRenderer.cs" />
     <Compile Include="PdfSharp.Drawing.Shapes\Shape.cs" />
     <Compile Include="PdfSharp.Drawing\enums\PathStart.cs" />
     <Compile Include="PdfSharp.Drawing\enums\XColorSpace.cs" />
@@ -112,7 +111,11 @@
     <Compile Include="PdfSharp.Drawing\XFont.cs" />
     <Compile Include="PdfSharp.Drawing\XFontFamily.cs" />
     <Compile Include="PdfSharp.Drawing\XFontMetrics.cs" />
+    <Compile Include="PdfSharp.Drawing\XFontStretch.cs" />
+    <Compile Include="PdfSharp.Drawing\XFontWeight.cs" />
+    <Compile Include="PdfSharp.Drawing\XFontWeights.cs" />
     <Compile Include="PdfSharp.Drawing\XForm.cs" />
+    <Compile Include="PdfSharp.Drawing\XGlyphTypeface.cs" />
     <Compile Include="PdfSharp.Drawing\XGraphics.cs" />
     <Compile Include="PdfSharp.Drawing\XGraphicsContainer.cs" />
     <Compile Include="PdfSharp.Drawing\XGraphicsPath.cs" />
@@ -134,26 +137,29 @@
     <Compile Include="PdfSharp.Drawing\XSolidBrush.cs" />
     <Compile Include="PdfSharp.Drawing\XStringFormat.cs" />
     <Compile Include="PdfSharp.Drawing\XStringFormats.cs" />
+    <Compile Include="PdfSharp.Drawing\XTypeFace.cs" />
     <Compile Include="PdfSharp.Drawing\XUnit.cs" />
     <Compile Include="PdfSharp.Drawing\XVector.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\enums\TableTag.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\enums\TableTagNames.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\ExternalHelper.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\FontData.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\FontDescriptor.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\FontDescriptorStock.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\GenericFontTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\GlyphDataTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\IndexToLocationTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\IRefFontTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TableDirectoryEntry.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeDescriptor.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeFontTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeFontWriter.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeStructures.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\enums\FontTechnology.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\enums\TableTag.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\enums\TableTagNames.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\ExternalHelper.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\FontData.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\FontDataStock.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\GenericFontTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\GlyphDataTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\IndexToLocationTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\IRefFontTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeDescriptor.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeFontTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeFontWriter.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeStructures.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\TableDirectoryEntry.cs" />
     <Compile Include="PdfSharp.Fonts\AdobeGlyphList20.cs" />
     <Compile Include="PdfSharp.Fonts\AdobeGlyphListForNewFonts.cs" />
     <Compile Include="PdfSharp.Fonts\CMapInfo.cs" />
+    <Compile Include="PdfSharp.Fonts\FontDescriptor.cs" />
+    <Compile Include="PdfSharp.Fonts\FontDescriptorStock.cs" />
     <Compile Include="PdfSharp.Fonts\FontWriter.cs" />
     <Compile Include="PdfSharp.Forms\ColorComboBox.cs">
       <SubType>Component</SubType>
@@ -177,7 +183,7 @@
     <Compile Include="PdfSharp.Pdf.AcroForms\PdfAcroForm.cs" />
     <Compile Include="PdfSharp.Pdf.AcroForms\PdfButtonField.cs" />
     <Compile Include="PdfSharp.Pdf.AcroForms\PdfCheckBoxField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfChoiseField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfChoiceField.cs" />
     <Compile Include="PdfSharp.Pdf.AcroForms\PdfComboBoxField.cs" />
     <Compile Include="PdfSharp.Pdf.AcroForms\PdfGenericField.cs" />
     <Compile Include="PdfSharp.Pdf.AcroForms\PdfListBoxField.cs" />
@@ -205,6 +211,7 @@
     <Compile Include="PdfSharp.Pdf.Advanced\PdfImageTable.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfImportedObjectTable.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfInternals.cs" />
+    <Compile Include="PdfSharp.Pdf.Advanced\PdfObjectInternals.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfPageInheritableObjects.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfReference.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfResourceMap.cs" />
@@ -258,6 +265,7 @@
     <Compile Include="PdfSharp.Pdf.Internal\RawUnicodeEncoding.cs" />
     <Compile Include="PdfSharp.Pdf.Internal\ThreadLocalStorage.cs" />
     <Compile Include="PdfSharp.Pdf.IO\Chars.cs" />
+    <Compile Include="PdfSharp.Pdf.IO\enums\PasswordValidity.cs" />
     <Compile Include="PdfSharp.Pdf.IO\enums\PdfDocumentOpenMode.cs" />
     <Compile Include="PdfSharp.Pdf.IO\enums\PdfWriterLayout.cs" />
     <Compile Include="PdfSharp.Pdf.IO\enums\PdfWriterOptions.cs" />
@@ -352,6 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PdfSharp.Drawing.BarCodes\%40BarCodes.txt" />
+    <Content Include="PdfSharp.Drawing.Wpf\!info.txt" />
     <Content Include="PdfSharp.SharpZipLib\ReadMe.txt" />
     <None Include="Resources\Messages.de.txt" />
     <None Include="Resources\Messages.txt" />
@@ -378,7 +387,7 @@
     <None Include="Resources\PdfSharp.resources.vcproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PdfSharp.Drawing.Wpf\" />
+    <Folder Include="PdfSharp.Drawing.Rtf\" />
     <Folder Include="PdfSharp.Windows\" />
     <Folder Include="Resources\images\" />
   </ItemGroup>

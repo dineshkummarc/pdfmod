@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using PdfSharp.Drawing;
@@ -47,13 +48,11 @@ namespace PdfSharp.Pdf.Security
   {
     internal PdfStandardSecurityHandler(PdfDocument document)
       : base(document)
-    {
-    }
+    { }
 
     internal PdfStandardSecurityHandler(PdfDictionary dict)
       : base(dict)
-    {
-    }
+    { }
 
     /// <summary>
     /// Sets the user password of the document. Setting a password automatically sets the
@@ -109,7 +108,7 @@ namespace PdfSharp.Pdf.Security
     {
       foreach (PdfReference iref in this.document.irefTable.AllReferences)
       {
-        if (!Object.ReferenceEquals(iref.Value, this))
+        if (!ReferenceEquals(iref.Value, this))
           EncryptObject(iref.Value);
       }
     }
@@ -152,7 +151,7 @@ namespace PdfSharp.Pdf.Security
     void EncryptDictionary(PdfDictionary dict)
     {
       PdfName[] names = dict.Elements.KeyNames;
-      foreach (DictionaryEntry item in dict.Elements)
+      foreach (KeyValuePair<string, PdfItem> item in dict.Elements)
       {
         PdfString value1;
         PdfDictionary value2;
@@ -230,16 +229,11 @@ namespace PdfSharp.Pdf.Security
     /// Checks the password.
     /// </summary>
     /// <param name="inputPassword">Password or null if no password is provided.</param>
-    /// <returns>
-    /// 0: inputPassword is neither user nor owner password.
-    /// 1: inputPassword is user password.
-    /// 2: inputPassword is owner password.
-    /// </returns>
-    public int ValidatePassword(string inputPassword)
+    public PasswordValidity ValidatePassword(string inputPassword)
     {
       // We can handle 40 and 128 bit standard encryption
       string filter = Elements.GetName(PdfSecurityHandler.Keys.Filter);
-      int v = Elements.GetInteger(Keys.V);
+      int v = Elements.GetInteger(PdfSecurityHandler.Keys.V);
       if (filter != "/Standard" || !(v >= 1 && v <= 3))
         throw new PdfReaderException(PSSR.UnknownEncryption);
 
@@ -249,13 +243,30 @@ namespace PdfSharp.Pdf.Security
       int pValue = Elements.GetInteger(Keys.P);
       int rValue = Elements.GetInteger(Keys.R);
 
-      byte[] password;
       if (inputPassword == null)
         inputPassword = "";
 
       bool strongEncryption = rValue == 3;
       int keyLength = strongEncryption ? 16 : 32;
 
+#if true
+      // Try owner password first
+      byte[] password = PdfEncoders.RawEncoding.GetBytes(inputPassword);
+      InitWidhOwnerPassword(documentID, inputPassword, oValue, pValue, strongEncryption);
+      if (EqualsKey(uValue, keyLength))
+      {
+        this.document.SecuritySettings.hasOwnerPermissions = true;
+        return PasswordValidity.OwnerPassword;
+      }
+      this.document.SecuritySettings.hasOwnerPermissions = false;
+
+      // Now try user password
+      password = PdfEncoders.RawEncoding.GetBytes(inputPassword);
+      InitWidhUserPassword(documentID, inputPassword, oValue, pValue, strongEncryption);
+      if (!EqualsKey(uValue, keyLength))
+        return PasswordValidity.Invalid;
+      return PasswordValidity.UserPassword;
+#else
       password = PdfEncoders.RawEncoding.GetBytes(inputPassword);
       InitWidhUserPassword(documentID, inputPassword, oValue, pValue, strongEncryption);
 
@@ -265,7 +276,7 @@ namespace PdfSharp.Pdf.Security
       {
         password = PdfEncoders.RawEncoding.GetBytes(inputPassword);
 
-        //Compare owner password
+        // Compare owner password
         InitWidhOwnerPassword(documentID, inputPassword, oValue, pValue, strongEncryption);
 
         if (!EqualsKey(uValue, keyLength))
@@ -280,10 +291,11 @@ namespace PdfSharp.Pdf.Security
         return 2;
       }
       return 1;
+#endif
     }
 
     [Conditional("DEBUG")]
-    void DumpBytes(string tag, byte[] bytes)
+    static void DumpBytes(string tag, byte[] bytes)
     {
       string dump = tag + ": ";
       for (int idx = 0; idx < bytes.Length; idx++)
@@ -294,7 +306,7 @@ namespace PdfSharp.Pdf.Security
     /// <summary>
     /// Pads a password to a 32 byte array.
     /// </summary>
-    byte[] PadPassword(string password)
+    static byte[] PadPassword(string password)
     {
       byte[] padded = new byte[32];
       if (password == null)
@@ -339,7 +351,7 @@ namespace PdfSharp.Pdf.Security
     byte[] ComputeOwnerKey(byte[] userPad, byte[] ownerPad, bool strongEncryption)
     {
       byte[] ownerKey = new byte[32];
-
+#if !SILVERLIGHT
       byte[] digest = this.md5.ComputeHash(ownerPad);
       if (strongEncryption)
       {
@@ -362,6 +374,7 @@ namespace PdfSharp.Pdf.Security
         PrepareRC4Key(digest, 0, 5);
         EncryptRC4(userPad, ownerKey);
       }
+#endif
       return ownerKey;
     }
 
@@ -370,6 +383,7 @@ namespace PdfSharp.Pdf.Security
     /// </summary>
     void InitEncryptionKey(byte[] documentID, byte[] userPad, byte[] ownerKey, int permissions, bool strongEncryption)
     {
+#if !SILVERLIGHT
       this.ownerKey = ownerKey;
       this.encryptionKey = new byte[strongEncryption ? 16 : 5];
 
@@ -398,6 +412,7 @@ namespace PdfSharp.Pdf.Security
         }
       }
       Array.Copy(digest, 0, this.encryptionKey, 0, this.encryptionKey.Length);
+#endif
     }
 
     /// <summary>
@@ -405,6 +420,7 @@ namespace PdfSharp.Pdf.Security
     /// </summary>
     void SetupUserKey(byte[] documentID)
     {
+#if !SILVERLIGHT
       if (this.encryptionKey.Length == 16)
       {
         this.md5.TransformBlock(passwordPadding, 0, passwordPadding.Length, passwordPadding, 0);
@@ -428,6 +444,7 @@ namespace PdfSharp.Pdf.Security
         PrepareRC4Key(this.encryptionKey);
         EncryptRC4(passwordPadding, this.userKey);
       }
+#endif
     }
 
     /// <summary>
@@ -527,6 +544,7 @@ namespace PdfSharp.Pdf.Security
     /// </summary>
     internal void SetHashKey(PdfObjectID id)
     {
+#if !SILVERLIGHT
       byte[] objectId = new byte[5];
       this.md5.Initialize();
       // Split the object number and generation
@@ -542,6 +560,7 @@ namespace PdfSharp.Pdf.Security
       this.keySize = this.encryptionKey.Length + 5;
       if (this.keySize > 16)
         this.keySize = 16;
+#endif
     }
 
     /// <summary>
@@ -549,6 +568,7 @@ namespace PdfSharp.Pdf.Security
     /// </summary>
     public void PrepareEncryption()
     {
+#if !SILVERLIGHT
       Debug.Assert(this.document.securitySettings.DocumentSecurityLevel != PdfDocumentSecurityLevel.None);
       int permissions = (int)this.Permission;
       bool strongEncryption = this.document.securitySettings.DocumentSecurityLevel == PdfDocumentSecurityLevel.Encrypted128Bit;
@@ -570,10 +590,10 @@ namespace PdfSharp.Pdf.Security
         rValue = new PdfInteger(2);
       }
 
-      if (this.userPassword == null || this.userPassword.Length == 0)
+      if (String.IsNullOrEmpty(this.userPassword))
         this.userPassword = "";
       // Use user password twice if no owner password provided.
-      if (this.ownerPassword == null || this.ownerPassword.Length == 0)
+      if (String.IsNullOrEmpty(this.ownerPassword))
         this.ownerPassword = this.userPassword;
 
       // Correct permission bits
@@ -601,6 +621,7 @@ namespace PdfSharp.Pdf.Security
       Elements[Keys.O] = oValue;
       Elements[Keys.U] = uValue;
       Elements[Keys.P] = pValue;
+#endif
     }
 
     /// <summary>
@@ -608,10 +629,12 @@ namespace PdfSharp.Pdf.Security
     /// </summary>
     byte[] encryptionKey;
 
+#if !SILVERLIGHT
     /// <summary>
     /// The message digest algorithm MD5.
     /// </summary>
     MD5 md5 = new MD5CryptoServiceProvider();
+#endif
 
     /// <summary>
     /// Bytes used for RC4 encryption.
@@ -706,9 +729,9 @@ namespace PdfSharp.Pdf.Security
       {
         get
         {
-          if (Keys.meta == null)
-            Keys.meta = CreateMeta(typeof(Keys));
-          return Keys.meta;
+          if (meta == null)
+            meta = CreateMeta(typeof(Keys));
+          return meta;
         }
       }
       static DictionaryMeta meta;

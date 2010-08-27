@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -172,7 +172,7 @@ namespace PdfSharp.Drawing
       CheckByte(red, "red");
       CheckByte(green, "green");
       CheckByte(blue, "blue");
-      return new XColor((byte)255, (byte)red, (byte)green, (byte)blue);
+      return new XColor(255, (byte)red, (byte)green, (byte)blue);
     }
 
     /// <summary>
@@ -514,6 +514,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     void RgbChanged()
     {
+      // ReSharper disable LocalVariableHidesMember
       this.cs = XColorSpace.Rgb;
       int c = 255 - this.r;
       int m = 255 - this.g;
@@ -529,6 +530,7 @@ namespace PdfSharp.Drawing
         this.y = (y - k) / black;
       }
       this.k = this.gs = k / 255f;
+      // ReSharper restore LocalVariableHidesMember
     }
 
     ///<summary>
@@ -612,7 +614,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     internal uint Rgb
     {
-      get { return ((uint)this.r << 16) | ((uint)this.g << 8) | (uint)this.b; }
+      get { return ((uint)this.r << 16) | ((uint)this.g << 8) | this.b; }
     }
 
     /// <summary>
@@ -620,7 +622,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     internal uint Argb
     {
-      get { return ((uint)(this.a * 255) << 24) | ((uint)this.r << 16) | ((uint)this.g << 8) | (uint)this.b; }
+      get { return ((uint)(this.a * 255) << 24) | ((uint)this.r << 16) | ((uint)this.g << 8) | this.b; }
     }
 
     /// <summary>

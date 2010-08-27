@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -138,7 +138,11 @@ namespace PdfSharp.Drawing
       path.gdipPath = this.gdipPath.Clone() as GraphicsPath;
 #endif
 #if WPF
+#if !SILVERLIGHT
       path.pathGeometry = this.pathGeometry.Clone();
+#else
+      // AGHACK
+#endif
 #endif
       return path;
     }
@@ -216,12 +220,30 @@ namespace PdfSharp.Drawing
       if (figure.Segments.Count == 0)
       {
         figure.StartPoint = new System.Windows.Point(x1, y1);
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(x2, y2), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment = new LineSegment(new System.Windows.Point(x2, y2), true);
+#else
+        LineSegment lineSegment = new LineSegment();
+        lineSegment.Point = new Point(x2, y2);
+        // AGHACK: ,true??
+#endif
+        figure.Segments.Add(lineSegment);
       }
       else
       {
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(x1, y1), true));
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(x2, y2), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment1 = new LineSegment(new System.Windows.Point(x1, y1), true);
+        LineSegment lineSegment2 = new LineSegment(new System.Windows.Point(x2, y2), true);
+#else
+        LineSegment lineSegment1 = new LineSegment();
+        lineSegment1.Point = new Point(x1, y1);
+        // AGHACK: ,true??
+        LineSegment lineSegment2 = new LineSegment();
+        lineSegment2.Point = new Point(x2, y2);
+        // AGHACK: ,true??
+#endif
+        figure.Segments.Add(lineSegment1);
+        figure.Segments.Add(lineSegment2);
       }
 #endif
     }
@@ -279,12 +301,29 @@ namespace PdfSharp.Drawing
       {
         figure.StartPoint = new System.Windows.Point(points[0].x, points[0].y);
         for (int idx = 1; idx < count; idx++)
-          figure.Segments.Add(new LineSegment(new System.Windows.Point(points[idx].x, points[idx].y), true));
+        {
+#if !SILVERLIGHT
+          LineSegment lineSegment = new LineSegment(new System.Windows.Point(points[idx].x, points[idx].y), true);
+#else
+          LineSegment lineSegment = new LineSegment();
+          lineSegment.Point = new Point(points[idx].x, points[idx].y); // ,true?
+#endif
+          figure.Segments.Add(lineSegment);
+        }
       }
       else
       {
         for (int idx = 0; idx < count; idx++)
-          figure.Segments.Add(new LineSegment(new System.Windows.Point(points[idx].x, points[idx].y), true));
+        {
+          // figure.Segments.Add(new LineSegment(new System.Windows.Point(points[idx].x, points[idx].y), true));
+#if !SILVERLIGHT
+          LineSegment lineSegment = new LineSegment(new System.Windows.Point(points[idx].x, points[idx].y), true);
+#else
+          LineSegment lineSegment = new LineSegment();
+          lineSegment.Point = new Point(points[idx].x, points[idx].y); // ,true?
+#endif
+          figure.Segments.Add(lineSegment);
+        }
       }
 #endif
     }
@@ -350,11 +389,32 @@ namespace PdfSharp.Drawing
       if (figure.Segments.Count == 0)
         figure.StartPoint = new System.Windows.Point(x1, y1);
       else
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(x1, y1), true));
-      figure.Segments.Add(new BezierSegment(
+      {
+        // figure.Segments.Add(new LineSegment(new System.Windows.Point(x1, y1), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment = new LineSegment(new System.Windows.Point(x1, y1), true);
+#else
+        LineSegment lineSegment = new LineSegment();
+        lineSegment.Point = new Point(x1, y1);
+#endif
+        figure.Segments.Add(lineSegment);
+      }
+      //figure.Segments.Add(new BezierSegment(
+      //  new System.Windows.Point(x2, y2),
+      //  new System.Windows.Point(x3, y3),
+      //  new System.Windows.Point(x4, y4), true));
+#if !SILVERLIGHT
+      BezierSegment bezierSegment = new BezierSegment(
         new System.Windows.Point(x2, y2),
         new System.Windows.Point(x3, y3),
-        new System.Windows.Point(x4, y4), true));
+        new System.Windows.Point(x4, y4), true);
+#else
+      BezierSegment bezierSegment = new BezierSegment();
+      bezierSegment.Point1 = new Point(x2, y2);
+      bezierSegment.Point2 = new Point(x3, y3);
+      bezierSegment.Point3 = new Point(x4, y4);
+#endif
+      figure.Segments.Add(bezierSegment);
 #endif
     }
 
@@ -413,13 +473,35 @@ namespace PdfSharp.Drawing
       if (figure.Segments.Count == 0)
         figure.StartPoint = new System.Windows.Point(points[0].x, points[0].y);
       else
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(points[0].x, points[0].y), true));
-
+      {
+        // figure.Segments.Add(new LineSegment(new System.Windows.Point(points[0].x, points[0].y), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment = new LineSegment(new System.Windows.Point(points[0].x, points[0].y), true);
+#else
+        LineSegment lineSegment = new LineSegment();
+        lineSegment.Point = new Point(points[0].x, points[0].y);
+#endif
+        figure.Segments.Add(lineSegment);
+      }
       for (int idx = 1; idx < count; idx += 3)
-        figure.Segments.Add(new BezierSegment(
-          new System.Windows.Point(points[idx].x, points[idx].y),
-          new System.Windows.Point(points[idx + 1].x, points[idx + 1].y),
-          new System.Windows.Point(points[idx + 2].x, points[idx + 2].y), true));
+      {
+        //figure.Segments.Add(new BezierSegment(
+        //                      new System.Windows.Point(points[idx].x, points[idx].y),
+        //                      new System.Windows.Point(points[idx + 1].x, points[idx + 1].y),
+        //                      new System.Windows.Point(points[idx + 2].x, points[idx + 2].y), true));
+#if !SILVERLIGHT
+        BezierSegment bezierSegment = new BezierSegment(
+                              new System.Windows.Point(points[idx].x, points[idx].y),
+                              new System.Windows.Point(points[idx + 1].x, points[idx + 1].y),
+                              new System.Windows.Point(points[idx + 2].x, points[idx + 2].y), true);
+#else
+        BezierSegment bezierSegment = new BezierSegment();
+        bezierSegment.Point1 = new Point(points[idx].x, points[idx].y);
+        bezierSegment.Point2 = new Point(points[idx + 1].x, points[idx + 1].y);
+        bezierSegment.Point3 = new Point(points[idx + 2].x, points[idx + 2].y);
+#endif
+        figure.Segments.Add(bezierSegment);
+      }
 #endif
     }
 
@@ -511,7 +593,16 @@ namespace PdfSharp.Drawing
       if (figure.Segments.Count == 0)
         figure.StartPoint = new System.Windows.Point(points[0].x, points[0].y);
       else
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(points[0].x, points[0].y), true));
+      {
+        // figure.Segments.Add(new LineSegment(new System.Windows.Point(points[0].x, points[0].y), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment = new LineSegment(new System.Windows.Point(points[0].x, points[0].y), true);
+#else
+        LineSegment lineSegment = new LineSegment();
+        lineSegment.Point = new Point(points[0].x, points[0].y);
+#endif
+        figure.Segments.Add(lineSegment);
+      }
 
       if (count == 2)
       {
@@ -648,8 +739,29 @@ namespace PdfSharp.Drawing
       if (figure.Segments.Count == 0)
         figure.StartPoint = point1.ToPoint();
       else
-        figure.Segments.Add(new LineSegment(point1.ToPoint(), true));
-      figure.Segments.Add(new ArcSegment(point2.ToPoint(), size.ToSize(), rotationAngle, isLargeArg, sweepDirection, true));
+      {
+        // figure.Segments.Add(new LineSegment(point1.ToPoint(), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment = new LineSegment(point1.ToPoint(), true);
+#else
+        LineSegment lineSegment = new LineSegment();
+        lineSegment.Point = point1.ToPoint();
+#endif
+        figure.Segments.Add(lineSegment);
+      }
+
+      // figure.Segments.Add(new ArcSegment(point2.ToPoint(), size.ToSize(), rotationAngle, isLargeArg, sweepDirection, true));
+#if !SILVERLIGHT
+      ArcSegment arcSegment = new ArcSegment(point2.ToPoint(), size.ToSize(), rotationAngle, isLargeArg, sweepDirection, true);
+#else
+      ArcSegment arcSegment = new ArcSegment();
+      arcSegment.Point = point2.ToPoint();
+      arcSegment.Size = size.ToSize();
+      arcSegment.RotationAngle = rotationAngle;
+      arcSegment.IsLargeArc = isLargeArg;
+      arcSegment.SweepDirection = sweepDirection;
+#endif
+      figure.Segments.Add(arcSegment);
     }
 #endif
 
@@ -687,9 +799,25 @@ namespace PdfSharp.Drawing
       StartFigure();
       PathFigure figure = CurrentPathFigure;
       figure.StartPoint = new System.Windows.Point(rect.x, rect.y);
-      figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y), true));
-      figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y + rect.height), true));
-      figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x, rect.y + rect.height), true));
+
+      // figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y), true));
+      // figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y + rect.height), true));
+      // figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x, rect.y + rect.height), true));
+#if !SILVERLIGHT
+      LineSegment lineSegment1 = new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y), true);
+      LineSegment lineSegment2 = new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y + rect.height), true);
+      LineSegment lineSegment3 = new LineSegment(new System.Windows.Point(rect.x, rect.y + rect.height), true);
+#else
+      LineSegment lineSegment1 = new LineSegment();
+      lineSegment1.Point = new Point(rect.x + rect.width, rect.y);
+      LineSegment lineSegment2 = new LineSegment();
+      lineSegment2.Point = new Point(rect.x + rect.width, rect.y + rect.height);
+      LineSegment lineSegment3 = new LineSegment();
+      lineSegment3.Point = new Point(rect.x, rect.y + rect.height);
+#endif
+      figure.Segments.Add(lineSegment1);
+      figure.Segments.Add(lineSegment2);
+      figure.Segments.Add(lineSegment3);
       CloseFigure();
 #endif
     }
@@ -754,9 +882,25 @@ namespace PdfSharp.Drawing
         PathFigure figure = CurrentPathFigure;
         XRect rect = rects[idx];
         figure.StartPoint = new System.Windows.Point(rect.x, rect.y);
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y), true));
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y + rect.height), true));
-        figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x, rect.y + rect.height), true));
+
+        // figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y), true));
+        // figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y + rect.height), true));
+        // figure.Segments.Add(new LineSegment(new System.Windows.Point(rect.x, rect.y + rect.height), true));
+#if !SILVERLIGHT
+        LineSegment lineSegment1 = new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y), true);
+        LineSegment lineSegment2 = new LineSegment(new System.Windows.Point(rect.x + rect.width, rect.y + rect.height), true);
+        LineSegment lineSegment3 = new LineSegment(new System.Windows.Point(rect.x, rect.y + rect.height), true);
+#else
+        LineSegment lineSegment1 = new LineSegment();
+        lineSegment1.Point = new Point(rect.x + rect.width, rect.y);
+        LineSegment lineSegment2 = new LineSegment();
+        lineSegment2.Point = new Point(rect.x + rect.width, rect.y + rect.height);
+        LineSegment lineSegment3 = new LineSegment();
+        lineSegment3.Point = new Point(rect.x, rect.y + rect.height);
+#endif
+        figure.Segments.Add(lineSegment1);
+        figure.Segments.Add(lineSegment2);
+        figure.Segments.Add(lineSegment3);
         CloseFigure();
 #endif
       }
@@ -766,7 +910,7 @@ namespace PdfSharp.Drawing
 
 #if GDI
     /// <summary>
-    /// Adds a rectangle with rounded cornes to this path.
+    /// Adds a rectangle with rounded corners to this path.
     /// </summary>
     public void AddRoundedRectangle(Rectangle rect, System.Drawing.Size ellipseSize)
     {
@@ -777,7 +921,7 @@ namespace PdfSharp.Drawing
 
 #if WPF
     /// <summary>
-    /// Adds a rectangle with rounded cornes to this path.
+    /// Adds a rectangle with rounded corners to this path.
     /// </summary>
     public void AddRoundedRectangle(Rect rect, System.Windows.Size ellipseSize)
     {
@@ -788,7 +932,7 @@ namespace PdfSharp.Drawing
 
 #if GDI
     /// <summary>
-    /// Adds a rectangle with rounded cornes to this path.
+    /// Adds a rectangle with rounded corners to this path.
     /// </summary>
     public void AddRoundedRectangle(RectangleF rect, SizeF ellipseSize)
     {
@@ -799,7 +943,7 @@ namespace PdfSharp.Drawing
 
 #if GDI
     /// <summary>
-    /// Adds a rectangle with rounded cornes to this path.
+    /// Adds a rectangle with rounded corners to this path.
     /// </summary>
     public void AddRoundedRectangle(XRect rect, SizeF ellipseSize)
     {
@@ -809,7 +953,7 @@ namespace PdfSharp.Drawing
 #endif
 
     /// <summary>
-    /// Adds a rectangle with rounded cornes to this path.
+    /// Adds a rectangle with rounded corners to this path.
     /// </summary>
     public void AddRoundedRectangle(int x, int y, int width, int height, int ellipseWidth, int ellipseHeight)
     {
@@ -817,7 +961,7 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// Adds a rectangle with rounded cornes to this path.
+    /// Adds a rectangle with rounded corners to this path.
     /// </summary>
     public void AddRoundedRectangle(double x, double y, double width, double height, double ellipseWidth, double ellipseHeight)
     {
@@ -834,8 +978,10 @@ namespace PdfSharp.Drawing
       StartFigure();
       PathFigure figure = CurrentPathFigure;
       figure.StartPoint = new System.Windows.Point(x + ex, y);
+
+#if !SILVERLIGHT
       figure.Segments.Add(new LineSegment(new System.Windows.Point(x + width - ex, y), true));
-      // TODOWPF
+      // TODOWPF XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
       figure.Segments.Add(new ArcSegment(new System.Windows.Point(x + width, y + ey), new System.Windows.Size(ex, ey), 0, false, SweepDirection.Clockwise, true));
       //figure.Segments.Add(new LineSegment(new System.Windows.Point(x + width, y + ey), true));
 
@@ -853,7 +999,9 @@ namespace PdfSharp.Drawing
       // TODOWPF
       figure.Segments.Add(new ArcSegment(new System.Windows.Point(x + ex, y), new System.Windows.Size(ex, ey), 0, false, SweepDirection.Clockwise, true));
       //figure.Segments.Add(new LineSegment(new System.Windows.Point(x + ex, y), true));
-
+#else
+      // AGHACK
+#endif
       CloseFigure();
 #endif
     }
@@ -906,7 +1054,18 @@ namespace PdfSharp.Drawing
 #endif
 #if WPF
       StartFigure();
+      //this.pathGeometry.AddGeometry(new EllipseGeometry(new Rect(x, y, width, height)));
+#if !SILVERLIGHT
       this.pathGeometry.AddGeometry(new EllipseGeometry(new Rect(x, y, width, height)));
+      //EllipseGeometry ellipseGeometry = new EllipseGeometry(new Rect(x, y, width, height));
+      //this.pa thGeometry..AddGeometry(ellipseGeometry);
+#else
+      // AGHACK: No AddGeometry in Silverlight version of PathGeometry
+      //EllipseGeometry ellipseGeometry = new EllipseGeometry();
+      //ellipseGeometry.Center = new Point((x + width) / 2, (y + height) / 2);
+      //ellipseGeometry.RadiusX = width / 2;
+      //ellipseGeometry.RadiusY = height / 2;
+#endif
 #endif
     }
 
@@ -928,7 +1087,13 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void AddPolygon(System.Windows.Point[] points)
     {
-      //  TODOWPF
+      // TODO: fill mode unclear here
+      StartFigure();
+#if !SILVERLIGHT
+      this.pathGeometry.AddGeometry(GeometryHelper.CreatePolygonGeometry(points, XFillMode.Alternate, true));
+#else
+      // AGHACK: No AddGeometry in Silverlight version of PathGeometry
+#endif
     }
 #endif
 
@@ -952,7 +1117,11 @@ namespace PdfSharp.Drawing
 #endif
 #if WPF
       StartFigure();
-      this.pathGeometry.AddGeometry(GeometryHelper.CreatePolygonGeometry(XGraphics.MakePointArray(points), XFillMode.Alternate, false));
+#if !SILVERLIGHT
+      this.pathGeometry.AddGeometry(GeometryHelper.CreatePolygonGeometry(XGraphics.MakePointArray(points), XFillMode.Alternate, true));
+#else
+      // AGHACK: No AddGeometry in Silverlight version of PathGeometry
+#endif
 #endif
     }
 
@@ -1124,7 +1293,11 @@ namespace PdfSharp.Drawing
       this.gdipPath.AddPath(path.gdipPath, connect);
 #endif
 #if WPF
+#if !SILVERLIGHT
       this.pathGeometry.AddGeometry(path.pathGeometry);
+#else
+      // AGHACK: No AddGeometry in Silverlight version of PathGeometry
+#endif
 #endif
     }
 
@@ -1136,9 +1309,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void AddString(string s, XFontFamily family, XFontStyle style, double emSize, System.Drawing.Point origin, XStringFormat format)
     {
-      //this.gdipPath.AddString(s, family.gdiFamily, (int)style, (float)emSize, origin, format.RealizeGdiStringFormat());
-      // TODOWPF
-      AddString(s, family, style, emSize, origin, format);
+      AddString(s, family, style, emSize, new XRect(origin.X, origin.Y, 0, 0), format);
     }
 #endif
 
@@ -1149,11 +1320,6 @@ namespace PdfSharp.Drawing
     public void AddString(string s, XFontFamily family, XFontStyle style, double emSize, System.Windows.Point origin, XStringFormat format)
     {
       AddString(s, family, style, emSize, new XPoint(origin), format);
-      //// TODOWPF
-      //Typeface typeface = FontHelper.CreateTypeface(family, style);
-      //FormattedText formattedText = new FormattedText(s, null, FlowDirection.LeftToRight, typeface, emSize, System.Windows.Media.Brushes.Black);
-      //Geometry geo = formattedText.BuildGeometry(origin);
-      //this.pathGeometry.AddGeometry(geo);
     }
 #endif
 
@@ -1163,8 +1329,6 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void AddString(string s, XFontFamily family, XFontStyle style, double emSize, PointF origin, XStringFormat format)
     {
-      //this.gdipPath.AddString(s, family.gdiFamily, (int)style, (float)emSize, origin, format.RealizeGdiStringFormat());
-      // TODOWPF
       AddString(s, family, style, emSize, new XRect(origin.X, origin.Y, 0, 0), format);
     }
 #endif
@@ -1177,15 +1341,18 @@ namespace PdfSharp.Drawing
       try
       {
 #if GDI
-        // TODOWPF
         this.gdipPath.AddString(s, family.gdiFamily, (int)style, (float)emSize, origin.ToPointF(), format.RealizeGdiStringFormat());
 #endif
 #if WPF
-        Typeface typeface = FontHelper.CreateTypeface(family, style);
-        FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, emSize,
-          System.Windows.Media.Brushes.Black);
-        Geometry geo = ft.BuildGeometry(origin);
+#if !SILVERLIGHT
+        Typeface typeface = FontHelper.CreateTypeface(family.wpfFamily, style);
+        //FormattedText ft = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, emSize, System.Windows.Media.Brushes.Black);
+        FormattedText formattedText = FontHelper.CreateFormattedText(s, typeface, emSize, System.Windows.Media.Brushes.Black);
+        Geometry geo = formattedText.BuildGeometry(origin);
         this.pathGeometry.AddGeometry(geo);
+#else
+        // AGHACK: 
+#endif
 #endif
       }
       catch { }
@@ -1197,7 +1364,6 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void AddString(string s, XFontFamily family, XFontStyle style, double emSize, Rectangle layoutRect, XStringFormat format)
     {
-      // TODOWPF
       this.gdipPath.AddString(s, family.gdiFamily, (int)style, (float)emSize, layoutRect, format.RealizeGdiStringFormat());
     }
 #endif
@@ -1208,7 +1374,6 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void AddString(string s, XFontFamily family, XFontStyle style, double emSize, RectangleF layoutRect, XStringFormat format)
     {
-      // TODOWPF
       this.gdipPath.AddString(s, family.gdiFamily, (int)style, (float)emSize, layoutRect, format.RealizeGdiStringFormat());
     }
 #endif
@@ -1261,6 +1426,7 @@ namespace PdfSharp.Drawing
       this.gdipPath.AddString(s, family.gdiFamily, (int)style, (float)emSize, rc, format.RealizeGdiStringFormat());
 #endif
 #if WPF && !GDI
+#if !SILVERLIGHT
       // Just a first sketch, but currently we do not need it and there is enough to do...
       double x = layoutRect.X;
       double y = layoutRect.Y;
@@ -1280,9 +1446,9 @@ namespace PdfSharp.Drawing
       bool strikeout = (style & XFontStyle.Strikeout) != 0;
       bool underline = (style & XFontStyle.Underline) != 0;
 
-      Typeface typeface = FontHelper.CreateTypeface(family, style);
-      FormattedText formattedText = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, emSize,
-        System.Windows.Media.Brushes.Black);
+      Typeface typeface = FontHelper.CreateTypeface(family.wpfFamily, style);
+      //FormattedText formattedText = new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, emSize, System.Windows.Media.Brushes.Black);
+      FormattedText formattedText = FontHelper.CreateFormattedText(s, typeface, emSize, System.Windows.Media.Brushes.Black);
 
       switch (format.Alignment)
       {
@@ -1376,6 +1542,9 @@ namespace PdfSharp.Drawing
 
       Geometry geo = formattedText.BuildGeometry(new Point(x, y));
       this.pathGeometry.AddGeometry(geo);
+#else
+      // AGHACK
+#endif
 #endif
     }
 
@@ -1455,7 +1624,11 @@ namespace PdfSharp.Drawing
       this.gdipPath.Flatten();
 #endif
 #if WPF
+#if !SILVERLIGHT
       this.pathGeometry = this.pathGeometry.GetFlattenedPathGeometry();
+#else
+      // AGHACK
+#endif
 #endif
     }
 
@@ -1468,8 +1641,12 @@ namespace PdfSharp.Drawing
       this.gdipPath.Flatten(matrix.ToGdiMatrix());
 #endif
 #if WPF
+#if !SILVERLIGHT
       this.pathGeometry = this.pathGeometry.GetFlattenedPathGeometry();
       this.pathGeometry.Transform = new MatrixTransform(matrix.ToWpfMatrix());
+#else
+      // AGHACK
+#endif
 #endif
     }
 
@@ -1482,8 +1659,14 @@ namespace PdfSharp.Drawing
       this.gdipPath.Flatten(matrix.ToGdiMatrix(), (float)flatness);
 #endif
 #if WPF
-      // TODOWPF: matrix
+#if !SILVERLIGHT
       this.pathGeometry = this.pathGeometry.GetFlattenedPathGeometry();
+      // TODO: matrix handling not yet tested
+      if (!matrix.IsIdentity)
+        this.pathGeometry.Transform = new MatrixTransform(matrix.ToWpfMatrix());
+#else
+      // AGHACK
+#endif
 #endif
     }
 
@@ -1499,7 +1682,11 @@ namespace PdfSharp.Drawing
       this.gdipPath.Widen(pen.RealizeGdiPen());
 #endif
 #if WPF
+#if !SILVERLIGHT
       this.pathGeometry = this.pathGeometry.GetWidenedPathGeometry(pen.RealizeWpfPen());
+#else
+      // AGHACK
+#endif
 #endif
     }
 
@@ -1513,7 +1700,11 @@ namespace PdfSharp.Drawing
       this.gdipPath.Widen(pen.RealizeGdiPen(), matrix.ToGdiMatrix());
 #endif
 #if WPF
+#if !SILVERLIGHT
       this.pathGeometry = this.pathGeometry.GetWidenedPathGeometry(pen.RealizeWpfPen());
+#else
+      // AGHACK
+#endif
 #endif
     }
 
@@ -1527,7 +1718,11 @@ namespace PdfSharp.Drawing
       this.gdipPath.Widen(pen.RealizeGdiPen(), matrix.ToGdiMatrix(), (float)flatness);
 #endif
 #if WPF
+#if !SILVERLIGHT
       this.pathGeometry = this.pathGeometry.GetWidenedPathGeometry(pen.RealizeWpfPen());
+#else
+      // AGHACK
+#endif
 #endif
     }
 

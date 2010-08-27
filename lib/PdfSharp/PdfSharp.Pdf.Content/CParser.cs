@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -142,9 +142,20 @@ namespace PdfSharp.Pdf.Content
     {
       string name = this.lexer.Token;
       COperator op = OpCodes.OperatorFromName(name);
+      if (op.OpCode.OpCodeName== OpCodeName.ID)
+      {
+        this.lexer.ScanInlineImage();
+      }
+
 #if DEBUG
       if (op.OpCode.Operands != -1 && op.OpCode.Operands != this.operands.Count)
-        Debug.Assert(false, "Invalid number of operands.");
+      {
+        if (op.OpCode.OpCodeName != OpCodeName.ID)
+        {
+          GetType();
+          Debug.Assert(false, "Invalid number of operands.");
+        }
+      }
 #endif
       op.Operands.Add(this.operands);
       return op;

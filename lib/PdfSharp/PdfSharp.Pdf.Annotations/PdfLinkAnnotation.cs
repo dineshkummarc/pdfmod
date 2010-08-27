@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -70,19 +70,18 @@ namespace PdfSharp.Pdf.Annotations
     /// Creates a link within the current document.
     /// </summary>
     /// <param name="rect">The link area in default page coordinates.</param>
-    /// <param name="destinatinPage">The one-based destination page number.</param>
-    /// <returns></returns>
-    public static PdfLinkAnnotation CreateDocumentLink(PdfRectangle rect, int destinatinPage)
+    /// <param name="destinationPage">The one-based destination page number.</param>
+    public static PdfLinkAnnotation CreateDocumentLink(PdfRectangle rect, int destinationPage)
     {
       PdfLinkAnnotation link = new PdfLinkAnnotation();
       link.linkType = PdfLinkAnnotation.LinkType.Document;
       link.Rectangle = rect;
-      link.destPage = destinatinPage;
+      link.destPage = destinationPage;
       return link;
     }
     int destPage;
-    LinkType linkType; // HACK
-    string url; // HACK
+    LinkType linkType;
+    string url;
 
     /// <summary>
     /// Creates a link to the web.

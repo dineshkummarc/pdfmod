@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -67,14 +67,14 @@ namespace PdfSharp.Forms
   /// Represents a preview control for an XGraphics page. Can be used as an alternative to
   /// System.Windows.Forms.PrintPreviewControl.
   /// </summary>
-  public class PagePreview : System.Windows.Forms.UserControl
+  public class PagePreview : UserControl
   {
     /// <summary>
     /// A delegate for invoking the render function.
     /// </summary>
     public delegate void RenderEvent(XGraphics gfx);
 
-    private System.ComponentModel.Container components = null;
+    private Container components = null;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PagePreview"/> class.
@@ -86,14 +86,14 @@ namespace PdfSharp.Forms
 
       this.hScrollBar = new HScrollBar();
       this.hScrollBar.Visible = this.showScrollbars;
-      this.hScrollBar.Scroll += new ScrollEventHandler(OnScroll);
-      this.hScrollBar.ValueChanged += new EventHandler(OnValueChanged);
+      this.hScrollBar.Scroll += OnScroll;
+      this.hScrollBar.ValueChanged += OnValueChanged;
       Controls.Add(this.hScrollBar);
 
       this.vScrollBar = new VScrollBar();
       this.vScrollBar.Visible = this.showScrollbars;
-      this.vScrollBar.Scroll += new ScrollEventHandler(OnScroll);
-      this.vScrollBar.ValueChanged += new EventHandler(OnValueChanged);
+      this.vScrollBar.Scroll += OnScroll;
+      this.vScrollBar.ValueChanged += OnValueChanged;
       Controls.Add(this.vScrollBar);
 
       InitializeComponent();
@@ -113,9 +113,10 @@ namespace PdfSharp.Forms
       this.posOffset = new Point();
       this.virtualPage = new Rectangle();
     }
-    PagePreviewCanvas canvas;
-    HScrollBar hScrollBar;
-    VScrollBar vScrollBar;
+
+    readonly PagePreviewCanvas canvas;
+    readonly HScrollBar hScrollBar;
+    readonly VScrollBar vScrollBar;
 
 
     /// <summary> 
@@ -320,6 +321,21 @@ namespace PdfSharp.Forms
     }
 
     /// <summary>
+    /// This is a hack for Visual Studio 2008. The designer uses reflection for setting the PageSize property.
+    /// This fails, even an implicit operator that converts Size to XSize exits.
+    /// </summary>
+    public Size PageSizeF
+    {
+      get { return new Size(Convert.ToInt32(this.pageSize.Width), Convert.ToInt32(this.pageSize.Height)); }
+      set
+      {
+        this.pageSize = value;
+        CalculatePreviewDimension();
+        Invalidate();
+      }
+    }
+
+    /// <summary>
     /// Sets a delagate that is invoked when the preview wants to be painted.
     /// </summary>
     public void SetRenderEvent(RenderEvent renderEvent)
@@ -362,7 +378,7 @@ namespace PdfSharp.Forms
     {
       // Accurate drawing prevents flickering
       Graphics gfx = e.Graphics;
-      Rectangle clientRect = this.ClientRectangle;
+      Rectangle clientRect = ClientRectangle;
       int d = 0;
       switch (this.borderStyle)
       {
@@ -381,7 +397,7 @@ namespace PdfSharp.Forms
         int cxScrollbar = SystemInformation.VerticalScrollBarWidth;
         int cyScrollbar = SystemInformation.HorizontalScrollBarHeight;
 
-        gfx.FillRectangle(new SolidBrush(this.BackColor),
+        gfx.FillRectangle(new SolidBrush(BackColor),
           clientRect.Width - cxScrollbar - d, clientRect.Height - cyScrollbar - d, cxScrollbar, cyScrollbar);
       }
     }
@@ -486,20 +502,20 @@ namespace PdfSharp.Forms
       gfx.Dispose();
       int xdpiScreen = devInfo.LogicalDpiX;
       int ydpiScreen = devInfo.LogicalDpiY;
-      int cxScrollbar = SystemInformation.VerticalScrollBarWidth;
-      int cyScrollbar = SystemInformation.HorizontalScrollBarHeight;
+      //int cxScrollbar = SystemInformation.VerticalScrollBarWidth;
+      //int cyScrollbar = SystemInformation.HorizontalScrollBarHeight;
       Rectangle rcCanvas = this.canvas.ClientRectangle;
 
       Zoom zoomOld = this.zoom;
       int zoomPercentOld = this.zoomPercent;
 
       // Border around virtual page in pixel.
-      int leftBorder = 2;
-      int rightBorder = 4;  // because of shadow
-      int topBorder = 2;
-      int bottomBorder = 4;  // because of shadow
-      int horzBorders = leftBorder + rightBorder;
-      int vertBorders = topBorder + bottomBorder;
+      const int leftBorder = 2;
+      const int rightBorder = 4;  // because of shadow
+      const int topBorder = 2;
+      const int bottomBorder = 4;  // because of shadow
+      const int horzBorders = leftBorder + rightBorder;
+      const int vertBorders = topBorder + bottomBorder;
 
       // Calculate new zoom factor.
       switch (this.zoom)
@@ -894,7 +910,7 @@ namespace PdfSharp.Forms
         }
       }
 
-      if (this.ShowScrollbars && this.vScrollBar != null)
+      if (ShowScrollbars && this.vScrollBar != null)
       {
         if (this.posOffset.Y > dy)
           this.vScrollBar.Value = this.posOffset.Y = dy;
@@ -1029,6 +1045,6 @@ namespace PdfSharp.Forms
     /// <summary>
     /// Printable area in point.
     /// </summary>
-    RectangleF printableArea;
+    readonly RectangleF printableArea;
   }
 }

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -95,23 +95,23 @@ namespace PdfSharp.Forms
     Percent10 = 10,
 
     /// <summary>
-    /// Sets the percent value such that the document fits horizontally into the window.
+    /// Sets the zoom factor so that the document fits horizontally into the window.
     /// </summary>
     BestFit = -1,
 
     /// <summary>
-    /// Sets the percent value such that the printable area of the document fits horizontally into the window.
+    /// Sets the zoom factor so that the printable area of the document fits horizontally into the window.
     /// Currently not yet implemented and the same as ZoomBestFit.
     /// </summary>
     TextFit = -2,
 
     /// <summary>
-    /// Sets the percent value such that the whole document fits completely into the window.
+    /// Sets the zoom factor so that the whole document fits completely into the window.
     /// </summary>
     FullPage = -3,
 
     /// <summary>
-    /// Sets the percent value such that the document is displayed in its real physical size.
+    /// Sets the zoom factor so that the document is displayed in its real physical size (based on the DPI information returned from the OS for the current monitor).
     /// </summary>
     OriginalSize = -4,
   }

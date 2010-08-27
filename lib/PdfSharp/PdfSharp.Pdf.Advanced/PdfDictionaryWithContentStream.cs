@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -40,7 +40,7 @@ using System.Drawing.Imaging;
 using System.Windows.Media;
 #endif
 using PdfSharp.Drawing;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Internal;
 using PdfSharp.Pdf.Internal;
 
@@ -48,7 +48,7 @@ namespace PdfSharp.Pdf.Advanced
 {
   /// <summary>
   /// Represents a base class for dictionaries with a content stream.
-  /// Implement IContentStream for use with a conent writer.
+  /// Implement IContentStream for use with a content writer.
   /// </summary>
   public abstract class PdfDictionaryWithContentStream : PdfDictionary, IContentStream
   {

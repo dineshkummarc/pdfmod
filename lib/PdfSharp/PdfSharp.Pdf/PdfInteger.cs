@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -67,7 +67,7 @@ namespace PdfSharp.Pdf
       // This class must behave like a value type. Therefore it cannot be changed (like System.String).
       get { return this.value; }
     }
-    int value;
+    readonly int value;
 
     /// <summary>
     /// Returns the integer as string.

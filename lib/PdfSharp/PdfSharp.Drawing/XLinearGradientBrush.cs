@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -38,6 +38,7 @@ using System.Drawing.Drawing2D;
 using System.Windows;
 using System.Windows.Media;
 #endif
+using PdfSharp;
 using PdfSharp.Internal;
 
 namespace PdfSharp.Drawing
@@ -109,6 +110,9 @@ namespace PdfSharp.Drawing
 #endif
 
 #if WPF
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XLinearGradientBrush"/> class.
+    /// </summary>
     public XLinearGradientBrush(Rect rect, XColor color1, XColor color2, XLinearGradientMode linearGradientMode)
       : this(new XRect(rect), color1, color2, linearGradientMode)
     {
@@ -212,7 +216,7 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// Multiplay the brush tranformation matrix with the specified matrix.
+    /// Multiply the brush transformation matrix with the specified matrix.
     /// </summary>
     public void MultiplyTransform(XMatrix matrix)
     {
@@ -220,7 +224,7 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// Multiplay the brush tranformation matrix with the specified matrix.
+    /// Multiply the brush transformation matrix with the specified matrix.
     /// </summary>
     public void MultiplyTransform(XMatrix matrix, XMatrixOrder order)
     {
@@ -228,11 +232,11 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// Resets the brush tranformation matrix with identity matrix.
+    /// Resets the brush transformation matrix with identity matrix.
     /// </summary>
     public void ResetTransform()
     {
-      this.matrix = XMatrix.Identity;
+      this.matrix = new XMatrix();  //XMatrix.Identity;
     }
 
     //public void SetBlendTriangularShape(double focus);
@@ -291,19 +295,63 @@ namespace PdfSharp.Drawing
       System.Windows.Media.LinearGradientBrush brush;
       if (this.useRect)
       {
+#if !SILVERLIGHT
         brush = new System.Windows.Media.LinearGradientBrush(this.color1.ToWpfColor(), this.color2.ToWpfColor(), new System.Windows.Point(0, 0), new System.Windows.Point(1,1));// this.rect.TopLeft, this.rect.BottomRight);
         //brush = new System.Drawing.Drawing2D.LinearGradientBrush(this.rect.ToRectangleF(),
         //  this.color1.ToGdiColor(), this.color2.ToGdiColor(), (LinearGradientMode)this.linearGradientMode);
+#else
+        GradientStop gs1 = new GradientStop();
+        gs1.Color = this.color1.ToWpfColor();
+        gs1.Offset = 0;
+
+        GradientStop gs2 = new GradientStop();
+        gs2.Color = this.color2.ToWpfColor();
+        gs2.Offset = 1;
+
+        GradientStopCollection gsc = new GradientStopCollection();
+        gsc.Add(gs1);
+        gsc.Add(gs2);
+
+        brush = new LinearGradientBrush(gsc, 0);
+        brush.StartPoint = new Point(0, 0);
+        brush.EndPoint = new Point(1, 1);
+#endif
       }
       else
       {
+#if !SILVERLIGHT
         brush = new System.Windows.Media.LinearGradientBrush(this.color1.ToWpfColor(), this.color2.ToWpfColor(), this.point1, this.point2);
         //brush = new System.Drawing.Drawing2D.LinearGradientBrush(
         //  this.point1.ToPointF(), this.point2.ToPointF(),
         //  this.color1.ToGdiColor(), this.color2.ToGdiColor());
+#else
+        GradientStop gs1 = new GradientStop();
+        gs1.Color = this.color1.ToWpfColor();
+        gs1.Offset = 0;
+
+        GradientStop gs2 = new GradientStop();
+        gs2.Color = this.color2.ToWpfColor();
+        gs2.Offset = 1;
+
+        GradientStopCollection gsc = new GradientStopCollection();
+        gsc.Add(gs1);
+        gsc.Add(gs2);
+
+        brush = new LinearGradientBrush(gsc, 0);
+        brush.StartPoint = this.point1;
+        brush.EndPoint = this.point2;
+#endif
       }
       if (!this.matrix.IsIdentity)
+      {
+#if !SILVERLIGHT
         brush.Transform = new MatrixTransform(this.matrix.ToWpfMatrix());
+#else
+        MatrixTransform transform = new MatrixTransform();
+        transform.Matrix = this.matrix.ToWpfMatrix();
+        brush.Transform = transform;
+#endif
+      }
       return brush;  //this.brush;
     }
 #endif
@@ -322,7 +370,7 @@ namespace PdfSharp.Drawing
     internal XRect rect;
     internal XLinearGradientMode linearGradientMode;
 
-    internal XMatrix matrix = XMatrix.Identity;
+    internal XMatrix matrix;
     //bool dirty = true;
     //LinearGradientBrush brush;
   }

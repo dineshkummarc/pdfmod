@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using PdfSharp.Pdf.Advanced;
@@ -150,23 +151,26 @@ namespace PdfSharp.Pdf.AcroForms
     }
 
     /// <summary>
-    /// Gets all descendant's names of this field.
+    /// Gets the names of all descendants of this field.
     /// </summary>
     public string[] DescendantNames
     {
       get
       {
-        ArrayList names = new ArrayList();
+        List<PdfName> names = new List<PdfName>();
         if (HasKids)
         {
           PdfAcroFieldCollection fields = Fields;
           fields.GetDescendantNames(ref names, null);
         }
-        return (string[])names.ToArray(typeof(string));
+        List<string> temp = new List<string>();
+        foreach (PdfName name in names)
+          temp.Add(name.ToString());
+        return temp.ToArray();
       }
     }
 
-    internal virtual void GetDescendantNames(ref ArrayList names, string partialName)
+    internal virtual void GetDescendantNames(ref List<PdfName> names, string partialName)
     {
       if (HasKids)
       {
@@ -188,10 +192,10 @@ namespace PdfSharp.Pdf.AcroForms
         Debug.Assert(t != "");
         if (t.Length > 0)
         {
-          if (partialName != null && partialName.Length > 0)
-            names.Add(partialName + "." + t);
+          if (!String.IsNullOrEmpty(partialName))
+            names.Add(new PdfName(partialName + "." + t));
           else
-            names.Add(t);
+            names.Add(new PdfName(t));
         }
       }
     }
@@ -245,13 +249,16 @@ namespace PdfSharp.Pdf.AcroForms
       {
         get
         {
-          ArrayList names = new ArrayList();
+          List<PdfName> names = new List<PdfName>();
           GetDescendantNames(ref names, null);
-          return (string[])names.ToArray(typeof(string));
+          List<string> temp = new List<string>();
+          foreach (PdfName name in names)
+            temp.Add(name.ToString());
+          return temp.ToArray();
         }
       }
 
-      internal void GetDescendantNames(ref ArrayList names, string partialName)
+      internal void GetDescendantNames(ref List<PdfName> names, string partialName)
       {
         int count = Elements.Count;
         for (int idx = 0; idx < count; idx++)
@@ -265,7 +272,7 @@ namespace PdfSharp.Pdf.AcroForms
 
       /// <summary>
       /// Gets a field from the collection. For your convenience an instance of a derived class like
-      /// PdfTextFiled or PdfCheckBoxis returned if PDFsharp can guess the actual type of the dictionary.
+      /// PdfTextField or PdfCheckBox is returned if PDFsharp can guess the actual type of the dictionary.
       /// If the actual type cannot be guessed by PDFsharp the function returns an instance
       /// of PdfGenericField.
       /// </summary>
@@ -316,7 +323,7 @@ namespace PdfSharp.Pdf.AcroForms
       }
 
       /// <summary>
-      /// Create a derived type like PdfTextFiled or PdfCheckBox if possible.
+      /// Create a derived type like PdfTextField or PdfCheckBox if possible.
       /// If the actual cannot be guessed by PDFsharp the function returns an instance
       /// of PdfGenericField.
       /// </summary>

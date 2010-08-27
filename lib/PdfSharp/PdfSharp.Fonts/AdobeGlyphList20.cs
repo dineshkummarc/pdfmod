@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -27,10 +27,8 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-//#pragma warning disable 1591
-
 using System;
-#if DEBUG
+#if DEBUG_
 namespace PdfSharp.Fonts
 {
   /// <summary>

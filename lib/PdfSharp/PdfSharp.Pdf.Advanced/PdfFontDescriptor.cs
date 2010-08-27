@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -33,7 +33,7 @@ using System.Globalization;
 using System.Text;
 using System.IO;
 using PdfSharp.Internal;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 
 namespace PdfSharp.Pdf.Advanced
 {
@@ -104,7 +104,7 @@ namespace PdfSharp.Pdf.Advanced
   /// </summary>
   public sealed class PdfFontDescriptor : PdfDictionary
   {
-    internal PdfFontDescriptor(PdfDocument document, TrueTypeDescriptor descriptor)
+    internal PdfFontDescriptor(PdfDocument document, OpenTypeDescriptor descriptor)
       : base(document)
     {
       this.descriptor = descriptor;
@@ -126,8 +126,8 @@ namespace PdfSharp.Pdf.Advanced
       Elements.SetInteger(Keys.XHeight, this.descriptor.DesignUnitsToPdf(this.descriptor.XHeight));
     }
 
-    //HACK
-    internal TrueTypeDescriptor descriptor;
+    //HACK OpenTypeDescriptor descriptor
+    internal OpenTypeDescriptor descriptor;
 
     //    public string DefaultName
     //    {
@@ -205,8 +205,8 @@ namespace PdfSharp.Pdf.Advanced
     //      return true;
     //    }
 
-    // HACK
-    PdfFontDescriptorFlags FlagsFromDescriptor(TrueTypeDescriptor descriptor)
+    // HACK FlagsFromDescriptor(OpenTypeDescriptor descriptor)
+    PdfFontDescriptorFlags FlagsFromDescriptor(OpenTypeDescriptor descriptor)
     {
       PdfFontDescriptorFlags flags = 0;
       this.isSymbolFont = descriptor.fontData.cmap.symbol;

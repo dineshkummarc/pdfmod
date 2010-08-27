@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,6 +34,7 @@ using System.Text;
 using System.IO;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.IO;
+using System.Collections.Generic;
 
 namespace PdfSharp.Pdf.Annotations
 {
@@ -91,7 +92,7 @@ namespace PdfSharp.Pdf.Annotations
     //}
 
     /// <summary>
-    /// Gets the number of annoations in this collection.
+    /// Gets the number of annotations in this collection.
     /// </summary>
     public int Count
     {
@@ -164,10 +165,10 @@ namespace PdfSharp.Pdf.Annotations
       if (annots != null)
       {
         int count = annots.Elements.Count;
-        for (int idx=0;idx<count;idx++)
+        for (int idx = 0; idx < count; idx++)
         {
           PdfDictionary annot = annots.Elements.GetDictionary(idx);
-          if (annot != null && annot.Elements.Contains("/P"))
+          if (annot != null && annot.Elements.ContainsKey("/P"))
             annot.Elements["/P"] = page.Reference;
         }
       }
@@ -176,12 +177,12 @@ namespace PdfSharp.Pdf.Annotations
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
-    public override IEnumerator GetEnumerator()
+    public override IEnumerator<PdfItem> GetEnumerator()
     {
-      return new AnnotationsIterator(this);
+      return (IEnumerator<PdfItem>)new AnnotationsIterator(this);
     }
 
-    class AnnotationsIterator : IEnumerator
+    class AnnotationsIterator : IEnumerator<PdfAnnotation>
     {
       PdfAnnotations annotations;
       int index;
@@ -192,9 +193,14 @@ namespace PdfSharp.Pdf.Annotations
         this.index = -1;
       }
 
-      public object Current
+      public PdfAnnotation Current
       {
         get { return this.annotations[this.index]; }
+      }
+
+      object IEnumerator.Current
+      {
+        get { return Current; }
       }
 
       public bool MoveNext()
@@ -205,6 +211,11 @@ namespace PdfSharp.Pdf.Annotations
       public void Reset()
       {
         this.index = -1;
+      }
+
+      public void Dispose()
+      {
+        //throw new NotImplementedException();
       }
     }
   }

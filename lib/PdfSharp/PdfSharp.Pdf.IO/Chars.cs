@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -36,7 +36,8 @@ namespace PdfSharp.Pdf.IO
   /// </summary>
   internal sealed class Chars
   {
-    public const char EOF          = (char)65535; //unchecked((char)(-1));
+    // ReSharper disable InconsistentNaming
+    public const char EOF = (char)65535; //unchecked((char)(-1));
     public const char NUL          = '\0';   // EOF
     public const char CR           = '\x0D'; // ignored by lexer
     public const char LF           = '\x0A'; // Line feed
@@ -75,5 +76,6 @@ namespace PdfSharp.Pdf.IO
     public const char Hyphen       = '-';  // char(45)
     public const char SoftHyphen   = '­';  // char(173)
     public const char Currency     = '¤';
+    // ReSharper restore InconsistentNaming
   }
 }

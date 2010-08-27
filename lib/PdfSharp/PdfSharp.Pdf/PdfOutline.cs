@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -176,7 +177,7 @@ namespace PdfSharp.Pdf
     PdfPage destinationPage;
 
     /// <summary>
-    /// Gets or sets whether the the outline item is opened (or expanded).
+    /// Gets or sets whether the outline item is opened (or expanded).
     /// </summary>
     public bool Opened
     {
@@ -475,7 +476,7 @@ namespace PdfSharp.Pdf
       }
 
       private PdfOutline parent;
-      private ArrayList outlines = new ArrayList();
+      private List<PdfOutline> outlines = new List<PdfOutline>();
     }
 
     /// <summary>

@@ -47,7 +47,7 @@ namespace PdfSharp.SharpZipLib.Zip.Compression.Streams
 	/// <summary>
 	/// A special stream deflating or compressing the bytes that are
 	/// written to it.  It uses a Deflater to perform actual deflating.<br/>
-	/// Authors of the original java version : Tom Tromey, Jochen Hoenicke 
+  /// Authors of the original java version: Tom Tromey, Jochen Hoenicke 
 	/// </summary>
 	internal class DeflaterOutputStream : Stream
 	{
@@ -127,7 +127,7 @@ namespace PdfSharp.SharpZipLib.Zip.Compression.Streams
 		
 		/// <summary>
 		/// The current position within the stream.
-		/// Always throws a NotSupportedExceptionNotSupportedException
+		/// Always throws a NotSupportedException
 		/// </summary>
 		/// <exception cref="NotSupportedException">Any attempt to set position</exception>
 		public override long Position {
@@ -183,7 +183,6 @@ namespace PdfSharp.SharpZipLib.Zip.Compression.Streams
 		/// <param name="count"></param>
 		/// <param name="callback"></param>
 		/// <param name="state"></param>
-		/// <returns></returns>
 		/// <exception cref="NotSupportedException">Any access</exception>
 		public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
 		{
@@ -198,7 +197,6 @@ namespace PdfSharp.SharpZipLib.Zip.Compression.Streams
 		/// <param name="count"></param>
 		/// <param name="callback"></param>
 		/// <param name="state"></param>
-		/// <returns></returns>
 		/// <exception cref="NotSupportedException">Any access</exception>
 		public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
 		{

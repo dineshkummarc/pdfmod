@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -73,7 +73,7 @@ namespace PdfSharp.Drawing
     {
       return wpfLineJoin[(int)lineJoin];
     }
-    static PenLineJoin[] wpfLineJoin = new PenLineJoin[3] { PenLineJoin.Miter, PenLineJoin.Round, PenLineJoin.Bevel };
+    static readonly PenLineJoin[] wpfLineJoin = new PenLineJoin[] { PenLineJoin.Miter, PenLineJoin.Round, PenLineJoin.Bevel };
 #endif
 
 #if WPF
@@ -84,7 +84,7 @@ namespace PdfSharp.Drawing
     {
       return wpfLineCap[(int)lineCap];
     }
-    static PenLineCap[] wpfLineCap = new PenLineCap[3] { PenLineCap.Flat, PenLineCap.Round, PenLineCap.Square };
+    static readonly PenLineCap[] wpfLineCap = new PenLineCap[] { PenLineCap.Flat, PenLineCap.Round, PenLineCap.Square };
 #endif
   }
 }

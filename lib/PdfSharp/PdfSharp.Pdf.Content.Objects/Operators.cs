@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,9 +28,9 @@
 #endregion
 
 using System;
-using System.Diagnostics;
 using System.Collections;
-using System.Text;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace PdfSharp.Pdf.Content.Objects
 {
@@ -47,7 +47,7 @@ namespace PdfSharp.Pdf.Content.Objects
     /// <param name="name">The name.</param>
     /// <param name="opcodeName">The enum value of the operator.</param>
     /// <param name="operands">The number of operands.</param>
-    /// <param name="postscript">The postscript equvalent, or null, if no such operation exists.</param>
+    /// <param name="postscript">The postscript equivalent, or null, if no such operation exists.</param>
     /// <param name="flags">The flags.</param>
     /// <param name="description">The description from Adobe PDF Reference.</param>
     internal OpCode(string name, OpCodeName opcodeName, int operands, string postscript, OpCodeFlags flags, string description)
@@ -81,7 +81,7 @@ namespace PdfSharp.Pdf.Content.Objects
     public readonly OpCodeFlags Flags;
 
     /// <summary>
-    /// The postscript equvalent, or null, if no such operation exists.
+    /// The postscript equivalent, or null, if no such operation exists.
     /// </summary>
     public readonly string Postscript;
 
@@ -102,7 +102,6 @@ namespace PdfSharp.Pdf.Content.Objects
     /// Operators from name.
     /// </summary>
     /// <param name="name">The name.</param>
-    /// <returns></returns>
     static public COperator OperatorFromName(string name)
     {
       COperator op = null;
@@ -123,15 +122,15 @@ namespace PdfSharp.Pdf.Content.Objects
     /// </summary>
     static OpCodes()
     {
-      OpCodes.stringToOpCode = new Hashtable();
+      stringToOpCode = new Dictionary<string, OpCode>();
 
-      for (int idx = 0; idx < OpCodes.ops.Length; idx++)
+      for (int idx = 0; idx < ops.Length; idx++)
       {
-        OpCode op = OpCodes.ops[idx];
-        OpCodes.stringToOpCode.Add(op.Name, op);
+        OpCode op = ops[idx];
+        stringToOpCode.Add(op.Name, op);
       }
     }
-    static Hashtable stringToOpCode;
+    static readonly Dictionary<string, OpCode> stringToOpCode;
 
     static OpCode b = new OpCode("b", OpCodeName.b, 0, "closepath, fill, stroke", OpCodeFlags.None,
       "Close, fill, and stroke path using nonzero winding number");

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -161,17 +162,17 @@ namespace PdfSharp.Pdf
     /// <summary>
     /// Implements a comparer that compares PdfName objects.
     /// </summary>
-    public class PdfXNameComparer : IComparer
+    public class PdfXNameComparer : IComparer<PdfName>
     {
       /// <summary>
       /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
       /// </summary>
       /// <param name="x">The first object to compare.</param>
       /// <param name="y">The second object to compare.</param>
-      public int Compare(object x, object y)
+      public int Compare(PdfName x, PdfName y)
       {
-        PdfName l = x as PdfName;
-        PdfName r = y as PdfName;
+        PdfName l = x; // as PdfName;
+        PdfName r = y; // as PdfName;
         if (l != null)
         {
           if (r != null)

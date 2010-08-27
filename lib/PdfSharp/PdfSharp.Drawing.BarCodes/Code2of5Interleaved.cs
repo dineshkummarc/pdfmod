@@ -3,7 +3,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,7 +34,7 @@ using PdfSharp.Drawing;
 namespace PdfSharp.Drawing.BarCodes
 {
   /// <summary>
-  /// Summary description for Interleave5of9.
+  /// Implementation of the Code 2 of 5 bar code.
   /// </summary>
   public class Code2of5Interleaved : ThickThinBarCode
   {
@@ -122,7 +122,7 @@ namespace PdfSharp.Drawing.BarCodes
 
     /// <summary>
     /// Calculates the thick and thin line widths,
-    /// taking into acount the required rendering size.
+    /// taking into account the required rendering size.
     /// </summary>
     internal override void CalcThinBarWidth(BarCodeRenderInfo info)
     {

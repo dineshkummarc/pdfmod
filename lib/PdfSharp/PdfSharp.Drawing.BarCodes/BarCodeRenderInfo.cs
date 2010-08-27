@@ -4,7 +4,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 //

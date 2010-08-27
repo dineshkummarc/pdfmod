@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -56,7 +56,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     protected PdfObject(PdfDocument document)
     {
-      this.Document = document;
+      Document = document;
     }
 
     /// <summary>
@@ -64,11 +64,18 @@ namespace PdfSharp.Pdf
     /// </summary>
     protected PdfObject(PdfObject obj)
     {
-      this.Document = obj.Owner;
+      Document = obj.Owner;
       // If the object that was transformed to an instance of a derived class was an indirect object
       // set the value of the reference to this.
       if (obj.iref != null)
         obj.iref.Value = this;
+#if DEBUG
+      else
+      {
+        // If this occurs it is an internal error
+        Debug.Assert(false, "Object type transformation must not be done with direct objects");
+      }
+#endif
     }
 
     /// <summary>
@@ -89,6 +96,37 @@ namespace PdfSharp.Pdf
       obj.iref = null;
       return obj;
     }
+
+#if true_  // works, but may lead to other problems that I cannot assess
+    /// <summary>
+    /// Determines whether the specified object is equal to the current PdfObject.
+    /// </summary>
+    public override bool Equals(object obj)
+    {
+      if (obj is PdfObject)
+      {
+        PdfObject other = (PdfObject)obj;
+        // Take object type transformation into account
+        if (this.iref != null && other.iref != null)
+        {
+          Debug.Assert(this.iref.Value != null, "iref without value.");
+          Debug.Assert(other.iref.Value != null, "iref without value.");
+          return Object.ReferenceEquals(this.iref.Value, other.iref.Value);
+        }
+      }
+      return base.Equals(obj);
+    }
+
+    public override int GetHashCode()
+    {
+      if (this.iref != null)
+      {
+        Debug.Assert(this.iref.Value != null, "iref without value.");
+        return this.iref.GetHashCode();
+      }
+      return base.GetHashCode();
+    }
+#endif
 
     /// <summary>
     /// Sets the object and generation number
@@ -135,7 +173,7 @@ namespace PdfSharp.Pdf
     {
       set
       {
-        if (!Object.ReferenceEquals(this.document, value))
+        if (!ReferenceEquals(this.document, value))
         {
           if (this.document != null)
             throw new InvalidOperationException("Cannot change document.");
@@ -150,11 +188,26 @@ namespace PdfSharp.Pdf
     /// <summary>
     /// Indicates whether the object is an indirect object.
     /// </summary>
-    internal bool IsIndirect
+    public bool IsIndirect
     {
-      // An object is an indirect object if and only if is has an indirect refernece value.
+      // An object is an indirect object if and only if is has an indirect reference value.
       get { return this.iref != null; }
     }
+
+    /// <summary>
+    /// Gets the PdfInternals object of this document, that grants access to some internal structures
+    /// which are not part of the public interface of PdfDocument.
+    /// </summary>
+    public PdfObjectInternals Internals
+    {
+      get
+      {
+        if (this.internals == null)
+          this.internals = new PdfObjectInternals(this);
+        return this.internals;
+      }
+    }
+    PdfObjectInternals internals;
 
     /// <summary>
     /// When overridden in a derived class, prepares the object to get saved.
@@ -197,7 +250,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     internal int ObjectNumber
     {
-      get { return this.ObjectID.ObjectNumber; }
+      get { return ObjectID.ObjectNumber; }
     }
 
     /// <summary>
@@ -205,14 +258,14 @@ namespace PdfSharp.Pdf
     /// </summary>
     internal int GenerationNumber
     {
-      get { return this.ObjectID.GenerationNumber; }
+      get { return ObjectID.GenerationNumber; }
     }
 
     ///// <summary>
     ///// Creates a deep copy of the specified value and its transitive closure and adds the
     ///// new objects to the specified owner document.
     ///// </summary>
-    /// <param name="owner">The document that ownes the cloned objects.</param>
+    /// <param name="owner">The document that owns the cloned objects.</param>
     /// <param name="externalObject">The root object to be cloned.</param>
     /// <returns>The clone of the root object</returns>
     internal static PdfObject DeepCopyClosure(PdfDocument owner, PdfObject externalObject)
@@ -284,13 +337,13 @@ namespace PdfSharp.Pdf
     ///// Imports an object and its transitive closure to the specified document.
     ///// </summary>
     /// <param name="importedObjectTable">The imported object table of the owner for the external document.</param>
-    /// <param name="owner">The document that ownes the cloned objects.</param>
+    /// <param name="owner">The document that owns the cloned objects.</param>
     /// <param name="externalObject">The root object to be cloned.</param>
     /// <returns>The clone of the root object</returns>
     internal static PdfObject ImportClosure(PdfImportedObjectTable importedObjectTable, PdfDocument owner, PdfObject externalObject)
     {
-      Debug.Assert(Object.ReferenceEquals(importedObjectTable.Owner, owner), "importedObjectTable does not belong to the owner.");
-      Debug.Assert(Object.ReferenceEquals(importedObjectTable.ExternalDocument, externalObject.Owner),
+      Debug.Assert(ReferenceEquals(importedObjectTable.Owner, owner), "importedObjectTable does not belong to the owner.");
+      Debug.Assert(ReferenceEquals(importedObjectTable.ExternalDocument, externalObject.Owner),
         "The ExternalDocument of the importedObjectTable does not belong to the owner of object to be imported.");
 
       // Get transitive closure of external object
@@ -310,7 +363,7 @@ namespace PdfSharp.Pdf
       for (int idx = 0; idx < count; idx++)
       {
         PdfObject obj = elements[idx];
-        Debug.Assert(!Object.ReferenceEquals(obj.Owner, owner));
+        Debug.Assert(!ReferenceEquals(obj.Owner, owner));
 
         if (importedObjectTable.Contains(obj.ObjectID))
         {
@@ -379,7 +432,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     internal static void FixUpObject(PdfImportedObjectTable iot, PdfDocument owner, PdfObject value)
     {
-      Debug.Assert(Object.ReferenceEquals(iot.Owner, owner));
+      Debug.Assert(ReferenceEquals(iot.Owner, owner));
 
       PdfDictionary dict;
       PdfArray array;

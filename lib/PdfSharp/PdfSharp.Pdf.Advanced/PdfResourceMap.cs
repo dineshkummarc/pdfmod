@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -30,6 +30,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace PdfSharp.Pdf.Advanced
 {
@@ -64,12 +65,12 @@ namespace PdfSharp.Pdf.Advanced
     /// <summary>
     /// Adds all imported resource names to the specified hashtable.
     /// </summary>
-    internal void CollectResourceNames(Hashtable usedResourceNames)
+    internal void CollectResourceNames(Dictionary<string, object> usedResourceNames)
     {
-      // ?TODO: Imported resources (e.g. fonts) can be reused, but I think this is rather difficult.
+      // ?TODO: Imported resources (e.g. fonts) can be reused, but I think this is rather difficult. Will be an issue in PDFsharp 2.0.
       PdfName[] names = Elements.KeyNames;
       foreach (PdfName name in names)
-        usedResourceNames.Add(name, null);
+        usedResourceNames.Add(name.ToString(), null);
     }
   }
 }

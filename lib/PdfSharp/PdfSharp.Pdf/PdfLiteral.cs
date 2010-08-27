@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -77,14 +77,14 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Gets the value as litarl string.
+    /// Gets the value as litaral string.
     /// </summary>
     public string Value
     {
       // This class must behave like a value type. Therefore it cannot be changed (like System.String).
       get { return this.value; }
     }
-    string value = "";
+    readonly string value = String.Empty;
 
     /// <summary>
     /// Returns a string that represents the current value.

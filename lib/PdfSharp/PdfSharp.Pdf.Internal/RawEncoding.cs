@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace PdfSharp.Pdf.Internal
@@ -51,7 +52,10 @@ namespace PdfSharp.Pdf.Internal
     public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
     {
       for (int count = charCount; count > 0; charIndex++, byteIndex++, count--)
+      {
+        Debug.Assert((uint)chars[charIndex] < 256, "Raw string contains invalid character with a value > 255.");
         bytes[byteIndex] = (byte)chars[charIndex];
+      }
       return charCount;
     }
 

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -51,7 +51,7 @@ namespace PdfSharp.Pdf.AcroForms
     }
 
     /// <summary>
-    /// Predefined keys of this dictionary. 
+    /// Predefined keys of this dictionary.
     /// The description comes from PDF 1.4 Reference.
     /// </summary>
     public new class Keys : PdfAcroField.Keys
@@ -79,7 +79,7 @@ namespace PdfSharp.Pdf.AcroForms
 
       /// <summary>
       /// (Required) An array of pairs of integers (starting byte offset, length in bytes)
-      /// describing the exact byte range for the digest calculation. Multiple discontiguous
+      /// describing the exact byte range for the digest calculation. Multiple discontinuous
       /// byte ranges may be used to describe a digest that does not include the
       /// signature token itself.
       /// </summary>

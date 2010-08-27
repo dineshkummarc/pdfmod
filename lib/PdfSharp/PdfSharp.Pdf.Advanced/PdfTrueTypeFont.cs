@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -35,7 +35,7 @@ using System.IO;
 using PdfSharp.Drawing;
 using PdfSharp.Internal;
 using PdfSharp.Fonts;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.Filters;
 
@@ -61,7 +61,7 @@ namespace PdfSharp.Pdf.Advanced
       Elements.SetName(Keys.Subtype, "/TrueType");
 
       // TrueType with WinAnsiEncoding only
-      TrueTypeDescriptor ttDescriptor = (TrueTypeDescriptor)FontDescriptorStock.Global.CreateDescriptor(font);
+      OpenTypeDescriptor ttDescriptor = (OpenTypeDescriptor)FontDescriptorStock.Global.CreateDescriptor(font);
       this.fontDescriptor = new PdfFontDescriptor(document, ttDescriptor);
       this.fontOptions = font.PdfOptions;
       Debug.Assert(this.fontOptions != null);

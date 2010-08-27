@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -41,7 +41,7 @@ namespace PdfSharp.Drawing
   // In GDI+ the functions Save/Restore, BeginContainer/EndContainer, Transform, SetClip and ResetClip
   // can be combined in any order. E.g. you can set a clip region, save the graphics state, empty the
   // clip region and draw without clipping. Then you can restore to the previous clip region. With PDF
-  // this behaviour is hard to implement. To solve this problem I first an automaton that keeps track
+  // this behavior is hard to implement. To solve this problem I first an automaton that keeps track
   // of all clipping paths and the current transformation when the clip path was set. The automation
   // manages a PDF graphics state stack to calculate the desired bahaviour. It also takes into consideration
   // not to multiply with inverse matrixes when the user sets a new transformation matrix.
@@ -118,7 +118,7 @@ namespace PdfSharp.Drawing
       get { return this.transform; }
       set { this.transform = value; }
     }
-    XMatrix transform = XMatrix.Identity;
+    XMatrix transform = new XMatrix();  //XMatrix.Identity;
 
     public void Pushed()
     {
@@ -178,6 +178,5 @@ namespace PdfSharp.Drawing
     // /// The GDI+ GraphicsContainer if contructed from XGraphicsContainer.
     // /// </summary>
     // public GraphicsContainer GdiGraphicsContainer;
-
   }
 }

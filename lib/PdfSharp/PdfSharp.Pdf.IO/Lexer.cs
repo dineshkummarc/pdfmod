@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -39,8 +39,8 @@ using PdfSharp.Pdf.Internal;
 namespace PdfSharp.Pdf.IO
 {
   /// <summary>
-  /// Lexical analyser for PDF files. Technically a PDF file is a stream of bytes. Some chunks
-  /// of bytes represent strings in serveral encodings. The actual encoding depends on the
+  /// Lexical analyzer for PDF files. Technically a PDF file is a stream of bytes. Some chunks
+  /// of bytes represent strings in several encodings. The actual encoding depends on the
   /// context where the string is used. Therefore the bytes are 'raw encoded' into characters,
   /// i.e. a character or token read by the lexer has always character values in the range from
   /// 0 to 255.
@@ -85,10 +85,10 @@ namespace PdfSharp.Pdf.IO
 
     /// <summary>
     /// Reads the next token and returns its type. If the token starts with a digit, the parameter
-    /// testReference specifies how to treat it. If it is flase, the lexer scans for a single integer.
+    /// testReference specifies how to treat it. If it is false, the lexer scans for a single integer.
     /// If it is true, the lexer checks if the digit is the prefix of a reference. If it is a reference,
     /// the token is set to the object ID followed by the generation number separated by a blank
-    /// (the 'R' is omited from the token).
+    /// (the 'R' is omitted from the token).
     /// </summary>
     // /// <param name="testReference">Indicates whether to test the next token if it is a reference.</param>
     public Symbol ScanNextToken()
@@ -203,7 +203,7 @@ namespace PdfSharp.Pdf.IO
       this.pdf.Position = position;
       byte[] bytes = new byte[length];
       this.pdf.Read(bytes, 0, length);
-      return PdfEncoders.RawEncoding.GetString(bytes);
+      return PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
     }
 
     /// <summary>
@@ -233,10 +233,9 @@ namespace PdfSharp.Pdf.IO
       {
         char ch = AppendAndScanNextChar();
         if (IsWhiteSpace(ch) || IsDelimiter(ch))
-        {
           return this.symbol = Symbol.Name;
-        }
-        else if (ch == '#')
+
+        if (ch == '#')
         {
           ScanNextChar();
           char[] hex = new char[2];
@@ -707,7 +706,7 @@ namespace PdfSharp.Pdf.IO
           ch = ScanNextChar();
         }
       }
-//      Debug.Assert(false, "Must never come here:");
+      //      Debug.Assert(false, "Must never come here:");
     }
 
     public Symbol ScanHexadecimalString()
@@ -727,14 +726,11 @@ namespace PdfSharp.Pdf.IO
         }
         if (char.IsLetterOrDigit(this.currChar))
         {
-          if (char.IsLetterOrDigit(this.nextChar))
-          {
-            hex[0] = char.ToUpper(this.currChar);
-            hex[1] = char.ToUpper(this.nextChar);
-            int ch = int.Parse(new string(hex), NumberStyles.AllowHexSpecifier);
-            this.token.Append(Convert.ToChar(ch));
-            ScanNextChar();
-          }
+          hex[0] = char.ToUpper(this.currChar);
+          hex[1] = char.ToUpper(this.nextChar);
+          int ch = int.Parse(new string(hex), NumberStyles.AllowHexSpecifier);
+          this.token.Append(Convert.ToChar(ch));
+          ScanNextChar();
           ScanNextChar();
         }
       }
@@ -882,7 +878,7 @@ namespace PdfSharp.Pdf.IO
     }
 
     /// <summary>
-    /// Interpret current token as real or interger literal.
+    /// Interpret current token as real or integer literal.
     /// </summary>
     internal double TokenToReal
     {

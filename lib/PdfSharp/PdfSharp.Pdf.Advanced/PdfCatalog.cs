@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -50,7 +50,7 @@ namespace PdfSharp.Pdf.Advanced
     {
       Elements.SetName(Keys.Type, "/Catalog");
 
-      this.version = "1.4";  // HACK
+      this.version = "1.4";  // HACK in PdfCatalog
     }
 
     PdfCatalog(PdfDictionary dictionary)
@@ -153,7 +153,7 @@ namespace PdfSharp.Pdf.Advanced
     PdfOutline outline;
 
     /// <summary>
-    /// Gets the AcroFrom dictionary of this document.
+    /// Gets the AcroForm dictionary of this document.
     /// </summary>
     public PdfAcroForm AcroForm
     {
@@ -357,7 +357,7 @@ namespace PdfSharp.Pdf.Advanced
 
       /// <summary>
       /// (Optional; PDF 1.4) A language identifier specifying the natural language for all 
-      /// text in the document except where overridden by language specificationsfor structure 
+      /// text in the document except where overridden by language specifications for structure 
       /// elements or marked content. If this entry is absent, the language is considered unknown.
       /// </summary>
       [KeyInfo("1.4", KeyType.String | KeyType.Optional)]

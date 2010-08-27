@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Globalization;
@@ -47,7 +48,7 @@ namespace PdfSharp.Pdf.Internal
   {
     public ThreadLocalStorage()
     {
-      this.importedDocuments = new Hashtable(StringComparer.InvariantCultureIgnoreCase);
+      this.importedDocuments = new Dictionary<string, PdfDocument.DocumentHandle>(StringComparer.InvariantCultureIgnoreCase);
     }
 
     public void AddDocument(string path, PdfDocument document)
@@ -65,8 +66,8 @@ namespace PdfSharp.Pdf.Internal
       Debug.Assert(path.StartsWith("*") || Path.IsPathRooted(path), "Path must be full qualified.");
 
       PdfDocument document = null;
-      PdfDocument.DocumentHandle handle = this.importedDocuments[path] as PdfDocument.DocumentHandle;
-      if (handle != null)
+      PdfDocument.DocumentHandle handle;
+      if (this.importedDocuments.TryGetValue(path, out handle))
       {
         document = handle.Target;
         if (document == null)
@@ -84,13 +85,13 @@ namespace PdfSharp.Pdf.Internal
     {
       get
       {
-        ArrayList list = new ArrayList();
+        List<PdfDocument> list = new List<PdfDocument>();
         foreach (PdfDocument.DocumentHandle handle in this.importedDocuments.Values)
         {
           if (handle.IsAlive)
             list.Add(handle.Target);
         }
-        return (PdfDocument[])list.ToArray(typeof(PdfDocument));
+        return list.ToArray();
       }
     }
 
@@ -100,7 +101,7 @@ namespace PdfSharp.Pdf.Internal
       {
         foreach (String path in this.importedDocuments.Keys)
         {
-          if ((PdfDocument.DocumentHandle)this.importedDocuments[path] == handle)
+          if (this.importedDocuments[path] == handle)
           {
             this.importedDocuments.Remove(path);
             break;
@@ -115,7 +116,7 @@ namespace PdfSharp.Pdf.Internal
         itemRemoved = false;
         foreach (String path in this.importedDocuments.Keys)
         {
-          if (!((PdfDocument.DocumentHandle)this.importedDocuments[path]).IsAlive)
+          if (!this.importedDocuments[path].IsAlive)
           {
             this.importedDocuments.Remove(path);
             itemRemoved = true;
@@ -128,6 +129,6 @@ namespace PdfSharp.Pdf.Internal
     /// <summary>
     /// Maps path to document handle.
     /// </summary>
-    Hashtable importedDocuments;
+    readonly Dictionary<string, PdfDocument.DocumentHandle> importedDocuments;
   }
 }

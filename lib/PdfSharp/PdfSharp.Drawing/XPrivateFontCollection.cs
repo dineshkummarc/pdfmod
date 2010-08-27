@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -29,95 +29,295 @@
 
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 using System.Globalization;
 using System.ComponentModel;
+using System.IO;
+using System.Runtime.InteropServices;
 #if GDI
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 #endif
 #if WPF
 using System.Windows.Media;
 #endif
 using PdfSharp.Internal;
-
-#pragma warning disable 1591
+using PdfSharp.Fonts.OpenType;
 
 namespace PdfSharp.Drawing
 {
-#if GDI
   ///<summary>
-  /// Represents a PrivateFontCollection.
+  /// Makes fonts that are not installed on the system available within the current application domain.
   /// </summary>
-  public class XPrivateFontCollection
+  public sealed class XPrivateFontCollection : IDisposable
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XPrivateFontCollection"/> class.
+    /// </summary>
     public XPrivateFontCollection()
     {
-      privateFontCollection = null;
-      privateFonts = null;
+      //// HACK: Use one global PrivateFontCollection in GDI+
+      //// TODO: Make a list of it
+      //if (s_global != null)
+      //  throw new InvalidOperationException("Because of limitations in GDI+ you can only have one instance of XPrivateFontCollection in your application.");
+    }
+    internal static XPrivateFontCollection s_global = new XPrivateFontCollection();
+
+    //static XPrivateFontCollection()
+    //{
+    //  // HACK: Use one global PrivateFontCollection in GDI+
+    //  // TODO: Make a list of it
+    //  if (global != null)
+    //    throw new InvalidOperationException("Because of limitations in GDI+ you can only have one instance of XPrivateFontCollection in your application.");
+    //  global = this;
+    //}
+    //internal static XPrivateFontCollection global;
+
+    /// <summary>
+    /// Disposes all fonts from the collection.
+    /// </summary>
+    public void Dispose()
+    {
+#if GDI
+      //privateFonts.Clear();
+      this.privateFontCollection.Dispose();
+      this.privateFontCollection = new PrivateFontCollection();
+#endif
+      s_global = null;
+      //GC.SuppressFinalize(this);
     }
 
-    public PrivateFontCollection PrivateFontCollection
+#if GDI
+    internal static PrivateFontCollection GlobalPrivateFontCollection
     {
-      get { return privateFontCollection; }
-      set { privateFontCollection = value; }
+      get { return s_global != null ? s_global.privateFontCollection : null; }
     }
-    PrivateFontCollection privateFontCollection;
-    List<XPrivateFont> privateFonts;
+#endif
 
-    void Initialize()
+
+#if GDI
+    //internal PrivateFontCollection PrivateFontCollection
+    //{
+    //  get { return privateFontCollection; }
+    //  set { privateFontCollection = value; }
+    //}
+    // PrivateFontCollection of GDI+
+    PrivateFontCollection privateFontCollection = new PrivateFontCollection();
+#endif
+
+    /// <summary>
+    /// Gets the global font collection.
+    /// </summary>
+    public static XPrivateFontCollection Global
     {
-      if (privateFontCollection == null)
-        privateFontCollection = new PrivateFontCollection();
-      if (privateFonts == null)
-        privateFonts = new List<XPrivateFont>();
+      get { return s_global; }
     }
 
-    /*public void AddMemoryFont(IntPtr memory, int length,
-      string fontName, bool bold, bool italic)
+    /// <summary>
+    /// Sets a new global font collection and returns the previous one, or null if no previous one exists.
+    /// </summary>
+    public static XPrivateFontCollection SetGlobalFontCollection(XPrivateFontCollection fontCollection)
     {
-    }*/
+      if (fontCollection==null)
+        throw new ArgumentNullException("fontCollection");
 
-    public void AddMemoryFont(byte[] data, int length,
-      string fontName, bool bold, bool italic)
+      XPrivateFontCollection old = s_global;
+      s_global = fontCollection;
+      return old;
+    }
+
+#if GDI
+    /// <summary>
+    /// Adds the font data to the font collections.
+    /// </summary>
+    public void AddFont(byte[] data, string familyName)
     {
-      Initialize();
-      // Do it w/o unsafe code (do it like VB programmers do): 
+      if (String.IsNullOrEmpty(familyName))
+        throw new ArgumentNullException("familyName");
+
+      //if (glyphTypeface == null)
+      //  throw new ArgumentNullException("glyphTypeface");
+
+      // Add to GDI+ PrivateFontCollection
+      int length = data.Length;
+
+      // Copy data without unsafe code 
       IntPtr ip = Marshal.AllocCoTaskMem(length);
       Marshal.Copy(data, 0, ip, length);
-      privateFontCollection.AddMemoryFont(ip, length);
+      this.privateFontCollection.AddMemoryFont(ip, length);
       Marshal.FreeCoTaskMem(ip);
-      byte[] data2 = new byte[length];
-      Array.Copy(data, data2, length);
-      XPrivateFont pf = new XPrivateFont(fontName, bold, italic, data2, length);
-      privateFonts.Add(pf);
+      //privateFonts.Add(glyphTypeface);
+    }
+#endif
+
+    //    /// <summary>
+    //    /// Adds the glyph typeface to this collection.
+    //    /// </summary>
+    //    public void AddGlyphTypeface(XGlyphTypeface glyphTypeface)
+    //    {
+    //      if (glyphTypeface == null)
+    //        throw new ArgumentNullException("glyphTypeface");
+
+    //#if GDI
+    //      // Add to GDI+ PrivateFontCollection
+    //      byte[] data = glyphTypeface.FontData.Data;
+    //      int length = data.Length;
+
+    //      // Do it w/o unsafe code (do it like VB programmers do): 
+    //      IntPtr ip = Marshal.AllocCoTaskMem(length);
+    //      Marshal.Copy(data, 0, ip, length);
+    //      this.privateFontCollection.AddMemoryFont(ip, length);
+    //      Marshal.FreeCoTaskMem(ip);
+    //      privateFonts.Add(glyphTypeface);
+    //#endif
+    //    }
+
+#if GDI
+    /// <summary>
+    /// HACK: to be removed.
+    /// </summary>
+    //[Obsolete("Just make QBX compile. Will be removed when Private Fonts are working.", false)]
+    public void AddFont(byte[] data, string fontName, bool bold, bool italic)
+    {
+      throw new NotImplementedException("AddFont");
+      //AddGlyphTypeface(new XGlyphTypeface(data));
     }
 
-    public XPrivateFont FindFont(string fontName, bool bold, bool italic)
+    /// <summary>
+    /// Adds a font from the specified file to this collection.
+    /// </summary>
+    public void AddFont(string filename)
     {
-      if (privateFonts != null)
+      throw new NotImplementedException("AddFont");
+      //AddGlyphTypeface(new XGlyphTypeface(filename));
+    }
+
+    /// <summary>
+    /// Adds a font from memory to this collection.
+    /// </summary>
+    public void AddFont(byte[] data)
+    {
+      throw new NotImplementedException("AddFont");
+      //AddGlyphTypeface(new XGlyphTypeface(data));
+    }
+#endif
+
+#if WPF
+    /// <summary>
+    /// Initializes a new instance of the FontFamily class from the specified font family name and an optional base uniform resource identifier (URI) value.
+    /// Sample: Add(new Uri("pack://application:,,,/"), "./myFonts/#FontFamilyName");)
+    /// </summary>
+    /// <param name="baseUri">Specifies the base URI that is used to resolve familyName.</param>
+    /// <param name="familyName">The family name or names that comprise the new FontFamily. Multiple family names should be separated by commas.</param>
+    public void Add(Uri baseUri, string familyName)
+    {
+      // TODO: What means 'Multiple family names should be separated by commas.'?
+      // does not work
+
+      if (String.IsNullOrEmpty(familyName))
+        throw new ArgumentNullException("familyName");
+      if (familyName.Contains(","))
+        throw new NotImplementedException("Only one family name is supported.");
+
+      // family name starts right of '#'
+      int idxHash = familyName.IndexOf('#');
+      if (idxHash < 0)
+        throw new ArgumentException("Family name must contain a '#'. Example './#MyFontFamilyName'", "familyName");
+
+      string key = familyName.Substring(idxHash + 1);
+      if (String.IsNullOrEmpty(key))
+        throw new ArgumentException("familyName has invalid format.");
+
+      if (this.fontFamilies.ContainsKey(key))
+        throw new ArgumentException("An entry with the specified family name already exists.");
+
+#if !SILVERLIGHT
+      System.Windows.Media.FontFamily fontFamily = new System.Windows.Media.FontFamily(baseUri, familyName);
+#else
+      System.Windows.Media.FontFamily fontFamily = new System.Windows.Media.FontFamily(familyName);
+#endif
+
+      // Check whether font data realy exists
+#if DEBUG && !SILVERLIGHT
+      ICollection<Typeface> list = fontFamily.GetTypefaces();
+      foreach (Typeface typeFace in list)
       {
-        for (int i = 0; i < 2; ++i)
+        //Debug.WriteLine(String.Format("{0}, {1}, {2}, {3}", typeFace.FaceNames.Values.First(), typeFace.Style, typeFace.Weight, typeFace.Stretch));
+        GlyphTypeface glyphTypeface;
+        if (!typeFace.TryGetGlyphTypeface(out glyphTypeface))
+          throw new ArgumentException("Font with the specified family name does not exist.");
+      }
+#endif
+
+      this.fontFamilies.Add(key, fontFamily);
+    }
+#endif
+
+#if GDI
+    internal static Font TryFindPrivateFont(string name, double size, FontStyle style)
+    {
+      try
+      {
+        PrivateFontCollection pfc = GlobalPrivateFontCollection;
+        if (pfc == null)
+          return null;
+        foreach (System.Drawing.FontFamily family in pfc.Families)
         {
-          // We make 3 passes.
-          // On second pass, we ignore Bold.
-          // On third pass, we ignore Bold and Italic
-          foreach (XPrivateFont pf in privateFonts)
+          if (String.Compare(family.Name, name, true) == 0)
+            return new Font(family, (float)size, style, GraphicsUnit.World);
+        }
+      }
+      catch
+      {
+#if DEBUG
+#endif
+      }
+      return null;
+    }
+#endif
+
+#if WPF
+    internal static Typeface TryFindTypeface(string name, XFontStyle style, out System.Windows.Media.FontFamily fontFamily)
+    {
+      if (s_global.fontFamilies.TryGetValue(name, out fontFamily))
+      {
+        Typeface typeface = FontHelper.CreateTypeface(fontFamily, style);
+        return typeface;
+      }
+      return null;
+    }
+#endif
+
+#if GDI___
+    internal XGlyphTypeface FindFont(string fontName, bool bold, bool italic)
+    {
+      //if (privateFonts != null)
+      {
+        for (int i = 0; i < 3; ++i)
+        {
+          // We make 4 passes.
+          // On second pass, we ignore Italic.
+          // On third pass, we ignore Bold.
+          // On fourth pass, we ignore Bold and Italic
+          foreach (XGlyphTypeface pf in privateFonts)
           {
-            if (string.Compare(pf.FontName, fontName, true) == 0)
+            if (string.Compare(pf.FamilyName, fontName, StringComparison.InvariantCultureIgnoreCase) == 0)
             {
               switch (i)
               {
                 case 0:
-                  if (pf.Bold == bold && pf.Italic == italic)
+                  if (pf.IsBold == bold && pf.IsItalic == italic)
                     return pf;
                   break;
                 case 1:
-                  if (/*pf.Bold == bold &&*/ pf.Italic == italic)
+                  if (pf.IsBold == bold /*&& pf.Italic == italic*/)
                     return pf;
                   break;
                 case 2:
+                  if (/*pf.Bold == bold &&*/ pf.IsItalic == italic)
+                    return pf;
+                  break;
+                case 3:
                   //if (pf.Bold == bold && pf.Italic == italic)
                   return pf;
               }
@@ -127,53 +327,13 @@ namespace PdfSharp.Drawing
       }
       return null;
     }
-  }
-
-  /// <summary>
-  /// THHO4THHO: TODO!
-  /// </summary>
-  public class XPrivateFont
-  {
-    public XPrivateFont(string fontName,
-      bool bold,
-      bool italic,
-      byte[] data,
-      int length)
-    {
-      this.FontName = fontName;
-      this.Bold = bold;
-      this.Italic = italic;
-      this.Data = data;
-      this.Length = length;
-    }
-
-    internal string FontName;
-    internal bool Bold;
-    internal bool Italic;
-    internal byte[] Data;
-    internal int Length;
-
-    public int GetFontData(ref byte[] data,
-       int length)
-    {
-      if (length == this.Length)
-      {
-        // Copy the data:
-        //Data.CopyTo(data, 0);
-        Array.Copy(Data, data, length);
-      }
-      return this.Length;
-    }
-  }
 #endif
 
-#if WPF && !GDI
-  /// <summary>
-  /// Stub - yni.
-  /// </summary>
-  public class XPrivateFontCollection
-  {
-  // TODOWPF:
-  }
+#if GDI
+    //List<XGlyphTypeface> privateFonts = new List<XGlyphTypeface>();
 #endif
+#if WPF
+    readonly Dictionary<string, System.Windows.Media.FontFamily> fontFamilies = new Dictionary<string, System.Windows.Media.FontFamily>(StringComparer.InvariantCultureIgnoreCase);
+#endif
+  }
 }

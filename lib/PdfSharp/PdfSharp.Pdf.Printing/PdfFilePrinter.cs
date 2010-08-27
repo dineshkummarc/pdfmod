@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -57,8 +57,8 @@ namespace PdfSharp.Pdf.Printing
   /// <summary>
   /// A wrapper around Adobe Reader or Adobe Acrobat that helps to print PDF files.
   /// The property AdobeReaderPath must be set before the class can be used for printing.
-  /// The class was testet with Adobe Reader 7.0.7.
-  /// If this stuff does not work, _please_ don't write me mails!
+  /// The class was tested with Adobe Reader 7.0.7.
+  /// If this stuff does not work, <c>please</c> don't write me mails!
   /// If you enhance this class, please let me know.
   /// </summary>
   public class PdfFilePrinter
@@ -151,7 +151,7 @@ namespace PdfSharp.Pdf.Printing
       else
         fqName = Path.Combine(Directory.GetCurrentDirectory(), this.pdfFileName);
       if (!File.Exists(fqName))
-        throw new InvalidOperationException(String.Format("The file {0} does not exists.", fqName));
+        throw new InvalidOperationException(String.Format("The file {0} does not exist.", fqName));
 
       // TODO: Check whether printer exists.
 

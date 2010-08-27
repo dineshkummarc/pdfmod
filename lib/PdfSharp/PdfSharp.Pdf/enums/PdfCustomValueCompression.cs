@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -40,12 +40,12 @@ namespace PdfSharp.Pdf
     Default,
 
     /// <summary>
-    /// Left custom values uncompressed.
+    /// Leave custom values uncompressed.
     /// </summary>
     Uncompressed,
 
     /// <summary>
-    /// Compress custom values using FalteDecode.
+    /// Compress custom values using FlateDecode.
     /// </summary>
     Compressed,
   }

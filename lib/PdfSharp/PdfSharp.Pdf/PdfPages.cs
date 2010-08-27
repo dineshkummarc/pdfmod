@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -53,7 +54,7 @@ namespace PdfSharp.Pdf
       Elements[Keys.Count] = new PdfInteger(0);
     }
 
-    PdfPages(PdfDictionary dictionary)
+    internal PdfPages(PdfDictionary dictionary)
       : base(dictionary)
     {
     }
@@ -63,7 +64,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     public int Count
     {
-      get { return this.PagesArray.Elements.Count; }
+      get { return PagesArray.Elements.Count; }
     }
 
     /// <summary>
@@ -90,7 +91,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Creates a new PdfPage, adds it to this document, and retruns it.
+    /// Creates a new PdfPage, adds it to this document, and returns it.
     /// </summary>
     public PdfPage Add()
     {
@@ -100,7 +101,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Adds the specified PdfPage to this document and retruns a may be new PdfPage object.
+    /// Adds the specified PdfPage to this document and maybe returns a new PdfPage object.
     /// The value returned is a new object if the added page comes from a foreign document.
     /// </summary>
     public PdfPage Add(PdfPage page)
@@ -109,7 +110,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Creates a new PdfPage, inserts it at the specified position to this document, and retruns it.
+    /// Creates a new PdfPage, inserts it at the specified position into this document, and returns it.
     /// </summary>
     public PdfPage Insert(int index)
     {
@@ -119,7 +120,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Inserts the specified PdfPage at the specified position to this document and retruns a may be new PdfPage object.
+    /// Inserts the specified PdfPage at the specified position to this document and maybe returns a new PdfPage object.
     /// The value returned is a new object if the inserted page comes from a foreign document.
     /// </summary>
     public PdfPage Insert(int index, PdfPage page)
@@ -128,13 +129,13 @@ namespace PdfSharp.Pdf
         throw new ArgumentNullException("page");
 
       // Is the page already owned by this document
-      if (page.Owner == this.Owner)
+      if (page.Owner == Owner)
       {
         // Case: Page is removed and than inserted a another position.
         int count = Count;
         for (int idx = 0; idx < count; idx++)
         {
-          if (Object.ReferenceEquals(this[idx], page))
+          if (ReferenceEquals(this[idx], page))
             throw new InvalidOperationException(PSSR.MultiplePageInsert);
         }
         // TODO: check this case
@@ -148,7 +149,7 @@ namespace PdfSharp.Pdf
       if (page.Owner == null)
       {
         // Case: New page was created and inserted now.
-        page.Document = this.Owner;
+        page.Document = Owner;
 
         Owner.irefTable.Add(page);
         PagesArray.Elements.Insert(index, page.Reference);
@@ -200,6 +201,7 @@ namespace PdfSharp.Pdf
       if (oldIndex == newIndex)
         return;
 
+      //PdfPage page = (PdfPage)pagesArray.Elements[oldIndex];
       PdfReference page = (PdfReference)pagesArray.Elements[oldIndex];
       pagesArray.Elements.RemoveAt(oldIndex);
       pagesArray.Elements.Insert(newIndex, page);
@@ -300,12 +302,12 @@ namespace PdfSharp.Pdf
     PdfArray pagesArray;
 
     /// <summary>
-    /// Replaces the page tree by a flat array of indirect references to the the pages objects.
+    /// Replaces the page tree by a flat array of indirect references to the pages objects.
     /// </summary>
     internal void FlattenPageTree()
     {
       // Acrobat creates a balanced tree if the number of pages is rougly more than ten. This is
-      // not difficult but obviously also not neccessary. I created a document with 50000 pages with
+      // not difficult but obviously also not necessary. I created a document with 50000 pages with
       // PDF4NET and Acrobat opened it in less than 2 seconds.
 
       //PdfReference xrefRoot = this.Document.Catalog.Elements[PdfCatalog.Keys.Pages] as PdfReference;
@@ -314,16 +316,16 @@ namespace PdfSharp.Pdf
       // Promote inheritable values down the page tree
       PdfPage.InheritedValues values = new PdfPage.InheritedValues();
       PdfPage.InheritValues(this, ref values);
-      PdfDictionary[] pages = GetKids(this.Reference, values, null);
+      PdfDictionary[] pages = GetKids(Reference, values, null);
 
       // Replace /Pages in catalog by this object
       // xrefRoot.Value = this;
 
-      PdfArray array = new PdfArray(this.Owner);
+      PdfArray array = new PdfArray(Owner);
       foreach (PdfDictionary page in pages)
       {
         // Fix the parent
-        page.Elements[PdfPage.Keys.Parent] = this.Reference;
+        page.Elements[PdfPage.Keys.Parent] = Reference;
         array.Elements.Add(page.Reference);
       }
 
@@ -356,7 +358,7 @@ namespace PdfSharp.Pdf
       {
         Debug.Assert(kid.Elements.GetName(Keys.Type) == "/Pages");
         PdfPage.InheritValues(kid, ref values);
-        ArrayList list = new ArrayList();
+        List<PdfDictionary> list = new List<PdfDictionary>();
         PdfArray kids = kid.Elements["/Kids"] as PdfArray;
         //newTHHO 15.10.2007 begin
         if (kids == null)
@@ -369,12 +371,13 @@ namespace PdfSharp.Pdf
           list.AddRange(GetKids(xref2, values, kid));
         int count = list.Count;
         Debug.Assert(count == kid.Elements.GetInteger("/Count"));
-        return (PdfDictionary[])list.ToArray(typeof(PdfDictionary));
+        //return (PdfDictionary[])list.ToArray(typeof(PdfDictionary));
+        return list.ToArray();
       }
     }
 
     /// <summary>
-    /// TODO: Create the page tree.
+    /// Prepares the document for saving.
     /// </summary>
     internal override void PrepareForSave()
     {
@@ -433,7 +436,7 @@ namespace PdfSharp.Pdf
 
       object IEnumerator.Current
       {
-        get { return this.Current; }
+        get { return Current; }
       }
 
       public PdfPage Current

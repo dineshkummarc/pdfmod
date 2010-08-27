@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -65,11 +65,8 @@ namespace PdfSharp.Pdf.IO
   /// <summary>
   /// Represents the functionality for reading PDF documents.
   /// </summary>
-  public sealed class PdfReader
+  public static class PdfReader
   {
-    // Makes this class static
-    PdfReader() { }
-
     /// <summary>
     /// Determines whether the file specified by its path is a PDF file by inspecting the first eight
     /// bytes of the data. If the file header has the form «%PDF-x.y» the function returns the version
@@ -149,6 +146,7 @@ namespace PdfSharp.Pdf.IO
     /// </summary>
     internal static int GetPdfFileVersion(byte[] bytes)
     {
+#if !SILVERLIGHT
       try
       {
         // Acrobat accepts headers like «%!PS-Adobe-N.n PDF-M.m»...
@@ -161,12 +159,15 @@ namespace PdfSharp.Pdf.IO
             char major = header[ich + 4];
             char minor = header[ich + 6];
             if (major >= '1' && major < '2' && minor >= '0' && minor <= '9')
-              return ((int)(major - '0')) * 10 + (int)(minor - '0');
+              return (major - '0') * 10 + (minor - '0');
           }
         }
       }
       catch {}
       return 0;
+#else
+      return 50; // AGHACK
+#endif
     }
 
     /// <summary>
@@ -198,12 +199,15 @@ namespace PdfSharp.Pdf.IO
     /// </summary>
     public static PdfDocument Open(string path, string password, PdfDocumentOpenMode openmode, PdfPasswordProvider provider)
     {
-      PdfDocument document = null;
+      PdfDocument document;
       Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
       try
       {
         document = PdfReader.Open(stream, password, openmode, provider);
-        document.fullPath = Path.GetFullPath(path);
+        if (document != null)
+        {
+          document.fullPath = Path.GetFullPath(path);
+        }
       }
       finally
       {
@@ -292,8 +296,8 @@ namespace PdfSharp.Pdf.IO
           xrefEncrypt.Value = encrypt;
           PdfStandardSecurityHandler securityHandler = document.SecurityHandler;
         TryAgain:
-          int v = securityHandler.ValidatePassword(password);
-          if (v == 0)
+          PasswordValidity validity = securityHandler.ValidatePassword(password);
+          if (validity == PasswordValidity.Invalid)
           {
             if (passwordProvider != null)
             {
@@ -312,9 +316,19 @@ namespace PdfSharp.Pdf.IO
                 throw new PdfReaderException(PSSR.InvalidPassword);
             }
           }
-          else if (v == 1 && openmode == PdfDocumentOpenMode.Modify)
+          else if (validity == PasswordValidity.UserPassword && openmode == PdfDocumentOpenMode.Modify)
           {
-            throw new PdfReaderException(PSSR.OwnerPasswordRequired);
+            if (passwordProvider != null)
+            {
+              PdfPasswordProviderArgs args = new PdfPasswordProviderArgs();
+              passwordProvider(args);
+              if (args.Abort)
+                return null;
+              password = args.Password;
+              goto TryAgain;
+            }
+            else
+              throw new PdfReaderException(PSSR.OwnerPasswordRequired);
           }
         }
         else
@@ -379,7 +393,10 @@ namespace PdfSharp.Pdf.IO
           if (document.Internals.SecondDocumentID == "")
             document.trailer.CreateNewDocumentIDs();
           else
-            document.Internals.SecondDocumentID = PdfEncoders.RawEncoding.GetString(Guid.NewGuid().ToByteArray());
+          {
+            byte[] agTemp = Guid.NewGuid().ToByteArray();
+            document.Internals.SecondDocumentID = PdfEncoders.RawEncoding.GetString(agTemp, 0, agTemp.Length);
+          }
 
           // Change modification date
           document.Info.ModificationDate = DateTime.Now;

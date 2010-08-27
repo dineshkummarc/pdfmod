@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,10 +34,8 @@ namespace PdfSharp.Drawing
   /// <summary>
   /// Brushes for all the pre-defined colors.
   /// </summary>
-  public sealed class XBrushes
+  public static class XBrushes
   {
-    XBrushes() { }
-
     /// <summary>Gets a pre-defined XBrush object.</summary>
     public static XSolidBrush AliceBlue
     {

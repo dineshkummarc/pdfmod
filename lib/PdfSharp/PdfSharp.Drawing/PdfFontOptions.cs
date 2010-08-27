@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -39,7 +39,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Media;
 #endif
 using PdfSharp.Internal;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
 
@@ -154,7 +154,7 @@ namespace PdfSharp.Drawing
     { }
 
     /// <summary>
-    /// Gets a value indicating whether the gets embeded in the PDF file.
+    /// Gets a value indicating whether the gets embedded in the PDF file.
     /// </summary>
     [Obsolete("Use FontEmbedding")]
     public bool Embed
@@ -199,7 +199,7 @@ namespace PdfSharp.Drawing
     PdfFontEncoding fontEncoding;
 
     /// <summary>
-    /// Not yet implemted.
+    /// Not yet implemented.
     /// </summary>
     [Obsolete("Not yet implemented")]
     public string BaseFont
@@ -210,7 +210,7 @@ namespace PdfSharp.Drawing
     //string baseFont = "";
 
     /// <summary>
-    /// Not yet implemted.
+    /// Not yet implemented.
     /// </summary>
     [Obsolete("Not yet implemented")]
     public string FontFile

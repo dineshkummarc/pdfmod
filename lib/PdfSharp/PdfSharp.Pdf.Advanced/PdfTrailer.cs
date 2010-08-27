@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -64,7 +64,7 @@ namespace PdfSharp.Pdf.Advanced
 
     public PdfDocumentInformation Info
     {
-      get {return (PdfDocumentInformation)Elements.GetValue(PdfTrailer.Keys.Info, VCF.CreateIndirect);}
+      get {return (PdfDocumentInformation)Elements.GetValue(Keys.Info, VCF.CreateIndirect);}
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ namespace PdfSharp.Pdf.Advanced
     }
 
     /// <summary>
-    /// Gets the first or secound document identifier.
+    /// Gets the first or second document identifier.
     /// </summary>
     public string GetDocumentID(int index)
     {
@@ -94,7 +94,7 @@ namespace PdfSharp.Pdf.Advanced
     }
 
     /// <summary>
-    /// Sets the first or secound document identifier.
+    /// Sets the first or second document identifier.
     /// </summary>
     public void SetDocumentID(int index, string value)
     {
@@ -113,7 +113,8 @@ namespace PdfSharp.Pdf.Advanced
     internal PdfArray CreateNewDocumentIDs()
     {
       PdfArray array = new PdfArray(this.document);
-      string id = PdfEncoders.RawEncoding.GetString(Guid.NewGuid().ToByteArray());
+      byte[] docID = Guid.NewGuid().ToByteArray();
+      string id = PdfEncoders.RawEncoding.GetString(docID, 0, docID.Length);
       array.Elements.Add(new PdfString(id, PdfStringFlags.HexLiteral));
       array.Elements.Add(new PdfString(id, PdfStringFlags.HexLiteral));
       Elements[Keys.ID] = array;
@@ -128,7 +129,7 @@ namespace PdfSharp.Pdf.Advanced
       get 
       {
         if (this.securityHandler == null)
-          this.securityHandler = (PdfStandardSecurityHandler)Elements.GetValue(PdfTrailer.Keys.Encrypt, VCF.CreateIndirect);
+          this.securityHandler = (PdfStandardSecurityHandler)Elements.GetValue(Keys.Encrypt, VCF.CreateIndirect);
         return this.securityHandler;
       }
     }

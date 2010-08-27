@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -36,7 +36,7 @@ using System.IO;
 using PdfSharp.Drawing;
 using PdfSharp.Internal;
 using PdfSharp.Fonts;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.Filters;
 
@@ -84,7 +84,7 @@ namespace PdfSharp.Pdf.Advanced
         "/CMapName /Adobe-Identity-UCS def /CMapType 2 def\n";
       string suffix = "endcmap CMapName currentdict /CMap defineresource pop end end";
 
-      Hashtable glyphIndexToCharacter = new Hashtable();
+      Dictionary<int, char> glyphIndexToCharacter = new Dictionary<int, char>();
       int lowIndex = 65536, hiIndex = -1;
       foreach (KeyValuePair<char, int> entry in this.cmapInfo.CharacterToGlyphIndex)
       {
@@ -96,7 +96,11 @@ namespace PdfSharp.Pdf.Advanced
       }
 
       MemoryStream ms = new MemoryStream();
+#if !SILVERLIGHT
       StreamWriter wrt = new StreamWriter(ms, Encoding.ASCII);
+#else
+      StreamWriter wrt = new StreamWriter(ms, Encoding.UTF8);
+#endif
 
       wrt.Write(prefix);
 
@@ -106,8 +110,8 @@ namespace PdfSharp.Pdf.Advanced
 
       // Sorting seems not necessary. The limit is 100 entries, we will see.
       wrt.WriteLine(String.Format("{0} beginbfrange", glyphIndexToCharacter.Count));
-      foreach (DictionaryEntry entry in glyphIndexToCharacter)
-        wrt.WriteLine(String.Format("<{0:X4}><{0:X4}><{1:X4}>", (int)entry.Key, (int)(char)entry.Value));
+      foreach (KeyValuePair<int, char> entry in glyphIndexToCharacter)
+        wrt.WriteLine(String.Format("<{0:X4}><{0:X4}><{1:X4}>", entry.Key, (int)entry.Value));
       wrt.WriteLine("endbfrange");
 
       wrt.Write(suffix);

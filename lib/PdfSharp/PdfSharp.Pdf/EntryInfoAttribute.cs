@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,7 +34,7 @@ using System.Collections;
 namespace PdfSharp.Pdf
 {
   /// <summary>
-  /// Specifes the type of a key's value in a dictionary.
+  /// Specifies the type of a key's value in a dictionary.
   /// </summary>
   [Flags]
   internal enum KeyType

@@ -3,7 +3,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -33,7 +33,7 @@ using System.Diagnostics;
 namespace PdfSharp.Drawing.BarCodes
 {
   /// <summary>
-  /// 
+  /// Imlpementation of the Code 3 of 9 bar code.
   /// </summary>
   public class Code3of9Standard : ThickThinBarCode
   {
@@ -173,7 +173,7 @@ namespace PdfSharp.Drawing.BarCodes
 
     /// <summary>
     /// Calculates the thick and thin line widths,
-    /// taking into acount the required rendering size.
+    /// taking into account the required rendering size.
     /// </summary>
     internal override void CalcThinBarWidth(BarCodeRenderInfo info)
     {

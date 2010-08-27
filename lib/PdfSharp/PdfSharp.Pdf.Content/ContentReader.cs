@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -44,7 +44,6 @@ namespace PdfSharp.Pdf.Content
     /// Reads the content stream(s) of the specified page.
     /// </summary>
     /// <param name="page">The page.</param>
-    /// <returns></returns>
     static public CSequence ReadContent(PdfPage page)
     {
       CParser parser = new CParser(page);
@@ -56,7 +55,6 @@ namespace PdfSharp.Pdf.Content
     /// Reads the specified content.
     /// </summary>
     /// <param name="content">The content.</param>
-    /// <returns></returns>
     static public CSequence ReadContent(byte[] content)
     {
       CParser parser = new CParser(content);

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -38,7 +38,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Media;
 #endif
 using PdfSharp.Pdf;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 
 // WPFHACK
 #pragma warning disable 162
@@ -67,6 +67,10 @@ namespace PdfSharp.Drawing
     internal XFontFamily(System.Windows.Media.FontFamily family)
     {
       this.name = family.Source;
+      // HACK
+      int idxHash = this.name.LastIndexOf('#');
+      if (idxHash > 0)
+        this.name = this.name.Substring(idxHash + 1);
       this.wpfFamily = family;
 #if GDI
       this.gdiFamily = new System.Drawing.FontFamily(family.Source);
@@ -105,7 +109,7 @@ namespace PdfSharp.Drawing
     {
       get { return this.name; }
     }
-    string name;
+    readonly string name;
 
     /// <summary>
     /// Returns the cell ascent, in design units, of the XFontFamily object of the specified style.
@@ -155,6 +159,10 @@ namespace PdfSharp.Drawing
     public int GetEmHeight(XFontStyle style)
     {
 #if GDI && !WPF
+#if DEBUG
+      int gdiResult = this.gdiFamily.GetEmHeight((FontStyle)style);
+      //int wpfResult = FontHelper.GetWpfValue(this, style, GWV.GetEmHeight);
+#endif
       return this.gdiFamily.GetEmHeight((FontStyle)style);
 #endif
 #if WPF && !GDI
@@ -205,16 +213,16 @@ namespace PdfSharp.Drawing
       return this.gdiFamily.IsStyleAvailable((FontStyle)style);
 #endif
 #if WPF && !GDI
-      return FontHelper.GetWpfValue(this, style, GWV.IsStyleAvailable) == 1;
+      return FontHelper.IsStyleAvailable(this, style);
 #endif
 #if WPF && GDI
 #if DEBUG
       bool gdiResult = this.gdiFamily.IsStyleAvailable((FontStyle)style);
-      bool wpfResult = FontHelper.GetWpfValue(this, style, GWV.IsStyleAvailable) == 1;
-      // TODOWPF
-      //Debug.Assert(gdiResult == wpfResult, "GDI+ and WPF provides different values.");
+      bool wpfResult = FontHelper.IsStyleAvailable(this, style);
+      // TODOWPF: check when fails
+      Debug.Assert(gdiResult == wpfResult, "GDI+ and WPF provides different values.");
 #endif
-      return FontHelper.GetWpfValue(this, style, GWV.IsStyleAvailable) == 1;
+      return FontHelper.IsStyleAvailable(this, style);
 #endif
     }
 
@@ -241,7 +249,7 @@ namespace PdfSharp.Drawing
 #endif
 #if WPF
         //System.Windows.Media.Fonts.GetFontFamilies(
-        // TODOWPF
+        // TODOWPF: not very important
         return null;
 #endif
       }
@@ -263,6 +271,7 @@ namespace PdfSharp.Drawing
         result[idx] = new XFontFamily(families[idx]);
 #endif
 #if WPF
+      // TODOWPF: not very important
       result = null;
 #endif
       return result;

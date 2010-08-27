@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -49,7 +49,7 @@ namespace PdfSharp.Pdf.IO
 
     /// <summary>
     /// The PDF stream is completely read into memory, but cannot be modified. This mode preserves the
-    /// original internal structure of the document and is useful for analysing existing PDF files.
+    /// original internal structure of the document and is useful for analyzing existing PDF files.
     /// </summary>
     ReadOnly,
 

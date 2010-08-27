@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -35,7 +35,7 @@ using System.IO;
 using PdfSharp.Drawing;
 using PdfSharp.Internal;
 using PdfSharp.Fonts;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.Filters;
 
@@ -51,14 +51,14 @@ namespace PdfSharp.Pdf.Advanced
     {
     }
 
-    public PdfType0Font(PdfDocument document, XFont font)
+    public PdfType0Font(PdfDocument document, XFont font, bool vertical)
       : base(document)
     {
       Elements.SetName(Keys.Type, "/Font");
       Elements.SetName(Keys.Subtype, "/Type0");
-      Elements.SetName(Keys.Encoding, "/Identity-H");
+      Elements.SetName(Keys.Encoding, vertical ? "/Identity-V" : "/Identity-H");
 
-      TrueTypeDescriptor ttDescriptor = (TrueTypeDescriptor)FontDescriptorStock.Global.CreateDescriptor(font);
+      OpenTypeDescriptor ttDescriptor = (OpenTypeDescriptor)FontDescriptorStock.Global.CreateDescriptor(font);
       this.fontDescriptor = new PdfFontDescriptor(document, ttDescriptor);
       this.fontOptions = font.PdfOptions;
       Debug.Assert(this.fontOptions != null);
@@ -106,14 +106,14 @@ namespace PdfSharp.Pdf.Advanced
       Elements[Keys.DescendantFonts] = descendantFonts;
     }
 
-    public PdfType0Font(PdfDocument document, string idName, byte[] fontData)
+    public PdfType0Font(PdfDocument document, string idName, byte[] fontData, bool vertical)
       : base(document)
     {
       Elements.SetName(Keys.Type, "/Font");
       Elements.SetName(Keys.Subtype, "/Type0");
-      Elements.SetName(Keys.Encoding, "/Identity-H");
+      Elements.SetName(Keys.Encoding, vertical ? "/Identity-V" : "/Identity-H");
 
-      TrueTypeDescriptor ttDescriptor = (TrueTypeDescriptor)FontDescriptorStock.Global.CreateDescriptor(idName, fontData);
+      OpenTypeDescriptor ttDescriptor = (OpenTypeDescriptor)FontDescriptorStock.Global.CreateDescriptor(idName, fontData);
       this.fontDescriptor = new PdfFontDescriptor(document, ttDescriptor);
       this.fontOptions = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
       Debug.Assert(this.fontOptions != null);
@@ -144,7 +144,7 @@ namespace PdfSharp.Pdf.Advanced
         //}
 
       // CID fonts are always embedded
-      if (!BaseFont.Contains("+"))  // HACK
+      if (!BaseFont.Contains("+"))  // HACK in PdfType0Font
         BaseFont = PdfFont.CreateEmbeddedFontSubsetName(BaseFont);
 
       this.fontDescriptor.FontName = BaseFont;
@@ -178,6 +178,26 @@ namespace PdfSharp.Pdf.Advanced
     {
       base.PrepareForSave();
 
+#if true
+      // use GetGlyphIndices to create the widths array
+      OpenTypeDescriptor descriptor = (OpenTypeDescriptor)this.fontDescriptor.descriptor;
+      StringBuilder w = new StringBuilder("[");
+      if (this.cmapInfo != null)
+      {
+        int[] glyphIndices = this.cmapInfo.GetGlyphIndices();
+        int count = glyphIndices.Length;
+        int[] glyphWidths = new int[count];
+
+        for (int idx = 0; idx < count; idx++)
+          glyphWidths[idx] = descriptor.GlyphIndexToPdfWidth(glyphIndices[idx]);
+
+        //TODO: optimize order of indices
+
+        for (int idx = 0; idx < count; idx++)
+          w.AppendFormat("{0}[{1}]", glyphIndices[idx], glyphWidths[idx]);
+        w.Append("]");
+        this.descendantFont.Elements.SetValue(PdfCIDFont.Keys.W, new PdfLiteral(w.ToString()));
+#else
       TrueTypeDescriptor descriptor = (TrueTypeDescriptor)this.fontDescriptor.descriptor;
       bool symbol = descriptor.fontData.cmap.symbol;
       StringBuilder w = new StringBuilder("[");
@@ -212,6 +232,7 @@ namespace PdfSharp.Pdf.Advanced
           w.AppendFormat("{0}[{1}]", glyphIndices[idx], glyphWidths[idx]);
         w.Append("]");
         this.descendantFont.Elements.SetValue(PdfCIDFont.Keys.W, new PdfLiteral(w.ToString()));
+#endif
       }
 
       this.descendantFont.PrepareForSave();

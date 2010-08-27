@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -82,7 +82,7 @@ namespace PdfSharp.Pdf.Filters
     public virtual string DecodeToString(byte[] data, FilterParms parms)
     {
       byte[] bytes = Decode(data, parms);
-      string text = PdfEncoders.RawEncoding.GetString(bytes);
+      string text = PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
       return text;
     }
 

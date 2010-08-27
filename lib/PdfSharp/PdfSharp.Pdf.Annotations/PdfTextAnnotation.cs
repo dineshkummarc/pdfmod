@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -100,7 +100,7 @@ namespace PdfSharp.Pdf.Annotations
         value = value.Substring(1);
         if (!Enum.IsDefined(typeof(PdfTextAnnotationIcon), value))
           return PdfTextAnnotationIcon.NoIcon;
-        return (PdfTextAnnotationIcon)Enum.Parse(typeof(PdfTextAnnotationIcon), value);
+        return (PdfTextAnnotationIcon)Enum.Parse(typeof(PdfTextAnnotationIcon), value, false);
       }
       set
       {

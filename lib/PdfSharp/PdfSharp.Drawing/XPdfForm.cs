@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -42,7 +42,7 @@ using System.Windows.Media;
 #endif
 using PdfSharp.Internal;
 using PdfSharp.Drawing.Pdf;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Advanced;
@@ -62,7 +62,7 @@ namespace PdfSharp.Drawing
   {
     /// <summary>
     /// Initializes a new instance of the XPdfForm class from the specified path to an external PDF document.
-    /// Although PDFsharp internally caches XPdfForm objects it is recommended to reuse PdfXFrom objects
+    /// Although PDFsharp internally caches XPdfForm objects it is recommended to reuse XPdfForm objects
     /// in your code and change the PageNumber property if more than one page is needed form the external
     /// document. Furthermore, because XPdfForm can occupy very much memory, it is recommended to
     /// dispose XPdfForm objects if not needed anymore.
@@ -74,7 +74,7 @@ namespace PdfSharp.Drawing
 
       path = Path.GetFullPath(path);
       if (!File.Exists(path))
-        throw new FileNotFoundException(PSSR.FileNotFound(path), path);
+        throw new FileNotFoundException(PSSR.FileNotFound(path));
 
       if (PdfReader.TestPdfFile(path) == 0)
         throw new ArgumentException("The specified file has no valid PDF file header.", "path");
@@ -116,10 +116,12 @@ namespace PdfSharp.Drawing
       return new XPdfForm(stream);
     }
 
+/*
     void Initialize()
     {
       // ImageFormat has no overridden Equals...
     }
+*/
 
     /// <summary>
     /// Sets the form in the state FormState.Finished.
@@ -154,11 +156,11 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// TODO:
     /// Frees the memory occupied by the underlying imported PDF document, even if other XPdfForm objects
-    /// refer to this document. A reuse of this object doesnt fail, because the underlying PDF document
-    /// is re-imported if neccessary. NYI
+    /// refer to this document. A reuse of this object doesn't fail, because the underlying PDF document
+    /// is re-imported if necessary.
     /// </summary>
+    // TODO: NYI: Dispose
     protected override void Dispose(bool disposing)
     {
       if (!this.disposed)
@@ -350,6 +352,16 @@ namespace PdfSharp.Drawing
       }
     }
     int pageNumber = 1;
+
+    /// <summary>
+    /// Gets or sets the page index in the external PDF document this object refers to. The page index
+    /// is zero-based, i.e. it is in the range from 0 to PageCount - 1. The default value is 0.
+    /// </summary>
+    public int PageIndex
+    {
+      get { return PageNumber - 1; }
+      set { PageNumber = value + 1; }
+    }
 
     /// <summary>
     /// Gets the underlying document from which pages are imported.

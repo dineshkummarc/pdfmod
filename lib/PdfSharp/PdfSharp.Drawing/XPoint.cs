@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -42,7 +42,6 @@ using PdfSharp.Internal;
 
 namespace PdfSharp.Drawing
 {
-#if true
   /// <summary>
   /// Represents a pair of floating point x- and y-coordinates that defines a point
   /// in a two-dimensional plane.
@@ -142,7 +141,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public override int GetHashCode()
     {
-      return this.X.GetHashCode() ^ this.Y.GetHashCode();
+      return X.GetHashCode() ^ Y.GetHashCode();
     }
 
     /// <summary>
@@ -260,7 +259,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     [Browsable(false)]
     [Obsolete("Use '== new XPoint()'")]
-    public bool IsEmpty // DELETE: 08-12-31
+    public bool IsEmpty // DELETE: 09-12-31
     {
       get { return this.x == 0 && this.y == 0; }
     }
@@ -366,7 +365,7 @@ namespace PdfSharp.Drawing
     /// Divides a point by a scalar value.
     /// </summary>
     [Obsolete("Avoid using this operator.")]
-    public static XPoint operator /(XPoint point, double value)  // DELETE: 08-12-31
+    public static XPoint operator /(XPoint point, double value)  // DELETE: 09-12-31
     {
       if (value == 0)
         throw new DivideByZeroException("Divisor is zero.");
@@ -412,248 +411,9 @@ namespace PdfSharp.Drawing
     /// For convergence with WPF use new XPoint(), not XPoint.Empty
     /// </summary>
     [Obsolete("For convergence with WPF use new XPoint(), not XPoint.Empty")]
-    public static readonly XPoint Empty = new XPoint();  // DELETE: 08-12-31
+    public static readonly XPoint Empty = new XPoint();  // DELETE: 09-12-31
 
     internal double x;
     internal double y;
   }
-
-#else
-  // Old code, delete end of 2008
-
-  /// <summary>
-  /// Represents a pair of floating point x- and y-coordinates that defines a point
-  /// in a two-dimensional plane.
-  /// </summary>
-  [DebuggerDisplay("X={X.ToString(\"0.####\",System.Globalization.CultureInfo.InvariantCulture)}, Y={Y.ToString(\"0.####\",System.Globalization.CultureInfo.InvariantCulture)}")]
-  public struct XPoint
-  {
-    /// <summary>
-    /// Initializes a new instance of the XPoint class with the specified coordinates.
-    /// </summary>
-    public XPoint(double x, double y)
-    {
-      this.x = x;
-      this.y = y;
-    }
-
-#if GDI
-    /// <summary>
-    /// Initializes a new instance of the XPoint class with the specified point.
-    /// </summary>
-    public XPoint(System.Drawing.Point point)
-    {
-      this.x = point.X;
-      this.y = point.Y;
-    }
-#endif
-
-#if WPF
-    /// <summary>
-    /// Initializes a new instance of the XPoint class with the specified point.
-    /// </summary>
-    public XPoint(System.Windows.Point point)
-    {
-      this.x = point.X;
-      this.y = point.Y;
-    }
-#endif
-
-#if GDI
-    /// <summary>
-    /// Initializes a new instance of the XPoint class with the specified point.
-    /// </summary>
-    public XPoint(PointF point)
-    {
-      this.x = point.X;
-      this.y = point.Y;
-    }
-#endif
-
-    /// <summary>
-    /// Indicates whether this instance and a specified object are equal.
-    /// </summary>
-    public override bool Equals(object obj)
-    {
-      XPoint point = (XPoint)obj;
-      if (obj != null)
-        return point.x == this.x && point.y == this.y;
-      return false;
-    }
-
-    /// <summary>
-    /// Returns the hash code for this instance.
-    /// </summary>
-    public override int GetHashCode()
-    {
-      return this.x.GetHashCode() ^ this.y.GetHashCode();
-    }
-
-    /// <summary>
-    /// Converts this XPoint to a human readable string.
-    /// </summary>
-    public override string ToString()
-    {
-      return String.Format("{{X={0}, Y={1}}}", this.x, this.y);
-    }
-
-#if GDI
-    /// <summary>
-    /// Converts this XPoint to a System.Drawing.Point.
-    /// </summary>
-    public PointF ToPointF()
-    {
-      return new PointF((float)this.x, (float)this.y);
-    }
-#endif
-
-#if WPF
-    /// <summary>
-    /// Converts this XPoint to a System.Windows.Point.
-    /// </summary>
-    public System.Windows. Point ToPoint()
-    {
-      return new System.Windows.Point(this.x, this.y);
-    }
-#endif
-
-    /// <summary>
-    /// Gets the x-coordinate of this XPoint.
-    /// </summary>
-    public double X
-    {
-      get { return this.x; }
-      set { this.x = value; }
-    }
-
-    /// <summary>
-    /// Gets the y-coordinate of this XPoint.
-    /// </summary>
-    public double Y
-    {
-      get { return this.y; }
-      set { this.y = value; }
-    }
-
-    /// <summary>
-    /// Indicates whether this XPoint is empty.
-    /// </summary>
-    [Browsable(false)]
-    public bool IsEmpty
-    {
-      get { return this.x == 0 && this.y == 0; }
-    }
-
-    /// <summary>
-    /// Add a point and a size.
-    /// </summary>
-    public static XPoint operator +(XPoint point, XSize sz)
-    {
-      return new XPoint(point.x + sz.width, point.y + sz.height);
-    }
-
-    /// <summary>
-    /// Add a size from a point.
-    /// </summary>
-    public static XPoint operator -(XPoint point, XSize sz)
-    {
-      return new XPoint(point.x - sz.width, point.y - sz.height);
-    }
-
-    /// <summary>
-    /// Multiplies a point with a scalar value.
-    /// </summary>
-    public static XPoint operator *(XPoint point, double f)
-    {
-      return new XPoint(point.x * f, point.y * f);
-    }
-
-    /// <summary>
-    /// Multiplies a point with a scalar value.
-    /// </summary>
-    public static XPoint operator *(double f, XPoint point)
-    {
-      return new XPoint(f * point.x, f * point.y);
-    }
-
-    /// <summary>
-    /// Divides a point by a scalar value.
-    /// </summary>
-    public static XPoint operator /(XPoint point, double f)
-    {
-      if (f == 0)
-        throw new DivideByZeroException("Divisor is zero.");
-
-      return new XPoint(point.x / f, point.y / f);
-    }
-
-    /// <summary>
-    /// Determines whether two points are equal.
-    /// </summary>
-    public static bool operator ==(XPoint left, XPoint right)
-    {
-      return left.x == right.x && left.y == right.y;
-    }
-
-    /// <summary>
-    /// Determines whether two points are not equal.
-    /// </summary>
-    public static bool operator !=(XPoint left, XPoint right)
-    {
-      return !(left == right);
-    }
-
-    /// <summary>
-    /// Offsets the x and y value of this point.
-    /// </summary>
-    internal void Offset(double dx, double dy)
-    {
-      this.X += dx;
-      this.Y += dy;
-    }
-
-    internal double x;
-    internal double y;
-
-    /// <summary>
-    /// Parses the point from a string.
-    /// </summary>
-    public static XPoint ParsePoint(string value)
-    {
-      if (value == null)
-        throw new ArgumentNullException("value");
-
-      // TODO: Reflect reliabel implementation from Avalon
-      int ich = value.IndexOf(',');
-      if (ich == -1)
-        throw new ArgumentException("Invalid value.", "value");
-
-      double x = double.Parse(value.Substring(0, ich), CultureInfo.InvariantCulture);
-      double y = double.Parse(value.Substring(ich + 1), CultureInfo.InvariantCulture);
-      return new XPoint(x, y);
-    }
-
-    /// <summary>
-    /// Parses an array of points from a string.
-    /// </summary>
-    public static XPoint[] ParsePoints(string value)
-    {
-      if (value == null)
-        throw new ArgumentNullException("value");
-
-      // TODO: Reflect reliabel implementation from Avalon
-      string[] values = value.Split(' ');
-      int count = values.Length;
-      XPoint[] points = new XPoint[count];
-      for (int idx = 0; idx < count; idx++)
-        points[idx] = ParsePoint(values[idx]);
-      return points;
-    }
-
-    /// <summary>
-    /// Represents a new instance of the XPoint class with member data left uninitialized.
-    /// </summary>
-    public static readonly XPoint Empty = new XPoint();
-  }
-#endif
 }

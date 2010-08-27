@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -30,7 +30,7 @@
 namespace PdfSharp.Pdf.AcroForms
 {
   /// <summary>
-  /// Specified the flags of AcroForm fields.
+  /// Specifies the flags of AcroForm fields.
   /// </summary>
   public enum PdfAcroFieldFlags
   {
@@ -111,7 +111,7 @@ namespace PdfSharp.Pdf.AcroForms
     /// </summary>
     DoNotScroll = 1 << (24 - 1),
 
-    // ----- Specific to choise fields ------------------------------------------------------------
+    // ----- Specific to choice fields ------------------------------------------------------------
 
     /// <summary>
     /// If set, the field is a combo box; if clear, the field is a list box.

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -27,7 +27,6 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-// Comment out next line in Visual Studio 7.1
 #pragma warning disable 1591
 
 namespace PdfSharp.Pdf.Content.Objects
@@ -42,6 +41,6 @@ namespace PdfSharp.Pdf.Content.Objects
     DP, EI, EMC, ET, EX, f, F, fx, G, g, gs, h, i, ID, j, J, K, k, l, m, M, MP,
     n, q, Q, re, RG, rg, ri, s, S, SC, sc, SCN, scn, sh,
     Tx, Tc, Td, TD, Tf, Tj, TJ, TL, Tm, Tr, Ts, Tw, Tz, v, w, W, Wx, y,
-    QuoteSingle, QuoteDbl
+    QuoteSingle, QuoteDbl,
   }
 }

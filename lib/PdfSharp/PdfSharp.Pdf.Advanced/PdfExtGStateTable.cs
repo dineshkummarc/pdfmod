@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -29,7 +29,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.IO;
@@ -48,8 +48,7 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public PdfExtGStateTable(PdfDocument document)
       : base(document)
-    {
-    }
+    { }
 
     /// <summary>
     /// Gets a PdfExtGState with the keys 'CA' and 'ca' set to the specified alpha value.
@@ -57,8 +56,8 @@ namespace PdfSharp.Pdf.Advanced
     public PdfExtGState GetExtGState(double alpha)
     {
       string key = MakeKey(alpha);
-      PdfExtGState extGState = this.alphaValues[key] as PdfExtGState;
-      if (extGState == null)
+      PdfExtGState extGState;
+      if (!this.alphaValues.TryGetValue(key, out extGState))
       {
         extGState = new PdfExtGState(this.owner);
         extGState.Elements[PdfExtGState.Keys.CA] = new PdfReal(alpha);
@@ -75,8 +74,8 @@ namespace PdfSharp.Pdf.Advanced
     public PdfExtGState GetExtGStateStroke(double alpha)
     {
       string key = MakeKey(alpha);
-      PdfExtGState extGState = this.strokeAlphaValues[key] as PdfExtGState;
-      if (extGState == null)
+      PdfExtGState extGState;
+      if (!this.strokeAlphaValues.TryGetValue(key, out extGState))
       {
         extGState = new PdfExtGState(this.owner);
         extGState.Elements[PdfExtGState.Keys.CA] = new PdfReal(alpha);
@@ -92,8 +91,8 @@ namespace PdfSharp.Pdf.Advanced
     public PdfExtGState GetExtGStateNonStroke(double alpha)
     {
       string key = MakeKey(alpha);
-      PdfExtGState extGState = this.nonStrokeAlphaValues[key] as PdfExtGState;
-      if (extGState == null)
+      PdfExtGState extGState; ;
+      if (!this.nonStrokeAlphaValues.TryGetValue(key, out extGState))
       {
         extGState = new PdfExtGState(this.owner);
         extGState.Elements[PdfExtGState.Keys.ca] = new PdfReal(alpha);
@@ -131,7 +130,7 @@ namespace PdfSharp.Pdf.Advanced
     //  //return extGState;
     //}
 
-    string MakeKey(double alpha)
+    static string MakeKey(double alpha)
     {
       return ((int)(1000 * alpha)).ToString();
     }
@@ -139,8 +138,8 @@ namespace PdfSharp.Pdf.Advanced
     /// <summary>
     /// Maps from alpha values (range "0" to "1000") to PdfExtGState objects.
     /// </summary>
-    Hashtable alphaValues = new Hashtable();
-    Hashtable strokeAlphaValues = new Hashtable();
-    Hashtable nonStrokeAlphaValues = new Hashtable();
+    Dictionary<string, PdfExtGState> alphaValues = new Dictionary<string, PdfExtGState>();
+    Dictionary<string, PdfExtGState> strokeAlphaValues = new Dictionary<string, PdfExtGState>();
+    Dictionary<string, PdfExtGState> nonStrokeAlphaValues = new Dictionary<string, PdfExtGState>();
   }
 }

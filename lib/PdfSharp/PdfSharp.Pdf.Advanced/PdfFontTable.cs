@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -29,13 +29,13 @@
 
 using System;
 using System.Diagnostics;
-using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.IO;
 using PdfSharp.Drawing;
 using PdfSharp.Internal;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 
 namespace PdfSharp.Pdf.Advanced
 {
@@ -47,7 +47,7 @@ namespace PdfSharp.Pdf.Advanced
     TrueType = 1,
 
     /// <summary>
-    /// TrueType with Identity-H encoding (unicode).
+    /// TrueType with Identity-H or Identity-V encoding (unicode).
     /// </summary>
     Type0 = 2,
   }
@@ -78,11 +78,11 @@ namespace PdfSharp.Pdf.Advanced
         selector = new FontSelector(font);
         font.selector = selector;
       }
-      PdfFont pdfFont = this.fonts[selector] as PdfFont;
-      if (pdfFont == null)
+      PdfFont pdfFont;
+      if (!this.fonts.TryGetValue(selector, out pdfFont))
       {
         if (font.Unicode)
-          pdfFont = new PdfType0Font(this.owner, font);
+          pdfFont = new PdfType0Font(this.owner, font, font.IsVertical);
         else
           pdfFont = new PdfTrueTypeFont(this.owner, font);
         //pdfFont.Document = this.document;
@@ -190,11 +190,11 @@ namespace PdfSharp.Pdf.Advanced
     public PdfFont GetFont(string idName, byte[] fontData)
     {
       PdfFontTable.FontSelector selector = new FontSelector(idName);
-      PdfFont pdfFont = this.fonts[selector] as PdfFont;
-      if (pdfFont == null)
+      PdfFont pdfFont;
+      if (!this.fonts.TryGetValue(selector, out pdfFont))
       {
         //if (font.Unicode)
-        pdfFont = new PdfType0Font(this.owner, idName, fontData);
+        pdfFont = new PdfType0Font(this.owner, idName, fontData, false);
         //else
         //  pdfFont = new PdfTrueTypeFont(this.owner, font);
         //pdfFont.Document = this.document;
@@ -211,15 +211,16 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public PdfFont TryGetFont(string idName)
     {
-      PdfFontTable.FontSelector selector = new FontSelector(idName);
-      PdfFont pdfFont = this.fonts[selector] as PdfFont;
+      FontSelector selector = new FontSelector(idName);
+      PdfFont pdfFont;
+      this.fonts.TryGetValue(selector, out pdfFont);
       return pdfFont;
     }
 
     /// <summary>
     /// Map from PdfFontSelector to PdfFont.
     /// </summary>
-    Hashtable fonts = new Hashtable();
+    readonly Dictionary<FontSelector, PdfFont> fonts = new Dictionary<FontSelector, PdfFont>();
 
     public void PrepareForSave()
     {
@@ -228,8 +229,8 @@ namespace PdfSharp.Pdf.Advanced
     }
 
     /// <summary>
-    /// A collection of information that uniquely idendifies a particular PDF font.
-    /// ... more docu...
+    /// A collection of information that uniquely identifies a particular PDF font.
+    /// ... more docu... TODO
     /// Two PDF fonts are equal if and only if their font selector objects are equal.
     /// </summary>
     public class FontSelector
@@ -250,11 +251,15 @@ namespace PdfSharp.Pdf.Advanced
           this.style &= ~XFontStyle.Italic;
 #endif
 #if WPF && !GDI
+#if !SILVERLIGHT
         Debug.Assert(font.typeface != null);
         if ((this.style & XFontStyle.Bold) == XFontStyle.Bold && font.typeface.IsBoldSimulated)
           this.style &= ~XFontStyle.Bold;
         if ((this.style & XFontStyle.Italic) == XFontStyle.Italic && font.typeface.IsObliqueSimulated)
           this.style &= ~XFontStyle.Italic;
+#else
+        // AGHACK
+#endif
 #endif
 #if WPF && GDI
         Debug.Assert(font.typeface != null);

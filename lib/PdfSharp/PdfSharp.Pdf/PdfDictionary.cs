@@ -1,9 +1,9 @@
-#region PDFsharp - A .NET library for processing PDF
+ï»¿#region PDFsharp - A .NET library for processing PDF
 //
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -30,6 +30,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.IO;
@@ -70,7 +71,7 @@ namespace PdfSharp.Pdf
   public class PdfDictionary : PdfObject, IEnumerable
   {
     /// <summary>
-    /// The elemets of the dictionary.
+    /// The elements of the dictionary.
     /// </summary>
     protected DictionaryElements elements;
 
@@ -113,7 +114,7 @@ namespace PdfSharp.Pdf
 
     /// <summary>
     /// This function is useful for importing objects from external documents. The returned object is not
-    /// yet complete. irefs refer to external objects and directed objects are coloned but their document
+    /// yet complete. irefs refer to external objects and directed objects are cloned but their document
     /// property is null. A cloned dictionary or array needs a 'fix-up' to be a valid object.
     /// </summary>
     protected override object Copy()
@@ -171,14 +172,14 @@ namespace PdfSharp.Pdf
     {
       // Get keys and sort
       PdfName[] keys = Elements.KeyNames;
-      ArrayList list = new ArrayList(keys);
-      list.Sort(PdfName.Comparer);
+      List<PdfName> list = new List<PdfName>(keys);
+      list.Sort((IComparer<PdfName>)PdfName.Comparer);
       list.CopyTo(keys, 0);
 
       StringBuilder pdf = new StringBuilder();
       pdf.Append("<< ");
       foreach (PdfName key in keys)
-        pdf.Append(key.ToString() + " " + Elements[key].ToString() + " ");
+        pdf.Append(key + " " + this.Elements[key] + " ");
       pdf.Append(">>");
 
       return pdf.ToString();
@@ -193,7 +194,7 @@ namespace PdfSharp.Pdf
 #if DEBUG
       // TODO: automatically set length
       if (this.stream != null)
-        Debug.Assert(Elements.Contains(PdfDictionary.PdfStream.Keys.Length), "Dictionary has a stream but no length is set.");
+        Debug.Assert(Elements.ContainsKey(PdfStream.Keys.Length), "Dictionary has a stream but no length is set.");
 #endif
 
 #if DEBUG
@@ -201,7 +202,7 @@ namespace PdfSharp.Pdf
       // Araxis Merge is easier with sorted keys.
       if (writer.Layout == PdfWriterLayout.Verbose)
       {
-        ArrayList list = new ArrayList(keys);
+        List<PdfName> list = new List<PdfName>(keys);
         list.Sort(PdfName.Comparer);
         list.CopyTo(keys, 0);
       }
@@ -259,7 +260,7 @@ namespace PdfSharp.Pdf
 
     /// <summary>
     /// Creates the stream of this dictionary and initializes it with the specified byte array.
-    /// The function must not be called if the dictionary already has a strem.
+    /// The function must not be called if the dictionary already has a stream.
     /// </summary>
     public PdfStream CreateStream(byte[] value)
     {
@@ -283,23 +284,23 @@ namespace PdfSharp.Pdf
     /// <summary>
     /// Represents the interface to the elements of a PDF dictionary.
     /// </summary>
-    public sealed class DictionaryElements : IDictionary, ICloneable
+    public sealed class DictionaryElements : IDictionary<string, PdfItem>, ICloneable
     {
-      Hashtable elements;
+      Dictionary<string, PdfItem> elements;
       PdfDictionary owner;
 
       internal DictionaryElements(PdfDictionary dict)
       {
-        this.elements = new Hashtable();
+        this.elements = new Dictionary<string, PdfItem>();
         this.owner = dict;
       }
 
       object ICloneable.Clone()
       {
-        DictionaryElements elements = (DictionaryElements)MemberwiseClone();
-        elements.elements = (Hashtable)elements.elements.Clone();
-        elements.owner = null;
-        return elements;
+        DictionaryElements dictionaryElements = (DictionaryElements)MemberwiseClone();
+        dictionaryElements.elements = new Dictionary<string, PdfItem>(dictionaryElements.elements);
+        dictionaryElements.owner = null;
+        return dictionaryElements;
       }
 
       /// <summary>
@@ -439,12 +440,16 @@ namespace PdfSharp.Pdf
 
         if (obj is PdfReal)
           return ((PdfReal)obj).Value;
-        else if (obj is PdfRealObject)
+        
+        if (obj is PdfRealObject)
           return ((PdfRealObject)obj).Value;
-        else if (obj is PdfInteger)
+        
+        if (obj is PdfInteger)
           return ((PdfInteger)obj).Value;
-        else if (obj is PdfIntegerObject)
+        
+        if (obj is PdfIntegerObject)
           return ((PdfIntegerObject)obj).Value;
+        
         throw new InvalidCastException("GetReal: Object is not a number.");
       }
 
@@ -484,12 +489,16 @@ namespace PdfSharp.Pdf
 
         if (obj is PdfString)
           return ((PdfString)obj).Value;
-        else if (obj is PdfStringObject)
+        
+        if (obj is PdfStringObject)
           return ((PdfStringObject)obj).Value;
-        else if (obj is PdfName)
+        
+        if (obj is PdfName)
           return ((PdfName)obj).Value;
-        else if (obj is PdfNameObject)
+        
+        if (obj is PdfNameObject)
           return ((PdfNameObject)obj).Value;
+        
         throw new InvalidCastException("GetString: Object is not a string.");
       }
 
@@ -528,7 +537,8 @@ namespace PdfSharp.Pdf
 
         if (obj is PdfName)
           return ((PdfName)obj).Value;
-        else if (obj is PdfNameObject)
+        
+        if (obj is PdfNameObject)
           return ((PdfNameObject)obj).Value;
 
         throw new InvalidCastException("GetName: Object is not a name.");
@@ -664,11 +674,11 @@ namespace PdfSharp.Pdf
         if (obj is PdfDate)
           return ((PdfDate)obj).Value;
 
-        string date = "";
+        string date;
         if (obj is PdfString)
           date = ((PdfString)obj).Value;
         else if (obj is PdfStringObject)
-          date = ((PdfStringObject)obj).Value;
+          date = ((PdfNameObject)obj).Value;
         else
           throw new InvalidCastException("GetName: Object is not a name.");
 
@@ -704,7 +714,7 @@ namespace PdfSharp.Pdf
           return (int)defaultValue;
         }
         Debug.Assert(obj is Enum);
-        return (int)Enum.Parse(defaultValue.GetType(), obj.ToString().Substring(1));
+        return (int)Enum.Parse(defaultValue.GetType(), obj.ToString().Substring(1), false);
       }
 
       internal int GetEnumFromName(string key, object defaultValue)
@@ -716,11 +726,11 @@ namespace PdfSharp.Pdf
       {
         if (!(value is Enum))
           throw new ArgumentException("value");
-        this.elements[key] = new PdfName("/" + value.ToString());
+        this.elements[key] = new PdfName("/" + value);
       }
 
       /// <summary>
-      /// Gets the value for the specified key. If the value does not exists, it is optionally created.
+      /// Gets the value for the specified key. If the value does not exist, it is optionally created.
       /// </summary>
       public PdfItem GetValue(string key, VCF options)
       {
@@ -762,7 +772,7 @@ namespace PdfSharp.Pdf
         }
         else
         {
-          // The value exists and can returned. But for imported documents check for neccessary
+          // The value exists and can returned. But for imported documents check for necessary
           // object type transformation.
           if ((iref = value as PdfReference) != null)
           {
@@ -811,7 +821,8 @@ namespace PdfSharp.Pdf
                 dict = CreateDictionary(type, dict);
               return dict;
             }
-            else if ((array = value as PdfArray) != null)
+            
+            if ((array = value as PdfArray) != null)
             {
               Type type = GetValueType(key);
               Debug.Assert(type != null, "No value type specified in meta information. Please send this file to PDFsharp support.");
@@ -910,7 +921,7 @@ namespace PdfSharp.Pdf
           if (obj is PdfDictionary)
           {
             PdfDictionary dict = (PdfDictionary)obj;
-            dict.elements = ((PdfDictionary)oldValue).elements;
+            dict.elements = oldValue.elements;
           }
         }
         return obj;
@@ -1014,28 +1025,33 @@ namespace PdfSharp.Pdf
       /// <summary>
       /// Returns an <see cref="T:System.Collections.IDictionaryEnumerator"></see> object for the <see cref="T:System.Collections.IDictionary"></see> object.
       /// </summary>
-      public IDictionaryEnumerator GetEnumerator()
+      public IEnumerator<KeyValuePair<string, PdfItem>> GetEnumerator()
       {
         return this.elements.GetEnumerator();
       }
 
-      object IDictionary.this[object key]
+      IEnumerator IEnumerable.GetEnumerator()
       {
-        get { return this.elements[key]; }
-        set
-        {
-          if (key == null)
-            throw new ArgumentNullException("key");
-          if (!(key is string))
-            throw new ArgumentException("Key must be of type System.String.");
-          if (((string)key) == "")
-            throw new ArgumentException(PSSR.NameMustStartWithSlash, "key");
-          if (((string)key)[0] != '/')
-            throw new ArgumentException(PSSR.NameMustStartWithSlash, "key");
-
-          this.elements[key] = value;
-        }
+        return ((ICollection)this.elements).GetEnumerator();
       }
+
+      //object IDictionary.this[object key]
+      //{
+      //  get { return this.elements[key]; }
+      //  set
+      //  {
+      //    if (key == null)
+      //      throw new ArgumentNullException("key");
+      //    if (!(key is string))
+      //      throw new ArgumentException("Key must be of type System.String.");
+      //    if (((string)key) == "")
+      //      throw new ArgumentException(PSSR.NameMustStartWithSlash, "key");
+      //    if (((string)key)[0] != '/')
+      //      throw new ArgumentException(PSSR.NameMustStartWithSlash, "key");
+
+      //    this.elements[key] = value;
+      //  }
+      //}
 
       /// <summary>
       /// Gets or sets an entry in the dictionary. The specified key must be a valid PDF name
@@ -1044,7 +1060,12 @@ namespace PdfSharp.Pdf
       /// </summary>
       public PdfItem this[string key]
       {
-        get { return (PdfItem)((IDictionary)this)[key]; }
+        get
+        {
+          PdfItem item;
+          this.elements.TryGetValue(key, out item);
+          return item;
+        }
         set
         {
           if (value == null)
@@ -1068,11 +1089,8 @@ namespace PdfSharp.Pdf
 #endif
           PdfObject obj = value as PdfObject;
           if (obj != null && obj.IsIndirect)
-          {
-            ((IDictionary)this)[key] = obj.Reference;
-            return;
-          }
-          ((IDictionary)this)[key] = value;
+            value = obj.Reference;
+          this.elements[key] = value;
         }
       }
 
@@ -1081,8 +1099,8 @@ namespace PdfSharp.Pdf
       /// </summary>
       public PdfItem this[PdfName key]
       {
-        get { return (PdfItem)((IDictionary)this)[key.Value]; }
-        set 
+        get { return this[key.Value]; }
+        set
         {
           if (value == null)
             throw new ArgumentNullException("value");
@@ -1098,38 +1116,50 @@ namespace PdfSharp.Pdf
 
           PdfObject obj = value as PdfObject;
           if (obj != null && obj.IsIndirect)
-          {
-            ((IDictionary)this)[key] = obj.Reference;
-            return;
-          }
-          ((IDictionary)this)[key.Value] = value; 
+            value = obj.Reference;
+          this.elements[key.Value] = value;
         }
-      }
-
-      void IDictionary.Remove(object key)
-      {
-        this.elements.Remove(key);
       }
 
       /// <summary>
       /// Removes the value with the specified key.
       /// </summary>
-      public void Remove(string key)
+      public bool Remove(string key)
       {
-        this.elements.Remove(key);
+        return this.elements.Remove(key);
       }
 
-      bool IDictionary.Contains(object key)
+      /// <summary>
+      /// Removes the value with the specified key.
+      /// </summary>
+      public bool Remove(KeyValuePair<string, PdfItem> item)
       {
-        return this.elements.Contains(key);
+        throw new NotImplementedException();
       }
 
       /// <summary>
       /// Determines whether the dictionary contains the specified name.
       /// </summary>
+      [Obsolete("Use ContainsKey.")]
       public bool Contains(string key)
       {
-        return this.elements.Contains(key);
+        return this.elements.ContainsKey(key);
+      }
+
+      /// <summary>
+      /// Determines whether the dictionary contains the specified name.
+      /// </summary>
+      public bool ContainsKey(string key)
+      {
+        return this.elements.ContainsKey(key);
+      }
+
+      /// <summary>
+      /// Determines whether the dictionary contains a specific value.
+      /// </summary>
+      public bool Contains(KeyValuePair<string, PdfItem> item)
+      {
+        throw new NotImplementedException();
       }
 
       /// <summary>
@@ -1140,17 +1170,36 @@ namespace PdfSharp.Pdf
         this.elements.Clear();
       }
 
-      void IDictionary.Add(object key, object value)
+      //void IDictionary.Add(object key, object value)
+      //{
+      //  if (key == null)
+      //    throw new ArgumentNullException("key");
+      //  if (key is PdfName)
+      //    key = (key as PdfName).Value;
+      //  if (!(key is string))
+      //    throw new ArgumentException("key must be of type System.String.");
+      //  if (((string)key) == "")
+      //    throw new ArgumentException("key");
+      //  if (((string)key)[0] != '/')
+      //    throw new ArgumentException("The key must start with a slash '/'.");
+
+      //  // If object is indirect automatically convert value to reference.
+      //  PdfObject obj = value as PdfObject;
+      //  if (obj != null && obj.IsIndirect)
+      //    value = obj.Reference;
+
+      //  this.elements.Add(key, value);
+      //}
+
+      /// <summary>
+      /// Adds the specified value to the dictionary.
+      /// </summary>
+      public void Add(string key, PdfItem value)
       {
-        if (key == null)
+        if (String.IsNullOrEmpty(key))
           throw new ArgumentNullException("key");
-        if (key is PdfName)
-          key = (key as PdfName).Value;
-        if (!(key is string))
-          throw new ArgumentException("key must be of type System.String.");
-        if (((string)key) == "")
-          throw new ArgumentException("key");
-        if (((string)key)[0] != '/')
+
+        if (key[0] != '/')
           throw new ArgumentException("The key must start with a slash '/'.");
 
         // If object is indirect automatically convert value to reference.
@@ -1162,16 +1211,11 @@ namespace PdfSharp.Pdf
       }
 
       /// <summary>
-      /// Adds the specified value to the dictionary.
+      /// Adds an item to the dictionary.
       /// </summary>
-      public void Add(object key, PdfItem value)
+      public void Add(KeyValuePair<string, PdfItem> item)
       {
-        ((IDictionary)this).Add(key, value);
-      }
-
-      ICollection IDictionary.Keys
-      {
-        get { return this.elements.Keys; }
+        Add(item.Key, item.Value);
       }
 
       /// <summary>
@@ -1195,7 +1239,7 @@ namespace PdfSharp.Pdf
       /// <summary>
       /// Get all keys currently in use in this dictionary as an array of string objects.
       /// </summary>
-      public string[] Keys
+      public ICollection<string> Keys
       {
         get
         {
@@ -1207,15 +1251,18 @@ namespace PdfSharp.Pdf
         }
       }
 
-      ICollection IDictionary.Values
+      /// <summary>
+      /// Gets the value associated with the specified key.
+      /// </summary>
+      public bool TryGetValue(string key, out PdfItem value)
       {
-        get { return this.elements.Values; }
+        return this.elements.TryGetValue(key, out value);
       }
 
       /// <summary>
       /// Gets all values currently in use in this dictionary as an array of PdfItem objects.
       /// </summary>
-      public PdfItem[] Values
+      public ICollection<PdfItem> Values
       {
         get
         {
@@ -1254,14 +1301,20 @@ namespace PdfSharp.Pdf
         get { return this.elements.Count; }
       }
 
+      ///// <param name="array">The one-dimensional array that is the destination of the elements copied from.</param>
+      ///// <param name="index">The zero-based index in array at which copying begins.</param>
+      //public void CopyTo(Array array, int index)
+      //{
+      //  //this.elements.CopyTo(array, index);
+      //  throw new NotImplementedException();
+      //}
+
       /// <summary>
-      /// Copies the elements of the elementes of the dictionary to an array, starting at a particular index.
+      /// Copies the elements of the dictionary to an array, starting at a particular index.
       /// </summary>
-      /// <param name="array">The one-dimensional array that is the destination of the elements copied from.</param>
-      /// <param name="index">The zero-based index in array at which copying begins.</param>
-      public void CopyTo(Array array, int index)
+      public void CopyTo(KeyValuePair<string, PdfItem>[] array, int arrayIndex)
       {
-        this.elements.CopyTo(array, index);
+        throw new NotImplementedException();
       }
 
       /// <summary>
@@ -1270,15 +1323,6 @@ namespace PdfSharp.Pdf
       public object SyncRoot
       {
         get { return null; }
-      }
-
-      #endregion
-
-      #region IEnumerable Members
-
-      IEnumerator System.Collections.IEnumerable.GetEnumerator()
-      {
-        return ((ICollection)this.elements).GetEnumerator();
       }
 
       #endregion
@@ -1384,7 +1428,7 @@ namespace PdfSharp.Pdf
               bytes = Filtering.Decode(this.value, filter);
               if (bytes == null)
               {
-                string message = String.Format("«Cannot decode filter '{0}'»", filter.ToString());
+                string message = String.Format("Â«Cannot decode filter '{0}'Â»", filter);
                 bytes = PdfEncoders.RawEncoding.GetBytes(message);
               }
             }
@@ -1394,19 +1438,18 @@ namespace PdfSharp.Pdf
               this.value.CopyTo(bytes, 0);
             }
           }
-          return bytes == null ? new byte[0] : bytes;
+          return bytes ?? new byte[0];
         }
       }
 
       /// <summary>
-      /// Tries the unfilter the bytes of the stream. If the stream is filtered and PDFsharp knows the filter
-      /// algorithm, the stream content is replaced by its unfiltered value and the function return true.
-      /// Otherwise the content keeps untouched and the function returns flase.
-      /// The funktion is useful for analysing existing PDF files.
+      /// Tries to unfilter the bytes of the stream. If the stream is filtered and PDFsharp knows the filter
+      /// algorithm, the stream content is replaced by its unfiltered value and the function returns true.
+      /// Otherwise the content remains untouched and the function returns false.
+      /// The function is useful for analyzing existing PDF files.
       /// </summary>
       public bool TryUnfilter()
       {
-        byte[] bytes = null;
         if (this.value != null)
         {
           PdfItem filter = this.owner.Elements["/Filter"];
@@ -1414,7 +1457,7 @@ namespace PdfSharp.Pdf
           {
             // PDFsharp can only uncompress streams that are compressed with
             // the ZIP or LHZ algorithm.
-            bytes = Filtering.Decode(this.value, filter);
+            byte[] bytes = Filtering.Decode(this.value, filter);
             if (bytes != null)
             {
               this.owner.Elements.Remove(Keys.Filter);
@@ -1436,7 +1479,7 @@ namespace PdfSharp.Pdf
         if (this.value == null)
           return;
 
-        if (!this.owner.Elements.Contains("/Filter"))
+        if (!this.owner.Elements.ContainsKey("/Filter"))
         {
           this.value = Filtering.FlateDecode.Encode(this.value);
           this.owner.Elements["/Filter"] = new PdfName("/FlateDecode");
@@ -1445,21 +1488,21 @@ namespace PdfSharp.Pdf
       }
 
       /// <summary>
-      /// Returns the strem content a raw string.
+      /// Returns the stream content as a raw string.
       /// </summary>
       public override string ToString()
       {
         if (this.value == null)
-          return "«null»";
+          return "Â«nullÂ»";
 
-        string stream = "";
+        string stream;
         PdfItem filter = this.owner.Elements["/Filter"];
         if (filter != null)
         {
 #if true
           byte[] bytes = Filtering.Decode(this.value, filter);
           if (bytes != null)
-            stream = PdfEncoders.RawEncoding.GetString(bytes);
+            stream = PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
 #else
 
           if (this.owner.Elements.GetString("/Filter") == "/FlateDecode")
@@ -1471,7 +1514,7 @@ namespace PdfSharp.Pdf
             throw new NotImplementedException("Unknown filter");
         }
         else
-          stream = PdfEncoders.RawEncoding.GetString(this.value);
+          stream = PdfEncoders.RawEncoding.GetString(this.value, 0, this.value.Length);
 
         return stream;
       }
@@ -1483,13 +1526,21 @@ namespace PdfSharp.Pdf
       //}
 
       /// <summary>
+      /// Converts a raw encoded string into a byte array.
+      /// </summary>
+      public static byte[] RawEncode(string content)
+      {
+        return PdfEncoders.RawEncoding.GetBytes(content);
+      }
+
+      /// <summary>
       /// Common keys for all streams.
       /// </summary>
       public class Keys : KeysBase
       {
         /// <summary>
         /// (Required) The number of bytes from the beginning of the line following the keyword
-        /// stream to the last byte just before the keywordendstream. (There may be an additional
+        /// stream to the last byte just before the keyword endstream. (There may be an additional
         /// EOL marker, preceding endstream, that is not included in the count and is not logically
         /// part of the stream data.)
         /// </summary>
@@ -1507,7 +1558,7 @@ namespace PdfSharp.Pdf
         /// <summary>
         /// (Optional) A parameter dictionary or an array of such dictionaries, used by the filters
         /// specified by Filter. If there is only one filter and that filter has parameters, DecodeParms
-        /// must be set to the filter’s parameter dictionary unless all the filter’s parameters have
+        /// must be set to the filterâ€™s parameter dictionary unless all the filterâ€™s parameters have
         /// their default values, in which case the DecodeParms entry may be omitted. If there are 
         /// multiple filters and any of the filters has parameters set to nondefault values, DecodeParms
         /// must be an array with one entry for each filter: either the parameter dictionary for that
@@ -1530,7 +1581,7 @@ namespace PdfSharp.Pdf
 
         /// <summary>
         /// (Optional; PDF 1.2) The name of a filter to be applied in processing the data found in the
-        /// stream’s external file, or an array of such names. The same rules apply as for Filter.
+        /// streamâ€™s external file, or an array of such names. The same rules apply as for Filter.
         /// </summary>
         [KeyInfo("1.2", KeyType.NameOrArray | KeyType.Optional)]
         public const string FFilter = "/FFilter";

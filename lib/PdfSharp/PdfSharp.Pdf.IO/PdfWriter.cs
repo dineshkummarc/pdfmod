@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Globalization;
@@ -227,11 +228,12 @@ namespace PdfSharp.Pdf.IO
       for (int idx = 1; idx < name.Length; idx++)
       {
         char ch = name[idx];
-        Debug.Assert((int)ch < 256);
+        Debug.Assert(ch < 256);
         if (ch > ' ')
           switch (ch)
           {
             // TODO: is this all?
+            case '%':
             case '/':
             case '<':
             case '>':
@@ -648,7 +650,7 @@ namespace PdfSharp.Pdf.IO
       public bool HasStream;
     }
 
-    ArrayList stack = new ArrayList();
+    List<StackItem> stack = new List<StackItem>();
     int commentPosition;
   }
 }

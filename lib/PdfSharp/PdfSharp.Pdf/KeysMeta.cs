@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -29,7 +29,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using PdfSharp.Pdf.IO;
 
@@ -37,7 +37,7 @@ namespace PdfSharp.Pdf
 {
   /// <summary>
   /// Hold information about the value of a key in a dictionary. This information is used to create
-  /// interpred this value.
+  /// and interpret this value.
   /// </summary>
   internal sealed class KeyDescriptor
   {
@@ -167,7 +167,7 @@ namespace PdfSharp.Pdf
             throw new NotImplementedException("KeyType.ArrayOrNameOrString");
 
           default:
-            Debug.Assert(false, "Invalid KeyType: " + this.keyType.ToString());
+            Debug.Assert(false, "Invalid KeyType: " + this.keyType);
             break;
         }
       }
@@ -198,9 +198,9 @@ namespace PdfSharp.Pdf
 
     public KeyDescriptor this[string key]
     {
-      get { return (KeyDescriptor)this.keyDescriptors[key]; }
+      get { return this.keyDescriptors[key]; }
     }
 
-    Hashtable keyDescriptors = new Hashtable();
+    readonly Dictionary<string, KeyDescriptor> keyDescriptors = new Dictionary<string, KeyDescriptor>();
   }
 }

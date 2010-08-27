@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -41,7 +41,7 @@ namespace PdfSharp.Pdf.Advanced
 {
   /// <summary>
   /// Provides access to the internal document data structures. This class prevents the public
-  /// interfaces from pollution with internal functions.
+  /// interfaces from pollution with to much internal functions.
   /// </summary>
   public class PdfInternals  // TODO: PdfDocumentInternals... PdfPageInterals etc.
   {
@@ -157,17 +157,23 @@ namespace PdfSharp.Pdf.Advanced
     /// <summary>
     /// Gets all indirect objects ordered by their object identifier.
     /// </summary>
+    public PdfObject[] GetAllObjects()
+    {
+      PdfReference[] irefs = this.document.irefTable.AllReferences;
+      int count = irefs.Length;
+      PdfObject[] objects = new PdfObject[count];
+      for (int idx = 0; idx < count; idx++)
+        objects[idx] = irefs[idx].Value;
+      return objects;
+    }
+
+    /// <summary>
+    /// Gets all indirect objects ordered by their object identifier.
+    /// </summary>
+    [Obsolete("Use GetAllObjects.")]  // Properties should not return arrays
     public PdfObject[] AllObjects
     {
-      get
-      {
-        PdfReference[] irefs = this.document.irefTable.AllReferences;
-        int count = irefs.Length;
-        PdfObject[] objects = new PdfObject[count];
-        for (int idx = 0; idx < count; idx++)
-          objects[idx] = irefs[idx].Value;
-        return objects;
-      }
+      get { return GetAllObjects(); }
     }
 
     /// <summary>
@@ -226,9 +232,18 @@ namespace PdfSharp.Pdf.Advanced
     /// as long as no new objects came along. This is e.g. useful for getting all objects belonging 
     /// to the resources of a page.
     /// </summary>
-    public PdfObject[] GetClosure(PdfObject obj) // TODO: "..., bool transitive)"
+    public PdfObject[] GetClosure(PdfObject obj)
     {
-      PdfReference[] references = this.document.irefTable.TransitiveClosure(obj);
+      return GetClosure(obj, Int32.MaxValue);
+    }
+
+    /// <summary>
+    /// Returns an array containing the specified object as first element follows by its transitive
+    /// closure limited by the specified number of iterations.
+    /// </summary>
+    public PdfObject[] GetClosure(PdfObject obj, int depth)
+    {
+      PdfReference[] references = this.document.irefTable.TransitiveClosure(obj, depth);
       int count = references.Length + 1;
       PdfObject[] objects = new PdfObject[count];
       objects[0] = obj;
@@ -250,7 +265,7 @@ namespace PdfSharp.Pdf.Advanced
     }
 
     /// <summary>
-    /// The name of the custuom value key.
+    /// The name of the custom value key.
     /// </summary>
     public string CustomValueKey = "/PdfSharp.CustomValue";
   }

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,7 +34,7 @@ using System.Text;
 using System.IO;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Drawing;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Fonts;
 using PdfSharp.Internal;
 using PdfSharp.Pdf.Filters;
@@ -119,6 +119,12 @@ namespace PdfSharp.Pdf.Advanced
     {
       if (this.cmapInfo != null)
         this.cmapInfo.AddChars(text);
+    }
+
+    internal void AddGlyphIndices(string glyphIndices)
+    {
+      if (this.cmapInfo != null)
+        this.cmapInfo.AddGlyphIndices(glyphIndices);
     }
 
     /// <summary>

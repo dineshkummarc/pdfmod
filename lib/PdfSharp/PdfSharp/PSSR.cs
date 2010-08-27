@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -42,11 +42,11 @@ namespace PdfSharp
   /// <summary>
   /// The Pdf-Sharp-String-Resources.
   /// </summary>
-  public static class PSSR
+  static class PSSR
   {
     // How to use:
     // Create a function or property for each message text, depending on how much parameters are
-    // part of the message. For the time beginning, type plain english text in the function or property. 
+    // part of the message. For the time beginning, type plain English text in the function or property. 
     // The use of functions is save when a parameter must be changed. The compiler tells you all
     // places in your code that must be modified.
     // For localization, create a enum value for each function or property with the same name. Then
@@ -72,10 +72,7 @@ namespace PdfSharp
       try
       {
         message = PSSR.GetString(id);
-        if (message != null)
-          message = Format(message, args);
-        else
-          message = "INTERNAL ERROR: Message not found in resources.";
+        message = message != null ? Format(message, args) : "INTERNAL ERROR: Message not found in resources.";
         return message;
       }
       catch (Exception ex)
@@ -97,7 +94,7 @@ namespace PdfSharp
       }
       catch (Exception ex)
       {
-        message = String.Format("UNEXPECTED ERROR while formatting message '{0}': {1}", format, ex.ToString());
+        message = String.Format("UNEXPECTED ERROR while formatting message '{0}': {1}", format, ex);
       }
       return message;
     }
@@ -157,7 +154,12 @@ namespace PdfSharp
 
     public static string FontDataReadOnly
     {
-      get { return "Font data is read-only"; }
+      get { return "Font data is read-only."; }
+    }
+
+    public static string ErrorReadingFontData
+    {
+      get { return "Error while parsing an OpenType font."; }
     }
 
     #endregion
@@ -252,7 +254,7 @@ namespace PdfSharp
 
     public static string UnexpectedTokenInPdfFile
     {
-      get { return "Unexpected token in PDF file. The PDF file may be currupt. If it is not, please send us the file for serivce."; }
+      get { return "Unexpected token in PDF file. The PDF file may be corrupt. If it is not, please send us the file for service."; }
     }
 
     public static string InappropriateColorSpace(PdfColorMode colorMode, XColorSpace colorSpace)
@@ -330,7 +332,7 @@ namespace PdfSharp
         if (PSSR.resmngr == null)
         {
 #if true_
-          // Force the english language, even on a German PC.
+          // Force the English language, even on German Windows.
           System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
 #endif
           PSSR.resmngr = new ResourceManager("PdfSharp.Resources.Messages", Assembly.GetExecutingAssembly());
@@ -346,6 +348,7 @@ namespace PdfSharp
     [Conditional("DEBUG")]
     public static void TestResourceMessages()
     {
+#if !SILVERLIGHT
       string[] names = Enum.GetNames(typeof(PSMsgID));
       foreach (string name in names)
       {
@@ -353,11 +356,13 @@ namespace PdfSharp
         Debug.Assert(message != null);
         Debug.WriteLine(message);
       }
+#else
+#endif
     }
 
     static PSSR()
     {
-      //TestResourceMessages();
+      TestResourceMessages();
     }
 
     #endregion

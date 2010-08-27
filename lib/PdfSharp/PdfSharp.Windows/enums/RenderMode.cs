@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -27,26 +27,26 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace PdfSharp.Forms
+namespace PdfSharp.Windows
 {
   /// <summary>
-  /// Specifies how to reander the preview.
+  /// Specifies how to render the preview.
   /// </summary>
   public enum RenderMode
   {
     /// <summary>
-    /// Draw immediately.
+    /// Draw retained
     /// </summary>
-    Direct = 0,
+    Default = 0,
 
-    /// <summary>
-    /// Draw using a metafile
-    /// </summary>
-    Metafile = 1,
+    ///// <summary>
+    ///// Draw using a metafile
+    ///// </summary>
+    //Metafile = 1,
 
-    /// <summary>
-    /// Draw using a bitmap image.
-    /// </summary>
-    Bitmap = 2
+    ///// <summary>
+    ///// Draw using a bitmap image.
+    ///// </summary>
+    //Bitmap = 2
   }
 }

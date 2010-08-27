@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -98,7 +98,7 @@ namespace PdfSharp.Pdf.Annotations
     }
 
     /// <summary>
-    /// Gets or sets the PdfAnnotations object that this annoation belongs to.
+    /// Gets or sets the PdfAnnotations object that this annotation belongs to.
     /// </summary>
     public PdfAnnotations Parent
     {
@@ -209,7 +209,7 @@ namespace PdfSharp.Pdf.Annotations
     {
       get
       {
-        if (!Elements.Contains(Keys.CA))
+        if (!Elements.ContainsKey(Keys.CA))
           return 1;
         return Elements.GetReal(Keys.CA, true);
       }

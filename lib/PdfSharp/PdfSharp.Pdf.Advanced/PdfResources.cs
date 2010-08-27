@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,7 +28,7 @@
 #endregion
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using PdfSharp.Internal;
@@ -57,23 +57,22 @@ namespace PdfSharp.Pdf.Advanced
       Elements[Keys.ProcSet] = new PdfLiteral("[/PDF/Text/ImageB/ImageC/ImageI]");
     }
 
-    PdfResources(PdfDictionary dict)
+    internal PdfResources(PdfDictionary dict)
       : base(dict)
-    {
-    }
+    { }
 
     /// <summary>
     /// Adds the specified font to this resource dictionary and returns its local resource name.
     /// </summary>
     public string AddFont(PdfFont font)
     {
-      string name = (string)this.resources[font];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(font, out name))
       {
         name = NextFontName;
         this.resources[font] = name;
         if (font.Reference == null)
-          this.Owner.irefTable.Add(font);
+          Owner.irefTable.Add(font);
         Fonts.Elements[name] = font.Reference;
       }
       return name;
@@ -85,13 +84,13 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public string AddImage(PdfImage image)
     {
-      string name = (string)this.resources[image];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(image, out name))
       {
         name = NextImageName;
         this.resources[image] = name;
         if (image.Reference == null)
-          this.Owner.irefTable.Add(image);
+          Owner.irefTable.Add(image);
         XObjects.Elements[name] = image.Reference;
       }
       return name;
@@ -103,13 +102,13 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public string AddForm(PdfFormXObject form)
     {
-      string name = (string)this.resources[form];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(form, out name))
       {
         name = NextFormName;
         this.resources[form] = name;
         if (form.Reference == null)
-          this.Owner.irefTable.Add(form);
+          Owner.irefTable.Add(form);
         XObjects.Elements[name] = form.Reference;
       }
       return name;
@@ -121,13 +120,13 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public string AddExtGState(PdfExtGState extGState)
     {
-      string name = (string)this.resources[extGState];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(extGState, out name))
       {
         name = NextExtGStateName;
         this.resources[extGState] = name;
         if (extGState.Reference == null)
-          this.Owner.irefTable.Add(extGState);
+          Owner.irefTable.Add(extGState);
         ExtGStates.Elements[name] = extGState.Reference;
       }
       return name;
@@ -139,13 +138,13 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public string AddPattern(PdfShadingPattern pattern)
     {
-      string name = (string)this.resources[pattern];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(pattern, out name))
       {
         name = NextPatternName;
         this.resources[pattern] = name;
         if (pattern.Reference == null)
-          this.Owner.irefTable.Add(pattern);
+          Owner.irefTable.Add(pattern);
         Patterns.Elements[name] = pattern.Reference;
       }
       return name;
@@ -157,13 +156,13 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public string AddPattern(PdfTilingPattern pattern)
     {
-      string name = (string)this.resources[pattern];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(pattern, out name))
       {
         name = NextPatternName;
         this.resources[pattern] = name;
         if (pattern.Reference == null)
-          this.Owner.irefTable.Add(pattern);
+          Owner.irefTable.Add(pattern);
         Patterns.Elements[name] = pattern.Reference;
       }
       return name;
@@ -175,13 +174,13 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public string AddShading(PdfShading shading)
     {
-      string name = (string)this.resources[shading];
-      if (name == null)
+      string name;
+      if (!this.resources.TryGetValue(shading, out name))
       {
         name = NextShadingName;
         this.resources[shading] = name;
         if (shading.Reference == null)
-          this.Owner.irefTable.Add(shading);
+          Owner.irefTable.Add(shading);
         Shadings.Elements[name] = shading.Reference;
       }
       return name;
@@ -373,7 +372,7 @@ namespace PdfSharp.Pdf.Advanced
       // Collect all resouce names of all imported resources.
       if (this.importedResourceNames == null)
       {
-        this.importedResourceNames = new Hashtable();
+        this.importedResourceNames = new Dictionary<string, object>();
 
         if (Elements[Keys.Font] != null)
           Fonts.CollectResourceNames(this.importedResourceNames);
@@ -396,7 +395,7 @@ namespace PdfSharp.Pdf.Advanced
         if (Elements[Keys.Properties] != null)
           Properties.CollectResourceNames(this.importedResourceNames);
       }
-      return this.importedResourceNames.Contains(name);
+      return this.importedResourceNames.ContainsKey(name);
       // This is superfluous because PDFsharp resource names cannot be double.
       // this.importedResourceNames.Add(name, null);
     }
@@ -404,12 +403,12 @@ namespace PdfSharp.Pdf.Advanced
     /// <summary>
     /// All the names of imported resources.
     /// </summary>
-    Hashtable importedResourceNames;
+    Dictionary<string, object> importedResourceNames;
 
     /// <summary>
     /// Maps all PDFsharp resources to their local resource names.
     /// </summary>
-    readonly Hashtable resources = new Hashtable();
+    readonly Dictionary<PdfObject, string> resources = new Dictionary<PdfObject, string>();
 
     /// <summary>
     /// Predefined keys of this dictionary.

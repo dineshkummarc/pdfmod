@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30428</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5384CE57-1F94-4D22-860D-2E9C1AC12DDF}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>PdfSharp</AssemblyName>
@@ -18,6 +19,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>PdfSharp</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -39,46 +42,68 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;GDI;UseGdiObjects</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;GDI;UseGdiObjects</DefineConstants>
     <DocumentationFile>bin\Debug\PdfSharp.XML</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
-    <Optimize>true</Optimize>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE;GDI;UseGdiObjects</DefineConstants>
     <DocumentationFile>bin\Release\PdfSharp.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
     <Optimize>true</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="!internal\Directives.cs" />
@@ -90,32 +115,58 @@
     <Compile Include="PdfSharp.Drawing\enums\XGraphicRenderTarget.cs" />
     <Compile Include="PdfSharp.Drawing\FontHelper.cs" />
     <Compile Include="PdfSharp.Drawing\GeometryHelper.cs" />
+    <Compile Include="PdfSharp.Drawing\ImageHelper.cs" />
+    <Compile Include="PdfSharp.Drawing\XFontStretch.cs" />
+    <Compile Include="PdfSharp.Drawing\XFontWeight.cs" />
+    <Compile Include="PdfSharp.Drawing\XFontWeights.cs" />
+    <Compile Include="PdfSharp.Drawing\XGlyphTypeface.cs" />
     <Compile Include="PdfSharp.Drawing\XGraphicsPathInternals.cs" />
     <Compile Include="PdfSharp.Drawing\XPrivateFontCollection.cs" />
     <Compile Include="PdfSharp.Drawing\XKnownColorTable.cs" />
     <Compile Include="PdfSharp.Drawing\XColorResourceManager.cs" />
     <Compile Include="PdfSharp.Drawing\XStringFormats.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\ExternalHelper.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\FontDescriptor.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\IndexToLocationTable.cs">
+    <Compile Include="PdfSharp.Drawing\XTypeFace.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\enums\FontTechnology.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\ExternalHelper.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\FontDataStock.cs" />
+    <Compile Include="PdfSharp.Fonts\FontDescriptor.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\IndexToLocationTable.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PdfSharp.Fonts.TrueType\GlyphDataTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\FontData.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\IRefFontTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\GenericFontTable.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TableDirectoryEntry.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\enums\TableTagNames.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\enums\TableTag.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeFontTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\GlyphDataTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\FontData.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\IRefFontTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\GenericFontTable.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\TableDirectoryEntry.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\enums\TableTagNames.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\enums\TableTag.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeFontTable.cs" />
     <Compile Include="PdfSharp.Fonts\FontWriter.cs" />
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeFontWriter.cs" />
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeFontWriter.cs" />
+    <Compile Include="PdfSharp.Forms\ColorComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PdfSharp.Internal\ColorHelper.cs" />
     <Compile Include="PdfSharp.Internal\DoubleUtil.cs" />
     <Compile Include="PdfSharp.Internal\TokenizerHelper.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\enums\PdfAcroFieldFlags.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfAcroField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfAcroForm.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfButtonField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfCheckBoxField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfChoiceField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfComboBoxField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfGenericField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfListBoxField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfPushButtonField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfRadioButtonField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfSignatureField.cs" />
+    <Compile Include="PdfSharp.Pdf.AcroForms\PdfTextField.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\IContentStream.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfDictionaryWithContentStream.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfGroupAttributes.cs" />
+    <Compile Include="PdfSharp.Pdf.Advanced\PdfImage.FaxEncode.cs" />
+    <Compile Include="PdfSharp.Pdf.Advanced\PdfObjectInternals.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfSoftMask.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfTilingPattern.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfToUnicodeMap.cs" />
@@ -154,9 +205,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PdfSharp.Drawing.Pdf\XGraphicsPdfRenderer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PdfSharp.Drawing.Rtf\XGraphicsRtfRenderer.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PdfSharp.Drawing.Shapes\Shape.cs">
@@ -307,13 +355,13 @@
     <Compile Include="PdfSharp.Drawing\XVector.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PdfSharp.Fonts.TrueType\FontDescriptorStock.cs">
+    <Compile Include="PdfSharp.Fonts\FontDescriptorStock.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeStructures.cs">
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeStructures.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PdfSharp.Fonts.TrueType\TrueTypeDescriptor.cs">
+    <Compile Include="PdfSharp.Fonts.OpenType\OpenTypeDescriptor.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PdfSharp.Fonts\AdobeGlyphList20.cs">
@@ -323,25 +371,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PdfSharp.Fonts\CMapInfo.cs" />
+    <Compile Include="PdfSharp.Forms\DeviceInfos.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PdfSharp.Forms\enums\Zoom.cs" />
+    <Compile Include="PdfSharp.Forms\enums\RenderMode.cs" />
+    <Compile Include="PdfSharp.Forms\PagePreview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PdfSharp.Forms\PagePreviewCanvas.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PdfSharp.Internal\Calc.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PdfSharp.Internal\NativeMethods.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PdfSharp.Pdf.AcroForms\enums\PdfAcroFieldFlags.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfAcroField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfAcroForm.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfButtonField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfCheckBoxField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfChoiseField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfComboBoxField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfGenericField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfListBoxField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfPushButtonField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfRadioButtonField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfSignatureField.cs" />
-    <Compile Include="PdfSharp.Pdf.AcroForms\PdfTextField.cs" />
     <Compile Include="PdfSharp.Pdf.Actions\enums\PdfNamedActionNames.cs" />
     <Compile Include="PdfSharp.Pdf.Actions\PdfAction.cs" />
     <Compile Include="PdfSharp.Pdf.Advanced\PdfType0Font.cs" />
@@ -470,6 +516,7 @@
     <Compile Include="PdfSharp.Pdf.IO\Chars.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PdfSharp.Pdf.IO\enums\PasswordValidity.cs" />
     <Compile Include="PdfSharp.Pdf.IO\enums\PdfDocumentOpenMode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -713,9 +760,16 @@
     <Content Include="PdfSharp.SharpZipLib\ReadMe.txt" />
     <Content Include="Resources\Messages.de.txt" />
     <Content Include="Resources\Messages.txt" />
-    <None Include="StrongnameKey.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="PdfSharp.Forms\PagePreview.resx">
+      <DependentUpon>PagePreview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PdfSharp.Forms\PagePreviewCanvas.resx">
+      <DependentUpon>PagePreviewCanvas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -724,15 +778,29 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="StrongnameKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
       <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AGInternals\" />
+    <Folder Include="PdfSharp.Drawing.Wpf\" />
+    <Folder Include="Resources\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -741,11 +809,4 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <Deployment.LinuxDeployData generatePcFile="false" />
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
 </Project>

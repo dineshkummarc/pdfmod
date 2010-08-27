@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -46,15 +46,15 @@ namespace PdfSharp.Pdf.IO
     Standard, 
 
     /// <summary>
-    /// The PDF stream is indented to reflect the nesting levels of the objects. This is usedful
-    /// for analysing PDF files, but increases the size of the file significantly.
+    /// The PDF stream is indented to reflect the nesting levels of the objects. This is useful
+    /// for analyzing PDF files, but increases the size of the file significantly.
     /// </summary>
     Indented,
 
     /// <summary>
     /// The PDF stream is indented to reflect the nesting levels of the objects and contains additional
     /// information about the PDFsharp objects. Furthermore content streams are not deflated. This 
-    /// is usedful for debugging purposes only and increases the size of the file significantly.
+    /// is useful for debugging purposes only and increases the size of the file significantly.
     /// </summary>
     Verbose,
   }

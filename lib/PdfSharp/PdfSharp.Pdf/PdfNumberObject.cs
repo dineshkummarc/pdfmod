@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -44,7 +44,7 @@ namespace PdfSharp.Pdf
     /// <summary>
     /// Initializes a new instance of the <see cref="PdfNumberObject"/> class.
     /// </summary>
-    public PdfNumberObject()
+    protected PdfNumberObject()
     {
     }
 
@@ -52,7 +52,7 @@ namespace PdfSharp.Pdf
     /// Initializes a new instance of the <see cref="PdfNumberObject"/> class.
     /// </summary>
     /// <param name="document">The document.</param>
-    public PdfNumberObject(PdfDocument document) : base(document)
+    protected PdfNumberObject(PdfDocument document) : base(document)
     {
     }
   }

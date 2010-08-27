@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -30,6 +30,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections;
+using PdfSharp.Drawing;
 using PdfSharp.Internal;
 
 namespace PdfSharp.Pdf
@@ -42,6 +43,23 @@ namespace PdfSharp.Pdf
     internal PdfDocumentSettings(PdfDocument document)
     {
     }
+
+    /// <summary>
+    /// Sets the private font collection.
+    /// </summary>
+    public XPrivateFontCollection PrivateFontCollection
+    {
+      internal get { return this.privateFontCollection; }
+      set
+      {
+        if (this.privateFontCollection != null)
+          throw new InvalidOperationException("PrivateFontCollection can only be set once.");
+
+        this.privateFontCollection = value;
+      }
+    }
+    private XPrivateFontCollection privateFontCollection;
+
 
     /// <summary>
     /// Gets or sets the default trim margins.

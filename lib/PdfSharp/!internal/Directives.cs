@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -71,7 +71,12 @@
 #endif
 
 #elif WPF
-// PDFsharp based on Windows Presentation Foundation in a future release...
+// PDFsharp based on Windows Presentation Foundation
+#elif SILVERLIGHT
+// PDFsharp based on Silverlight
+#if !WPF
+#error 'SILVERLIGHT' must be defined together with 'WPF'
+#endif
 #else
-#error Either 'GDI' or 'WPF' must be defined
+#error Either 'GDI', 'WPF' or 'SILVERLIGHT' must be defined
 #endif

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -29,7 +29,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.IO;
@@ -48,8 +48,7 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public PdfImageTable(PdfDocument document)
       : base(document)
-    {
-    }
+    { }
 
     /// <summary>
     /// Gets a PdfImage from an XImage. If no PdfImage already exists, a new one is created.
@@ -62,8 +61,8 @@ namespace PdfSharp.Pdf.Advanced
         selector = new ImageSelector(image);
         image.selector = selector;
       }
-      PdfImage pdfImage = this.images[selector] as PdfImage;
-      if (pdfImage == null)
+      PdfImage pdfImage;
+      if (!this.images.TryGetValue(selector, out pdfImage))
       {
         pdfImage = new PdfImage(this.owner, image);
         //pdfImage.Document = this.document;
@@ -82,10 +81,10 @@ namespace PdfSharp.Pdf.Advanced
     /// <summary>
     /// Map from ImageSelector to PdfImage.
     /// </summary>
-    Hashtable images = new Hashtable();
+    readonly Dictionary<ImageSelector, PdfImage> images = new Dictionary<ImageSelector, PdfImage>();
 
     /// <summary>
-    /// A collection of information that uniquely idendifies a particular PdfImage.
+    /// A collection of information that uniquely identifies a particular PdfImage.
     /// </summary>
     public class ImageSelector
     {

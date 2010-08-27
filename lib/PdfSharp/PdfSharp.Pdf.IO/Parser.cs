@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -78,7 +78,7 @@ namespace PdfSharp.Pdf.IO
     }
 
     /// <summary>
-    /// Sets PDF input stream position the the specified object.
+    /// Sets PDF input stream position to the specified object.
     /// </summary>
     public int MoveToObject(PdfObjectID objectID)
     {
@@ -181,7 +181,7 @@ namespace PdfSharp.Pdf.IO
           return pdfObject;
 
         case Symbol.Boolean:
-          pdfObject = new PdfBooleanObject(this.document, this.lexer.Token == Boolean.TrueString);
+          pdfObject = new PdfBooleanObject(this.document, string.Compare(this.lexer.Token, Boolean.TrueString, true) == 0); //!!!mod THHO 19.11.09
           pdfObject.SetObjectID(objectNumber, generationNumber);
           ReadSymbol(Symbol.EndObj);
           return pdfObject;
@@ -222,7 +222,7 @@ namespace PdfSharp.Pdf.IO
 
         default:
           // Should not come here anymore
-          throw new NotImplementedException("unknown token");
+          throw new NotImplementedException("unknown token \"" + symbol + "\"");
       }
       symbol = ScanNextToken();
       if (symbol == Symbol.BeginStream)
@@ -705,9 +705,15 @@ namespace PdfSharp.Pdf.IO
       //string token;
       //int xrefOffset = 0;
       int length = lexer.PdfLength;
+#if true
+      string trail = this.lexer.ReadRawString(length - 131, 130); //lexer.Pdf.Substring(length - 30);
+      int idx = trail.IndexOf("startxref");
+      this.lexer.Position = length - 131 + idx;
+#else
       string trail = this.lexer.ReadRawString(length - 31, 30); //lexer.Pdf.Substring(length - 30);
       int idx = trail.IndexOf("startxref");
       this.lexer.Position = length - 31 + idx;
+#endif
       ReadSymbol(Symbol.StartXRef);
       this.lexer.Position = ReadInteger();
 
@@ -741,7 +747,7 @@ namespace PdfSharp.Pdf.IO
       // Is it an xref stream?
       if (symbol == Symbol.Integer)
         throw new PdfReaderException(PSSR.CannotHandleXRefStreams);
-      // TODO: We have all code to handle them -> just do it
+      // TODO: It is very high on the todo list, but still undone
       Debug.Assert(symbol == Symbol.XRef);
       while (true)
       {
@@ -831,7 +837,7 @@ namespace PdfSharp.Pdf.IO
         }
         else
         {
-          // Some libraries use plain english format.
+          // Some libraries use plain English format.
           datetime = DateTime.Parse(date);
         }
       }

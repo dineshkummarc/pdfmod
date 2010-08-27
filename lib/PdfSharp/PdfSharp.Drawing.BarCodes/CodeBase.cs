@@ -3,7 +3,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -124,7 +124,7 @@ namespace PdfSharp.Drawing.BarCodes
     internal CodeDirection direction;
 
     /// <summary>
-    /// Whem implemented in a derived class, determines whether the specified string can be used as Text
+    /// When implemented in a derived class, determines whether the specified string can be used as Text
     /// for this bar code type.
     /// </summary>
     /// <param name="text">The code string to check.</param>
@@ -137,13 +137,12 @@ namespace PdfSharp.Drawing.BarCodes
     /// <param name="oldType"></param>
     /// <param name="newType"></param>
     /// <param name="size"></param>
-    /// <returns></returns>
     public static XVector CalcDistance(AnchorType oldType, AnchorType newType, XSize size)
     {
       if (oldType == newType)
         return new XVector();
 
-      XVector result = new XVector();
+      XVector result;
       Delta delta = CodeBase.deltas[(int)oldType, (int)newType];
       result = new XVector(size.width / 2 * delta.x, size.height / 2 * delta.y);
       return result;

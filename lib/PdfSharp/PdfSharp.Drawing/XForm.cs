@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -42,7 +42,7 @@ using System.Windows.Media;
 #endif
 using PdfSharp.Internal;
 using PdfSharp.Drawing.Pdf;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using PdfSharp.Pdf.Advanced;
@@ -88,7 +88,7 @@ namespace PdfSharp.Drawing
 
 #if GDI
     /// <summary>
-    /// Initializes a new instance of the XForm class such that it can be drawn on the specifed graphics
+    /// Initializes a new instance of the XForm class such that it can be drawn on the specified graphics
     /// object.
     /// </summary>
     /// <param name="gfx">The graphics object that later is used to draw this form.</param>
@@ -118,7 +118,7 @@ namespace PdfSharp.Drawing
 
 #if GDI
     /// <summary>
-    /// Initializes a new instance of the XForm class such that it can be drawn on the specifed graphics
+    /// Initializes a new instance of the XForm class such that it can be drawn on the specified graphics
     /// object.
     /// </summary>
     /// <param name="gfx">The graphics object that later is used to draw this form.</param>
@@ -412,7 +412,7 @@ namespace PdfSharp.Drawing
         this.transform = value;
       }
     }
-    internal XMatrix transform = XMatrix.Identity;
+    internal XMatrix transform = new XMatrix();  //XMatrix.Identity;
 
     internal PdfResources Resources
     {
@@ -543,5 +543,34 @@ namespace PdfSharp.Drawing
     internal PdfFormXObject pdfForm;
 
     internal XGraphicsPdfRenderer pdfRenderer;
+
+#if WPF && !SILVERLIGHT
+    /// <summary>
+    /// Gets a value indicating whether this image is cmyk.
+    /// </summary>
+    /// <value><c>true</c> if this image is cmyk; otherwise, <c>false</c>.</value>
+    public override bool IsCmyk
+    {
+      get { return false; } // not supported and not relevant
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether this image is JPEG.
+    /// </summary>
+    /// <value><c>true</c> if this image is JPEG; otherwise, <c>false</c>.</value>
+    public override bool IsJpeg
+    {
+      get { return base.IsJpeg; }// not supported and not relevant
+    }
+
+    /// <summary>
+    /// Gets the JPEG memory stream (if IsJpeg returns true).
+    /// </summary>
+    /// <value>The memory.</value>
+    public override MemoryStream Memory
+    {
+      get { throw new NotImplementedException(); }
+    }
+#endif
   }
 }

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -44,7 +44,7 @@ using System.Windows.Media;
 using PdfSharp.Internal;
 using PdfSharp.Pdf;
 using PdfSharp.Fonts;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf.Internal;
 using PdfSharp.Pdf.Advanced;
 
@@ -499,7 +499,7 @@ namespace PdfSharp.Drawing.Pdf
       Debug.Assert(realizedFont != null);
       realizedFont.AddChars(s);
 
-      TrueTypeDescriptor descriptor = realizedFont.FontDescriptor.descriptor;
+      OpenTypeDescriptor descriptor = realizedFont.FontDescriptor.descriptor;
 
       if (bold && !descriptor.IsBoldFace)
       {
@@ -531,7 +531,7 @@ namespace PdfSharp.Drawing.Pdf
 
         byte[] bytes = PdfEncoders.RawUnicodeEncoding.GetBytes(s);
         bytes = PdfEncoders.FormatStringLiteral(bytes, true, false, true, null);
-        string text = PdfEncoders.RawEncoding.GetString(bytes);
+        string text = PdfEncoders.RawEncoding.GetString(bytes, 0, bytes.Length);
         XPoint pos = new XPoint(x, y);
         AdjustTextMatrix(ref pos);
         AppendFormat(
@@ -843,7 +843,7 @@ namespace PdfSharp.Drawing.Pdf
       // Save InternalGraphicsState and transformation of the current graphical state.
       InternalGraphicsState state = this.gfxState.InternalState;
       XMatrix ctm = this.gfxState.Transform;
-      // Empty clip path by switching back the the previous state.
+      // Empty clip path by switching back to the previous state.
       RestoreState();
       SaveState();
       // Save internal state
@@ -870,7 +870,7 @@ namespace PdfSharp.Drawing.Pdf
     public void WriteComment(string comment)
     {
       comment.Replace("\n", "\n% ");
-      // TODO: Some more checks neccessary?
+      // TODO: Some more checks necessary?
       Append("% " + comment + "\n");
     }
 
@@ -1003,8 +1003,8 @@ namespace PdfSharp.Drawing.Pdf
       //   1 | 0
       //     |
       // If the angles lie in quarter 2 or 3, their values are subtracted by 180 and the
-      // resulting curve is reflected at the center. This algorythm works as expected (simply tried out).
-      // There may be a mathematical more elegant solution...
+      // resulting curve is reflected at the center. This algorithm works as expected (simply tried out).
+      // There may be a mathematically more elegant solution...
       bool reflect = false;
       if (α >= 180 && β >= 180)
       {
@@ -1094,6 +1094,24 @@ namespace PdfSharp.Drawing.Pdf
     void AppendPartialArc(System.Windows.Point point1, System.Windows.Point point2, double rotationAngle,
       System.Windows.Size size, bool isLargeArc, System.Windows.Media.SweepDirection sweepDirection, PathStart pathStart)
     {
+#if true
+      //AppendPartialArc(currentPoint, seg.Point, seg.RotationAngle, seg.Size, seg.IsLargeArc, seg.SweepDirection, PathStart.Ignore1st);
+
+      int pieces;
+      PointCollection points = GeometryHelper.ArcToBezier(point1.X, point1.Y, size.Width, size.Height, rotationAngle, isLargeArc, 
+        sweepDirection == SweepDirection.Clockwise, point2.X, point2.Y, out pieces);
+
+      int count = points.Count;
+      int start = count % 3 == 1 ? 1 : 0;
+      if (start == 1)
+        AppendFormat("{0:0.####} {1:0.####} m\n", points[0].X, points[0].Y);
+      for (int idx = start; idx < count; idx += 3)
+        AppendFormat("{0:0.####} {1:0.####} {2:0.####} {3:0.####} {4:0.####} {5:0.####} c\n",
+          points[idx].X, points[idx].Y,
+          points[idx + 1].X, points[idx + 1].Y,
+          points[idx + 2].X, points[idx + 2].Y);
+
+#else
       List<XPoint> points = GeometryHelper.BezierCurveFromArc((XPoint)point1, (XPoint)point2, rotationAngle, (XSize)size,
         isLargeArc, sweepDirection == SweepDirection.Clockwise, pathStart);
       int count = points.Count;
@@ -1105,6 +1123,7 @@ namespace PdfSharp.Drawing.Pdf
           points[idx].X, points[idx].Y,
           points[idx + 1].X, points[idx + 1].Y,
           points[idx + 2].X, points[idx + 2].Y);
+#endif
     }
 #endif
 
@@ -1251,14 +1270,14 @@ namespace PdfSharp.Drawing.Pdf
           {
             QuadraticBezierSegment seg = (QuadraticBezierSegment)segment;
             currentPoint = seg.Point2;
-            // TODOWPF
+            // TODOWPF: Undone because XGraphics has no such curve type
             throw new NotImplementedException("AppendPath with QuadraticBezierSegment.");
           }
           else if (type == typeof(PolyQuadraticBezierSegment))
           {
             PolyQuadraticBezierSegment seg = (PolyQuadraticBezierSegment)segment;
             currentPoint = seg.Points[seg.Points.Count - 1];
-            // TODOWPF
+            // TODOWPF: Undone because XGraphics has no such curve type
             throw new NotImplementedException("AppendPath with PolyQuadraticBezierSegment.");
           }
         }
@@ -1318,7 +1337,7 @@ namespace PdfSharp.Drawing.Pdf
       {
         // Flip page horizontaly and mirror text.
         // TODO: Is PageOriging and PageScale (== Viewport) useful? Or just public DefaultViewMatrix (like Presentation Manager has had)
-        this.defaultViewMatrix = XMatrix.Identity;
+        this.defaultViewMatrix = new XMatrix();  //XMatrix.Identity;
         if (this.gfx.PageDirection == XPageDirection.Downwards)
         {
 #if MIGRADOC

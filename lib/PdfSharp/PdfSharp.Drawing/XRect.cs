@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -43,7 +43,6 @@ using PdfSharp.Internal;
 
 namespace PdfSharp.Drawing
 {
-#if true
   /// <summary>
   /// Stores a set of four floating-point numbers that represent the location and size of a rectangle.
   /// </summary>
@@ -71,8 +70,8 @@ namespace PdfSharp.Drawing
     {
       this.x = Math.Min(point1.x, point2.x);
       this.y = Math.Min(point1.y, point2.y);
-      this.width = Math.Max((double)(Math.Max(point1.x, point2.x) - this.x), 0);
-      this.height = Math.Max((double)(Math.Max(point1.y, point2.y) - this.y), 0);
+      this.width = Math.Max(Math.Max(point1.x, point2.x) - this.x, 0);
+      this.height = Math.Max(Math.Max(point1.y, point2.y) - this.y, 0);
     }
 
     /// <summary>
@@ -212,7 +211,7 @@ namespace PdfSharp.Drawing
     {
       if (IsEmpty)
         return 0;
-      return this.X.GetHashCode() ^ this.Y.GetHashCode() ^ this.Width.GetHashCode() ^ this.Height.GetHashCode();
+      return X.GetHashCode() ^ Y.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode();
     }
 
     /// <summary>
@@ -237,7 +236,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public override string ToString()
     {
-      return this.ConvertToString(null, null);
+      return ConvertToString(null, null);
     }
 
     /// <summary>
@@ -245,7 +244,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public string ToString(IFormatProvider provider)
     {
-      return this.ConvertToString(null, provider);
+      return ConvertToString(null, provider);
     }
 
     /// <summary>
@@ -253,7 +252,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     string IFormattable.ToString(string format, IFormatProvider provider)
     {
-      return this.ConvertToString(format, provider);
+      return ConvertToString(format, provider);
     }
 
     internal string ConvertToString(string format, IFormatProvider provider)
@@ -429,7 +428,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public XPoint TopLeft
     {
-      get { return new XPoint(this.Left, this.Top); }
+      get { return new XPoint(Left, Top); }
     }
 
     /// <summary>
@@ -437,7 +436,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public XPoint TopRight
     {
-      get { return new XPoint(this.Right, this.Top); }
+      get { return new XPoint(Right, Top); }
     }
 
     /// <summary>
@@ -445,7 +444,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public XPoint BottomLeft
     {
-      get { return new XPoint(this.Left, this.Bottom); }
+      get { return new XPoint(Left, Bottom); }
     }
 
     /// <summary>
@@ -453,7 +452,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public XPoint BottomRight
     {
-      get { return new XPoint(this.Right, this.Bottom); }
+      get { return new XPoint(Right, Bottom); }
     }
 
     /// <summary>
@@ -480,7 +479,7 @@ namespace PdfSharp.Drawing
     {
       if (IsEmpty)
         return false;
-      return this.ContainsInternal(x, y);
+      return ContainsInternal(x, y);
     }
 
     /// <summary>
@@ -499,8 +498,8 @@ namespace PdfSharp.Drawing
     public bool IntersectsWith(XRect rect)
     {
       return !IsEmpty && !rect.IsEmpty &&
-        rect.Left <= this.Right && rect.Right >= this.Left &&
-        rect.Top <= this.Bottom && rect.Bottom >= this.Top;
+          rect.Left <= Right && rect.Right >= Left &&
+          rect.Top <= Bottom && rect.Bottom >= Top;
     }
 
     /// <summary>
@@ -508,14 +507,14 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void Intersect(XRect rect)
     {
-      if (!this.IntersectsWith(rect))
+      if (!IntersectsWith(rect))
         this = Empty;
       else
       {
-        double left = Math.Max(this.Left, rect.Left);
-        double top = Math.Max(this.Top, rect.Top);
-        this.width = Math.Max((double)(Math.Min(this.Right, rect.Right) - left), 0.0);
-        this.height = Math.Max((double)(Math.Min(this.Bottom, rect.Bottom) - top), 0.0);
+        double left = Math.Max(Left, rect.Left);
+        double top = Math.Max(Top, rect.Top);
+        this.width = Math.Max(Math.Min(Right, rect.Right) - left, 0.0);
+        this.height = Math.Max(Math.Min(Bottom, rect.Bottom) - top, 0.0);
         this.x = left;
         this.y = top;
       }
@@ -539,22 +538,22 @@ namespace PdfSharp.Drawing
         this = rect;
       else if (!rect.IsEmpty)
       {
-        double left = Math.Min(this.Left, rect.Left);
-        double top = Math.Min(this.Top, rect.Top);
-        if (rect.Width == Double.PositiveInfinity || this.Width == Double.PositiveInfinity)
+        double left = Math.Min(Left, rect.Left);
+        double top = Math.Min(Top, rect.Top);
+        if (rect.Width == Double.PositiveInfinity || Width == Double.PositiveInfinity)
           this.width = Double.PositiveInfinity;
         else
         {
-          double right = Math.Max(this.Right, rect.Right);
-          this.width = Math.Max((double)(right - left), 0.0);
+          double right = Math.Max(Right, rect.Right);
+          this.width = Math.Max(right - left, 0.0);
         }
 
         if (rect.Height == Double.PositiveInfinity || this.height == Double.PositiveInfinity)
           this.height = Double.PositiveInfinity;
         else
         {
-          double bottom = Math.Max(this.Bottom, rect.Bottom);
-          this.height = Math.Max((double)(bottom - top), 0.0);
+          double bottom = Math.Max(Bottom, rect.Bottom);
+          this.height = Math.Max(bottom - top, 0.0);
         }
         this.x = left;
         this.y = top;
@@ -628,7 +627,7 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// Translates the rectangle by adding the specifed point.
+    /// Translates the rectangle by adding the specified point.
     /// </summary>
     //[Obsolete("Use Offset.")]
     public static XRect operator +(XRect rect, XPoint point)
@@ -637,7 +636,7 @@ namespace PdfSharp.Drawing
     }
 
     /// <summary>
-    /// Translates the rectangle by subtracting the specifed point.
+    /// Translates the rectangle by subtracting the specified point.
     /// </summary>
     //[Obsolete("Use Offset.")]
     public static XRect operator -(XRect rect, XPoint point)
@@ -693,7 +692,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public static XRect Transform(XRect rect, XMatrix matrix)
     {
-      XMatrix.MatrixUtil.TransformRect(ref rect, ref matrix);
+      XMatrix.MatrixHelper.TransformRect(ref rect, ref matrix);
       return rect;
     }
 
@@ -702,7 +701,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public void Transform(XMatrix matrix)
     {
-      XMatrix.MatrixUtil.TransformRect(ref this, ref matrix);
+      XMatrix.MatrixHelper.TransformRect(ref this, ref matrix);
     }
 
     /// <summary>
@@ -793,429 +792,4 @@ namespace PdfSharp.Drawing
     internal double height;
     private static readonly XRect s_empty;
   }
-
-#else
-  // Old code, delete end of 2008
-
-  /// <summary>
-  /// Stores a set of four floating-point numbers that represent the location and size of a rectangle.
-  /// </summary>
-  [DebuggerDisplay("({X}, {Y}, {Width}, {Height})")]
-  public struct XRect
-  {
-    // Called XRect and not XRectangle because XRectangle will get the name of a shape object
-    // in a forthcoming extension.
-
-    /// <summary>
-    /// Initializes a new instance of the XRect class.
-    /// </summary>
-    public XRect(double x, double y, double width, double height)
-    {
-      this.x = x;
-      this.y = y;
-      this.width = width;
-      this.height = height;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the XRect class.
-    /// </summary>
-    public XRect(XPoint location, XSize size)
-    {
-      this.x = location.X;
-      this.y = location.Y;
-      this.width = size.Width;
-      this.height = size.Height;
-    }
-
-#if GDI
-    /// <summary>
-    /// Initializes a new instance of the XRect class.
-    /// </summary>
-    public XRect(PointF location, SizeF size)
-    {
-      this.x = location.X;
-      this.y = location.Y;
-      this.width = size.Width;
-      this.height = size.Height;
-    }
-#endif
-
-#if GDI
-    /// <summary>
-    /// Initializes a new instance of the XRect class.
-    /// </summary>
-    public XRect(RectangleF rect)
-    {
-      this.x = rect.X;
-      this.y = rect.Y;
-      this.width = rect.Width;
-      this.height = rect.Height;
-    }
-#endif
-
-#if WPF
-    /// <summary>
-    /// Initializes a new instance of the XRect class.
-    /// </summary>
-    public XRect(Rect rect)
-    {
-      this.x = rect.X;
-      this.y = rect.Y;
-      this.width = rect.Width;
-      this.height = rect.Height;
-    }
-#endif
-
-    /// <summary>
-    /// Creates a rectangle from for straight lines.
-    /// </summary>
-    public static XRect FromLTRB(double left, double top, double right, double bottom)
-    {
-      return new XRect(left, top, right - left, bottom - top);
-    }
-
-    /// <summary>
-    /// Returns the hash code for this instance.
-    /// </summary>
-    public override int GetHashCode()
-    {
-      // Lutz Roeder's .NET Reflector proudly presents:
-      //   »THE ART OF HASH CODE PROGRAMMING«
-      //
-      // .NET 1.1:
-      //   return (int) (((((uint) this.X) ^ ((((uint) this.Y) << 13) | (((uint) this.Y) >> 0x13))) ^ ((((uint) this.Width) << 0x1a) | (((uint) this.Width) >> 6))) ^ ((((uint) this.Height) << 7) | (((uint) this.Height) >> 0x19)));
-      // Mono:
-      //   return (int) (x + y + width + height);
-      return (int)(x + y + width + height);
-    }
-
-    /// <summary>
-    /// Indicates whether this instance and a specified object are equal.
-    /// </summary>
-    public override bool Equals(object obj)
-    {
-      if (obj is XRect)
-      {
-        XRect rect = (XRect)obj;
-        return rect.x == this.x && rect.y == this.y && rect.width == this.width && rect.height == this.height;
-      }
-      return false;
-    }
-
-    /// <summary>
-    /// Returns a string with the values of this rectangle.
-    /// </summary>
-    public override string ToString()
-    {
-      return String.Format("{{X={0},Y={1},Width={2},Height={3}}}", this.x, this.y, this.width, this.height);
-    }
-
-#if GDI
-    /// <summary>
-    /// Converts this instance to a System.Drawing.RectangleF.
-    /// </summary>
-    public RectangleF ToRectangleF()
-    {
-      return new RectangleF((float)this.x, (float)this.y, (float)this.width, (float)this.height);
-    }
-#endif
-
-    /// <summary>
-    /// Gets a value indicating whether this rectangle is empty.
-    /// </summary>
-    [Browsable(false)]
-    public bool IsEmpty
-    {
-      // The .NET documentation differs from the actual implemention, which differs from the Mono 
-      // implementation. This is my recommendation what an empty rectangle means:
-      get { return this.width <= 0.0 || this.height <= 0.0; }
-    }
-
-    /// <summary>
-    /// Gets or sets the location of the rectangle.
-    /// </summary>
-    [Browsable(false)]
-    public XPoint Location
-    {
-      get { return new XPoint(this.x, this.y); }
-      set { this.x = value.X; this.y = value.Y; }
-    }
-
-    /// <summary>
-    /// Gets or sets the size of the rectangle.
-    /// </summary>
-    [Browsable(false)]
-    public XSize Size
-    {
-      get { return new XSize(this.width, this.height); }
-      set { this.width = value.Width; this.height = value.Height; }
-    }
-
-    /// <summary>
-    /// Gets or sets the X value.
-    /// </summary>
-    public double X
-    {
-      get { return this.x; }
-      set { this.x = value; }
-    }
-
-    /// <summary>
-    /// Gets or sets the Y value.
-    /// </summary>
-    public double Y
-    {
-      get { return this.y; }
-      set { this.y = value; }
-    }
-
-    /// <summary>
-    /// Gets or sets the width.
-    /// </summary>
-    public double Width
-    {
-      get { return this.width; }
-      set { this.width = value; }
-    }
-
-    /// <summary>
-    /// Gets or sets the height.
-    /// </summary>
-    public double Height
-    {
-      get { return this.height; }
-      set { this.height = value; }
-    }
-
-    /// <summary>
-    /// Gets the left.
-    /// </summary>
-    [Browsable(false)]
-    public double Left
-    {
-      get { return this.x; }
-    }
-
-    /// <summary>
-    /// Gets the top.
-    /// </summary>
-    [Browsable(false)]
-    public double Top
-    {
-      get { return this.y; }
-    }
-
-    /// <summary>
-    /// Gets the right.
-    /// </summary>
-    [Browsable(false)]
-    public double Right
-    {
-      get { return this.x + this.width; }
-    }
-
-    /// <summary>
-    /// Gets the bottom.
-    /// </summary>
-    [Browsable(false)]
-    public double Bottom
-    {
-      get { return this.y + this.height; }
-    }
-
-    /// <summary>
-    /// Gets the center of the rectangle.
-    /// </summary>
-    [Browsable(false)]
-    public XPoint Center
-    {
-      get { return new XPoint(this.x + this.width / 2, this.y + this.height / 2); }
-    }
-
-    /// <summary>
-    /// Determines whether the rectangle contains the specified point.
-    /// </summary>
-    public bool Contains(XPoint pt)
-    {
-      return Contains(pt.X, pt.Y);
-    }
-
-    /// <summary>
-    /// Determines whether the rectangle contains the specified point.
-    /// </summary>
-    public bool Contains(double x, double y)
-    {
-      return this.x <= x && x < this.x + this.width && this.y <= y && y < this.y + this.height;
-    }
-
-    /// <summary>
-    /// Determines whether the rectangle completely contains the specified rectangle.
-    /// </summary>
-    public bool Contains(XRect rect)
-    {
-      return this.x <= rect.x && rect.x + rect.width <= this.x + this.width &&
-             this.y <= rect.y && rect.y + rect.height <= this.y + this.height;
-    }
-
-    /// <summary>
-    /// Inflates the rectangle by the specified size.
-    /// </summary>
-    public void Inflate(XSize size)
-    {
-      Inflate(size.Width, size.Height);
-    }
-
-    /// <summary>
-    /// Inflates the rectangle by the specified size.
-    /// </summary>
-    public void Inflate(double x, double y)
-    {
-      this.x -= x;
-      this.y -= y;
-      this.width += x * 2;
-      this.height += y * 2;
-    }
-
-    /// <summary>
-    /// Inflates the rectangle by the specified size.
-    /// </summary>
-    public static XRect Inflate(XRect rect, double x, double y)
-    {
-      rect.Inflate(x, y);
-      return rect;
-    }
-
-    /// <summary>
-    /// Intersects the rectangle with the specified rectangle.
-    /// </summary>
-    public void Intersect(XRect rect)
-    {
-      rect = XRect.Intersect(rect, this);
-      this.x = rect.x;
-      this.y = rect.y;
-      this.width = rect.width;
-      this.height = rect.height;
-    }
-
-    /// <summary>
-    /// Intersects the specified rectangles.
-    /// </summary>
-    public static XRect Intersect(XRect left, XRect right)
-    {
-      double l = Math.Max(left.x, right.x);
-      double r = Math.Min(left.x + left.width, right.x + right.width);
-      double t = Math.Max(left.y, right.y);
-      double b = Math.Min(left.y + left.height, right.y + right.height);
-      if ((r >= l) && (b >= t))
-        return new XRect(l, t, r - l, b - t);
-      return XRect.Empty;
-    }
-
-    /// <summary>
-    /// Determines whether the rectangle intersects with the specified rectangle.
-    /// </summary>
-    public bool IntersectsWith(XRect rect)
-    {
-      return rect.x < this.x + this.width && this.x < rect.x + rect.width &&
-        rect.y < this.y + this.height && this.y < rect.y + rect.height;
-    }
-
-    /// <summary>
-    /// Unites the specified rectangles.
-    /// </summary>
-    public static XRect Union(XRect left, XRect right)
-    {
-      double l = Math.Min(left.X, right.X);
-      double r = Math.Max(left.X + left.Width, right.X + right.Width);
-      double t = Math.Min(left.Y, right.Y);
-      double b = Math.Max(left.Y + left.Height, right.Y + right.Height);
-      return new XRect(l, t, r - l, b - t);
-    }
-
-    /// <summary>
-    /// Translates the rectangle by the specifed offset.
-    /// </summary>
-    public void Offset(XPoint pt)
-    {
-      Offset(pt.X, pt.Y);
-    }
-
-    /// <summary>
-    /// Translates the rectangle by the specifed offset.
-    /// </summary>
-    public void Offset(double x, double y)
-    {
-      this.x += x;
-      this.y += y;
-    }
-
-    /// <summary>
-    /// Translates the rectangle by adding the specifed point.
-    /// </summary>
-    public static XRect operator +(XRect rect, XPoint point)
-    {
-      return new XRect(rect.x + point.x, rect.Y + point.y, rect.width, rect.height);
-    }
-
-    /// <summary>
-    /// Translates the rectangle by subtracting the specifed point.
-    /// </summary>
-    public static XRect operator -(XRect rect, XPoint point)
-    {
-      return new XRect(rect.x - point.x, rect.Y - point.y, rect.width, rect.height);
-    }
-
-#if GDI
-    /// <summary>
-    /// Implicit conversion from a System.Drawing.Rectangle to an XRect.
-    /// </summary>
-    public static implicit operator XRect(Rectangle rect)
-    {
-      return new XRect(rect.X, rect.Y, rect.Width, rect.Height);
-    }
-
-    /// <summary>
-    /// Implicit conversion from a System.Drawing.RectangleF to an XRect.
-    /// </summary>
-    public static implicit operator XRect(RectangleF rect)
-    {
-      return new XRect(rect.X, rect.Y, rect.Width, rect.Height);
-    }
-#endif
-
-#if WPF
-    public static implicit operator XRect(Rect rect)
-    {
-      return new XRect(rect.X, rect.Y, rect.Width, rect.Height);
-    }
-#endif
-
-    /// <summary>
-    /// Determines whether the two rectangles are equal.
-    /// </summary>
-    public static bool operator ==(XRect left, XRect right)
-    {
-      return left.x == right.x && left.y == right.y && left.width == right.width && left.height == right.height;
-    }
-
-    /// <summary>
-    /// Determines whether the two rectangles not are equal.
-    /// </summary>
-    public static bool operator !=(XRect left, XRect right)
-    {
-      return !(left == right);
-    }
-
-    /// <summary>
-    /// Represents the empty rectangle.
-    /// </summary>
-    public static readonly XRect Empty = new XRect();
-
-    internal double x;
-    internal double y;
-    internal double width;
-    internal double height;
-  }
-#endif
 }

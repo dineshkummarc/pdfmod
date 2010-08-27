@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -41,10 +41,8 @@ namespace PdfSharp
   /// <summary>
   /// Converter from <see cref="PageSize"/> to <see cref="XSize"/>.
   /// </summary>
-  public sealed class PageSizeConverter
+  public static class PageSizeConverter
   {
-    PageSizeConverter() { }
-
     /// <summary>
     /// Converts the specified page size enumeration to a pair of values in point.
     /// </summary>

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -42,12 +42,9 @@ namespace PdfSharp.Pdf.Internal
   /// <summary>
   /// Groups a set of static encoding helper functions.
   /// </summary>
-  internal class PdfEncoders
+  internal static class PdfEncoders
   {
-    PdfEncoders()
-    { }
-
-    const char InvalidChar = '?';
+    // static char InvalidChar = '?';
 
     //[Obsolete]
     //public static void WriteAnsi(Stream stream, string text)
@@ -63,7 +60,7 @@ namespace PdfSharp.Pdf.Internal
       get
       {
         if (PdfEncoders.rawEncoding == null)
-          PdfEncoders.rawEncoding = new PdfSharp.Pdf.Internal.RawEncoding();
+          PdfEncoders.rawEncoding = new RawEncoding();
         return PdfEncoders.rawEncoding;
       }
     }
@@ -77,7 +74,7 @@ namespace PdfSharp.Pdf.Internal
       get
       {
         if (PdfEncoders.rawUnicodeEncoding == null)
-          PdfEncoders.rawUnicodeEncoding = new PdfSharp.Pdf.Internal.RawUnicodeEncoding();
+          PdfEncoders.rawUnicodeEncoding = new RawUnicodeEncoding();
         return PdfEncoders.rawUnicodeEncoding;
       }
     }
@@ -91,7 +88,12 @@ namespace PdfSharp.Pdf.Internal
       get
       {
         if (PdfEncoders.winAnsiEncoding == null)
-          PdfEncoders.winAnsiEncoding = Encoding.GetEncoding(1252);
+          PdfEncoders.winAnsiEncoding =
+#if !SILVERLIGHT
+            Encoding.GetEncoding(1252);
+#else
+ Encoding.GetEncoding("utf-8"); // AGHACK
+#endif
         return PdfEncoders.winAnsiEncoding;
       }
     }
@@ -105,7 +107,7 @@ namespace PdfSharp.Pdf.Internal
       get
       {
         if (PdfEncoders.docEncoding == null)
-          PdfEncoders.docEncoding = new PdfSharp.Pdf.Internal.DocEncoding();
+          PdfEncoders.docEncoding = new DocEncoding();
         return PdfEncoders.docEncoding;
       }
     }
@@ -232,33 +234,33 @@ namespace PdfSharp.Pdf.Internal
     /// </summary>
     public static string ToStringLiteral(string text, PdfStringEncoding encoding, PdfStandardSecurityHandler securityHandler)
     {
-      if (text == null || text == "")
+      if (String.IsNullOrEmpty(text))
         return "()";
 
       byte[] bytes;
       switch (encoding)
       {
         case PdfStringEncoding.RawEncoding:
-          bytes = PdfEncoders.RawEncoding.GetBytes(text);
+          bytes = RawEncoding.GetBytes(text);
           break;
 
         case PdfStringEncoding.WinAnsiEncoding:
-          bytes = PdfEncoders.WinAnsiEncoding.GetBytes(text);
+          bytes = WinAnsiEncoding.GetBytes(text);
           break;
 
         case PdfStringEncoding.PDFDocEncoding:
-          bytes = PdfEncoders.DocEncoding.GetBytes(text);
+          bytes = DocEncoding.GetBytes(text);
           break;
 
         case PdfStringEncoding.Unicode:
-          bytes = PdfEncoders.UnicodeEncoding.GetBytes(text);
+          bytes = UnicodeEncoding.GetBytes(text);
           break;
 
         default:
           throw new NotImplementedException(encoding.ToString());
       }
-      return PdfEncoders.RawEncoding.GetString(FormatStringLiteral(bytes, encoding == PdfStringEncoding.Unicode, true,
-        false, securityHandler));
+      byte[] temp = FormatStringLiteral(bytes, encoding == PdfStringEncoding.Unicode, true, false, securityHandler);
+      return RawEncoding.GetString(temp, 0, temp.Length);
     }
 
     /// <summary>
@@ -269,7 +271,8 @@ namespace PdfSharp.Pdf.Internal
       if (bytes == null || bytes.Length == 0)
         return "()";
 
-      return PdfEncoders.RawEncoding.GetString(FormatStringLiteral(bytes, unicode, true, false, securityHandler));
+      byte[] temp = FormatStringLiteral(bytes, unicode, true, false, securityHandler);
+      return RawEncoding.GetString(temp, 0, temp.Length);
     }
 
     /// <summary>
@@ -277,33 +280,34 @@ namespace PdfSharp.Pdf.Internal
     /// </summary>
     public static string ToHexStringLiteral(string text, PdfStringEncoding encoding, PdfStandardSecurityHandler securityHandler)
     {
-      if (text == null || text == "")
+      if (String.IsNullOrEmpty(text))
         return "<>";
 
       byte[] bytes;
       switch (encoding)
       {
         case PdfStringEncoding.RawEncoding:
-          bytes = PdfEncoders.RawEncoding.GetBytes(text);
+          bytes = RawEncoding.GetBytes(text);
           break;
 
         case PdfStringEncoding.WinAnsiEncoding:
-          bytes = PdfEncoders.WinAnsiEncoding.GetBytes(text);
+          bytes = WinAnsiEncoding.GetBytes(text);
           break;
 
         case PdfStringEncoding.PDFDocEncoding:
-          bytes = PdfEncoders.DocEncoding.GetBytes(text);
+          bytes = DocEncoding.GetBytes(text);
           break;
 
         case PdfStringEncoding.Unicode:
-          bytes = PdfEncoders.UnicodeEncoding.GetBytes(text);
+          bytes = UnicodeEncoding.GetBytes(text);
           break;
 
         default:
           throw new NotImplementedException(encoding.ToString());
       }
-      return PdfEncoders.RawEncoding.GetString(FormatStringLiteral(bytes, encoding == PdfStringEncoding.Unicode, true,
-        true, securityHandler));
+
+      byte[] agTemp = FormatStringLiteral(bytes, encoding == PdfStringEncoding.Unicode, true, true, securityHandler);
+      return RawEncoding.GetString(agTemp, 0, agTemp.Length);
     }
 
     /// <summary>
@@ -314,7 +318,8 @@ namespace PdfSharp.Pdf.Internal
       if (bytes == null || bytes.Length == 0)
         return "<>";
 
-      return PdfEncoders.RawEncoding.GetString(FormatStringLiteral(bytes, unicode, true, true, securityHandler));
+      byte[] agTemp = FormatStringLiteral(bytes, unicode, true, true, securityHandler);
+      return RawEncoding.GetString(agTemp, 0, agTemp.Length);
     }
 
     /// <summary>
@@ -447,7 +452,7 @@ namespace PdfSharp.Pdf.Internal
           goto Hex;
         }
       }
-      return PdfEncoders.RawEncoding.GetBytes(pdf.ToString());
+      return RawEncoding.GetBytes(pdf.ToString());
     }
 
     /// <summary>
@@ -596,7 +601,7 @@ namespace PdfSharp.Pdf.Internal
     //}
 
     /// <summary>
-    /// ...because I always forget CultureInfo.InvariantCulture and wonder why Arcobat
+    /// ...because I always forget CultureInfo.InvariantCulture and wonder why Acrobat
     /// cannot understand my German decimal separator...
     /// </summary>
     public static string Format(string format, params object[] args)
@@ -619,12 +624,8 @@ namespace PdfSharp.Pdf.Internal
     {
       // If not defined let color decide
       if (colorMode == PdfColorMode.Undefined)
-      {
-        if (color.ColorSpace == XColorSpace.Cmyk)
-          colorMode = PdfColorMode.Cmyk;
-        else
-          colorMode = PdfColorMode.Rgb;
-      }
+        colorMode = color.ColorSpace == XColorSpace.Cmyk ? PdfColorMode.Cmyk : PdfColorMode.Rgb;
+
       switch (colorMode)
       {
         case PdfColorMode.Cmyk:

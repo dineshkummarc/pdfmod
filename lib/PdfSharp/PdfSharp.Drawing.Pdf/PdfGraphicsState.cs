@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -31,15 +31,12 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using System.IO;
 #if GDI
 using System.Drawing;
 using System.Drawing.Drawing2D;
 #endif
 #if WPF
-using System.Windows.Media;
 #endif
-using PdfSharp.Internal;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Pdf.Internal;
@@ -71,7 +68,7 @@ namespace PdfSharp.Drawing.Pdf
     {
       this.renderer = renderer;
     }
-    XGraphicsPdfRenderer renderer;
+    readonly XGraphicsPdfRenderer renderer;
 
     public PdfGraphicsState Clone()
     {
@@ -298,7 +295,7 @@ namespace PdfSharp.Drawing.Pdf
 
     internal PdfFont realizedFont;
     string realizedFontName = String.Empty;
-    double realizedFontSize = 0;
+    double realizedFontSize;
 
     public void RealizeFont(XFont font, XBrush brush, int renderMode)
     {
@@ -319,7 +316,7 @@ namespace PdfSharp.Drawing.Pdf
       }
     }
 
-    public XPoint realizedTextPosition = new XPoint();
+    public XPoint realizedTextPosition;
 
     #endregion
 
@@ -328,12 +325,12 @@ namespace PdfSharp.Drawing.Pdf
     /// <summary>
     /// The realized current transformation matrix.
     /// </summary>
-    XMatrix realizedCtm = XMatrix.Identity;
+    private XMatrix realizedCtm;
 
     /// <summary>
     /// The unrealized current transformation matrix.
     /// </summary>
-    XMatrix unrealizedCtm = XMatrix.Identity;
+    XMatrix unrealizedCtm;
 
     /// <summary>
     /// A flag indicating whether the CTM must be realized.
@@ -389,7 +386,7 @@ namespace PdfSharp.Drawing.Pdf
           matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
 
         this.realizedCtm.Prepend(this.unrealizedCtm);
-        this.unrealizedCtm = XMatrix.Identity;
+        this.unrealizedCtm = new XMatrix();  //XMatrix.Identity;
         this.MustRealizeCtm = false;
       }
     }

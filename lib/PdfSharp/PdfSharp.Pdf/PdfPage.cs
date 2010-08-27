@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -53,13 +53,7 @@ namespace PdfSharp.Pdf
     public PdfPage()
     {
       Elements.SetName(Keys.Type, "/Page");
-
-      // TODO: Can I get default paper size from something like CultureInfo??
-      if (RegionInfo.CurrentRegion != null && RegionInfo.CurrentRegion.IsMetric)
-        Size = PageSize.A4;
-      else
-        Size = PageSize.Letter;
-      PdfRectangle rect = MediaBox;
+      Initialize();
     }
 
     /// <summary>
@@ -70,12 +64,8 @@ namespace PdfSharp.Pdf
       : base(document)
     {
       Elements.SetName(Keys.Type, "/Page");
-      Elements[PdfPage.Keys.Parent] = document.Pages.Reference;
-
-      if (RegionInfo.CurrentRegion != null && RegionInfo.CurrentRegion.IsMetric)
-        Size = PageSize.A4;
-      else
-        Size = PageSize.Letter;
+      Elements[Keys.Parent] = document.Pages.Reference;
+      Initialize();
     }
 
     internal PdfPage(PdfDictionary dict)
@@ -85,6 +75,16 @@ namespace PdfSharp.Pdf
       int rotate = Elements.GetInteger(PdfPage.Keys.Rotate);
       if (Math.Abs((rotate / 90)) % 2 == 1)
         this.orientation = PageOrientation.Landscape;
+    }
+
+    void Initialize()
+    {
+      Size = RegionInfo.CurrentRegion.IsMetric ? PageSize.A4 : PageSize.Letter;
+
+#pragma warning disable 168
+      // Force creation of MediaBox object by invoking property
+      PdfRectangle rect = MediaBox;
+#pragma warning restore 168
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ namespace PdfSharp.Pdf
     {
       set
       {
-        if (!Object.ReferenceEquals(this.document, value))
+        if (!ReferenceEquals(this.document, value))
         {
           if (this.document != null)
             throw new InvalidOperationException("Cannot change document.");
@@ -141,13 +141,13 @@ namespace PdfSharp.Pdf
 
     /// <summary>
     /// Gets or sets the orientation of the page. The default value PageOrientation.Portrait.
-    /// If an imported page has a /Rotate value that satisfys the formula 90 + n * 180 the 
+    /// If an imported page has a /Rotate value that matches the formula 90 + n * 180 the 
     /// orientation is set to PageOrientation.Landscape.
     /// </summary>
     public PageOrientation Orientation
     {
-      get { return this.orientation; }
-      set { this.orientation = value; }
+      get { return orientation; }
+      set { orientation = value; }
     }
     PageOrientation orientation;
 
@@ -163,11 +163,12 @@ namespace PdfSharp.Pdf
           throw new InvalidEnumArgumentException("value", (int)value, typeof(PageSize));
 
         XSize size = PageSizeConverter.ToSize(value);
-        if (this.orientation == PageOrientation.Portrait)
+        // THHO: MediaBox is always in Portrait mode (see Height, Width)
+        /*if (this.orientation == PageOrientation.Portrait)*/
           MediaBox = new PdfRectangle(0, 0, size.Width, size.Height);
-        else
-          MediaBox = new PdfRectangle(0, 0, size.Height, size.Width);
-        this.pageSize = value;
+        /*else
+          MediaBox = new PdfRectangle(0, 0, size.Height, size.Width);*/
+        pageSize = value;
       }
     }
     PageSize pageSize;
@@ -346,8 +347,10 @@ namespace PdfSharp.Pdf
                 {
                   // Make it a direct array
                   array = array.Clone();
-                  array.Document = this.Owner;
+                  array.Document = Owner;
                 }
+//#warning THHO4STLA: verursacht Exception "Object type transformation must not be done with direct objects" in "protected PdfObject(PdfObject obj)"
+                // TODO THHO4STLA: verursacht Exception "Object type transformation must not be done with direct objects" in "protected PdfObject(PdfObject obj)"
                 this.contents = new PdfContents(array);
               }
               else
@@ -393,24 +396,22 @@ namespace PdfSharp.Pdf
     PdfAnnotations annotations;
 
     /// <summary>
-    /// Adds the intra document link.
+    /// Adds an intra document link.
     /// </summary>
     /// <param name="rect">The rect.</param>
-    /// <param name="destinatinPage">The destinatin page.</param>
-    /// <returns></returns>
-    public PdfLinkAnnotation AddDocumentLink(PdfRectangle rect, int destinatinPage)
+    /// <param name="destinationPage">The destination page.</param>
+    public PdfLinkAnnotation AddDocumentLink(PdfRectangle rect, int destinationPage)
     {
-      PdfLinkAnnotation annotation = PdfLinkAnnotation.CreateDocumentLink(rect, destinatinPage);
+      PdfLinkAnnotation annotation = PdfLinkAnnotation.CreateDocumentLink(rect, destinationPage);
       Annotations.Add(annotation);
       return annotation;
     }
 
     /// <summary>
-    /// Adds the link to the Web.
+    /// Adds a link to the Web.
     /// </summary>
     /// <param name="rect">The rect.</param>
     /// <param name="url">The URL.</param>
-    /// <returns></returns>
     public PdfLinkAnnotation AddWebLink(PdfRectangle rect, string url)
     {
       PdfLinkAnnotation annotation = PdfLinkAnnotation.CreateWebLink(rect, url);
@@ -419,11 +420,10 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Adds the link to a file.
+    /// Adds a link to a file.
     /// </summary>
     /// <param name="rect">The rect.</param>
     /// <param name="fileName">Name of the file.</param>
-    /// <returns></returns>
     public PdfLinkAnnotation AddFileLink(PdfRectangle rect, string fileName)
     {
       PdfLinkAnnotation annotation = PdfLinkAnnotation.CreateFileLink(rect, fileName);
@@ -563,13 +563,15 @@ namespace PdfSharp.Pdf
       // HACK: temporarily flip media box if Landscape
       PdfRectangle mediaBox = MediaBox;
       // TODO: Take /Rotate into account
-      if (this.orientation == PageOrientation.Landscape)
+      if (orientation == PageOrientation.Landscape)
         MediaBox = new PdfRectangle(mediaBox.X1, mediaBox.Y1, mediaBox.Y2, mediaBox.X2);
+//#warning THHO4STLA: warum nicht new PdfRectangle(mediaBox.Y1, mediaBox.X1, mediaBox.Y2, mediaBox.X2)? - siehe auch Orientation
+//#warning THHO4STLA: CropBox, BleedBox etc. auch drehen?
 
 #if true
       // Add transparency group to prevent rendering problems of Adobe viewer
       this.transparencyUsed = true; // TODO: check XObjects
-      if (this.transparencyUsed && !Elements.Contains(Keys.Group))
+      if (this.transparencyUsed && !Elements.ContainsKey(Keys.Group))
       {
         PdfDictionary group = new PdfDictionary();
         this.elements["/Group"] = group;
@@ -612,6 +614,7 @@ namespace PdfSharp.Pdf
         if (res is PdfReference)
         {
           resources = (PdfDictionary)((PdfReference)res).Value.Clone();
+          resources.Document = page.Owner;
         }
         else
           resources = (PdfDictionary)res;
@@ -619,18 +622,19 @@ namespace PdfSharp.Pdf
         if (resources == null)
         {
           resources = values.Resources.Clone();
+          resources.Document = page.Owner;
           page.Elements.Add(PdfPage.Keys.Resources, resources);
         }
         else
         {
           foreach (PdfName name in values.Resources.Elements.KeyNames)
           {
-            if (!resources.Elements.Contains(name.Value))
+            if (!resources.Elements.ContainsKey(name.Value))
             {
               PdfItem item = values.Resources.Elements[name];
               if (item is PdfObject)
                 item = item.Clone();
-              resources.Elements.Add(name, item);
+              resources.Elements.Add(name.ToString(), item);
             }
           }
         }
@@ -647,7 +651,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Add all inheritables values from the specified page to the specified values structure.
+    /// Add all inheritable values from the specified page to the specified values structure.
     /// </summary>
     internal static void InheritValues(PdfDictionary page, ref InheritedValues values)
     {
@@ -955,7 +959,7 @@ namespace PdfSharp.Pdf
       /// (Optional; inheritable) A rectangle, expressed in default user space units, defining the 
       /// visible region of default user space. When the page is displayed or printed, its contents 
       /// are to be clipped (cropped) to this rectangle and then imposed on the output medium in some
-      /// implementationdefined manner. Default value: the value of MediaBox.
+      /// implementation defined manner. Default value: the value of MediaBox.
       /// </summary>
       [KeyInfo(KeyType.Rectangle | KeyType.Optional | KeyType.Inheritable)]
       public const string CropBox = "/CropBox";

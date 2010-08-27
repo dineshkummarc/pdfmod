@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -42,7 +42,7 @@ namespace PdfSharp.Internal
     /// <summary>
     /// Reflected from System.Drawing.SafeNativeMethods+LOGFONT
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    //[SuppressUnmanagedCodeSecurity]
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     public class LOGFONT
     {

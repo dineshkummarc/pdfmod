@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -40,14 +40,14 @@ using System.Drawing.Imaging;
 using System.Windows.Media;
 #endif
 using PdfSharp.Drawing;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Internal;
 using PdfSharp.Pdf.Internal;
 
 namespace PdfSharp.Pdf.Advanced
 {
   /// <summary>
-  /// Represents an external form object (an imported page e.g).
+  /// Represents an external form object (e.g. an imported page).
   /// </summary>
   public sealed class PdfFormXObject : PdfXObject, IContentStream
   {
@@ -218,7 +218,7 @@ namespace PdfSharp.Pdf.Advanced
         this.Elements["/BBox"] = rect;
 
         // Rotate the image such that it is upright
-        XMatrix matrix = XMatrix.Identity;
+        XMatrix matrix = new XMatrix();  //XMatrix.Identity;
         double width = rect.Width;
         double height = rect.Height;
         matrix.RotateAtPrepend(-rotate, new XPoint(width / 2, height / 2));

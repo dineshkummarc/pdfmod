@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -29,13 +29,13 @@
 
 using System;
 using System.Diagnostics;
-using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.IO;
 using PdfSharp.Drawing;
 using PdfSharp.Internal;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 
 namespace PdfSharp.Pdf.Advanced
 {
@@ -57,12 +57,11 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public PdfFormXObjectTable(PdfDocument document)
       : base(document)
-    {
-    }
+    { }
 
     /// <summary>
     /// Gets a PdfFormXObject from an XPdfForm. Because the returned objects must be unique, always
-    /// a new instance of PdfFormXObject is created if none exists for the specifed form. 
+    /// a new instance of PdfFormXObject is created if none exists for the specified form. 
     /// </summary>
     public PdfFormXObject GetForm(XForm form)
     {
@@ -83,8 +82,8 @@ namespace PdfSharp.Pdf.Advanced
       {
         // Is the external PDF file from which is imported already known for the current document?
         Selector selector = new Selector(form);
-        PdfImportedObjectTable importedObjectTable = this.forms[selector] as PdfImportedObjectTable;
-        if (importedObjectTable == null)
+        PdfImportedObjectTable importedObjectTable;
+        if (!this.forms.TryGetValue(selector, out importedObjectTable))
         {
           // No: Get the external document from the form and create ImportedObjectTable.
           PdfDocument doc = pdfForm.ExternalDocument;
@@ -106,16 +105,14 @@ namespace PdfSharp.Pdf.Advanced
     }
 
     /// <summary>
-    /// 
+    /// Gets the imported object table.
     /// </summary>
-    /// <param name="page"></param>
-    /// <returns></returns>
     public PdfImportedObjectTable GetImportedObjectTable(PdfPage page)
     {
       // Is the external PDF file from which is imported already known for the current document?
       Selector selector = new Selector(page);
-      PdfImportedObjectTable importedObjectTable = this.forms[selector] as PdfImportedObjectTable;
-      if (importedObjectTable == null)
+      PdfImportedObjectTable importedObjectTable;
+      if (!this.forms.TryGetValue(selector, out importedObjectTable))
       {
         importedObjectTable = new PdfImportedObjectTable(this.owner, page.Owner);
         this.forms[selector] = importedObjectTable;
@@ -145,7 +142,7 @@ namespace PdfSharp.Pdf.Advanced
         itemRemoved = false;
         foreach (Selector selector in this.forms.Keys)
         {
-          PdfImportedObjectTable table = (PdfImportedObjectTable)this.forms[selector];
+          PdfImportedObjectTable table = this.forms[selector];
           if (table.ExternalDocument == null)
           {
             this.forms.Remove(selector);
@@ -157,12 +154,12 @@ namespace PdfSharp.Pdf.Advanced
     }
 
     /// <summary>
-    /// Map from FormSelector to ImportedObjectTable.
+    /// Map from Selector to PdfImportedObjectTable.
     /// </summary>
-    Hashtable forms = new Hashtable();
+    readonly Dictionary<Selector, PdfImportedObjectTable> forms = new Dictionary<Selector, PdfImportedObjectTable>();
 
     /// <summary>
-    /// A collection of information that uniquely idendifies a particular ImportedObjectTable.
+    /// A collection of information that uniquely identifies a particular ImportedObjectTable.
     /// </summary>
     public class Selector
     {

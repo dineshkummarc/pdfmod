@@ -4,7 +4,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 //
@@ -51,7 +51,7 @@ namespace PdfSharp.Drawing.BarCodes
       base.InitRendering(info);
       CalcThinBarWidth(info);
       info.BarHeight = Size.Height;
-      // HACK 
+      // HACK in ThickThinBarCode
       if (this.textLocation != TextLocation.None)
         info.BarHeight *= 4.0 / 5;
 
@@ -78,7 +78,7 @@ namespace PdfSharp.Drawing.BarCodes
     }
 
     /// <summary>
-    /// Gets or sets the ration between thick an thin lines. Must be between 2 an 3.
+    /// Gets or sets the ration between thick an thin lines. Must be between 2 and 3.
     /// Optimal and also default value is 2.6.
     /// </summary>
     public override double WideNarrowRatio

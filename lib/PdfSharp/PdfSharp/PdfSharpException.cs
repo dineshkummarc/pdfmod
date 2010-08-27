@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,7 +34,7 @@ namespace PdfSharp
   /// <summary>
   /// Base class of all exceptions in the PDFsharp frame work.
   /// </summary>
-  public class PdfSharpException : ApplicationException
+  public class PdfSharpException : Exception
   {
     // The class is not yet used
 

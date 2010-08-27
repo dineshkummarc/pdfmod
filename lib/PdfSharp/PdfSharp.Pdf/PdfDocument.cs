@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -198,14 +198,15 @@ namespace PdfSharp.Pdf
       if (PdfDocument.nameCount == 57)
         PdfDocument.nameCount.GetType();
 #endif
-      return "Document " + (nameCount++).ToString();
+      return "Document " + nameCount++;
     }
     static int nameCount;
 
     internal bool CanModify
     {
       //get {return this.state == DocumentState.Created || this.state == DocumentState.Modifyable;}
-      get { return true; }
+      // THHO4STLA: TODO: correct implementation
+      get { return openMode == PdfDocumentOpenMode.Modify; } // TODO: correct implementation
     }
 
     /// <summary>
@@ -230,8 +231,7 @@ namespace PdfSharp.Pdf
         }
         finally
         {
-          if (writer != null)
-            writer.Close();
+          writer.Close();
         }
       }
     }
@@ -273,8 +273,13 @@ namespace PdfSharp.Pdf
       }
       finally
       {
-        if (stream != null && closeStream)
-          stream.Close();
+        if (stream != null)
+        {
+          if (closeStream)
+            stream.Close();
+          else
+            stream.Position = 0; // Reset the stream position if the stream is left open.
+        }
         if (writer != null)
           writer.Close(closeStream);
       }
@@ -358,7 +363,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     internal override void PrepareForSave()
     {
-      PdfDocumentInformation info = this.Info;
+      PdfDocumentInformation info = Info;
 
       // Set Creator if value is undefined
       if (info.Elements[PdfDocumentInformation.Keys.Creator] == null)
@@ -387,7 +392,7 @@ namespace PdfSharp.Pdf
       // Remove all unreachable objects (e.g. from deleted pages)
       int removed = this.irefTable.Compact();
       if (removed != 0)
-        Debug.WriteLine("PrepareForSave: Number of deleted unreachable objects: " + removed.ToString());
+        Debug.WriteLine("PrepareForSave: Number of deleted unreachable objects: " + removed);
       this.irefTable.Renumber();
 #endif
     }
@@ -516,7 +521,7 @@ namespace PdfSharp.Pdf
     DocumentHandle handle;
 
     /// <summary>
-    /// Returns a value indicating whether the document was new created or opend from an exsisting document.
+    /// Returns a value indicating whether the document was newly created or opened from an existing document.
     /// Returns true if the document was opened with the PdfReader.Open function, false otherwise.
     /// </summary>
     public bool IsImported
@@ -615,7 +620,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Gets the viewer preverences of this document.
+    /// Gets the viewer preferences of this document.
     /// </summary>
     public PdfViewerPreferences ViewerPreferences
     {
@@ -631,7 +636,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Get the AcroFrom dictionary.
+    /// Get the AcroForm dictionary.
     /// </summary>
     public PdfAcroForm AcroForm
     {
@@ -735,7 +740,7 @@ namespace PdfSharp.Pdf
     /// Gets the PdfInternals object of this document, that grants access to some internal structures
     /// which are not part of the public interface of PdfDocument.
     /// </summary>
-    public PdfInternals Internals
+    public new PdfInternals Internals
     {
       get
       {
@@ -812,7 +817,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     internal void OnExternalDocumentFinalized(PdfDocument.DocumentHandle handle)
     {
-      if (PdfDocument.tls != null)
+      if (tls != null)
       {
         //PdfDocument[] documents = tls.Documents;
         tls.DetachDocument(handle);
@@ -832,9 +837,9 @@ namespace PdfSharp.Pdf
     {
       get
       {
-        if (PdfDocument.tls == null)
-          PdfDocument.tls = new ThreadLocalStorage();
-        return PdfDocument.tls;
+        if (tls == null)
+          tls = new ThreadLocalStorage();
+        return tls;
       }
     }
     [ThreadStatic]

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -66,7 +66,11 @@ namespace PdfSharp.Drawing
     public XUnit(double value, XGraphicsUnit type)
     {
       if (!Enum.IsDefined(typeof(XGraphicsUnit), type))
+#if !SILVERLIGHT
         throw new System.ComponentModel.InvalidEnumArgumentException("type");
+#else
+        throw new ArgumentException("type");
+#endif
 
       this.value = value;
       this.type = type;
@@ -75,7 +79,7 @@ namespace PdfSharp.Drawing
     /// <summary>
     /// Gets the raw value of the object without any conversion.
     /// To determine the XGraphicsUnit use property <code>Type</code>.
-    /// To get the value in point use the implicit convertion to double.
+    /// To get the value in point use the implicit conversion to double.
     /// </summary>
     public double Value
     {
@@ -87,7 +91,7 @@ namespace PdfSharp.Drawing
     /// </summary>
     public XGraphicsUnit Type
     {
-      get { return (XGraphicsUnit)type; }
+      get { return this.type; }
     }
 
     /// <summary>
@@ -269,7 +273,7 @@ namespace PdfSharp.Drawing
     /// Returns the object as string using the format information.
     /// The unit of measure is appended to the end of the string.
     /// </summary>
-    public string ToString(System.IFormatProvider formatProvider)
+    public string ToString(IFormatProvider formatProvider)
     {
       string valuestring;
       valuestring = this.value.ToString(formatProvider) + GetSuffix();
@@ -280,7 +284,7 @@ namespace PdfSharp.Drawing
     /// Returns the object as string using the specified format and format information.
     /// The unit of measure is appended to the end of the string.
     /// </summary>
-    string System.IFormattable.ToString(string format, IFormatProvider formatProvider)
+    string IFormattable.ToString(string format, IFormatProvider formatProvider)
     {
       string valuestring;
       valuestring = this.value.ToString(format, formatProvider) + GetSuffix();
@@ -604,14 +608,14 @@ namespace PdfSharp.Drawing
         //          break;
 
         default:
-          throw new ArgumentException("Unknown unit type: '" + type.ToString() + "'");
+          throw new ArgumentException("Unknown unit type: '" + type + "'");
       }
     }
 
     /// <summary>
     /// Represents a unit with all values zero.
     /// </summary>
-    public static readonly XUnit Zero = new XUnit();
+    public static readonly XUnit Zero;
 
     double value;
     XGraphicsUnit type;

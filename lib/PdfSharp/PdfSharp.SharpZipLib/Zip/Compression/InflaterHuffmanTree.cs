@@ -125,13 +125,13 @@ namespace PdfSharp.SharpZipLib.Zip.Compression
 					treeSize += (end - start) >> (16 - bits);
 				}
 			}
-			
-/* -jr comment this out! doesnt work for dynamic trees and pkzip 2.04g
-			if (code != 65536) 
-			{
-				throw new SharpZipBaseException("Code lengths don't add up properly.");
-			}
-*/
+
+      /* -jr comment this out! doesn't work for dynamic trees and pkzip 2.04g
+            if (code != 65536) 
+            {
+              throw new SharpZipBaseException("Code lengths don't add up properly.");
+            }
+      */
 			/* Now create and fill the extra tables from longest to shortest
 			* bit len.  This way the sub trees will be aligned.
 			*/

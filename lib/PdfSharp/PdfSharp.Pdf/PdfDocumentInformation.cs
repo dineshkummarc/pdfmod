@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -160,7 +160,7 @@ namespace PdfSharp.Pdf
 
       /// <summary>
       /// (Optional) If the document was converted to PDF from another format,
-      /// the name of the application (for example, empira MigraDoc®) that created the
+      /// the name of the application (for example, empira MigraDoc) that created the
       /// original document from which it was converted.
       /// </summary>
       [KeyInfo(KeyType.String | KeyType.Optional)]

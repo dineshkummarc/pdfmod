@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -58,7 +58,8 @@ namespace PdfSharp.Pdf
     /// </summary>
     /// <param name="document">The document.</param>
     /// <param name="value">The value.</param>
-    public PdfStringObject(PdfDocument document, string value) : base(document)
+    public PdfStringObject(PdfDocument document, string value)
+      : base(document)
     {
       this.value = value;
       this.flags = PdfStringFlags.RawEncoding;
@@ -90,7 +91,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     public int Length
     {
-      get {return this.value == null ? 0 : this.value.Length;}
+      get { return this.value == null ? 0 : this.value.Length; }
     }
 
     /// <summary>
@@ -99,7 +100,7 @@ namespace PdfSharp.Pdf
     public PdfStringEncoding Encoding
     {
       get { return (PdfStringEncoding)(this.flags & PdfStringFlags.EncodingMask); }
-      set { this.flags = (this.flags & ~PdfStringFlags.EncodingMask) | ((PdfStringFlags)value & PdfStringFlags.EncodingMask);}
+      set { this.flags = (this.flags & ~PdfStringFlags.EncodingMask) | ((PdfStringFlags)value & PdfStringFlags.EncodingMask); }
     }
 
     /// <summary>
@@ -108,7 +109,7 @@ namespace PdfSharp.Pdf
     public bool HexLiteral
     {
       get { return (this.flags & PdfStringFlags.HexLiteral) != 0; }
-      set { this.flags = value ? this.flags | PdfStringFlags.HexLiteral : this.flags & ~PdfStringFlags.HexLiteral;}
+      set { this.flags = value ? this.flags | PdfStringFlags.HexLiteral : this.flags & ~PdfStringFlags.HexLiteral; }
     }
 
     PdfStringFlags flags;
@@ -118,8 +119,8 @@ namespace PdfSharp.Pdf
     /// </summary>
     public string Value
     {
-      get { return this.value == null ? "" : this.value; }
-      set { this.value = value == null ? "" : value; }
+      get { return this.value ?? ""; }
+      set { this.value = value ?? ""; }
     }
     string value;
 
@@ -129,8 +130,8 @@ namespace PdfSharp.Pdf
     internal byte[] EncryptionValue
     {
       // TODO: Unicode case is not handled!
-      get {return this.value == null ? new byte[0] : PdfEncoders.RawEncoding.GetBytes(this.value);}
-      set {this.value = PdfEncoders.RawEncoding.GetString(value);}
+      get { return this.value == null ? new byte[0] : PdfEncoders.RawEncoding.GetBytes(this.value); }
+      set { this.value = PdfEncoders.RawEncoding.GetString(value, 0, value.Length); }
     }
 
     /// <summary>

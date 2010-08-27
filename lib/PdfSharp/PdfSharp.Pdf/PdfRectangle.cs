@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -143,7 +143,7 @@ namespace PdfSharp.Pdf
     /// </summary>
     internal PdfRectangle(PdfItem item)
     {
-      if (item == null)
+      if (item == null || item is PdfNull)
         return;
 
       if (item is PdfReference)
@@ -226,7 +226,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// Tests whether two structures differs in one or more coordinates.
+    /// Tests whether two structures differ in one or more coordinates.
     /// </summary>
     public static bool operator !=(PdfRectangle left, PdfRectangle right)
     {

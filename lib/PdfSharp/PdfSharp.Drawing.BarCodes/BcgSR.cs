@@ -3,7 +3,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -33,7 +33,7 @@ namespace PdfSharp.Drawing.BarCodes
 {
   // TODO: Mere with PDFsharp strings table
   /// <summary>
-  /// String resources for the empira barcde renderer.
+  /// String resources for the empira barcode renderer.
   /// </summary>
   internal class BcgSR
   {

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -39,7 +39,7 @@ using PdfSharp.Drawing;
 namespace PdfSharp.Pdf.Security
 {
   /// <summary>
-  /// Encapsultes access to the security settings of a PDF document.
+  /// Encapsulates access to the security settings of a PDF document.
   /// </summary>
   public sealed class PdfSecuritySettings
   {
@@ -50,7 +50,7 @@ namespace PdfSharp.Pdf.Security
     PdfDocument document;
 
     /// <summary>
-    /// Indicates whether the granted access to the document is 'owner permission'. Retruns true if the document 
+    /// Indicates whether the granted access to the document is 'owner permission'. Returns true if the document 
     /// is unprotected or was opened with the owner password. Returns false if the document was opened with the
     /// user password.
     /// </summary>

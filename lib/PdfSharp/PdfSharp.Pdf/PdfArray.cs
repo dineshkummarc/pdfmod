@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -42,7 +43,7 @@ namespace PdfSharp.Pdf
   /// Represents a PDF array object.
   /// </summary>
   [DebuggerDisplay("(elements={Elements.Count})")]
-  public class PdfArray : PdfObject, IEnumerable
+  public class PdfArray : PdfObject, IEnumerable<PdfItem>
   {
     ArrayElements elements;
 
@@ -130,9 +131,14 @@ namespace PdfSharp.Pdf
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
-    public virtual IEnumerator GetEnumerator()
+    public virtual IEnumerator<PdfItem> GetEnumerator()
     {
       return Elements.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
     }
 
     /// <summary>
@@ -164,21 +170,21 @@ namespace PdfSharp.Pdf
     /// <summary>
     /// Represents the elements of an PdfArray.
     /// </summary>
-    public sealed class ArrayElements : IList, ICloneable
+    public sealed class ArrayElements : IList<PdfItem>, ICloneable
     {
-      ArrayList elements;
+      List<PdfItem> elements;
       PdfArray owner;
 
       internal ArrayElements(PdfArray array)
       {
-        this.elements = new ArrayList();
+        this.elements = new List<PdfItem>();
         this.owner = array;
       }
 
       object ICloneable.Clone()
       {
         ArrayElements elements = (ArrayElements)MemberwiseClone();
-        elements.elements = (ArrayList)elements.elements.Clone();
+        elements.elements = new List<PdfItem>(elements.elements);
         elements.owner = null;
         return elements;
       }
@@ -204,7 +210,7 @@ namespace PdfSharp.Pdf
       /// Converts the specified value to boolean.
       /// If the value not exists, the function returns false.
       /// If the value is not convertible, the function throws an InvalidCastException.
-      /// If the index is out ouf range, the function throws an ArgumentOutOfRangeException.
+      /// If the index is out of range, the function throws an ArgumentOutOfRangeException.
       /// </summary>
       public bool GetBoolean(int index)
       {
@@ -225,7 +231,7 @@ namespace PdfSharp.Pdf
       /// Converts the specified value to integer.
       /// If the value not exists, the function returns 0.
       /// If the value is not convertible, the function throws an InvalidCastException.
-      /// If the index is out ouf range, the function throws an ArgumentOutOfRangeException.
+      /// If the index is out of range, the function throws an ArgumentOutOfRangeException.
       /// </summary>
       public int GetInteger(int index)
       {
@@ -246,7 +252,7 @@ namespace PdfSharp.Pdf
       /// Converts the specified value to double.
       /// If the value not exists, the function returns 0.
       /// If the value is not convertible, the function throws an InvalidCastException.
-      /// If the index is out ouf range, the function throws an ArgumentOutOfRangeException.
+      /// If the index is out of range, the function throws an ArgumentOutOfRangeException.
       /// </summary>
       public double GetReal(int index)
       {
@@ -271,7 +277,7 @@ namespace PdfSharp.Pdf
       /// Converts the specified value to string.
       /// If the value not exists, the function returns the empty string.
       /// If the value is not convertible, the function throws an InvalidCastException.
-      /// If the index is out ouf range, the function throws an ArgumentOutOfRangeException.
+      /// If the index is out of range, the function throws an ArgumentOutOfRangeException.
       /// </summary>
       public string GetString(int index)
       {
@@ -292,7 +298,7 @@ namespace PdfSharp.Pdf
       /// Converts the specified value to a name.
       /// If the value not exists, the function returns the empty string.
       /// If the value is not convertible, the function throws an InvalidCastException.
-      /// If the index is out ouf range, the function throws an ArgumentOutOfRangeException.
+      /// If the index is out of range, the function throws an ArgumentOutOfRangeException.
       /// </summary>
       public string GetName(int index)
       {
@@ -371,18 +377,18 @@ namespace PdfSharp.Pdf
       /// </summary>
       public PdfItem[] Items
       {
-        get { return (PdfItem[])this.elements.ToArray(typeof(PdfItem)); }
+        get { return this.elements.ToArray(); }
       }
 
-      /// <summary>
-      /// INTERNAL USE ONLY.
-      /// </summary>
-      public ArrayList GetArrayList()
-      {
-        // I use this hack to order the pages by ZIP code (MigraDoc ControlCode-Generator)
-        // TODO: implement a clean solution
-        return this.elements;
-      }
+      ///// <summary>
+      ///// INTERNAL USE ONLY.
+      ///// </summary>
+      //public List<PdfItem> GetArrayList_()
+      //{
+      //  // I use this hack to order the pages by ZIP code (MigraDoc ControlCode-Generator)
+      //  // TODO: implement a clean solution
+      //  return this.elements;
+      //}
 
       #region IList Members
 
@@ -394,11 +400,11 @@ namespace PdfSharp.Pdf
         get { return false; }
       }
 
-      object IList.this[int index]
-      {
-        get { return this.elements[index]; }
-        set { this.elements[index] = value; }
-      }
+      //object IList.this[int index]
+      //{
+      //  get { return this.elements[index]; }
+      //  set { this.elements[index] = value as PdfItem; }
+      //}
 
       /// <summary>
       /// Gets or sets an item at the specified index.
@@ -406,7 +412,7 @@ namespace PdfSharp.Pdf
       /// <value></value>
       public PdfItem this[int index]
       {
-        get { return (PdfItem)this.elements[index]; }
+        get { return this.elements[index]; }
         set
         {
           if (value == null)
@@ -423,9 +429,12 @@ namespace PdfSharp.Pdf
         this.elements.RemoveAt(index);
       }
 
-      void IList.Insert(int index, object value)
+      /// <summary>
+      /// Removes the first occurrence of a specific object from the array/>.
+      /// </summary>
+      public bool Remove(PdfItem item)
       {
-        this.elements.Insert(index, value);
+        return this.elements.Remove(item);
       }
 
       /// <summary>
@@ -434,24 +443,6 @@ namespace PdfSharp.Pdf
       public void Insert(int index, PdfItem value)
       {
         this.elements.Insert(index, value);
-      }
-
-      void IList.Remove(object value)
-      {
-        this.elements.Remove(value);
-      }
-
-      /// <summary>
-      /// Removes the specified value.
-      /// </summary>
-      public void Remove(PdfItem value)
-      {
-        this.elements.Remove(value);
-      }
-
-      bool IList.Contains(object value)
-      {
-        return this.elements.Contains(value);
       }
 
       /// <summary>
@@ -470,11 +461,6 @@ namespace PdfSharp.Pdf
         this.elements.Clear();
       }
 
-      int IList.IndexOf(object value)
-      {
-        return this.elements.IndexOf(value);
-      }
-
       /// <summary>
       /// Gets the index of the specified item.
       /// </summary>
@@ -483,15 +469,10 @@ namespace PdfSharp.Pdf
         return this.elements.IndexOf(value);
       }
 
-      int IList.Add(object value)
-      {
-        return this.elements.Add(value);
-      }
-
       /// <summary>
       /// Appends the specified object to the array.
       /// </summary>
-      public int Add(PdfItem value)
+      public void Add(PdfItem value)
       {
         // TODO: ??? 
         //Debug.Assert((value is PdfObject && ((PdfObject)value).Reference == null) | !(value is PdfObject),
@@ -499,8 +480,9 @@ namespace PdfSharp.Pdf
 
         PdfObject obj = value as PdfObject;
         if (obj != null && obj.IsIndirect)
-          return this.elements.Add(obj.Reference);
-        return this.elements.Add(value);
+          this.elements.Add(obj.Reference);
+        else
+          this.elements.Add(value);
       }
 
       /// <summary>
@@ -534,7 +516,7 @@ namespace PdfSharp.Pdf
       /// <summary>
       /// Copies the elements of the array to the specified array.
       /// </summary>
-      public void CopyTo(Array array, int index)
+      public void CopyTo(PdfItem[] array, int index)
       {
         this.elements.CopyTo(array, index);
       }
@@ -549,17 +531,18 @@ namespace PdfSharp.Pdf
 
       #endregion
 
-      #region IEnumerable Members
-
       /// <summary>
       /// Returns an enumerator that iterates through the array.
       /// </summary>
-      public IEnumerator GetEnumerator()
+      public IEnumerator<PdfItem> GetEnumerator()
       {
         return this.elements.GetEnumerator();
       }
 
-      #endregion
+      IEnumerator IEnumerable.GetEnumerator()
+      {
+        return this.elements.GetEnumerator();
+      }
     }
   }
 }

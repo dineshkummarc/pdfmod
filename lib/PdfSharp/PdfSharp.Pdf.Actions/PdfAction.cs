@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -44,7 +44,7 @@ namespace PdfSharp.Pdf.Actions
     /// <summary>
     /// Initializes a new instance of the <see cref="PdfAction"/> class.
     /// </summary>
-    public PdfAction()
+    protected PdfAction()
     {
       Elements.SetName(Keys.Type, "/Action");
     }
@@ -53,7 +53,7 @@ namespace PdfSharp.Pdf.Actions
     /// Initializes a new instance of the <see cref="PdfAction"/> class.
     /// </summary>
     /// <param name="document">The document that owns this object.</param>
-    public PdfAction(PdfDocument document) : base(document)
+    protected PdfAction(PdfDocument document) : base(document)
     {
       Elements.SetName(Keys.Type, "/Action");
     }

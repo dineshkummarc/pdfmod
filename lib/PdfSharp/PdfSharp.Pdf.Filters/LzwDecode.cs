@@ -3,7 +3,7 @@
 // Authors:
 //   David Stephensen (mailto:David.Stephensen@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -52,7 +52,7 @@ namespace PdfSharp.Pdf.Filters
     /// </summary>
     public override byte[] Decode(byte[] data, FilterParms parms)
     {
-      if (data[0] == (byte)0x00 && data[1] == (byte)0x01)
+      if (data[0] == 0x00 && data[1] == 0x01)
         throw new Exception("LZW flavour not supported.");
 
       MemoryStream outputStream = new MemoryStream();
@@ -60,16 +60,13 @@ namespace PdfSharp.Pdf.Filters
       InitializeDictionary();
 
       this.data = data;
-
       bytePointer = 0;
-
       nextData = 0;
       nextBits = 0;
-
       int code, oldCode = 0;
       byte[] str;
 
-      while ((code = this.NextCode) != 257)
+      while ((code = NextCode) != 257)
       {
         if (code == 256)
         {
@@ -177,9 +174,9 @@ namespace PdfSharp.Pdf.Filters
       }
     }
 
-    int[] andTable = { 511, 1023, 2047, 4095 };
+    readonly int[] andTable = { 511, 1023, 2047, 4095 };
     byte[][] stringTable;
-    byte[] data = null;
+    byte[] data;
     int tableIndex, bitsToGet = 9;
     int bytePointer;
     int nextData = 0;

@@ -4,7 +4,7 @@
 //   David Stephensen (mailto:David.Stephensen@pdfsharp.com)
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -47,7 +47,7 @@ namespace PdfSharp.Drawing.BarCodes
       : base(text, size, CodeDirection.LeftToRight)
     {
       this.encoding = encoding;
-      if (this.encoding == "" || this.encoding == null)
+      if (String.IsNullOrEmpty(this.encoding))
         this.encoding = new String('a', this.text.Length);
 
       if (columns < rows)
@@ -119,7 +119,7 @@ namespace PdfSharp.Drawing.BarCodes
       }
     }
 
-    internal XImage matrixImage = null;
+    internal XImage matrixImage;
 
     /// <summary>
     /// When implemented in a derived class renders the 2D code.

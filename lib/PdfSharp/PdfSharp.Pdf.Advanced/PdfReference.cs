@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -31,6 +31,7 @@
 #define UNIQUE_IREF
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -174,6 +175,8 @@ namespace PdfSharp.Pdf.Advanced
       get { return this.value; }
       set
       {
+        Debug.Assert(value != null, "The value of a PdfReference must never be null.");
+        Debug.Assert(value.Reference == null || Object.ReferenceEquals(value.Reference, this), "The reference of the value must be null or this.");
         this.value = value;
         // value must never be null
         value.Reference = this;
@@ -215,12 +218,12 @@ namespace PdfSharp.Pdf.Advanced
     /// <summary>
     /// Implements a comparer that compares PdfReference objects by their PdfObjectID.
     /// </summary>
-    internal class PdfReferenceComparer : IComparer
+    internal class PdfReferenceComparer : IComparer<PdfReference>
     {
-      public int Compare(object x, object y)
+      public int Compare(PdfReference x, PdfReference y)
       {
-        PdfReference l = x as PdfReference;
-        PdfReference r = y as PdfReference;
+        PdfReference l = x; // as PdfReference;
+        PdfReference r = y; // as PdfReference;
         if (l != null)
         {
           if (r != null)

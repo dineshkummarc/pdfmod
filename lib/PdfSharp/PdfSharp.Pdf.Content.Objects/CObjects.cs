@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Globalization;
@@ -45,7 +46,7 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     /// <summary>
     /// Initializes a new instance of the <see cref="CObject"/> class.
     /// </summary>
-    public CObject()
+    protected CObject()
     {
     }
 
@@ -130,9 +131,9 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
   /// Represents a sequence of objects in a PDF content stream.
   /// </summary>
   [DebuggerDisplay("(count={Count})")]
-  public class CSequence : CObject, IList, ICollection, IEnumerable
+  public class CSequence : CObject, IList<CObject>, ICollection<CObject>, IEnumerable<CObject>
   {
-    ArrayList items = new ArrayList();
+    List<CObject> items = new List<CObject>();
 
     /// <summary>
     /// Creates a new object that is a copy of the current instance.
@@ -148,11 +149,9 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     protected override CObject Copy()
     {
       CObject obj = base.Copy();
-      this.items = (ArrayList)this.items.Clone();
+      this.items = new List<CObject>(this.items);
       for (int idx = 0; idx < this.items.Count; idx++)
-      {
-        this.items[idx] = ((CObject)(this.items[idx])).Clone();
-      }
+        this.items[idx] = this.items[idx].Clone();
       return obj;
     }
 
@@ -170,24 +169,11 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     #region IList Members
 
     /// <summary>
-    /// Adds an item to the <see cref="T:System.Collections.IList"></see>.
-    /// </summary>
-    /// <param name="value">The <see cref="T:System.Object"></see> to add to the <see cref="T:System.Collections.IList"></see>.</param>
-    /// <returns>
-    /// The position into which the new element was inserted.
-    /// </returns>
-    /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"></see> is read-only.-or- The <see cref="T:System.Collections.IList"></see> has a fixed size. </exception>
-    int IList.Add(object value)
-    {
-      return this.items.Add(value);
-    }
-
-    /// <summary>
     /// Adds the specified value add the end of the sequence.
     /// </summary>
-    public int Add(CObject value)
+    public void Add(CObject value)
     {
-      return this.items.Add(value);
+      this.items.Add(value);
     }
 
     /// <summary>
@@ -198,10 +184,10 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
       this.items.Clear();
     }
 
-    bool IList.Contains(object value)
-    {
-      return this.items.Contains(value);
-    }
+    //bool IList.Contains(object value)
+    //{
+    //  return this.items.Contains(value);
+    //}
 
     /// <summary>
     /// Determines whether the specified value is in the sequence.
@@ -209,11 +195,6 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     public bool Contains(CObject value)
     {
       return this.items.Contains(value);
-    }
-
-    int IList.IndexOf(object value)
-    {
-      return this.items.IndexOf(value);
     }
 
     /// <summary>
@@ -224,11 +205,6 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
       return this.items.IndexOf(value);
     }
 
-    void IList.Insert(int index, object value)
-    {
-      this.items.Insert(index, value);
-    }
-
     /// <summary>
     /// Inserts the specified value in the sequence.
     /// </summary>
@@ -237,33 +213,28 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
       this.items.Insert(index, value);
     }
 
-    /// <summary>
-    /// Gets a value indicating whether the sequence has a fixed size.
-    /// </summary>
-    public bool IsFixedSize
-    {
-      get { return this.items.IsFixedSize; }
-    }
+    /////// <summary>
+    /////// Gets a value indicating whether the sequence has a fixed size.
+    /////// </summary>
+    ////public bool IsFixedSize
+    ////{
+    ////  get { return this.items.IsFixedSize; }
+    ////}
 
-    /// <summary>
-    /// Gets a value indicating whether the sequence is read-only.
-    /// </summary>
-    public bool IsReadOnly
-    {
-      get { return this.items.IsReadOnly; }
-    }
-
-    void IList.Remove(object value)
-    {
-      this.items.Remove(value);
-    }
+    /////// <summary>
+    /////// Gets a value indicating whether the sequence is read-only.
+    /////// </summary>
+    ////public bool IsReadOnly
+    ////{
+    ////  get { return this.items.IsReadOnly; }
+    ////}
 
     /// <summary>
     /// Removes the specified value from the sequence.
     /// </summary>
-    public void Remove(CObject value)
+    public bool Remove(CObject value)
     {
-      this.items.Remove(value);
+      return this.items.Remove(value);
     }
 
     /// <summary>
@@ -272,12 +243,6 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     public void RemoveAt(int index)
     {
       this.items.RemoveAt(index);
-    }
-
-    object IList.this[int index]
-    {
-      get { return this.items[index]; }
-      set { this.items[index] = value; }
     }
 
     /// <summary>
@@ -296,10 +261,11 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     /// <summary>
     /// Copies the elements of the sequence to the specified array.
     /// </summary>
-    public void CopyTo(Array array, int index)
+    public void CopyTo(CObject[] array, int index)
     {
       this.items.CopyTo(array, index);
     }
+
 
     /// <summary>
     /// Gets the number of elements contained in the sequence.
@@ -309,21 +275,21 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
       get { return this.items.Count; }
     }
 
-    /// <summary>
-    /// Gets a value indicating whether access to the sequence is synchronized (thread safe).
-    /// </summary>
-    public bool IsSynchronized
-    {
-      get { return this.items.IsSynchronized; }
-    }
+    ///// <summary>
+    ///// Gets a value indicating whether access to the sequence is synchronized (thread safe).
+    ///// </summary>
+    //public bool IsSynchronized
+    //{
+    //  get { return this.items.IsSynchronized; }
+    //}
 
-    /// <summary>
-    /// Gets an object that can be used to synchronize access to the sequence.
-    /// </summary>
-    public object SyncRoot
-    {
-      get { return this.items.SyncRoot; }
-    }
+    ///// <summary>
+    ///// Gets an object that can be used to synchronize access to the sequence.
+    ///// </summary>
+    //public object SyncRoot
+    //{
+    //  get { return this.items.SyncRoot; }
+    //}
 
     #endregion
 
@@ -332,7 +298,7 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     /// <summary>
     /// Returns an enumerator that iterates through the sequence.
     /// </summary>
-    public IEnumerator GetEnumerator()
+    public IEnumerator<CObject> GetEnumerator()
     {
       return this.items.GetEnumerator();
     }
@@ -340,7 +306,7 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     #endregion
 
     /// <summary>
-    /// Converts the sequence to a PDF conent stream.
+    /// Converts the sequence to a PDF content stream.
     /// </summary>
     public byte[] ToContent()
     {
@@ -370,11 +336,95 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
       return s.ToString();
     }
 
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
+    }
+
     internal override void WriteObject(ContentWriter writer)
     {
       for (int idx = 0; idx < this.items.Count; idx++)
         (this.items[idx] as CObject).WriteObject(writer);
     }
+
+    #region IList<CObject> Members
+
+    int IList<CObject>.IndexOf(CObject item)
+    {
+      throw new NotImplementedException();
+    }
+
+    void IList<CObject>.Insert(int index, CObject item)
+    {
+      throw new NotImplementedException();
+    }
+
+    void IList<CObject>.RemoveAt(int index)
+    {
+      throw new NotImplementedException();
+    }
+
+    CObject IList<CObject>.this[int index]
+    {
+      get
+      {
+        throw new NotImplementedException();
+      }
+      set
+      {
+        throw new NotImplementedException();
+      }
+    }
+
+    #endregion
+
+    #region ICollection<CObject> Members
+
+    void ICollection<CObject>.Add(CObject item)
+    {
+      throw new NotImplementedException();
+    }
+
+    void ICollection<CObject>.Clear()
+    {
+      throw new NotImplementedException();
+    }
+
+    bool ICollection<CObject>.Contains(CObject item)
+    {
+      throw new NotImplementedException();
+    }
+
+    void ICollection<CObject>.CopyTo(CObject[] array, int arrayIndex)
+    {
+      throw new NotImplementedException();
+    }
+
+    int ICollection<CObject>.Count
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    bool ICollection<CObject>.IsReadOnly
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    bool ICollection<CObject>.Remove(CObject item)
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
+
+    #region IEnumerable<CObject> Members
+
+    IEnumerator<CObject> IEnumerable<CObject>.GetEnumerator()
+    {
+      throw new NotImplementedException();
+    }
+
+    #endregion
   }
 
   /// <summary>
@@ -537,7 +587,63 @@ namespace PdfSharp.Pdf.Content.Objects  // TODO: split into single files
     /// </summary>
     public override string ToString()
     {
-      return "(" + this.value + ")";
+      StringBuilder s = new StringBuilder("(");
+      int length = this.value.Length;
+      for (int ich = 0; ich < length; ich++)
+      {
+        char ch = this.value[ich];
+        switch (ch)
+        {
+          case Chars.LF:
+            s.Append("\\n");
+            break;
+
+          case Chars.CR:
+            s.Append("\\r");
+            break;
+
+          case Chars.HT:
+            s.Append("\\t");
+            break;
+
+          case Chars.BS:
+            s.Append("\\b");
+            break;
+
+          case Chars.FF:
+            s.Append("\\f");
+            break;
+
+          case Chars.ParenLeft:
+            s.Append("\\(");
+            break;
+
+          case Chars.ParenRight:
+            s.Append("\\)");
+            break;
+
+          case Chars.BackSlash:
+            s.Append("\\\\");
+            break;
+
+          default:
+#if true_
+            // not absolut necessary to use octal encoding for characters less than blank
+            if (ch < ' ')
+            {
+              s.Append("\\");
+              s.Append((char)(((ch >> 6) & 7) + '0'));
+              s.Append((char)(((ch >> 3) & 7) + '0'));
+              s.Append((char)((ch & 7) + '0'));
+            }
+            else
+#endif
+            s.Append(ch);
+            break;
+        }
+      }
+      s.Append(')');
+      return s.ToString();
     }
 
     internal override void WriteObject(ContentWriter writer)

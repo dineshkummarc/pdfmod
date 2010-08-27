@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -33,14 +33,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 
-#pragma warning disable 1591
-
-
 namespace PdfSharp.Internal
 {
   // Relected from WPF to ensure compatibility
   // Use netmassdownloader -d "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0" -output g:\cachetest -v
-  public class TokenizerHelper
+  class TokenizerHelper
   {
     internal char PeekNextCharacter()
     {
@@ -50,7 +47,7 @@ namespace PdfSharp.Internal
       return ch;
     }
 
-    static IFormatProvider NeutralCulture = CultureInfo.GetCultureInfo("en-us");
+    private static readonly IFormatProvider NeutralCulture = CultureInfo.InvariantCulture; //.GetCultureInfo("en-us");
 
     public TokenizerHelper(string str)
       : this(str, NeutralCulture)
@@ -64,7 +61,7 @@ namespace PdfSharp.Internal
 
     public TokenizerHelper(string str, char quoteChar, char separator)
     {
-      this.Initialize(str, quoteChar, separator);
+      Initialize(str, quoteChar, separator);
     }
 
     internal string GetCurrentToken()
@@ -83,7 +80,7 @@ namespace PdfSharp.Internal
       return ch;
     }
 
-    private void Initialize(string str, char quoteChar, char separator)
+    void Initialize(string str, char quoteChar, char separator)
     {
       this.str = str;
       this.strLen = (str == null) ? 0 : str.Length;
@@ -106,12 +103,12 @@ namespace PdfSharp.Internal
 
     internal bool NextToken()
     {
-      return this.NextToken(false);
+      return NextToken(false);
     }
 
     internal bool NextToken(bool allowQuotedToken)
     {
-      return this.NextToken(allowQuotedToken, this.argSeparator);
+      return NextToken(allowQuotedToken, this.argSeparator);
     }
 
     internal bool NextToken(bool allowQuotedToken, char separator)
@@ -157,7 +154,7 @@ namespace PdfSharp.Internal
       }
       if (charCount > 0)
         throw new InvalidOperationException("Missing end quote"); //SR.Get(SRID.TokenizerHelperMissingEndQuote, new object[0]));
-      this.ScanToNextToken(separator);
+      ScanToNextToken(separator);
       this.currentTokenIndex = index;
       this.currentTokenLength = num3;
       if (this.currentTokenLength < 1)

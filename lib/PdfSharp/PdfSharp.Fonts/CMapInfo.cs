@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -32,7 +32,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Pdf.Internal;
 
 namespace PdfSharp.Fonts
@@ -42,15 +42,15 @@ namespace PdfSharp.Fonts
   /// </summary>
   internal class CMapInfo
   {
-    public CMapInfo(TrueTypeDescriptor descriptor)
+    public CMapInfo(OpenTypeDescriptor descriptor)
     {
       Debug.Assert(descriptor != null);
       this.descriptor = descriptor;
     }
-    internal TrueTypeDescriptor descriptor;
+    internal OpenTypeDescriptor descriptor;
 
     /// <summary>
-    /// Adds the characters of the specifed string the the hashtable.
+    /// Adds the characters of the specified string to the hashtable.
     /// </summary>
     public void AddChars(string text)
     {
@@ -68,7 +68,7 @@ namespace PdfSharp.Fonts
             {
               if (symbol)
               {
-                glyphIndex = (int)ch + (descriptor.fontData.os2.usFirstCharIndex & 0xFF00); // @@@
+                glyphIndex = ch + (descriptor.fontData.os2.usFirstCharIndex & 0xFF00); // @@@
                 glyphIndex = descriptor.CharCodeToGlyphIndex((char)glyphIndex);
               }
               else
@@ -86,6 +86,22 @@ namespace PdfSharp.Fonts
     }
 
     /// <summary>
+    /// Adds the glyphIndices to the hashtable.
+    /// </summary>
+    public void AddGlyphIndices(string glyphIndices)
+    {
+      if (glyphIndices != null)
+      {
+        int length = glyphIndices.Length;
+        for (int idx = 0; idx < length; idx++)
+        {
+          int glyphIndex = glyphIndices[idx];
+          GlyphIndices[glyphIndex] = null;
+        }
+      }
+    }
+
+    /// <summary>
     /// Adds a ANSI characters.
     /// </summary>
     internal void AddAnsiChars()
@@ -93,7 +109,7 @@ namespace PdfSharp.Fonts
       byte[] ansi = new byte[256 - 32];
       for (int idx = 0; idx < 256 - 32; idx++)
         ansi[idx] = (byte)(idx + 32);
-      string text = PdfEncoders.WinAnsiEncoding.GetString(ansi);
+      string text = PdfEncoders.WinAnsiEncoding.GetString(ansi, 0, ansi.Length);  // AGHACK
       AddChars(text);
     }
 
@@ -111,6 +127,14 @@ namespace PdfSharp.Fonts
         Array.Sort(chars);
         return chars;
       }
+    }
+
+    public int[] GetGlyphIndices()
+    {
+      int[] indices = new int[GlyphIndices.Count];
+      GlyphIndices.Keys.CopyTo(indices, 0);
+      Array.Sort(indices);
+      return indices;
     }
 
     public char MinChar = Char.MaxValue;

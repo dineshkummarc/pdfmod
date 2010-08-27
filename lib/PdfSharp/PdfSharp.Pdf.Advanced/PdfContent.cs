@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -69,7 +69,7 @@ namespace PdfSharp.Pdf.Advanced
     /// Initializes a new instance of the <see cref="PdfContent"/> class.
     /// </summary>
     /// <param name="dict">The dict.</param>
-    public PdfContent(PdfDictionary dict) // HACK
+    public PdfContent(PdfDictionary dict) // HACK PdfContent
       : base(dict)
     {
       // A PdfContent dictionary is always unfiltered.
@@ -123,7 +123,7 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     internal void PreserveGraphicsState()
     {
-      // If a conent stream is touched by PDFsharp it is typically because graphical operations are
+      // If a content stream is touched by PDFsharp it is typically because graphical operations are
       // prepended or appended. Some nasty PDF tools does not preserve the graphical state correctly.
       // Therefore we try to relieve the problem by surrounding the content stream with push/restore 
       // graphic state operation.

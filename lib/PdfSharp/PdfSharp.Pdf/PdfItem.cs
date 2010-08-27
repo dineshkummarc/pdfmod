@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -40,15 +40,9 @@ namespace PdfSharp.Pdf
   /// <summary>
   /// The base class of all PDF objects and simple types.
   /// </summary>
-  public abstract class PdfItem  : ICloneable
+  public abstract class PdfItem : ICloneable
   {
     // All simple types (i.e. derived from PdfItem but not from PdfObject) must be immutable.
-    //
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PdfItem"/> class.
-    /// </summary>
-    public PdfItem() { }
 
     object ICloneable.Clone()
     {

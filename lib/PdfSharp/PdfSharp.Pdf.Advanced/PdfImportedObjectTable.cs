@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,13 +28,14 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
 using System.IO;
 using PdfSharp.Pdf.Advanced;
 using PdfSharp.Drawing;
-using PdfSharp.Fonts.TrueType;
+using PdfSharp.Fonts.OpenType;
 using PdfSharp.Internal;
 
 namespace PdfSharp.Pdf.Advanced
@@ -98,14 +99,14 @@ namespace PdfSharp.Pdf.Advanced
     /// </summary>
     public bool Contains(PdfObjectID externalID)
     {
-      return this.externalIDs.Contains(externalID.ToString());
+      return this.externalIDs.ContainsKey(externalID.ToString());
     }
 
     /// <summary>
     /// Adds a cloned object to this table.
     /// </summary>
-    /// <param name="externalID">The object identifier in the forein object.</param>
-    /// <param name="iref">The cross reference to the clone of the forein object, which belongs to
+    /// <param name="externalID">The object identifier in the foreign object.</param>
+    /// <param name="iref">The cross reference to the clone of the foreign object, which belongs to
     /// this document. In general the clone has a different object identifier.</param>
     public void Add(PdfObjectID externalID, PdfReference iref)
     {
@@ -124,6 +125,6 @@ namespace PdfSharp.Pdf.Advanced
     /// Maps external object identifiers to cross reference entries of the importing document
     /// {PdfObjectID -> PdfReference}.
     /// </summary>
-    Hashtable externalIDs = new Hashtable();
+    Dictionary<string, PdfReference> externalIDs = new Dictionary<string, PdfReference>();
   }
 }

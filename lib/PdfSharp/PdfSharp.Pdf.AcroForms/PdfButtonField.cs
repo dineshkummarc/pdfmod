@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using PdfSharp.Pdf.Annotations;
@@ -76,19 +77,19 @@ namespace PdfSharp.Pdf.AcroForms
       return null;
     }
 
-    internal override void GetDescendantNames(ref ArrayList names, string partialName)
+    internal override void GetDescendantNames(ref List<PdfName> names, string partialName)
     {
-      string t = Elements.GetString(Keys.T);
+      string t = Elements.GetString(PdfAcroField.Keys.T);
       // HACK: ??? 
       if (t == "")
         t = "???";
       Debug.Assert(t != "");
       if (t.Length > 0)
       {
-        if (partialName != null && partialName.Length > 0)
-          names.Add(partialName + "." + t);
+        if (!String.IsNullOrEmpty(partialName))
+          names.Add(new PdfName(partialName + "." + t));
         else
-          names.Add(t);
+          names.Add(new PdfName(t));
       }
     }
 

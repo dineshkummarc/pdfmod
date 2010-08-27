@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -45,11 +45,8 @@ namespace PdfSharp.Drawing
   /// Represents a set of 141 pre-defined RGB colors. Incidentally the values are the same
   /// as in System.Drawing.Color.
   /// </summary>
-  public sealed class XColors
+  public static class XColors
   {
-    private XColors()
-    { }
-
     ///<summary>Gets a predefined color.</summary>
     public static XColor AliceBlue { get { return new XColor(XKnownColor.AliceBlue); } }
     ///<summary>Gets a predefined color.</summary>

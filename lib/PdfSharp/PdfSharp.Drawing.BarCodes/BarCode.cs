@@ -3,7 +3,7 @@
 // Authors:
 //   Klaus Potzesny (mailto:Klaus.Potzesny@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -67,7 +67,11 @@ namespace PdfSharp.Drawing.BarCodes
           return new Code3of9Standard(text, size, direction);
 
         default:
+#if !SILVERLIGHT
           throw new InvalidEnumArgumentException("type", (int)type, typeof(CodeType));
+#else
+          throw new ArgumentException("type", type.ToString());
+#endif
       }
     }
 
@@ -98,7 +102,7 @@ namespace PdfSharp.Drawing.BarCodes
     /// <summary>
     /// When overridden in a derived class gets or sets the wide narrow ratio.
     /// </summary>
-    public virtual double WideNarrowRatio 
+    public virtual double WideNarrowRatio
     {
       get { return 0; }
       set { }
@@ -125,7 +129,7 @@ namespace PdfSharp.Drawing.BarCodes
     internal int dataLength;
 
     /// <summary>
-    /// Gets or sets the optional start chararacter.
+    /// Gets or sets the optional start character.
     /// </summary>
     public char StartChar
     {
@@ -135,7 +139,7 @@ namespace PdfSharp.Drawing.BarCodes
     internal char startChar;
 
     /// <summary>
-    /// Gets or sets the optional end chararacter.
+    /// Gets or sets the optional end character.
     /// </summary>
     public char EndChar
     {
@@ -153,7 +157,7 @@ namespace PdfSharp.Drawing.BarCodes
       get { return this.turboBit; }
       set { this.turboBit = value; }
     }
-    internal bool turboBit = false;
+    internal bool turboBit;
 
     internal virtual void InitRendering(BarCodeRenderInfo info)
     {

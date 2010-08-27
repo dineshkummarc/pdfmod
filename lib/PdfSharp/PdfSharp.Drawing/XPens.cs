@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,10 +34,8 @@ namespace PdfSharp.Drawing
   /// <summary>
   /// Pens for all the pre-defined colors.
   /// </summary>
-  public sealed class XPens
+  public static class XPens
   {
-    XPens() { }
-
     /// <summary>Gets a pre-defined XPen object.</summary>
     public static XPen AliceBlue
     {

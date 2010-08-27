@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -34,12 +34,12 @@ using System.Collections;
 namespace PdfSharp.Pdf
 {
   /// <summary>
-  /// This class is intended for empira interanl use only and may change or drop in future releases.
+  /// This class is intended for empira internal use only and may change or drop in future releases.
   /// </summary>
   public class PdfCustomValue : PdfDictionary
   {
     /// <summary>
-    /// This function is intended for empira interanl use only.
+    /// This function is intended for empira internal use only.
     /// </summary>
     public PdfCustomValue()
     {
@@ -47,7 +47,7 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// This function is intended for empira interanl use only.
+    /// This function is intended for empira internal use only.
     /// </summary>
     public PdfCustomValue(byte[] bytes)
     {
@@ -67,12 +67,12 @@ namespace PdfSharp.Pdf
     }
 
     /// <summary>
-    /// This property is intended for empira interanl use only.
+    /// This property is intended for empira internal use only.
     /// </summary>
     public PdfCustomValueCompressionMode CompressionMode;
 
     /// <summary>
-    /// This property is intended for empira interanl use only.
+    /// This property is intended for empira internal use only.
     /// </summary>
     public byte[] Value
     {

@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -84,7 +84,7 @@ namespace PdfSharp.Pdf.Filters
       }
       if (rest == 1)
       {
-        uint val = (uint)data[idxIn++] << 24;
+        uint val = (uint)data[idxIn] << 24;
         val /= 85 * 85 * 85;
         byte c2 = (byte)(val % 85 + '!');
         val /= 85;
@@ -95,7 +95,7 @@ namespace PdfSharp.Pdf.Filters
       }
       else if (rest == 2)
       {
-        uint val = ((uint)data[idxIn++] << 24) + ((uint)data[idxIn++] << 16);
+        uint val = ((uint)data[idxIn++] << 24) + ((uint)data[idxIn] << 16);
         val /= 85 * 85;
         byte c3 = (byte)(val % 85 + '!');
         val /= 85;
@@ -109,7 +109,7 @@ namespace PdfSharp.Pdf.Filters
       }
       else if (rest == 3)
       {
-        uint val = ((uint)data[idxIn++] << 24) + ((uint)data[idxIn++] << 16) + ((uint)data[idxIn++] << 8);
+        uint val = ((uint)data[idxIn++] << 24) + ((uint)data[idxIn++] << 16) + ((uint)data[idxIn] << 8);
         val /= 85;
         byte c4 = (byte)(val % 85 + '!');
         val /= 85;
@@ -128,7 +128,7 @@ namespace PdfSharp.Pdf.Filters
       result[idxOut++] = (byte)'>';
 
       if (idxOut < result.Length)
-        Array.Resize<byte>(ref result, idxOut);
+        Array.Resize(ref result, idxOut);
 
       return result;
     }
@@ -161,14 +161,11 @@ namespace PdfSharp.Pdf.Filters
             throw new ArgumentException("Illegal character.", "data");
           break;
         }
-        else
-        {
-          // ingnore unknown character
-        }
+        // ingnore unknown character
       }
       // Loop not ended with break?
       if (idx == length)
-        throw new ArgumentException("Illegal character.", "date");
+        throw new ArgumentException("Illegal character.", "data");
 
       length = idxOut;
       int nonZero = length - zCount;
@@ -214,30 +211,28 @@ namespace PdfSharp.Pdf.Filters
       // All possible cases are tested programmatically.
       if (remainder == 2) // one byte
       {
-        int idxIn = idx;
         uint value =
           (uint)(data[idx++] - '!') * (85 * 85 * 85 * 85) +
-          (uint)(data[idx++] - '!') * (85 * 85 * 85);
+          (uint)(data[idx] - '!') * (85 * 85 * 85);
 
         // Always increase if not zero (tried out)
         if (value != 0)
           value += 0x01000000;
 
-        output[idxOut++] = (byte)(value >> 24);
+        output[idxOut] = (byte)(value >> 24);
       }
       else if (remainder == 3) // two bytes
       {
         int idxIn = idx;
-        uint val;
         uint value =
           (uint)(data[idx++] - '!') * (85 * 85 * 85 * 85) +
           (uint)(data[idx++] - '!') * (85 * 85 * 85) +
-          (uint)(data[idx++] - '!') * (85 * 85);
+          (uint)(data[idx] - '!') * (85 * 85);
 
         if (value != 0)
         {
           value &= 0xFFFF0000;
-          val = value / (85 * 85);
+          uint val = value / (85 * 85);
           byte c3 = (byte)(val % 85 + '!');
           val /= 85;
           byte c2 = (byte)(val % 85 + '!');
@@ -250,22 +245,21 @@ namespace PdfSharp.Pdf.Filters
           }
         }
         output[idxOut++] = (byte)(value >> 24);
-        output[idxOut++] = (byte)(value >> 16);
+        output[idxOut] = (byte)(value >> 16);
       }
       else if (remainder == 4) // three bytes
       {
         int idxIn = idx;
-        uint val;
         uint value =
           (uint)(data[idx++] - '!') * (85 * 85 * 85 * 85) +
           (uint)(data[idx++] - '!') * (85 * 85 * 85) +
           (uint)(data[idx++] - '!') * (85 * 85) +
-          (uint)(data[idx++] - '!') * 85;
+          (uint)(data[idx] - '!') * 85;
 
         if (value != 0)
         {
           value &= 0xFFFFFF00;
-          val = value / 85;
+          uint val = value / 85;
           byte c4 = (byte)(val % 85 + '!');
           val /= 85;
           byte c3 = (byte)(val % 85 + '!');
@@ -281,7 +275,7 @@ namespace PdfSharp.Pdf.Filters
         }
         output[idxOut++] = (byte)(value >> 24);
         output[idxOut++] = (byte)(value >> 16);
-        output[idxOut++] = (byte)(value >> 8);
+        output[idxOut] = (byte)(value >> 8);
       }
       return output;
     }

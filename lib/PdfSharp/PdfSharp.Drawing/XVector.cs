@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -46,7 +46,6 @@ namespace PdfSharp.Drawing
   /// </summary>
   [Serializable]
   [StructLayout(LayoutKind.Sequential)]
-  // [TypeConverter(typeof(VectorConverter)), ValueSerializer(typeof(VectorValueSerializer))]
   public struct XVector : IFormattable
   {
     public XVector(double x, double y)
@@ -129,7 +128,7 @@ namespace PdfSharp.Drawing
 
     internal string ConvertToString(string format, IFormatProvider provider)
     {
-      char numericListSeparator = ','; // TokenizerHelper.GetNumericListSeparator(provider);
+      const char numericListSeparator = ',';
       return string.Format(provider, "{1:" + format + "}{0}{2:" + format + "}", new object[] { numericListSeparator, this.x, this.y });
     }
 
@@ -145,8 +144,8 @@ namespace PdfSharp.Drawing
 
     public void Normalize()
     {
-      this = (XVector)(this / Math.Max(Math.Abs(this.x), Math.Abs(this.y)));
-      this = (XVector)(this / this.Length);
+      this = this / Math.Max(Math.Abs(this.x), Math.Abs(this.y));
+      this = this / Length;
     }
 
     public static double CrossProduct(XVector vector1, XVector vector2)

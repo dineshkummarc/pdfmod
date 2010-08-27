@@ -3,7 +3,7 @@
 // Authors:
 //   Stefan Lange (mailto:Stefan.Lange@pdfsharp.com)
 //
-// Copyright (c) 2005-2008 empira Software GmbH, Cologne (Germany)
+// Copyright (c) 2005-2009 empira Software GmbH, Cologne (Germany)
 //
 // http://www.pdfsharp.com
 // http://sourceforge.net/projects/pdfsharp
@@ -28,6 +28,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections;
 using System.Text;
@@ -39,7 +40,7 @@ namespace PdfSharp.Drawing.Layout
   /// <summary>
   /// Represents a very simple text formatter.
   /// If this class does not satisfy your needs on formatting paragraphs I recommend to take a look
-  /// at MigraDoc Lite. Alternatively you should copy this class in you own source code and modify it.
+  /// at MigraDoc Foundation. Alternatively you should copy this class in your own source code and modify it.
   /// </summary>
   public class XTextFormatter
   {
@@ -81,7 +82,7 @@ namespace PdfSharp.Drawing.Layout
         this.cyAscent = lineSpace * font.cellAscent / font.cellSpace;
         this.cyDescent = lineSpace * font.cellDescent / font.cellSpace;
 
-        // HACK
+        // HACK in XTextFormatter
         this.spaceWidth = gfx.MeasureString("x x", value).width;
         this.spaceWidth -= gfx.MeasureString("xx", value).width;
       }
@@ -247,28 +248,28 @@ namespace PdfSharp.Drawing.Layout
         }
         else
         {
-          double width = this.spaceWidth + block.Width;
+          double width = block.Width; //!!!modTHHO 19.11.09 don't add this.spaceWidth here
           if ((x + width <= rectWidth || x == 0) && block.Type != BlockType.LineBreak)
           {
             block.Location = new XPoint(x, y);
-            x += width;
+            x += width + spaceWidth; //!!!modTHHO 19.11.09 add this.spaceWidth here
           }
           else
           {
             AlignLine(firstIndex, idx - 1, rectWidth);
             firstIndex = idx;
-            y += this.lineSpace;
+            y += lineSpace;
             if (y > rectHeight)
             {
               block.Stop = true;
               break;
             }
             block.Location = new XPoint(0, y);
-            x = width;
+            x = width + spaceWidth; //!!!modTHHO 19.11.09 add this.spaceWidth here
           }
         }
       }
-      if (firstIndex < count && this.Alignment != XParagraphAlignment.Justify)
+      if (firstIndex < count && Alignment != XParagraphAlignment.Justify)
         AlignLine(firstIndex, count - 1, rectWidth);
     }
 
@@ -312,7 +313,7 @@ namespace PdfSharp.Drawing.Layout
       }
     }
 
-    ArrayList blocks = new ArrayList();
+    readonly List<Block> blocks = new List<Block>();
 
     enum BlockType
     {
@@ -362,7 +363,7 @@ namespace PdfSharp.Drawing.Layout
       public double Width;
 
       /// <summary>
-      /// The location relative to the opper left corner of the layout rectangle.
+      /// The location relative to the upper left corner of the layout rectangle.
       /// </summary>
       public XPoint Location;
 
