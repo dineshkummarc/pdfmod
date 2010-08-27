@@ -8,7 +8,7 @@ ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-
 ASSEMBLY = ../bin/PdfMod.exe
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = exe
-PROJECT_REFERENCES = ../bin/PdfSharp.dll
+PROJECT_REFERENCES =
 BUILD_DIR = ../bin
 
 PDFMOD_EXE_MDB_SOURCE=../bin/PdfMod.exe.mdb
@@ -76,7 +76,7 @@ else
 REFERENCES += -pkg:poppler-sharp
 endif
 
-DLL_REFERENCES = 
+DLL_REFERENCES = ../bin/PdfSharp.dll 
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES)
 

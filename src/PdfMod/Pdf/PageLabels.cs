@@ -95,13 +95,13 @@ namespace PdfMod.Pdf
             edited = false;
 
             // Ignore documents that don't have labelling stuff defined
-            if (!pdf_elements.Contains (name_labels)) {
+            if (!pdf_elements.ContainsKey (name_labels)) {
                 return;
             }
 
             // Ignore documents that don't have a properly-defined PageLabelFmt section
             PdfDictionary my_labels = pdf_elements.GetDictionary (name_labels);
-            if (!my_labels.Elements.Contains (name_numtree)) {
+            if (!my_labels.Elements.ContainsKey (name_numtree)) {
                 return;
             }
 
@@ -120,21 +120,21 @@ namespace PdfMod.Pdf
                 PdfDictionary label_data = number_tree.Elements.GetDictionary (i * 2 + 1);
 
                 // Set the prefix, default to ""
-                if (label_data.Elements.Contains (name_prefix)) {
+                if (label_data.Elements.ContainsKey (name_prefix)) {
                     temp_label.prefix = label_data.Elements.GetString (name_prefix);
                 } else {
                     temp_label.prefix = "";
                 }
 
                 // Set the start number, default to 1
-                if (label_data.Elements.Contains (name_start_at)) {
+                if (label_data.Elements.ContainsKey (name_start_at)) {
                     temp_label.first_number = label_data.Elements.GetInteger (name_start_at);
                 } else {
                     temp_label.first_number = 1;
                 }
 
                 // Set the format type, default to no numbering (only show the prefix)
-                if (label_data.Elements.Contains (name_fmt)) {
+                if (label_data.Elements.ContainsKey (name_fmt)) {
                     temp_label.number_style = label_data.Elements.GetString (name_fmt);
                 } else {
                     temp_label.number_style = "";
@@ -251,9 +251,9 @@ namespace PdfMod.Pdf
 
             // Grab the labels element, creating it if necessary
             PdfDictionary labels_dict;
-            if (!pdf_elements.Contains (name_labels)) {
+            if (!pdf_elements.ContainsKey (name_labels)) {
                 labels_dict = new PdfDictionary (pdf_document);
-                pdf_elements.Add (new PdfName (name_labels), labels_dict);
+                pdf_elements.Add (name_labels, labels_dict);
             } else {
                 labels_dict = pdf_elements.GetDictionary (name_labels);
             }
@@ -270,17 +270,17 @@ namespace PdfMod.Pdf
                 PdfDictionary r_attribs = new PdfDictionary (pdf_document);
 
                 if (label_format.number_style.Length > 0) {
-                    r_attribs.Elements.Add (new PdfName (name_fmt), new PdfName (label_format.number_style));
+                    r_attribs.Elements.Add (name_fmt, new PdfName (label_format.number_style));
                 }
                 if (label_format.first_number > 1) {
-                    r_attribs.Elements.Add (new PdfName (name_start_at), new PdfInteger (label_format.first_number));
+                    r_attribs.Elements.Add (name_start_at, new PdfInteger (label_format.first_number));
                 }
                 if (label_format.prefix.Length > 0) {
-                    r_attribs.Elements.Add (new PdfName (name_prefix), new PdfString (label_format.prefix));
+                    r_attribs.Elements.Add (name_prefix, new PdfString (label_format.prefix));
                 }
                 number_tree.Elements.Add (r_attribs);
             }
-            labels_dict.Elements.Add (new PdfName (name_numtree), number_tree);
+            labels_dict.Elements.Add (name_numtree, number_tree);
         }
     }
 }
