@@ -32,6 +32,7 @@ FILES =  \
 	PdfMod/Core/Configuration.cs \
 	PdfMod/Core/Defines.cs \
 	PdfMod/Gui/Actions.cs \
+	PdfMod/Gui/BookmarkView.cs \
 	PdfMod/Gui/CairoCell.cs \
 	PdfMod/Gui/Client.cs \
 	PdfMod/Gui/DocumentIconView.cs \
@@ -67,6 +68,8 @@ REFERENCES =  \
 	-pkg:hyena.gui \
 	System \
 	System.Core
+
+PROJECT_REFERENCES = ../bin/PdfSharp.dll
 
 if USE_BUNDLED_POPPLER
 PROJECT_REFERENCES += ../bin/poppler-sharp.dll

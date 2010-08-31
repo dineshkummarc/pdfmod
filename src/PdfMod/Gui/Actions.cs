@@ -100,6 +100,7 @@ namespace PdfMod.Gui
                 new ToggleActionEntry ("Properties", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
                 new ToggleActionEntry ("ZoomFit", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
                 new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, Client.Configuration.ShowToolbar),
+                new ToggleActionEntry ("ViewBookmarks", null, Catalog.GetString ("Bookmarks"), "F9", null, OnViewBookmarks, Client.Configuration.ShowBookmarks),
                 new ToggleActionEntry ("FullScreenView", null, Catalog.GetString ("Fullscreen"), "F11", null, OnFullScreenView, false)
             );
 
@@ -177,7 +178,7 @@ namespace PdfMod.Gui
                 ? Catalog.GetString ("_Redo")
                 : String.Format (Catalog.GetString ("Redo {0}"), redo.Description);
 
-            UpdateActions (true, have_doc && app.Document.HasUnsavedChanged, "Save", "SaveAs");
+            UpdateActions (true, have_doc && app.Document.HasUnsavedChanges, "Save", "SaveAs");
             UpdateAction ("ZoomIn", true, have_doc && app.IconView.CanZoomIn);
             UpdateAction ("ZoomOut", true, have_doc && app.IconView.CanZoomOut);
 
@@ -337,8 +338,6 @@ namespace PdfMod.Gui
 
             var export_path_base = Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
-                // Translators: This is used for creating a folder name, be careful!
-                //String.Format (Catalog.GetString ("{0} - Images for {1}"), app.Document.Title ?? app.Document.Filename, GetPageSummary (pages, 10))
                 Hyena.StringUtil.EscapeFilename (
                     app.Document.Title ?? System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename))
             );
@@ -533,6 +532,12 @@ namespace PdfMod.Gui
         {
             bool show = (this["ViewToolbar"] as ToggleAction).Active;
             Client.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
+        }
+
+        void OnViewBookmarks (object o, EventArgs args)
+        {
+            bool show = (this["ViewBookmarks"] as ToggleAction).Active;
+            Client.Configuration.ShowBookmarks = app.BookmarkView.Visible = show;
         }
 
         void OnRotateRight (object o, EventArgs args)

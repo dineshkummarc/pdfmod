@@ -40,6 +40,7 @@
       <separator/>
       <menuitem action="FullScreenView"/>
       <menuitem action="ViewToolbar"/>
+      <menuitem action="ViewBookmarks"/>
     </menu>
     <menu action="HelpMenu">
       <menuitem action="Help"/>

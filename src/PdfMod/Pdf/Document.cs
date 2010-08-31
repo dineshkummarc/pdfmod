@@ -144,7 +144,8 @@ namespace PdfMod.Pdf
             Uri = uri_obj.AbsoluteUri;
             SuggestedSavePath = Path = uri_obj.LocalPath;
 
-            pdf_document = PdfSharp.Pdf.IO.PdfReader.Open (Path, PdfDocumentOpenMode.Modify | PdfDocumentOpenMode.Import, passwordProvider);
+            pdf_document = PdfSharp.Pdf.IO.PdfReader.Open (Path, PdfDocumentOpenMode.Modify, passwordProvider);
+
             for (int i = 0; i < pdf_document.PageCount; i++) {
                 var page = new Page (pdf_document.Pages[i]) {
                     Document = this,
@@ -158,8 +159,13 @@ namespace PdfMod.Pdf
             OnChanged ();
         }
 
-        public bool HasUnsavedChanged {
-            get { return tmp_uri != null || save_timeout_id != 0; }
+        private bool has_unsaved_changes;
+        public bool HasUnsavedChanges {
+            get { return has_unsaved_changes || tmp_uri != null || save_timeout_id != 0; }
+            set {
+                has_unsaved_changes = value;
+                OnChanged ();
+            }
         }
 
         public long FileSize {
@@ -258,6 +264,7 @@ namespace PdfMod.Pdf
         public void Save (string uri)
         {
             Pdf.Save (uri);
+            has_unsaved_changes = false;
             Log.DebugFormat ("Saved to {0}", uri);
             Uri = uri;
 

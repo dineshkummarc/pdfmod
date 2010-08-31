@@ -55,6 +55,7 @@ namespace PdfMod.Gui
         public Gtk.Window        Window        { get; private set; }
         public DocumentIconView  IconView      { get; private set; }
         public MetadataEditorBox EditorBox     { get; private set; }
+        public BookmarkView      BookmarkView  { get; private set; }
 
         static Client ()
         {
@@ -121,12 +122,22 @@ namespace PdfMod.Gui
             HeaderToolbar.NoShowAll = true;
             HeaderToolbar.Visible = Configuration.ShowToolbar;
 
+            // BookmarksView
+            BookmarkView = new BookmarkView ();
+            BookmarkView.NoShowAll = true;
+            BookmarkView.Visible = Configuration.ShowBookmarks;
+
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
             vbox.PackStart (HeaderToolbar, false, false, 0);
             vbox.PackStart (EditorBox, false, false, 0);
             vbox.PackStart (query_box, false, false, 0);
-            vbox.PackStart (iconview_sw, true, true, 0);
+
+            var hbox = new HPaned ();
+            hbox.Add1 (BookmarkView);
+            hbox.Add2 (iconview_sw);
+            vbox.PackStart (hbox, true, true, 0);
+
             vbox.PackStart (StatusBar, false, true, 0);
             Window.Add (vbox);
 
@@ -184,7 +195,7 @@ namespace PdfMod.Gui
 
         bool PromptIfUnsavedChanges ()
         {
-            if (Document != null && Document.HasUnsavedChanged) {
+            if (Document != null && Document.HasUnsavedChanges) {
                 var dialog = new Hyena.Widgets.HigMessageDialog (
                     Window, DialogFlags.Modal, MessageType.Warning, ButtonsType.None,
                     Catalog.GetString ("Save the changes made to this document?"),
@@ -268,7 +279,9 @@ namespace PdfMod.Gui
 
                     ThreadAssist.BlockingProxyToMain (delegate {
                         IconView.SetDocument (Document);
+                        BookmarkView.SetDocument (Document);
                         RecentManager.Default.AddItem (Document.Uri);
+
                         Document.Changed += UpdateForDocument;
                         UpdateForDocument ();
                         OnDocumentLoaded ();
@@ -302,6 +315,7 @@ namespace PdfMod.Gui
 
         void UpdateForDocument ()
         {
+            ThreadAssist.AssertInMainThread ();
             var current_size = Document.FileSize;
             string size_str = null;
             if (original_size_string == null) {
@@ -326,7 +340,7 @@ namespace PdfMod.Gui
 
             var title = Document.Title;
             var filename = Document.Filename;
-            if (Document.HasUnsavedChanged) {
+            if (Document.HasUnsavedChanges) {
                 filename = "*" + filename;
             }
             Window.Title = title == null ? filename : String.Format ("{0} - {1}", filename, title);
@@ -337,9 +351,7 @@ namespace PdfMod.Gui
             // This method is called from some random thread, but we need
             // to do the dialog on the GUI thread; use the reset_event
             // to block this thread until the user is done with the dialog.
-            var reset_event = new System.Threading.ManualResetEvent (false);
-
-            ThreadAssist.ProxyToMain (delegate {
+            ThreadAssist.BlockingProxyToMain (delegate {
                 Log.Debug ("Password requested to open document");
                 var dialog = new Hyena.Widgets.HigMessageDialog (
                     Window, DialogFlags.Modal, MessageType.Question, ButtonsType.None,
@@ -365,10 +377,7 @@ namespace PdfMod.Gui
                     Log.Information ("Password dialog cancelled");
                     args.Abort = true;
                 }
-                reset_event.Set ();
             });
-
-            reset_event.WaitOne ();
         }
 
         public Gtk.FileChooserDialog CreateChooser (string title, FileChooserAction action)

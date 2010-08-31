@@ -46,6 +46,11 @@ namespace PdfMod.Core
             set { Set<bool> ("show_toolbar", value); }
         }
 
+        public bool ShowBookmarks {
+            get { return Get<bool> ("show_bookmarks", false); }
+            set { Set<bool> ("show_bookmarks", value); }
+        }
+
         public string LastOpenFolder {
             get { return Get<string> ("last_folder", System.Environment.GetFolderPath (System.Environment.SpecialFolder.Desktop)); }
             set {
