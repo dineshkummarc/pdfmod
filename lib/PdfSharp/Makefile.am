@@ -5,7 +5,7 @@ EXTRA_DIST =
 
 if ENABLE_DEBUG
 ASSEMBLY_COMPILER_COMMAND = $(MCS)
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:TRACE;DEBUG;GDI;UseGdiObjects"
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:TRACE;GDI;UseGdiObjects"
 ASSEMBLY = ../../bin/PdfSharp.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
@@ -18,7 +18,7 @@ endif
 
 if ENABLE_RELEASE
 ASSEMBLY_COMPILER_COMMAND = $(MCS)
-ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:TRACE;GDI;DEBUG;UseGdiObjects"
+ASSEMBLY_COMPILER_FLAGS =  -noconfig -codepage:utf8 -warn:4 -optimize+ -debug "-define:TRACE;GDI;UseGdiObjects"
 ASSEMBLY = ../../bin/PdfSharp.dll
 ASSEMBLY_MDB = $(ASSEMBLY).mdb
 COMPILE_TARGET = library
@@ -350,6 +350,7 @@ EXTRAS =
 
 REFERENCES =  \
 	System \
+	System.Core \
 	System.Data \
 	System.Drawing \
 	System.Xml
