@@ -178,7 +178,7 @@ namespace PdfMod.Gui
                 ? Catalog.GetString ("_Redo")
                 : String.Format (Catalog.GetString ("Redo {0}"), redo.Description);
 
-            UpdateActions (true, have_doc && app.Document.HasUnsavedChanges, "Save", "SaveAs");
+            UpdateAction ("Save", true, have_doc && app.Document.HasUnsavedChanges);
             UpdateAction ("ZoomIn", true, have_doc && app.IconView.CanZoomIn);
             UpdateAction ("ZoomOut", true, have_doc && app.IconView.CanZoomOut);
 
