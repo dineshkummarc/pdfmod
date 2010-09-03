@@ -1,4 +1,4 @@
-# Slovenian translation of pdfmod.
+# Slovenian translations for pdfmod.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pdfmod package.
 #
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pdfmod\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-05-08 01:29+0000\n"
-"PO-Revision-Date: 2010-06-04 18:57+0100\n"
-"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
+"POT-Creation-Date: 2010-08-31 21:18+0000\n"
+"PO-Revision-Date: 2010-09-03 17:30+0100\n"
+"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,28 +156,32 @@ msgid "Toolbar"
 msgstr "Orodna vrstica"
 
 #: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Bookmarks"
+msgstr "Zaznamki"
+
+#: ../src/PdfMod/Gui/Actions.cs:104
 msgid "Fullscreen"
 msgstr "Celozaslonski način"
 
-#: ../src/PdfMod/Gui/Actions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:173
 msgid "_Undo"
 msgstr "_Razveljavi"
 
-#: ../src/PdfMod/Gui/Actions.cs:173
+#: ../src/PdfMod/Gui/Actions.cs:174
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Razveljavitev {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:178
 msgid "_Redo"
 msgstr "_Uveljavi"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:179
 #, csharp-format
 msgid "Redo {0}"
 msgstr "Uveljavitev {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:186
+#: ../src/PdfMod/Gui/Actions.cs:187
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
@@ -186,7 +190,7 @@ msgstr[1] "Odstrani {0} stran"
 msgstr[2] "Odstrani {0} strani"
 msgstr[3] "Odstrani {0} strani"
 
-#: ../src/PdfMod/Gui/Actions.cs:189
+#: ../src/PdfMod/Gui/Actions.cs:190
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
@@ -195,7 +199,7 @@ msgstr[1] "Odstrani {0} izbrane strani"
 msgstr[2] "Odstrani {0} izbranih strani"
 msgstr[3] "Odstrani {0} izbranih strani"
 
-#: ../src/PdfMod/Gui/Actions.cs:192
+#: ../src/PdfMod/Gui/Actions.cs:193
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
@@ -204,7 +208,7 @@ msgstr[1] "Razširi {0} stran"
 msgstr[2] "Razširi {0} strani"
 msgstr[3] "Razširi {0} strani"
 
-#: ../src/PdfMod/Gui/Actions.cs:195
+#: ../src/PdfMod/Gui/Actions.cs:196
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
@@ -213,23 +217,23 @@ msgstr[1] "Razširi {0} izbrano stran"
 msgstr[2] "Razširi {0} izbrani strani"
 msgstr[3] "Razširi {0} izbrane strani"
 
-#: ../src/PdfMod/Gui/Actions.cs:203
-#: ../src/PdfMod/Gui/Actions.cs:244
+#: ../src/PdfMod/Gui/Actions.cs:204
+#: ../src/PdfMod/Gui/Actions.cs:245
 msgid "Select PDF"
 msgstr "Izbor PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:261
-#: ../src/PdfMod/Gui/Client.cs:289
+#: ../src/PdfMod/Gui/Actions.cs:262
+#: ../src/PdfMod/Gui/Client.cs:302
 msgid "Error Loading Document"
 msgstr "Napaka nalaganja dokumenta"
 
-#: ../src/PdfMod/Gui/Actions.cs:262
-#: ../src/PdfMod/Gui/Client.cs:290
+#: ../src/PdfMod/Gui/Actions.cs:263
+#: ../src/PdfMod/Gui/Client.cs:303
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Prišlo je do napake med nalaganjem {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:276
+#: ../src/PdfMod/Gui/Actions.cs:277
 msgid "Save as..."
 msgstr "Shrani kot ..."
 
@@ -268,19 +272,19 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Andrej Žnidaršič <andrej.znidarsic@gmail.com>"
 
-#: ../src/PdfMod/Gui/Client.cs:85
+#: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
 msgstr "PDF urejevalnik"
 
-#: ../src/PdfMod/Gui/Client.cs:190
+#: ../src/PdfMod/Gui/Client.cs:201
 msgid "Save the changes made to this document?"
 msgstr "Ali naj se shranijo spremembe dokumenta?"
 
-#: ../src/PdfMod/Gui/Client.cs:193
+#: ../src/PdfMod/Gui/Client.cs:204
 msgid "Close _Without Saving"
 msgstr "Zapri _brez shranjevanja"
 
-#: ../src/PdfMod/Gui/Client.cs:223
+#: ../src/PdfMod/Gui/Client.cs:234
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
@@ -289,25 +293,25 @@ msgstr[1] "Ali naj se nadaljuje odpiranje {0} dokumenta v ločenih oknih?"
 msgstr[2] "Ali naj se nadaljuje odpiranje {0} dokumentov v ločenih oknih?"
 msgstr[3] "Ali naj se nadaljuje odpiranje {0} dokumentov v ločenih oknih?"
 
-#: ../src/PdfMod/Gui/Client.cs:227
+#: ../src/PdfMod/Gui/Client.cs:238
 msgid "Open _First"
 msgstr "Odpri _prvo"
 
-#: ../src/PdfMod/Gui/Client.cs:228
+#: ../src/PdfMod/Gui/Client.cs:239
 msgid "Open _All"
 msgstr "Odpri _vse"
 
-#: ../src/PdfMod/Gui/Client.cs:259
+#: ../src/PdfMod/Gui/Client.cs:270
 msgid "Loading document..."
 msgstr "Nalaganje dokumenta ..."
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:315
+#: ../src/PdfMod/Gui/Client.cs:332
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (izvorno {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:320
+#: ../src/PdfMod/Gui/Client.cs:337
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
@@ -316,15 +320,19 @@ msgstr[1] "{0} stran"
 msgstr[2] "{0} strani"
 msgstr[3] "{0} strani"
 
-#: ../src/PdfMod/Gui/Client.cs:343
+#: ../src/PdfMod/Gui/Client.cs:358
 msgid "Document is Encrypted"
 msgstr "Dokument je šifriran"
 
-#: ../src/PdfMod/Gui/Client.cs:344
+#: ../src/PdfMod/Gui/Client.cs:359
 msgid "Enter the document's password to open it:"
 msgstr "Vnesite geslo za odpiranje dokumenta:"
 
-#: ../src/PdfMod/Gui/Client.cs:378
+#: ../src/PdfMod/Gui/Client.cs:389
+msgid "PDF Documents"
+msgstr "Dokumenti PDF"
+
+#: ../src/PdfMod/Gui/Client.cs:390
 msgid "All Files"
 msgstr "Vse datoteke"
 
@@ -364,5 +372,3 @@ msgstr "_Zapri"
 msgid "Hide the document's properties"
 msgstr "Skrij lastnosti dokumenta"
 
-#~ msgid "PDF Documents"
-#~ msgstr "Dokumenti PDF"
