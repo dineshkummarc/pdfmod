@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the pdfmod package.
 # GrayWaLL <graywall@ymail.com>, 2010.
 # Aron Xu <happyaron.xu@gmail.com>, 2010.
-#
+# GrayWaLL <graywall@ymail.co>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-01-01 08:52+0000\n"
-"PO-Revision-Date: 2010-01-31 16:28+0800\n"
-"Last-Translator: GrayWaLL <graywall@ymail.com\n"
+"POT-Creation-Date: 2010-08-31 20:27+0000\n"
+"PO-Revision-Date: 2010-09-01 03:59+0800\n"
+"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/pdfmod.desktop.in.in.h:1
@@ -44,6 +45,11 @@ msgstr "试图移动页面时发生错误"
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
 msgstr "试图从文档中移除页面时发生错误"
+
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "页面 {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:63
 msgid "Open a document"
@@ -146,152 +152,166 @@ msgid "Toolbar"
 msgstr "工具栏"
 
 #: ../src/PdfMod/Gui/Actions.cs:103
+msgid "Bookmarks"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:104
 msgid "Fullscreen"
 msgstr "全屏"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:173
 msgid "_Undo"
 msgstr "撤销(_U)"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:174
 #, csharp-format
 msgid "Undo {0}"
 msgstr "撤销 {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:182
+#: ../src/PdfMod/Gui/Actions.cs:178
 msgid "_Redo"
 msgstr "重做(_R)"
 
-#: ../src/PdfMod/Gui/Actions.cs:183
+#: ../src/PdfMod/Gui/Actions.cs:179
 #, csharp-format
 msgid "Redo {0}"
 msgstr "重做 {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:191
+#: ../src/PdfMod/Gui/Actions.cs:187
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "移除 {0} 页面"
 
-#: ../src/PdfMod/Gui/Actions.cs:194
+#: ../src/PdfMod/Gui/Actions.cs:190
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "移除已选择 {0} 页面"
 
-#: ../src/PdfMod/Gui/Actions.cs:197
+#: ../src/PdfMod/Gui/Actions.cs:193
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "释放 {0} 页面"
 
-#: ../src/PdfMod/Gui/Actions.cs:200
+#: ../src/PdfMod/Gui/Actions.cs:196
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "释放已选择 {0} 页面"
 
-#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
+#: ../src/PdfMod/Gui/Actions.cs:204 ../src/PdfMod/Gui/Actions.cs:245
 msgid "Select PDF"
 msgstr "选择 PDF 文件"
 
-#: ../src/PdfMod/Gui/Actions.cs:212
-msgid "PDF Documents"
-msgstr "PDF 文档"
+#: ../src/PdfMod/Gui/Actions.cs:262 ../src/PdfMod/Gui/Client.cs:302
+msgid "Error Loading Document"
+msgstr "载入文档时发生错误"
 
-#: ../src/PdfMod/Gui/Actions.cs:213 ../src/PdfMod/Gui/Actions.cs:259
-#: ../src/PdfMod/Gui/Actions.cs:290
-msgid "All Files"
-msgstr "所有文件"
+#: ../src/PdfMod/Gui/Actions.cs:263 ../src/PdfMod/Gui/Client.cs:303
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "载入 {0} 时发生错误"
 
-#: ../src/PdfMod/Gui/Actions.cs:281
+#: ../src/PdfMod/Gui/Actions.cs:277
 msgid "Save as..."
 msgstr "另存为..."
 
-#: ../src/PdfMod/Gui/Actions.cs:423
+#: ../src/PdfMod/Gui/Actions.cs:413
 msgid "Error opening help"
 msgstr "打开帮助时发生错误"
 
-#: ../src/PdfMod/Gui/Actions.cs:424
+#: ../src/PdfMod/Gui/Actions.cs:414
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "您要打开PDF修改者的在线文档吗？"
 
-#: ../src/PdfMod/Gui/Actions.cs:445
+#: ../src/PdfMod/Gui/Actions.cs:435
 msgid "Visit Website"
 msgstr "访问网站"
 
-#: ../src/PdfMod/Gui/Actions.cs:447
+#: ../src/PdfMod/Gui/Actions.cs:437
 msgid "Primary Development:"
 msgstr "主要开发人员"
 
-#: ../src/PdfMod/Gui/Actions.cs:450
+#: ../src/PdfMod/Gui/Actions.cs:440
 msgid "Contributors:"
 msgstr "贡献者"
 
-#: ../src/PdfMod/Gui/Actions.cs:466
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:458
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"版权所有 {0} Novell Inc.\n"
+"版权所有 {1} 其它 PDF Mod 贡献者"
+
+#: ../src/PdfMod/Gui/Actions.cs:461
 msgid "translator-credits"
 msgstr ""
 "GrayWaLL <graywall@ymail.com>, 2010\n"
 "Aron Xu <happyaron.xu@gmail.com>, 2010"
 
-#: ../src/PdfMod/Gui/Client.cs:84
+#: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
 msgstr "PDF修改者"
 
-#: ../src/PdfMod/Gui/Client.cs:189
+#: ../src/PdfMod/Gui/Client.cs:201
 msgid "Save the changes made to this document?"
 msgstr "保存对当前文档的所有更改吗？"
 
-#: ../src/PdfMod/Gui/Client.cs:192
+#: ../src/PdfMod/Gui/Client.cs:204
 msgid "Close _Without Saving"
 msgstr "不保存而关闭(_W)"
 
-#: ../src/PdfMod/Gui/Client.cs:222
+#: ../src/PdfMod/Gui/Client.cs:234
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "在新窗口中打开 {0} 文档，继续吗？"
 
-#: ../src/PdfMod/Gui/Client.cs:226
+#: ../src/PdfMod/Gui/Client.cs:238
 msgid "Open _First"
 msgstr "打开第一个(_F)"
 
-#: ../src/PdfMod/Gui/Client.cs:227
+#: ../src/PdfMod/Gui/Client.cs:239
 msgid "Open _All"
 msgstr "打开所有(_A)"
 
-#: ../src/PdfMod/Gui/Client.cs:258
+#: ../src/PdfMod/Gui/Client.cs:270
 msgid "Loading document..."
 msgstr "载入文档..."
 
-#: ../src/PdfMod/Gui/Client.cs:288
-msgid "Error Loading Document"
-msgstr "载入文档时发生错误"
-
-#: ../src/PdfMod/Gui/Client.cs:289
-#, csharp-format
-msgid "There was an error loading {0}"
-msgstr "载入 {0} 时发生错误"
-
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:314
+#: ../src/PdfMod/Gui/Client.cs:332
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (原始为{1})"
 
-#: ../src/PdfMod/Gui/Client.cs:319
+#: ../src/PdfMod/Gui/Client.cs:337
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} 页面"
 
-#: ../src/PdfMod/Gui/Client.cs:342
+#: ../src/PdfMod/Gui/Client.cs:358
 msgid "Document is Encrypted"
 msgstr "文档是加密的"
 
-#: ../src/PdfMod/Gui/Client.cs:343
+#: ../src/PdfMod/Gui/Client.cs:359
 msgid "Enter the document's password to open it:"
 msgstr "请输入该文档的密码："
+
+#: ../src/PdfMod/Gui/Client.cs:389
+msgid "PDF Documents"
+msgstr "PDF 文档"
+
+#: ../src/PdfMod/Gui/Client.cs:390
+msgid "All Files"
+msgstr "所有文件"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
 msgid "Select Matching"
