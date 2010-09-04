@@ -10,8 +10,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=pdfmod&component=general\n"
 "POT-Creation-Date: 2010-08-31 20:27+0000\n"
-"PO-Revision-Date: 2010-09-01 03:59+0800\n"
-"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
+"PO-Revision-Date: 2010-09-05 03:40+0800\n"
+"Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,7 +153,7 @@ msgstr "工具栏"
 
 #: ../src/PdfMod/Gui/Actions.cs:103
 msgid "Bookmarks"
-msgstr ""
+msgstr "书签"
 
 #: ../src/PdfMod/Gui/Actions.cs:104
 msgid "Fullscreen"
