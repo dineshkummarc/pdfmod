@@ -118,12 +118,26 @@ namespace PdfMod.Gui
             }
         }
 
+        private class BookmarkTreeView : TreeView
+        {
+            protected override bool OnButtonPressEvent (Gdk.EventButton press)
+            {
+                TreePath path;
+                if (!GetPathAtPos ((int)press.X, (int)press.Y, out path)) {
+                    Selection.UnselectAll ();
+                    return true;
+                } else {
+                    return base.OnButtonPressEvent (press);
+                }
+            }
+        }
+
         private void BuildTreeView ()
         {
             // outline, expanded/opened, title, page # destination, tooltip
             model = new TreeStore (typeof(PdfSharp.Pdf.PdfOutline), typeof(bool), typeof(string), typeof(int), typeof(string));
 
-            tree_view = new TreeView () {
+            tree_view = new BookmarkTreeView () {
                 Model = model,
                 SearchColumn = (int)ModelColumns.Title,
                 TooltipColumn = (int)ModelColumns.Tooltip,
@@ -133,7 +147,7 @@ namespace PdfMod.Gui
                 Reorderable = false,
                 ShowExpanders = true
             };
-            tree_view.Selection.Mode = SelectionMode.Browse;
+            tree_view.Selection.Mode = SelectionMode.Multiple;
 
             var title = new CellRendererText () {
                 Editable = true,
@@ -182,9 +196,9 @@ namespace PdfMod.Gui
 
             var sw = new Gtk.ScrolledWindow () {
                 HscrollbarPolicy = PolicyType.Never,
-                VscrollbarPolicy = PolicyType.Automatic,
-                Child = tree_view
+                VscrollbarPolicy = PolicyType.Automatic
             };
+            sw.AddWithViewport (tree_view);
             PackStart (sw, true, true, 0);
         }
 
@@ -221,15 +235,18 @@ namespace PdfMod.Gui
 
             var remove_button = new Button (Gtk.Stock.Remove);
             remove_button.Clicked += (o, a) => {
-                TreeIter iter;
-                if (tree_view.Selection.GetSelected (out iter)) {
+                foreach (var path in tree_view.Selection.GetSelectedRows ()) {
+                    TreeIter iter;
+                    model.GetIter (out iter, path);
                     var outline = GetOutline (iter);
                     Hyena.Log.DebugFormat ("Removing bookmark '{0}'", outline.Title);
                     outline.Remove ();
                     model.Remove (ref iter);
-                    MarkModified ();
                 }
+                MarkModified ();
             };
+            tree_view.Selection.Changed += (o, a) => remove_button.Sensitive = tree_view.Selection.CountSelectedRows () > 0;
+            remove_button.Sensitive = tree_view.Selection.CountSelectedRows () > 0;
 
             box.PackStart (add_button, false, false, 0);
             box.PackStart (remove_button, false, false, 0);

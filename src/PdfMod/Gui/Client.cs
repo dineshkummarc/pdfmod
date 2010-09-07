@@ -92,7 +92,8 @@ namespace PdfMod.Gui
 
             // PDF Icon View
             IconView = new DocumentIconView (this);
-            var iconview_sw = new Gtk.ScrolledWindow () { Child = IconView };
+            var iconview_sw = new Gtk.ScrolledWindow ();
+            iconview_sw.AddWithViewport (IconView);
 
             query_box = new QueryBox (this) { NoShowAll = true };
             query_box.Hide ();
