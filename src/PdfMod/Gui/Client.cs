@@ -124,7 +124,7 @@ namespace PdfMod.Gui
             HeaderToolbar.Visible = Configuration.ShowToolbar;
 
             // BookmarksView
-            BookmarkView = new BookmarkView ();
+            BookmarkView = new BookmarkView (this);
             BookmarkView.NoShowAll = true;
             BookmarkView.Visible = Configuration.ShowBookmarks;
 

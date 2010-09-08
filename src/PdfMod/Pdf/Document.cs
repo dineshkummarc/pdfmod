@@ -159,11 +159,15 @@ namespace PdfMod.Pdf
             OnChanged ();
         }
 
-        private bool has_unsaved_changes;
         public bool HasUnsavedChanges {
-            get { return has_unsaved_changes || tmp_uri != null || save_timeout_id != 0; }
+            get { return UnsavedChanges > 0 || tmp_uri != null || save_timeout_id != 0; }
+        }
+
+        int unsaved_changes = 0;
+        public int UnsavedChanges {
+            get { return unsaved_changes; }
             set {
-                has_unsaved_changes = value;
+                unsaved_changes = value;
                 OnChanged ();
             }
         }
@@ -264,7 +268,7 @@ namespace PdfMod.Pdf
         public void Save (string uri)
         {
             Pdf.Save (uri);
-            has_unsaved_changes = false;
+            UnsavedChanges = 0;
             Log.DebugFormat ("Saved to {0}", uri);
             Uri = uri;
 

@@ -45,7 +45,8 @@ namespace PdfMod.Gui
 
         static string [] require_doc_actions = new string[] {
             "Save", "SaveAs", "Properties", "Undo", "Redo", "ZoomFit", "OpenInViewer",
-            "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "SelectInverse", "InsertFrom", "ExportImages"
+            "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "SelectInverse", "InsertFrom", "ExportImages",
+            "AddBookmark", "EditBookmarks"
         };
 
         static string [] require_page_actions = new string[] {
@@ -60,53 +61,64 @@ namespace PdfMod.Gui
             undo_manager = new UndoManager ();
 
             AddImportant (
+                new ActionEntry ("FileMenu", null, Catalog.GetString ("_File"), null, null, null),
                 new ActionEntry ("Open",   Gtk.Stock.Open,   null, "<control>O", Catalog.GetString ("Open a document"), OnOpen),
-                new ActionEntry ("InsertFrom", Gtk.Stock.Add, Catalog.GetString("_Insert From..."), null, Catalog.GetString("Insert pages from another document"), OnInsertFrom),
                 new ActionEntry ("Save",   Gtk.Stock.Save,   null, "<control>S", Catalog.GetString ("Save changes to this document, overwriting the existing file"), OnSave),
                 new ActionEntry ("SaveAs", Gtk.Stock.SaveAs, null, "<control><shift>S", Catalog.GetString ("Save this document to a new file"), OnSaveAs),
-
-                new ActionEntry ("FileMenu", null, Catalog.GetString ("_File"), null, null, null),
                 new ActionEntry ("RecentMenu", null, Catalog.GetString ("Recent _Files"), null, null, null),
-                new ActionEntry ("Close", Gtk.Stock.Close, null, "<control>W", null, OnClose),
-                new ActionEntry ("Remove", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
-                new ActionEntry ("Extract", Gtk.Stock.New, null, null, null, OnExtractPages),
-                new ActionEntry ("RotateRight", null, Catalog.GetString ("Rotate Right"), "bracketright", Catalog.GetString ("Rotate right"), OnRotateRight),
-                new ActionEntry ("RotateLeft", null, Catalog.GetString ("Rotate Left"), "bracketleft", Catalog.GetString ("Rotate left"), OnRotateLeft),
                 new ActionEntry ("ExportImages", null, Catalog.GetString ("Export Images"), null, Catalog.GetString ("Save all images in this document to a new folder"), OnExportImages),
+                new ActionEntry ("InsertFrom", Gtk.Stock.Add, Catalog.GetString("_Insert From..."), null, Catalog.GetString("Insert pages from another document"), OnInsertFrom),
+                new ActionEntry ("Close", Gtk.Stock.Close, null, "<control>W", null, OnClose),
 
                 new ActionEntry ("EditMenu", null, Catalog.GetString ("_Edit"), null, null, null),
-                new ActionEntry ("SelectAll", Stock.SelectAll, null, "<control>A", null, OnSelectAll),
-                new ActionEntry ("SelectEvens", null, Catalog.GetString ("Select Even Pages"), null, null, OnSelectEvens),
-                new ActionEntry ("SelectOdds", null, Catalog.GetString ("Select Odd Pages"), null, null, OnSelectOdds),
-                new ActionEntry ("SelectMatching", null, Catalog.GetString ("Select Matching..."), "<control>F", null, OnSelectMatching),
-                new ActionEntry ("SelectInverse", null, Catalog.GetString ("_Invert Selection"), "<shift><control>I", null, OnSelectInverse),
                 new ActionEntry ("Undo", Stock.Undo, null, "<control>z", null, OnUndo),
                 new ActionEntry ("Redo", Stock.Redo, null, "<control>y", null, OnRedo),
+                new ActionEntry ("Extract", Gtk.Stock.New, null, null, null, OnExtractPages),
+                new ActionEntry ("Remove", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
+                new ActionEntry ("RotateLeft", null, Catalog.GetString ("Rotate Left"), "bracketleft", Catalog.GetString ("Rotate left"), OnRotateLeft),
+                new ActionEntry ("RotateRight", null, Catalog.GetString ("Rotate Right"), "bracketright", Catalog.GetString ("Rotate right"), OnRotateRight),
+                new ActionEntry ("SelectAll", Stock.SelectAll, null, "<control>A", null, OnSelectAll),
+                new ActionEntry ("SelectOdds", null, Catalog.GetString ("Select Odd Pages"), null, null, OnSelectOdds),
+                new ActionEntry ("SelectEvens", null, Catalog.GetString ("Select Even Pages"), null, null, OnSelectEvens),
+                new ActionEntry ("SelectMatching", null, Catalog.GetString ("Select Matching..."), "<control>F", null, OnSelectMatching),
+                new ActionEntry ("SelectInverse", null, Catalog.GetString ("_Invert Selection"), "<shift><control>I", null, OnSelectInverse),
 
                 new ActionEntry ("ViewMenu", null, Catalog.GetString ("_View"), null, null, null),
                 new ActionEntry ("ZoomIn", Stock.ZoomIn, null, "<control>plus", null, OnZoomIn),
                 new ActionEntry ("ZoomOut", Stock.ZoomOut, null, "<control>minus", null, OnZoomOut),
+                new ActionEntry ("OpenInViewer", null, Catalog.GetString ("Open in Viewer"), "F5", Catalog.GetString ("Open in viewer"), OnOpenInViewer),
+
+                new ActionEntry ("BookmarksMenu", null, Catalog.GetString ("_Bookmarks"), null, null, null),
+                new ActionEntry ("AddBookmark", null, Catalog.GetString ("_Add Bookmark"), "<control>d", null, null),
+                new ActionEntry ("RenameBookmark", null, Catalog.GetString ("Re_name Bookmark"), "F2", null, null),
+                new ActionEntry ("ChangeBookmarkDest", null, Catalog.GetString ("_Change Bookmark Destination"), null, null, null),
+                new ActionEntry ("RemoveBookmarks", Stock.Remove, Catalog.GetString ("_Remove Bookmark"), null, null, null),
+                new ActionEntry ("EditBookmarks", null, Catalog.GetString ("_Edit Bookmarks"), "<control>B", null, OnEditBookmarks),
 
                 new ActionEntry ("HelpMenu", null, Catalog.GetString ("_Help"), null, null, null),
                 new ActionEntry ("Help", Stock.Help, Catalog.GetString ("_Contents"), "F1", null, OnHelp),
                 new ActionEntry ("About", Stock.About, null, null, null, OnAbout),
 
                 new ActionEntry ("PageContextMenu", null, "", null, null, OnPageContextMenu),
-
-                new ActionEntry ("OpenInViewer", null, Catalog.GetString ("Open in Viewer"), "F5", Catalog.GetString ("Open in viewer"), OnOpenInViewer)
+                new ActionEntry ("BookmarkContextMenu", null, "", null, null, OnBookmarkContextMenu)
             );
+
+            this["AddBookmark"].ShortLabel = Catalog.GetString ("_Add");
+            this["RemoveBookmarks"].ShortLabel = Catalog.GetString ("_Remove");
 
             AddImportant (
                 new ToggleActionEntry ("Properties", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
                 new ToggleActionEntry ("ZoomFit", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
                 new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, Client.Configuration.ShowToolbar),
-                new ToggleActionEntry ("ViewBookmarks", null, Catalog.GetString ("Bookmarks"), "F9", null, OnViewBookmarks, Client.Configuration.ShowBookmarks),
+                new ToggleActionEntry ("ViewBookmarks", null, Catalog.GetString ("Bookmarks"), "<ctrl>B", null, OnViewBookmarks, Client.Configuration.ShowBookmarks),
                 new ToggleActionEntry ("FullScreenView", null, Catalog.GetString ("Fullscreen"), "F11", null, OnFullScreenView, false)
             );
 
             this["RotateRight"].IconName = "object-rotate-right";
             this["RotateLeft"].IconName = "object-rotate-left";
             this["ExportImages"].IconName = "image-x-generic";
+            this["ViewBookmarks"].IconName = "user-bookmarks";
+            this["AddBookmark"].IconName = "bookmark-new";
 
             UpdateAction ("Help", true);
 
@@ -123,19 +135,10 @@ namespace PdfMod.Gui
             Register ();
 
             // Add additional menu item keybindings
-            var item = ActionManager.UIManager.GetWidget ("/MainMenu/ViewMenu/ZoomIn");
-            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.KP_Add, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
-            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.equal, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
-
-            item = ActionManager.UIManager.GetWidget ("/MainMenu/ViewMenu/ZoomOut");
-            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.KP_Subtract, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
-            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.underscore, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
-
-            item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/Close");
-            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.q, Gdk.ModifierType.ControlMask, Gtk.AccelFlags.Visible);
-
-            item = ActionManager.UIManager.GetWidget ("/MainMenu/EditMenu/Redo");
-            item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint) Gdk.Key.z, Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask, Gtk.AccelFlags.Visible);
+            AddAccel ("/MainMenu/ViewMenu/ZoomIn",  Gdk.ModifierType.ControlMask, Gdk.Key.KP_Add, Gdk.Key.equal);
+            AddAccel ("/MainMenu/ViewMenu/ZoomOut", Gdk.ModifierType.ControlMask, Gdk.Key.KP_Subtract, Gdk.Key.underscore);
+            AddAccel ("/MainMenu/FileMenu/Close",   Gdk.ModifierType.ControlMask, Gdk.Key.q);
+            AddAccel ("/MainMenu/EditMenu/Redo",    Gdk.ModifierType.ControlMask | Gdk.ModifierType.ShiftMask, Gdk.Key.z);
 
             // Set up recent documents menu
             MenuItem recent_item = ActionManager.UIManager.GetWidget ("/MainMenu/FileMenu/RecentMenu") as MenuItem;
@@ -148,6 +151,14 @@ namespace PdfMod.Gui
                 Client.RunIdle (delegate { app.LoadPath (recent_chooser_item.CurrentUri); });
             };
             recent_item.Submenu = recent_chooser_item;
+        }
+
+        private void AddAccel (string path, Gdk.ModifierType modifier, params Gdk.Key [] keys)
+        {
+            var item = ActionManager.UIManager.GetWidget (path);
+            foreach (var key in keys) {
+                item.AddAccelerator ("activate", ActionManager.UIManager.AccelGroup, (uint)key, modifier, Gtk.AccelFlags.Visible);
+            }
         }
 
         void OnChanged (object o, EventArgs args)
@@ -199,6 +210,8 @@ namespace PdfMod.Gui
 
 #region Action Handlers
 
+        // File menu actions
+
         void OnOpen (object o, EventArgs args)
         {
             var chooser = app.CreateChooser (Catalog.GetString ("Select PDF"), FileChooserAction.Open);
@@ -221,48 +234,6 @@ namespace PdfMod.Gui
                         app.LoadPath (file);
                     }
                 });
-            }
-        }
-
-        void OnOpenInViewer (object o, EventArgs args)
-        {
-            System.Diagnostics.Process.Start (app.Document.CurrentStateUri);
-        }
-
-        void OnFullScreenView (object o, EventArgs args)
-        {
-            bool fullscreen = (this["FullScreenView"] as ToggleAction).Active;
-
-            if (fullscreen) {
-                app.Window.Fullscreen ();
-            } else {
-                app.Window.Unfullscreen ();
-            }
-        }
-
-        void OnInsertFrom (object o, EventArgs args)
-        {
-            var chooser = app.CreateChooser (Catalog.GetString ("Select PDF"), FileChooserAction.Open);
-            chooser.SelectMultiple = false;
-            chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
-            chooser.AddButton (Stock.Open, ResponseType.Ok);
-            // TODO will uncomment this later; don't want to break string freeze now
-            //chooser.AddButton (Catalog.GetString ("_Insert"), ResponseType.Ok);
-
-            var response = chooser.Run ();
-            string filename = chooser.Filename;
-            chooser.Destroy();
-
-            if (response == (int)ResponseType.Ok) {
-                try {
-                    app.Document.AddFromUri (new Uri (filename));
-                } catch (Exception e) {
-                    Hyena.Log.Exception (e);
-                    Hyena.Log.Error (
-                        Catalog.GetString ("Error Loading Document"),
-                        String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (filename ?? "")), true
-                    );
-                }
             }
         }
 
@@ -290,42 +261,6 @@ namespace PdfMod.Gui
                 app.Document.Save (filename);
                 undo_manager.Clear ();
             }
-        }
-
-        void OnProperties (object o, EventArgs args)
-        {
-            app.EditorBox.Visible = (this["Properties"] as ToggleAction).Active;
-            if (app.EditorBox.Visible) {
-                app.EditorBox.GrabFocus ();
-            }
-        }
-
-        void OnRemove (object o, EventArgs args)
-        {
-            var action = new RemoveAction (app.Document, app.IconView.SelectedPages);
-            action.Do ();
-            // Undo isn't working yet
-            //undo_manager.AddUndoAction (action);
-        }
-
-        void OnExtractPages (object o, EventArgs args)
-        {
-            var doc = new PdfDocument ();
-            var pages = new List<Page> (app.IconView.SelectedPages);
-            foreach (var page in pages) {
-                doc.AddPage (page.Pdf);
-            }
-
-            var path = Client.GetTmpFilename ();
-            doc.Save (path);
-            doc.Dispose ();
-
-            app.LoadPath (path, Path.Combine (
-                Path.GetDirectoryName (app.Document.SuggestedSavePath),
-                String.Format ("[{0}] {1}",
-                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10)),
-                    Path.GetFileName (app.Document.SuggestedSavePath))
-            ));
         }
 
         void OnExportImages (object o, EventArgs args)
@@ -358,6 +293,47 @@ namespace PdfMod.Gui
             System.Diagnostics.Process.Start (export_path);
         }
 
+        void OnInsertFrom (object o, EventArgs args)
+        {
+            var chooser = app.CreateChooser (Catalog.GetString ("Select PDF"), FileChooserAction.Open);
+            chooser.SelectMultiple = false;
+            chooser.SetCurrentFolder (System.IO.Path.GetDirectoryName (app.Document.SuggestedSavePath));
+            chooser.AddButton (Stock.Open, ResponseType.Ok);
+            // TODO will uncomment this later; don't want to break string freeze now
+            //chooser.AddButton (Catalog.GetString ("_Insert"), ResponseType.Ok);
+
+            var response = chooser.Run ();
+            string filename = chooser.Filename;
+            chooser.Destroy();
+
+            if (response == (int)ResponseType.Ok) {
+                try {
+                    app.Document.AddFromUri (new Uri (filename));
+                } catch (Exception e) {
+                    Hyena.Log.Exception (e);
+                    Hyena.Log.Error (
+                        Catalog.GetString ("Error Loading Document"),
+                        String.Format (Catalog.GetString ("There was an error loading {0}"), GLib.Markup.EscapeText (filename ?? "")), true
+                    );
+                }
+            }
+        }
+
+        void OnProperties (object o, EventArgs args)
+        {
+            app.EditorBox.Visible = (this["Properties"] as ToggleAction).Active;
+            if (app.EditorBox.Visible) {
+                app.EditorBox.GrabFocus ();
+            }
+        }
+
+        void OnClose (object o, EventArgs args)
+        {
+            app.Quit ();
+        }
+
+        // Edit menu actions
+
         void OnUndo (object o, EventArgs args)
         {
             undo_manager.Undo ();
@@ -368,17 +344,115 @@ namespace PdfMod.Gui
             undo_manager.Redo ();
         }
 
-        [DllImport ("glib-2.0.dll")]
-        static extern IntPtr g_get_language_names ();
-
-        string CombinePaths (params string [] parts)
+        void OnExtractPages (object o, EventArgs args)
         {
-            string path = parts[0];
-            for (int i = 1; i < parts.Length; i++) {
-                path = System.IO.Path.Combine (path, parts[i]);
+            var doc = new PdfDocument ();
+            var pages = new List<Page> (app.IconView.SelectedPages);
+            foreach (var page in pages) {
+                doc.AddPage (page.Pdf);
             }
-            return path;
+
+            var path = Client.GetTmpFilename ();
+            doc.Save (path);
+            doc.Dispose ();
+
+            app.LoadPath (path, Path.Combine (
+                Path.GetDirectoryName (app.Document.SuggestedSavePath),
+                String.Format ("[{0}] {1}",
+                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10)),
+                    Path.GetFileName (app.Document.SuggestedSavePath))
+            ));
         }
+
+        void OnRemove (object o, EventArgs args)
+        {
+            var action = new RemoveAction (app.Document, app.IconView.SelectedPages);
+            action.Do ();
+            // Undo isn't working yet
+            //undo_manager.AddUndoAction (action);
+        }
+
+        void OnRotateLeft (object o, EventArgs args)
+        {
+            Rotate (-90);
+        }
+
+        void OnRotateRight (object o, EventArgs args)
+        {
+            Rotate (90);
+        }
+
+        void OnSelectAll (object o, EventArgs args)
+        {
+            app.IconView.SetPageSelectionMode (PageSelectionMode.All);
+        }
+
+        void OnSelectOdds (object o, EventArgs args)
+        {
+            app.IconView.SetPageSelectionMode (PageSelectionMode.Odds);
+        }
+
+        void OnSelectEvens (object o, EventArgs args)
+        {
+            app.IconView.SetPageSelectionMode (PageSelectionMode.Evens);
+        }
+
+        void OnSelectMatching (object o, EventArgs args)
+        {
+            app.ToggleMatchQuery ();
+        }
+
+        void OnSelectInverse (object o, EventArgs args)
+        {
+            app.IconView.SetPageSelectionMode (PageSelectionMode.Inverse);
+        }
+
+        // View menu actions
+
+        void OnZoomIn (object o, EventArgs args)
+        {
+            app.IconView.Zoom (10);
+        }
+
+        void OnZoomOut (object o, EventArgs args)
+        {
+            app.IconView.Zoom (-10);
+        }
+
+        void OnZoomFit (object o, EventArgs args)
+        {
+            app.IconView.ZoomFit ();
+        }
+
+        void OnOpenInViewer (object o, EventArgs args)
+        {
+            System.Diagnostics.Process.Start (app.Document.CurrentStateUri);
+        }
+
+        void OnFullScreenView (object o, EventArgs args)
+        {
+            bool fullscreen = (this["FullScreenView"] as ToggleAction).Active;
+
+            if (fullscreen) {
+                app.Window.Fullscreen ();
+            } else {
+                app.Window.Unfullscreen ();
+            }
+        }
+
+        void OnViewToolbar (object o, EventArgs args)
+        {
+            bool show = (this["ViewToolbar"] as ToggleAction).Active;
+            Client.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
+        }
+
+        void OnViewBookmarks (object o, EventArgs args)
+        {
+            bool show = (this["ViewBookmarks"] as ToggleAction).Active;
+            Client.Configuration.ShowBookmarks = app.BookmarkView.Visible = show;
+        }
+
+        // Help menu actions
 
         void OnHelp (object o, EventArgs args)
         {
@@ -488,67 +562,23 @@ namespace PdfMod.Gui
             ShowContextMenu ("/PageContextMenu");
         }
 
-        void OnSelectAll (object o, EventArgs args)
+        // Bookmark actions
+
+        void OnEditBookmarks (object o, EventArgs args)
         {
-            app.IconView.SetPageSelectionMode (PageSelectionMode.All);
+            if (!app.BookmarkView.Visible) {
+                (this["ViewBookmarks"] as ToggleAction).Active = true;
+            }
         }
 
-        void OnSelectEvens (object o, EventArgs args)
+        void OnBookmarkContextMenu (object o, EventArgs args)
         {
-            app.IconView.SetPageSelectionMode (PageSelectionMode.Evens);
+            ShowContextMenu ("/BookmarkContextMenu");
         }
 
-        void OnSelectOdds (object o, EventArgs args)
-        {
-            app.IconView.SetPageSelectionMode (PageSelectionMode.Odds);
-        }
+#endregion
 
-        void OnSelectMatching (object o, EventArgs args)
-        {
-            app.ToggleMatchQuery ();
-        }
-
-        void OnSelectInverse (object o, EventArgs args)
-        {
-            app.IconView.SetPageSelectionMode (PageSelectionMode.Inverse);
-        }
-
-        void OnZoomIn (object o, EventArgs args)
-        {
-            app.IconView.Zoom (10);
-        }
-
-        void OnZoomOut (object o, EventArgs args)
-        {
-            app.IconView.Zoom (-10);
-        }
-
-        void OnZoomFit (object o, EventArgs args)
-        {
-            app.IconView.ZoomFit ();
-        }
-
-        void OnViewToolbar (object o, EventArgs args)
-        {
-            bool show = (this["ViewToolbar"] as ToggleAction).Active;
-            Client.Configuration.ShowToolbar = app.HeaderToolbar.Visible = show;
-        }
-
-        void OnViewBookmarks (object o, EventArgs args)
-        {
-            bool show = (this["ViewBookmarks"] as ToggleAction).Active;
-            Client.Configuration.ShowBookmarks = app.BookmarkView.Visible = show;
-        }
-
-        void OnRotateRight (object o, EventArgs args)
-        {
-            Rotate (90);
-        }
-
-        void OnRotateLeft (object o, EventArgs args)
-        {
-            Rotate (-90);
-        }
+#region Utility methods
 
         void Rotate (int degrees)
         {
@@ -559,12 +589,29 @@ namespace PdfMod.Gui
             }
         }
 
-        void OnClose (object o, EventArgs args)
+        string CombinePaths (params string [] parts)
         {
-            app.Quit ();
+            string path = parts[0];
+            for (int i = 1; i < parts.Length; i++) {
+                path = System.IO.Path.Combine (path, parts[i]);
+            }
+            return path;
         }
+
+        [DllImport ("glib-2.0.dll")]
+        static extern IntPtr g_get_language_names ();
 
 #endregion
 
+    }
+
+    public static class ActionExtensions
+    {
+        public static Hyena.Widgets.ImageButton CreateImageButton (this Gtk.Action action)
+        {
+            var button = new Hyena.Widgets.ImageButton (action.ShortLabel, action.IconName);
+            action.ConnectProxy (button);
+            return button;
+        }
     }
 }

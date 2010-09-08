@@ -41,6 +41,7 @@ FILES =  \
 	PdfMod/Gui/PageListStore.cs \
 	PdfMod/Gui/SelectMatchingBox.cs \
 	PdfMod/Main.cs \
+	PdfMod/Pdf/Actions/BaseAction.cs \
 	PdfMod/Pdf/Actions/BasePageAction.cs \
 	PdfMod/Pdf/Actions/ExportImagesAction.cs \
 	PdfMod/Pdf/Actions/MoveAction.cs \

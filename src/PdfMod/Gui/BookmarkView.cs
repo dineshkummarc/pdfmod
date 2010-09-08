@@ -21,6 +21,7 @@ using Gtk;
 
 using PdfSharp.Pdf;
 using PdfMod.Pdf;
+using PdfMod.Pdf.Actions;
 using System.Collections.Generic;
 using Mono.Unix;
 using PdfSharp.Pdf.Advanced;
@@ -29,20 +30,25 @@ namespace PdfMod.Gui
 {
     public class BookmarkView : VBox
     {
+        Client app;
         TreeView tree_view;
         TreeStore model;
         Document document;
 
-        public bool IsModified { get; set; }
-
-        public BookmarkView ()
+        public BookmarkView (Client app)
         {
+            this.app = app;
             BuildTreeView ();
             BuildButtonBar ();
 
             WidthRequest = 200;
             Spacing = 6;
             ShowAll ();
+
+            app.Actions["AddBookmark"].Activated += OnAdd;
+            app.Actions["RenameBookmark"].Activated += OnRename;
+            app.Actions["ChangeBookmarkDest"].Activated += OnChangeDest;
+            app.Actions["RemoveBookmarks"].Activated += OnRemove;
         }
 
         public void SetDocument (Document new_doc)
@@ -62,7 +68,141 @@ namespace PdfMod.Gui
 
             model.Clear ();
             AddOutlineCollection (document, document.Pdf.Outlines, TreeIter.Zero);
+            UpdateActions ();
         }
+
+        // Bookmark action handlers
+
+        void OnAdd (object o, EventArgs args)
+        {
+            // Figure out if there's a parent to put it under
+            TreeIter parent_iter = TreeIter.Zero;
+            if (tree_view.Selection.CountSelectedRows () > 0) {
+                TreePath parent_path;
+                TreeViewColumn col;
+                tree_view.GetCursor (out parent_path, out col);
+                model.GetIter (out parent_iter, parent_path);
+            }
+
+            // Add it to the PDF document
+            var outline = new PdfOutline (Catalog.GetString ("New bookmark"), document.Pages.First ().Pdf, true);
+            if (!TreeIter.Zero.Equals (parent_iter)) {
+                var parent = GetOutline (parent_iter);
+                SetDestIndex (outline, GetDestIndex (parent) + 1);
+                parent.Outlines.Add (outline);
+            } else {
+                document.Pdf.Outlines.Add (outline);
+            }
+
+            // Add it to our TreeView
+            var iter = AddOutline (parent_iter, outline);
+
+            // Make sure it is visible
+            tree_view.ExpandToPath (model.GetPath (iter));
+
+            MarkModified ();
+
+            // Begin editing its name
+            tree_view.SetCursor (model.GetPath (iter), tree_view.Columns[0], true);
+            Hyena.Log.Debug ("Added bookmark");
+
+            // Create an IUndo action so it can be undone
+            var action = CreateAddRemoveAction (true, iter);
+            action.Description = Catalog.GetString ("Add Bookmark");
+            app.Actions.UndoManager.AddUndoAction (action);
+        }
+
+        void OnRename (object o, EventArgs args)
+        {
+            tree_view.SetCursor (tree_view.Selection.GetSelectedRows ().First (), tree_view.Columns[0], true);
+        }
+
+        void OnChangeDest (object o, EventArgs args)
+        {
+            tree_view.SetCursor (tree_view.Selection.GetSelectedRows ().First (), tree_view.Columns[1], true);
+        }
+
+        void OnRemove (object o, EventArgs args)
+        {
+            TreeIter iter;
+            var iters = tree_view.Selection.GetSelectedRows ().Select (p => { model.GetIter (out iter, p); return iter; }).ToArray ();
+            var action = CreateAddRemoveAction (false, iters);
+            action.Description = String.Format (Catalog.GetPluralString ("Remove Bookmark", "Remove {0} Bookmarks", iters.Length), iters.Length);
+            action.Do ();
+            app.Actions.UndoManager.AddUndoAction (action);
+        }
+
+        class ActionContext {
+            public TreeIter Iter;
+            public PdfOutline Bookmark;
+            public PdfOutline Parent;
+        }
+
+        TreeIter IterForBookmark (PdfOutline bookmark)
+        {
+            var iter = TreeIter.Zero;
+            model.Foreach ((m, path, i) => {
+                if (GetOutline (i) == bookmark) {
+                    iter = i;
+                    return true;
+                }
+                return false;
+            });
+            return iter;
+        }
+
+        DelegateAction CreateAddRemoveAction (bool added, params TreeIter [] iters)
+        {
+            TreeIter iter;
+            var items = iters.Select (i => new ActionContext () {
+                                  Iter = i,
+                                  Bookmark = GetOutline (i),
+                                  Parent = model.IterParent (out iter, i) ? GetOutline (iter) : null
+                              })
+                             .ToList ();
+
+            var add_action = new System.Action (() => {
+                for (int i = 0; i < items.Count; i++) {
+                    var item = items[i];
+                    TreeIter parent_iter = TreeIter.Zero;
+                    if (item.Parent != null) {
+                        item.Parent.Outlines.Add (item.Bookmark);
+                        parent_iter = IterForBookmark (item.Parent);
+                    } else {
+                        document.Pdf.Outlines.Add (item.Bookmark);
+                    }
+
+                    // Add it to our TreeView
+                    item.Iter = AddOutline (parent_iter, item.Bookmark);
+                    tree_view.ExpandToPath (model.GetPath (item.Iter));
+                    Hyena.Log.DebugFormat ("Added back bookmark '{0}'", item.Bookmark.Title);
+                }
+            });
+
+            var remove_action = new System.Action (() => {
+                items.Reverse ();
+                foreach (var item in items) {
+                    item.Bookmark.Remove ();
+                    TreeIter i = item.Iter;
+                    model.Remove (ref i);
+                    Hyena.Log.DebugFormat ("Removed bookmark '{0}'", item.Bookmark.Title);
+                }
+                items.Reverse ();
+            });
+
+            return new DelegateAction (document) {
+                UndoAction = delegate {
+                    if (added) remove_action (); else add_action ();
+                    RemoveModifiedMark ();
+                },
+                RedoAction = delegate {
+                    if (added)  add_action (); else remove_action ();
+                    MarkModified ();
+                }
+            };
+        }
+
+        // Document event handlers
 
         void OnPagesAdded (int index, Page [] pages)
         {
@@ -78,8 +218,8 @@ namespace PdfMod.Gui
         {
             var pdf_pages = pages.Select (p => p.Pdf).ToList ();
 
-            var to_remove = new List<TreeIter> ();
             // Remove bookmarks that point to removed pages
+            var to_remove = new List<TreeIter> ();
             model.Foreach ((m, path, iter) => {
                 var outline = GetOutline (iter);
                 if (pdf_pages.Contains (outline.DestinationPage)) {
@@ -96,7 +236,7 @@ namespace PdfMod.Gui
                 outline.Remove ();
                 model.Remove (ref iter);
 
-                Hyena.Log.DebugFormat ("Removing bookmark '{0}' since its page was removed", outline.Title);
+                Hyena.Log.DebugFormat ("Removed bookmark '{0}' since its page was removed", outline.Title);
             }
 
             UpdateModel ();
@@ -107,37 +247,15 @@ namespace PdfMod.Gui
             UpdateModel ();
         }
 
-        public IEnumerable<PdfOutline> Outlines {
-            get {
-                TreeIter iter;
-                if (model.GetIterFirst (out iter)) {
-                    do {
-                        yield return GetOutline (iter);
-                    } while (model.IterNext (ref iter));
-                }
-            }
-        }
+        // Widget construction utility methods
 
-        private class BookmarkTreeView : TreeView
-        {
-            protected override bool OnButtonPressEvent (Gdk.EventButton press)
-            {
-                TreePath path;
-                if (!GetPathAtPos ((int)press.X, (int)press.Y, out path)) {
-                    Selection.UnselectAll ();
-                    return true;
-                } else {
-                    return base.OnButtonPressEvent (press);
-                }
-            }
-        }
-
-        private void BuildTreeView ()
+        void BuildTreeView ()
         {
             // outline, expanded/opened, title, page # destination, tooltip
             model = new TreeStore (typeof(PdfSharp.Pdf.PdfOutline), typeof(bool), typeof(string), typeof(int), typeof(string));
 
             tree_view = new BookmarkTreeView () {
+                App = app,
                 Model = model,
                 SearchColumn = (int)ModelColumns.Title,
                 TooltipColumn = (int)ModelColumns.Tooltip,
@@ -158,9 +276,25 @@ namespace PdfMod.Gui
                 if (model.GetIterFromString (out iter, args.Path)) {
                     if (!String.IsNullOrEmpty (args.NewText)) {
                         var bookmark = GetOutline (iter);
-                        bookmark.Title = args.NewText;
-                        model.SetValue (iter, (int)ModelColumns.Title, bookmark.Title);
-                        MarkModified ();
+                        string new_name = args.NewText;
+                        string old_name = bookmark.Title;
+                        var action = new DelegateAction (document) {
+                            Description = Catalog.GetString ("Rename Bookmark"),
+                            UndoAction = delegate {
+                                var i = IterForBookmark (bookmark);
+                                bookmark.Title = old_name;
+                                model.SetValue (i, (int)ModelColumns.Title, bookmark.Title);
+                                RemoveModifiedMark ();
+                            },
+                            RedoAction = delegate {
+                                var i = IterForBookmark (bookmark);
+                                bookmark.Title = new_name;
+                                model.SetValue (i, (int)ModelColumns.Title, bookmark.Title);
+                                MarkModified ();
+                            }
+                        };
+                        action.Do ();
+                        app.Actions.UndoManager.AddUndoAction (action);
                     } else {
                         args.RetVal = false;
                     }
@@ -179,9 +313,24 @@ namespace PdfMod.Gui
                     var bookmark = GetOutline (iter);
                     int i = -1;
                     if (Int32.TryParse (args.NewText, out i) && i >= 1 && i <= document.Count && i != (GetDestIndex (bookmark) + 1)) {
-                        SetDestIndex (bookmark, i - 1);
-                        model.SetValue (iter, (int)ModelColumns.PageNumber, i);
-                        MarkModified ();
+                        int old_dest = GetDestIndex (bookmark);
+                        int new_dest = i - 1;
+
+                        var action = new DelegateAction (document) {
+                            Description = Catalog.GetString ("Rename Bookmark"),
+                            UndoAction = delegate {
+                                SetDestIndex (bookmark, old_dest);
+                                model.SetValue (iter, (int)ModelColumns.PageNumber, old_dest + 1);
+                                RemoveModifiedMark ();
+                            },
+                            RedoAction = delegate {
+                                SetDestIndex (bookmark, new_dest);
+                                model.SetValue (iter, (int)ModelColumns.PageNumber, new_dest + 1);
+                                MarkModified ();
+                            }
+                        };
+                        action.Do ();
+                        app.Actions.UndoManager.AddUndoAction (action);
                     } else {
                         args.RetVal = false;
                     }
@@ -202,51 +351,16 @@ namespace PdfMod.Gui
             PackStart (sw, true, true, 0);
         }
 
-        private void BuildButtonBar ()
+        void BuildButtonBar ()
         {
             var box = new HBox () { Spacing = 6 };
-            var add_button = new Button (Gtk.Stock.Add);
-            add_button.Clicked += (o, a) => {
-                TreeIter parent_iter;
-                if (!tree_view.Selection.GetSelected (out parent_iter) && !model.GetIterFirst (out parent_iter)) {
-                    parent_iter = TreeIter.Zero;
-                }
+            var add_action = app.Actions["AddBookmark"];
+            var add_button = add_action.CreateImageButton ();
 
-                // Add it to the PDF document
-                var outline = new PdfOutline (Catalog.GetString ("New bookmark"), document.Pages.First ().Pdf, true);
-                if (!TreeIter.Zero.Equals (parent_iter)) {
-                    var parent = GetOutline (parent_iter);
-                    SetDestIndex (outline, GetDestIndex (parent) + 1);
-                    parent.Outlines.Add (outline);
-
-                    tree_view.ExpandToPath (model.GetPath (parent_iter));
-                } else {
-                    document.Pdf.Outlines.Add (outline);
-                }
-
-                // Add it to our TreeView
-                var iter = AddOutline (parent_iter, outline);
-                MarkModified ();
-
-                // Begin editing its name
-                tree_view.SetCursor (model.GetPath (iter), tree_view.Columns[0], true);
-                Hyena.Log.Debug ("Added bookmark");
-            };
-
-            var remove_button = new Button (Gtk.Stock.Remove);
-            remove_button.Clicked += (o, a) => {
-                foreach (var path in tree_view.Selection.GetSelectedRows ()) {
-                    TreeIter iter;
-                    model.GetIter (out iter, path);
-                    var outline = GetOutline (iter);
-                    Hyena.Log.DebugFormat ("Removing bookmark '{0}'", outline.Title);
-                    outline.Remove ();
-                    model.Remove (ref iter);
-                }
-                MarkModified ();
-            };
-            tree_view.Selection.Changed += (o, a) => remove_button.Sensitive = tree_view.Selection.CountSelectedRows () > 0;
-            remove_button.Sensitive = tree_view.Selection.CountSelectedRows () > 0;
+            var remove_action = app.Actions["RemoveBookmarks"];
+            var remove_button = remove_action.CreateImageButton ();
+            tree_view.Selection.Changed += (o, a) => UpdateActions ();
+            UpdateActions ();
 
             box.PackStart (add_button, false, false, 0);
             box.PackStart (remove_button, false, false, 0);
@@ -254,28 +368,44 @@ namespace PdfMod.Gui
             PackStart (box, false, false, 0);
         }
 
-        private void UpdateModel ()
+        string [] selection_actions = new string [] { "RenameBookmark", "RemoveBookmarks", "ChangeBookmarkDest" };
+        void UpdateActions ()
+        {
+            int count = tree_view.Selection.CountSelectedRows ();
+            bool have_doc_and_selection = count > 0 && document != null;
+            foreach (var action in selection_actions) {
+                app.Actions.UpdateAction (action, true, have_doc_and_selection);
+            }
+            app.Actions["RemoveBookmarks"].Label = String.Format (Catalog.GetPluralString ("_Remove Bookmark", "_Remove {0} Bookmarks", count), count);
+        }
+
+        void UpdateModel ()
         {
             model.Foreach ((m, path, iter) => {
                 model.SetValues (iter, GetValuesFor (GetOutline (iter)));
                 return false;
             });
+            UpdateActions ();
         }
 
-        private void MarkModified ()
+        void RemoveModifiedMark ()
         {
-            IsModified = true;
-            document.HasUnsavedChanges = true;
+            document.UnsavedChanges--;
         }
 
-        private TreeIter AddOutline (TreeIter parent, PdfOutline outline)
+        void MarkModified ()
+        {
+            document.UnsavedChanges++;
+        }
+
+        TreeIter AddOutline (TreeIter parent, PdfOutline outline)
         {
             return TreeIter.Zero.Equals (parent)
                 ? model.AppendValues (GetValuesFor (outline))
                 : model.AppendValues (parent, GetValuesFor (outline));
         }
 
-        private object [] GetValuesFor (PdfOutline outline)
+        object [] GetValuesFor (PdfOutline outline)
         {
             int dest_num = GetDestIndex (outline);
 
@@ -283,7 +413,7 @@ namespace PdfMod.Gui
                 String.Format (Catalog.GetString ("Bookmark links to page {0}"), dest_num + 1) };
         }
 
-        private int GetDestIndex (PdfOutline outline)
+        int GetDestIndex (PdfOutline outline)
         {
             if (outline.DestinationPage == null)
                 return -1;
@@ -291,26 +421,21 @@ namespace PdfMod.Gui
                 return document.Pages.Select (p => p.Pdf).IndexOf (outline.DestinationPage);
         }
 
-        private void SetDestIndex (PdfOutline outline, int i)
+        void SetDestIndex (PdfOutline outline, int i)
         {
             if (i >= 0 && i < document.Count) {
                 outline.DestinationPage = document.Pages.Skip (i).First ().Pdf;
             }
         }
 
-        private PdfOutline GetSelected ()
-        {
-            TreeIter iter;
-            if (tree_view.Selection.GetSelected (out iter))
-                return GetOutline (iter);
-            return null;
-        }
-
-        private void AddOutlineCollection (Document document, PdfOutline.PdfOutlineCollection outlines, TreeIter parent)
+        void AddOutlineCollection (Document document, PdfOutline.PdfOutlineCollection outlines, TreeIter parent)
         {
             if (outlines != null) {
                 foreach (PdfOutline outline in outlines) {
                     var iter = AddOutline (parent, outline);
+                    if (outline.Opened) {
+                        tree_view.ExpandRow (model.GetPath (iter), false);
+                    }
 
                     // Recursively add this item's children, if any
                     AddOutlineCollection (document, outline.Outlines, iter);
@@ -318,18 +443,57 @@ namespace PdfMod.Gui
             }
         }
 
-        private PdfOutline GetOutline (TreeIter iter)
+        PdfOutline GetOutline (TreeIter iter)
         {
             return (PdfOutline) model.GetValue (iter, (int)ModelColumns.Bookmark);
         }
 
-        private enum ModelColumns : int {
+        enum ModelColumns : int {
             Bookmark,
             IsExpanded,
             Title,
             PageNumber,
             Tooltip
         };
+
+        class BookmarkTreeView : TreeView
+        {
+            public Client App;
+
+            protected override bool OnButtonPressEvent (Gdk.EventButton press)
+            {
+                TreePath path;
+                if (!GetPathAtPos ((int)press.X, (int)press.Y, out path)) {
+                    Selection.UnselectAll ();
+                }
+
+                bool call_parent = true;
+                if (press.Button == 3 && path != null && Selection.PathIsSelected (path)) {
+                    // Calling the parent in this case would unselect any other items than
+                    // this path, which we don't want to do - they should stay selected and the
+                    // context menu should pop up.
+                    call_parent = false;
+                }
+
+                bool ret = false;
+                if (call_parent) {
+                    ret = base.OnButtonPressEvent (press);
+                }
+
+                if (press.Button == 3) {
+                    ret = OnPopupMenu ();
+                }
+
+                return ret;
+            }
+
+            protected override bool OnPopupMenu ()
+            {
+                App.Actions["BookmarkContextMenu"].Activate ();
+                return true;
+            }
+        }
+
     }
 
     internal static class Extensions

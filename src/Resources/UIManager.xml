@@ -42,6 +42,14 @@
       <menuitem action="ViewToolbar"/>
       <menuitem action="ViewBookmarks"/>
     </menu>
+    <menu action="BookmarksMenu">
+      <menuitem action="AddBookmark"/>
+      <menuitem action="RenameBookmark"/>
+      <menuitem action="ChangeBookmarkDest"/>
+      <menuitem action="RemoveBookmarks"/>
+      <separator/>
+      <menuitem action="EditBookmarks"/>
+    </menu>
     <menu action="HelpMenu">
       <menuitem action="Help"/>
       <menuitem action="About"/>
@@ -53,6 +61,7 @@
     <toolitem action="SaveAs"/>
     <separator/>
     <toolitem action="Properties"/>
+    <toolitem action="ViewBookmarks"/>
     <toolitem action="ExportImages"/>
     <toolitem action="InsertFrom"/>
     <separator/>
@@ -77,5 +86,12 @@
     <menuitem action="SelectEvens"/>
     <menuitem action="SelectMatching"/>
     <separator/>
+  </popup>
+
+  <popup action="BookmarkContextMenu">
+    <menuitem action="AddBookmark"/>
+    <menuitem action="RenameBookmark"/>
+    <menuitem action="ChangeBookmarkDest"/>
+    <menuitem action="RemoveBookmarks"/>
   </popup>
 </ui>
