@@ -207,7 +207,7 @@ namespace PdfMod.Gui
         protected override bool OnDragMotion (Gdk.DragContext context, int x, int y, uint time_)
         {
             // Scroll if within 20 pixels of the top or bottom
-            var parent = Parent as Gtk.ScrolledWindow;
+            var parent = Parent.Parent as Gtk.ScrolledWindow;
             if (y < 20) {
                 parent.Vadjustment.Value -= 30;
             } else if ((parent.Allocation.Height - y) < 20) {
