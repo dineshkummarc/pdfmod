@@ -255,8 +255,8 @@ namespace PdfSharp.Pdf
     {
       // Remove all our children
       var children = Outlines.Cast<PdfOutline> ().ToList ();
-      while (children.Count > 0) {
-        children[0].Remove ();
+      foreach (var child in children) {
+        child.Remove ();
       }
 
       // Remove ourself
