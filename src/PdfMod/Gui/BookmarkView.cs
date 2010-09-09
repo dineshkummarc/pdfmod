@@ -69,6 +69,8 @@ namespace PdfMod.Gui
             model.Clear ();
             AddOutlineCollection (document, document.Pdf.Outlines, TreeIter.Zero);
             UpdateActions ();
+
+            Visible = Client.Configuration.ShowBookmarks;
         }
 
         // Bookmark action handlers
@@ -125,9 +127,14 @@ namespace PdfMod.Gui
         void OnRemove (object o, EventArgs args)
         {
             TreeIter iter;
-            var iters = tree_view.Selection.GetSelectedRows ().Select (p => { model.GetIter (out iter, p); return iter; }).ToArray ();
+            var parent_iters = tree_view.Selection
+                                 .GetSelectedRows ()
+                                 .Select (p => { model.GetIter (out iter, p); return iter; });
+            var iters = parent_iters.Concat (parent_iters.SelectMany (i => model.IterChildrenOf (i, true))).Distinct ().ToArray ();
+
             var action = CreateAddRemoveAction (false, iters);
-            action.Description = String.Format (Catalog.GetPluralString ("Remove Bookmark", "Remove {0} Bookmarks", iters.Length), iters.Length);
+            // Translators: {0} is available for you to use; contains the number of bookmarks
+            action.Description = String.Format (Catalog.GetPluralString ("Remove Bookmark", "Remove Bookmarks", iters.Length), iters.Length);
             action.Do ();
             app.Actions.UndoManager.AddUndoAction (action);
         }
@@ -136,30 +143,27 @@ namespace PdfMod.Gui
             public TreeIter Iter;
             public PdfOutline Bookmark;
             public PdfOutline Parent;
+            // TODO Save/restore the precise position this bookmark was at beneath its parent
+            public int Position;
         }
 
         TreeIter IterForBookmark (PdfOutline bookmark)
         {
-            var iter = TreeIter.Zero;
-            model.Foreach ((m, path, i) => {
-                if (GetOutline (i) == bookmark) {
-                    iter = i;
-                    return true;
-                }
-                return false;
-            });
-            return iter;
+            return model.IterFor (bookmark);
         }
 
         DelegateAction CreateAddRemoveAction (bool added, params TreeIter [] iters)
         {
             TreeIter iter;
-            var items = iters.Select (i => new ActionContext () {
-                                  Iter = i,
-                                  Bookmark = GetOutline (i),
-                                  Parent = model.IterParent (out iter, i) ? GetOutline (iter) : null
-                              })
-                             .ToList ();
+            var items = iters.Select (i => {
+                var parent = model.IterParent (out iter, i) ? GetOutline (iter) : null;
+                var bookmark = GetOutline (i);
+                return new ActionContext () {
+                    Iter = i,
+                    Bookmark = bookmark,
+                    Parent = parent
+                };
+            }).ToList ();
 
             var add_action = new System.Action (() => {
                 for (int i = 0; i < items.Count; i++) {
@@ -172,7 +176,7 @@ namespace PdfMod.Gui
                         document.Pdf.Outlines.Add (item.Bookmark);
                     }
 
-                    // Add it to our TreeView
+                    // Add it to our TreeView, and all its children
                     item.Iter = AddOutline (parent_iter, item.Bookmark);
                     tree_view.ExpandToPath (model.GetPath (item.Iter));
                     Hyena.Log.DebugFormat ("Added back bookmark '{0}'", item.Bookmark.Title);
@@ -183,8 +187,7 @@ namespace PdfMod.Gui
                 items.Reverse ();
                 foreach (var item in items) {
                     item.Bookmark.Remove ();
-                    TreeIter i = item.Iter;
-                    model.Remove (ref i);
+                    model.Remove (ref item.Iter);
                     Hyena.Log.DebugFormat ("Removed bookmark '{0}'", item.Bookmark.Title);
                 }
                 items.Reverse ();
@@ -376,7 +379,8 @@ namespace PdfMod.Gui
             foreach (var action in selection_actions) {
                 app.Actions.UpdateAction (action, true, have_doc_and_selection);
             }
-            app.Actions["RemoveBookmarks"].Label = String.Format (Catalog.GetPluralString ("_Remove Bookmark", "_Remove {0} Bookmarks", count), count);
+            // Translators: {0} is available for you to use; contains the number of bookmarks
+            app.Actions["RemoveBookmarks"].Label = String.Format (Catalog.GetPluralString ("_Remove Bookmark", "_Remove Bookmarks", count), count);
         }
 
         void UpdateModel ()
@@ -445,7 +449,7 @@ namespace PdfMod.Gui
 
         PdfOutline GetOutline (TreeIter iter)
         {
-            return (PdfOutline) model.GetValue (iter, (int)ModelColumns.Bookmark);
+            return model.Get<PdfOutline> (iter);
         }
 
         enum ModelColumns : int {
@@ -493,7 +497,6 @@ namespace PdfMod.Gui
                 return true;
             }
         }
-
     }
 
     internal static class Extensions
@@ -510,6 +513,48 @@ namespace PdfMod.Gui
             }
 
             return -1;
+        }
+
+        public static T Get<T> (this TreeStore model, TreeIter iter)
+        {
+            // NOTE: assumes object is stored in model column 0
+            return (T) model.GetValue (iter, 0);
+        }
+
+        public static TreeIter IterFor<T> (this TreeStore model, T item)
+        {
+            var iter = TreeIter.Zero;
+            model.Foreach ((m, path, i) => {
+                if (model.Get<T> (i).Equals (item)) {
+                    iter = i;
+                    return true;
+                }
+                return false;
+            });
+            return iter;
+        }
+
+        public static IEnumerable<T> ObjectChildrenOf<T> (this TreeStore model, TreeIter iter, bool recursive)
+        {
+            foreach (var child in IterChildrenOf (model, iter, recursive)) {
+                yield return model.Get<T> (child);
+            }
+        }
+
+        public static IEnumerable<TreeIter> IterChildrenOf (this TreeStore model, TreeIter iter, bool recursive)
+        {
+            TreeIter child;
+            if (model.IterChildren (out child, iter)) {
+                do {
+                    yield return child;
+
+                    if (recursive) {
+                        foreach (var subchild in model.IterChildrenOf (child, recursive)) {
+                            yield return subchild;
+                        }
+                    }
+                } while (model.IterNext (ref child));
+            }
         }
     }
 }

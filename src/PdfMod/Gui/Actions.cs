@@ -46,7 +46,7 @@ namespace PdfMod.Gui
         static string [] require_doc_actions = new string[] {
             "Save", "SaveAs", "Properties", "Undo", "Redo", "ZoomFit", "OpenInViewer",
             "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "SelectInverse", "InsertFrom", "ExportImages",
-            "AddBookmark", "EditBookmarks"
+            "ViewBookmarks", "AddBookmark", "EditBookmarks"
         };
 
         static string [] require_page_actions = new string[] {
@@ -450,6 +450,9 @@ namespace PdfMod.Gui
         {
             bool show = (this["ViewBookmarks"] as ToggleAction).Active;
             Client.Configuration.ShowBookmarks = app.BookmarkView.Visible = show;
+            if (app.BookmarkView.Visible) {
+                app.BookmarkView.GrabFocus ();
+            }
         }
 
         // Help menu actions

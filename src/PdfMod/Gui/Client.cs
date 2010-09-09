@@ -126,7 +126,7 @@ namespace PdfMod.Gui
             // BookmarksView
             BookmarkView = new BookmarkView (this);
             BookmarkView.NoShowAll = true;
-            BookmarkView.Visible = Configuration.ShowBookmarks;
+            BookmarkView.Visible = false;
 
             var vbox = new VBox ();
             vbox.PackStart (menu_bar, false, false, 0);
