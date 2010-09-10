@@ -9,9 +9,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-06-17 20:30+0000\n"
-"PO-Revision-Date: 2010-06-27 22:53+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&component=general\n"
+"POT-Creation-Date: 2010-09-09 18:35+0000\n"
+"PO-Revision-Date: 2010-09-09 23:41+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,8 +46,27 @@ msgstr "Tõrge lehekülgede eemaldamisel dokumendist"
 msgid "Page {0}"
 msgstr "Lehekülg {0}"
 
+msgid "_File"
+msgstr "_Fail"
+
 msgid "Open a document"
 msgstr "Dokumendi avamine"
+
+msgid "Save changes to this document, overwriting the existing file"
+msgstr ""
+"Muudatuste salvestamine sellesse dokumenti, olemasoleva faili ülekirjutamine"
+
+msgid "Save this document to a new file"
+msgstr "Selle dokumendi salvestamine uue nimega"
+
+msgid "Recent _Files"
+msgstr "Hiljutised _failid"
+
+msgid "Export Images"
+msgstr "Piltide eksportimine"
+
+msgid "Save all images in this document to a new folder"
+msgstr "Kõigi selles dokumendis olevate piltide salvestamine uude kausta"
 
 msgid "_Insert From..."
 msgstr "_Lisa mujalt..."
@@ -54,23 +74,8 @@ msgstr "_Lisa mujalt..."
 msgid "Insert pages from another document"
 msgstr "Lehekülgede lisamine teisest dokumendist"
 
-msgid "Save changes to this document, overwriting the existing file"
-msgstr "Muudatuste salvestamine sellesse dokumenti, olemasoleva faili ülekirjutamine"
-
-msgid "Save this document to a new file"
-msgstr "Selle dokumendi salvestamine uue nimega"
-
-msgid "_File"
-msgstr "_Fail"
-
-msgid "Recent _Files"
-msgstr "Hiljutised _failid"
-
-msgid "Rotate Right"
-msgstr "Pööra paremale"
-
-msgid "Rotate right"
-msgstr "Paremale pööramine"
+msgid "_Edit"
+msgstr "_Redaktor"
 
 msgid "Rotate Left"
 msgstr "Pööra vasakule"
@@ -78,20 +83,17 @@ msgstr "Pööra vasakule"
 msgid "Rotate left"
 msgstr "Vasakule pööramine"
 
-msgid "Export Images"
-msgstr "PIltide eksportimine"
+msgid "Rotate Right"
+msgstr "Pööra paremale"
 
-msgid "Save all images in this document to a new folder"
-msgstr "Kõigi selles dokumendis olevate piltide salvestamine uude kausta"
-
-msgid "_Edit"
-msgstr "_Redaktor"
-
-msgid "Select Even Pages"
-msgstr "Vali paarisleheküljed"
+msgid "Rotate right"
+msgstr "Paremale pööramine"
 
 msgid "Select Odd Pages"
 msgstr "Vali paaritud leheküljed"
+
+msgid "Select Even Pages"
+msgstr "Vali paarisleheküljed"
 
 msgid "Select Matching..."
 msgstr "Kattuvate valimine..."
@@ -102,23 +104,54 @@ msgstr "_Pööra valik"
 msgid "_View"
 msgstr "_Vaade"
 
-msgid "_Help"
-msgstr "A_bi"
-
-msgid "_Contents"
-msgstr "_Sisukord"
-
 msgid "Open in Viewer"
 msgstr "Ava vaaturis"
 
 msgid "Open in viewer"
 msgstr "Vaaturis avamine"
 
+msgid "_Bookmarks"
+msgstr "_Järjehoidjad"
+
+msgid "_Add Bookmark"
+msgstr "_Lisa järjehoidja"
+
+msgid "Re_name Bookmark"
+msgstr "_Nimeta järjehoidja ümber"
+
+msgid "_Change Bookmark Destination"
+msgstr "_Tõsta järjehoidja ümber"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] "_Eemalda järjehoidja"
+msgstr[1] "_Eemalda järjehoidjad"
+
+msgid "_Edit Bookmarks"
+msgstr "_Muuda järjehoidjaid"
+
+msgid "_Help"
+msgstr "A_bi"
+
+msgid "_Contents"
+msgstr "_Sisukord"
+
+msgid "_Add"
+msgstr "_Lisa"
+
+msgid "_Remove"
+msgstr "_Eemalda"
+
 msgid "View and edit the title, keywords, and more for this document"
 msgstr "Kuva ja muuda pealkirja, võtmesõnu ja selle dokumendi teisi omadusi"
 
 msgid "Toolbar"
 msgstr "Tööriistariba"
+
+msgid "Bookmarks"
+msgstr "Järjehoidjad"
 
 msgid "Fullscreen"
 msgstr "Täisekraan"
@@ -164,15 +197,15 @@ msgstr[1] "Valitud {0} lehe eraldamine"
 msgid "Select PDF"
 msgstr "PDF-i valimine"
 
+msgid "Save as..."
+msgstr "Salvesta kui..."
+
 msgid "Error Loading Document"
 msgstr "Tõrge dokumendi laadimisel"
 
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "{0} laadimisel esines viga"
-
-msgid "Save as..."
-msgstr "Salvesta kui..."
 
 msgid "Error opening help"
 msgstr "Tõrge abi avamisel"
@@ -201,6 +234,27 @@ msgstr ""
 
 msgid "translator-credits"
 msgstr "Mattias Põldaru 2010."
+
+#. Add it to the PDF document
+msgid "New bookmark"
+msgstr "Uus järjehoidja"
+
+msgid "Add Bookmark"
+msgstr "Järjehoidja lisamine"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "Järjehoidja eemaldamine"
+msgstr[1] "Järjehoidjate eemaldamine"
+
+msgid "Rename Bookmark"
+msgstr "Järjehoidja nime muutmine"
+
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr "Järjehoidja viitab lehele {0}"
 
 msgid "PDF Mod"
 msgstr "PDF Mod"
