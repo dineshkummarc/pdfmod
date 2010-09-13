@@ -38,6 +38,7 @@ namespace PdfMod.Gui
         {
             if (Theme == null) {
                 Theme = Hyena.Gui.Theming.ThemeEngine.CreateTheme (widget);
+                Theme.Context.Radius = 3;
             }
 
             Context cr = Gdk.CairoHelper.Create (window);
@@ -46,6 +47,11 @@ namespace PdfMod.Gui
             cr.Rectangle (cell_area.X, cell_area.Y, cell_area.Width, cell_area.Height);
             cr.Clip ();
             cr.Translate (cell_area.X, cell_area.Y);
+
+            // Clear any existing drawing
+            cr.Rectangle (0, 0, cell_area.Width, cell_area.Height);
+            cr.Color = Theme.ViewFill;
+            cr.Fill ();
 
             if (state == CellRendererState.Selected) {
                 Theme.DrawRowSelection (cr, 0, 0, cell_area.Width, cell_area.Height, true);
