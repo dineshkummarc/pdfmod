@@ -92,11 +92,15 @@ namespace PdfMod.Gui
             Model = store = new PageListStore ();
             Reorderable = false;
             Spacing = 0;
+            Orientation = Orientation.Vertical;
+
+            // Properties not bound in Gtk#
+            SetProperty ("item-padding", new GLib.Value ((int)0));
 
             CanZoomIn = CanZoomOut = true;
 
             page_renderer = new PageCell (this);
-            PackStart (page_renderer, true);
+            PackStart (page_renderer, false);
             AddAttribute (page_renderer, "page", PageListStore.PageColumn);
 
             // TODO enable uri-list as drag source target for drag-out-of-pdfmod-to-extract feature
@@ -273,7 +277,7 @@ namespace PdfMod.Gui
 
             // Convert drop above/below/into into DropLeft or DropRight based on the x coordinate
             if (path != null && (pos == IconViewDropPosition.DropAbove || pos == IconViewDropPosition.DropBelow || pos == IconViewDropPosition.DropInto)) {
-                if (!path.Equals (GetPathAtPos (x + ItemWidth/2, y))) {
+                if (!path.Equals (GetPathAtPos (x + ItemSize/2, y))) {
                     pos = IconViewDropPosition.DropRight;
                 } else {
                     pos = IconViewDropPosition.DropLeft;
@@ -462,7 +466,7 @@ namespace PdfMod.Gui
                 (app.Actions["ZoomFit"] as ToggleAction).Active = false;
             }
 
-            int new_width = ItemWidth + pixels;
+            int new_width = ItemSize + pixels;
             if (new_width <= MIN_WIDTH) {
                 CanZoomOut = false;
                 new_width = MIN_WIDTH;
@@ -471,11 +475,11 @@ namespace PdfMod.Gui
                 new_width = MAX_WIDTH;
             }
 
-            if (ItemWidth == new_width) {
+            if (ItemSize == new_width) {
                 return;
             }
 
-            ItemWidth = new_width;
+            SetItemSize (new_width);
 
             var handler = ZoomChanged;
             if (handler != null) {
@@ -495,16 +499,16 @@ namespace PdfMod.Gui
             zoom_manually_set = false;
             // Try to fit all pages into the view, with a minimum size
             var n = (double)document.Count;
-            var width = (double)Allocation.Width - 2 * Margin - 2*BorderWidth - 4; // HACK this -4 is total hack
-            var height = (double)Allocation.Height - 2 * Margin - 2*BorderWidth - 4; // same
+            var width = (double)(Parent.Allocation.Width - 2 * (Margin + BorderWidth + 8)); // HACK this + 8 is total hack
+            var height = (double)(Parent.Allocation.Height - 2 * (Margin + BorderWidth + 8)); // same
 
             var n_across = (int)Math.Ceiling (Math.Sqrt (width * n / height));
-            var best_width = (int) Math.Floor ((width - (n_across + 1) * ColumnSpacing - n_across*2*FocusLineWidth) / n_across);
+            var best_width = (int)Math.Floor ((width - (n_across + 1)*ColumnSpacing - n_across*2*FocusLineWidth) / n_across);
 
             // restrict to min/max
             best_width = Math.Min (MAX_WIDTH, Math.Max (MIN_WIDTH, best_width));
 
-            if (best_width == ItemWidth) {
+            if (best_width == ItemSize) {
                 return;
             }
 
@@ -514,16 +518,30 @@ namespace PdfMod.Gui
             }
 
             before_last_zoom = last_zoom;
-            last_zoom = ItemWidth;
+            last_zoom = ItemSize;
 
-            ItemWidth  = best_width;
-            CanZoomOut = ItemWidth > MIN_WIDTH;
-            CanZoomIn  = ItemWidth < MAX_WIDTH;
+            SetItemSize (best_width);
+            CanZoomOut = ItemSize > MIN_WIDTH;
+            CanZoomIn  = ItemSize < MAX_WIDTH;
 
             var handler = ZoomChanged;
             if (handler != null) {
                 handler ();
             }
+        }
+
+        public int ItemSize {
+            get { return page_renderer.ItemSize; }
+            set { page_renderer.ItemSize = value; }
+        }
+
+        private void SetItemSize (int w)
+        {
+            ItemSize = w;
+
+            // HACK trigger gtk_icon_view_invalidate_sizes and queue_layout
+            Orientation = Orientation.Horizontal;
+            Orientation = Orientation.Vertical;
         }
 
         #region Selection

@@ -45,9 +45,8 @@ namespace PdfMod.Gui
 
         public override void GetSize (Gtk.Widget widget, ref Gdk.Rectangle cell_area, out int x_offset, out int y_offset, out int width, out int height)
         {
-            base.GetSize (widget, ref cell_area, out x_offset, out y_offset, out width, out height);
             x_offset = y_offset = 0;
-            width = height = parent.ItemWidth;
+            width = height = ItemSize;
         }
 
         public override void Dispose ()
@@ -58,6 +57,15 @@ namespace PdfMod.Gui
             }
 
             base.Dispose ();
+        }
+
+        int item_size = DocumentIconView.MIN_WIDTH;
+        public int ItemSize {
+            get { return item_size; }
+            set {
+                item_size = value;
+                SetFixedSize (value, value);
+            }
         }
 
         protected override void Render (Cairo.Context cr, double width, double height, CellRendererState state)
