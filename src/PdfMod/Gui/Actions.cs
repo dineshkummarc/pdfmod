@@ -30,6 +30,7 @@ using Hyena;
 using Hyena.Gui;
 
 using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 using PdfMod.Pdf;
 using PdfMod.Pdf.Actions;
@@ -110,7 +111,7 @@ namespace PdfMod.Gui
                 new ToggleActionEntry ("Properties", Stock.Properties, null, "<alt>Return", Catalog.GetString ("View and edit the title, keywords, and more for this document"), OnProperties, false),
                 new ToggleActionEntry ("ZoomFit", Stock.ZoomFit, null, "<control>0", null, OnZoomFit, true),
                 new ToggleActionEntry ("ViewToolbar", null, Catalog.GetString ("Toolbar"), null, null, OnViewToolbar, Client.Configuration.ShowToolbar),
-                new ToggleActionEntry ("ViewBookmarks", null, Catalog.GetString ("Bookmarks"), "<ctrl>B", null, OnViewBookmarks, Client.Configuration.ShowBookmarks),
+                new ToggleActionEntry ("ViewBookmarks", null, Catalog.GetString ("Bookmarks"), "F9", null, OnViewBookmarks, Client.Configuration.ShowBookmarks),
                 new ToggleActionEntry ("FullScreenView", null, Catalog.GetString ("Fullscreen"), "F11", null, OnFullScreenView, false)
             );
 
@@ -274,7 +275,7 @@ namespace PdfMod.Gui
             var export_path_base = Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
                 Hyena.StringUtil.EscapeFilename (
-                    app.Document.Title ?? System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename))
+                    System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename))
             );
 
             var export_path = export_path_base;
@@ -346,21 +347,23 @@ namespace PdfMod.Gui
 
         void OnExtractPages (object o, EventArgs args)
         {
-            var doc = new PdfDocument ();
-            var pages = new List<Page> (app.IconView.SelectedPages);
-            foreach (var page in pages) {
-                doc.AddPage (page.Pdf);
+            var to_doc = new PdfDocument ();
+            var from_doc = PdfSharp.Pdf.IO.PdfReader.Open (new Uri (app.Document.CurrentStateUri).LocalPath, PdfDocumentOpenMode.Import, null);
+            var pages = app.IconView.SelectedPages.ToList ();
+
+            foreach (var index in pages.Select (p => p.Index)) {
+                to_doc.AddPage (from_doc.Pages[index]);
             }
 
             var path = Client.GetTmpFilename ();
-            doc.Save (path);
-            doc.Dispose ();
+            to_doc.Save (path);
+            to_doc.Dispose ();
 
             app.LoadPath (path, Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
-                String.Format ("[{0}] {1}",
-                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10)),
-                    Path.GetFileName (app.Document.SuggestedSavePath))
+                String.Format ("{0} [{1}].pdf",
+                    Path.GetFileNameWithoutExtension (app.Document.SuggestedSavePath),
+                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10)))
             ));
         }
 

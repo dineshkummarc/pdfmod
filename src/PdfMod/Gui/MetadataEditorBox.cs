@@ -113,7 +113,7 @@ namespace PdfMod.Gui
             var pdf = app.Document.Pdf;
             var info = pdf.Info;
             
-            Console.WriteLine ("Author           = {0}", info.Author);
+            /*Console.WriteLine ("Author           = {0}", info.Author);
             Console.WriteLine ("CreationDate     = {0}", info.CreationDate);
             Console.WriteLine ("Creator          = {0}", info.Creator);
             Console.WriteLine ("Keywords         = {0}", info.Keywords);
@@ -140,7 +140,7 @@ namespace PdfMod.Gui
             Console.WriteLine ("FitWindow        = {0}", prefs.FitWindow);
             Console.WriteLine ("HideMenubar      = {0}", prefs.HideMenubar);
             Console.WriteLine ("HideToolbar      = {0}", prefs.HideToolbar);
-            Console.WriteLine ("HideWindowUI     = {0}", prefs.HideWindowUI);
+            Console.WriteLine ("HideWindowUI     = {0}", prefs.HideWindowUI);*/
 
             title.SetDefault (doc.Title);
             author.SetDefault (doc.Author);

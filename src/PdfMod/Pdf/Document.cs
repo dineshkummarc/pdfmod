@@ -270,7 +270,10 @@ namespace PdfMod.Pdf
             Pdf.Save (uri);
             UnsavedChanges = 0;
             Log.DebugFormat ("Saved to {0}", uri);
+
+            var uri_obj = new Uri (uri);
             Uri = uri;
+            SuggestedSavePath = Path = uri_obj.LocalPath;
 
             if (tmp_uri != null) {
                 try {
