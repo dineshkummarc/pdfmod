@@ -46,12 +46,12 @@ namespace PdfMod.Gui
 
         static string [] require_doc_actions = new string[] {
             "Save", "SaveAs", "Properties", "Undo", "Redo", "ZoomFit", "OpenInViewer",
-            "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "SelectInverse", "InsertFrom", "ExportImages",
+            "SelectAll", "SelectEvens", "SelectOdds", "SelectMatching", "SelectInverse", "InsertFrom",
             "ViewBookmarks", "AddBookmark", "EditBookmarks"
         };
 
         static string [] require_page_actions = new string[] {
-            "Remove", "Extract", "RotateRight", "RotateLeft"
+            "Remove", "Extract", "RotateRight", "RotateLeft", "ExportImages"
         };
 
         public UndoManager UndoManager { get { return undo_manager; } }
@@ -67,7 +67,6 @@ namespace PdfMod.Gui
                 new ActionEntry ("Save",   Gtk.Stock.Save,   null, "<control>S", Catalog.GetString ("Save changes to this document, overwriting the existing file"), OnSave),
                 new ActionEntry ("SaveAs", Gtk.Stock.SaveAs, null, "<control><shift>S", Catalog.GetString ("Save this document to a new file"), OnSaveAs),
                 new ActionEntry ("RecentMenu", null, Catalog.GetString ("Recent _Files"), null, null, null),
-                new ActionEntry ("ExportImages", null, Catalog.GetString ("Export Images"), null, Catalog.GetString ("Save all images in this document to a new folder"), OnExportImages),
                 new ActionEntry ("InsertFrom", Gtk.Stock.Add, Catalog.GetString("_Insert From..."), null, Catalog.GetString("Insert pages from another document"), OnInsertFrom),
                 new ActionEntry ("Close", Gtk.Stock.Close, null, "<control>W", null, OnClose),
 
@@ -78,6 +77,7 @@ namespace PdfMod.Gui
                 new ActionEntry ("Remove", Gtk.Stock.Remove, null, "Delete", null, OnRemove),
                 new ActionEntry ("RotateLeft", null, Catalog.GetString ("Rotate Left"), "bracketleft", Catalog.GetString ("Rotate left"), OnRotateLeft),
                 new ActionEntry ("RotateRight", null, Catalog.GetString ("Rotate Right"), "bracketright", Catalog.GetString ("Rotate right"), OnRotateRight),
+                new ActionEntry ("ExportImages", null, null, null, null, OnExportImages),
                 new ActionEntry ("SelectAll", Stock.SelectAll, null, "<control>A", null, OnSelectAll),
                 new ActionEntry ("SelectOdds", null, Catalog.GetString ("Select Odd Pages"), null, null, OnSelectOdds),
                 new ActionEntry ("SelectEvens", null, Catalog.GetString ("Select Even Pages"), null, null, OnSelectEvens),
@@ -177,6 +177,17 @@ namespace PdfMod.Gui
             foreach (string action in require_page_actions)
                 UpdateAction (action, true, have_page);
 
+            int exportable_imgs = 0;
+            if (have_page) {
+                exportable_imgs = new ExportImagesAction (app.Document, app.IconView.SelectedPages).ExportableImageCount;
+            }
+            UpdateAction ("ExportImages", true, exportable_imgs > 0);
+            this["ExportImages"].Label = String.Format (Catalog.GetPluralString (
+                "Export Image", "Export {0} Images", exportable_imgs), exportable_imgs);
+
+            this["ExportImages"].Tooltip = String.Format (Catalog.GetPluralString (
+                "Save image from the selected pages to a new folder", "Save {0} images from the selected pages to a new folder", exportable_imgs), exportable_imgs);
+
             UpdateAction ("Undo", true, have_doc && undo_manager.CanUndo);
             UpdateAction ("Redo", true, have_doc && undo_manager.CanRedo);
 
@@ -266,7 +277,8 @@ namespace PdfMod.Gui
 
         void OnExportImages (object o, EventArgs args)
         {
-            var action = new ExportImagesAction (app.Document, app.Document.Pages);
+            var pages = app.IconView.SelectedPages.ToList ();
+            var action = new ExportImagesAction (app.Document, pages);
             if (action.ExportableImageCount == 0) {
                 Log.Information ("Found zero exportable images in the selected pages");
                 return;
@@ -274,8 +286,9 @@ namespace PdfMod.Gui
 
             var export_path_base = Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
-                Hyena.StringUtil.EscapeFilename (
-                    System.IO.Path.GetFileNameWithoutExtension (app.Document.Filename))
+                Hyena.StringUtil.EscapeFilename (String.Format ("{0} [{1}]",
+                    Path.GetFileNameWithoutExtension (app.Document.SuggestedSavePath),
+                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10))))
             );
 
             var export_path = export_path_base;
@@ -361,9 +374,9 @@ namespace PdfMod.Gui
 
             app.LoadPath (path, Path.Combine (
                 Path.GetDirectoryName (app.Document.SuggestedSavePath),
-                String.Format ("{0} [{1}].pdf",
+                Hyena.StringUtil.EscapeFilename (String.Format ("{0} [{1}].pdf",
                     Path.GetFileNameWithoutExtension (app.Document.SuggestedSavePath),
-                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10)))
+                    GLib.Markup.EscapeText (Document.GetPageSummary (pages, 10))))
             ));
         }
 

@@ -35,8 +35,11 @@
 
 using System;
 using System.IO;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+
+using Mono.Unix;
 
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.Advanced;
@@ -46,10 +49,13 @@ namespace PdfMod.Pdf.Actions
     public class ExportImagesAction
     {
         List<ImageInfo> image_objects;
+        int max_page_index;
 
         public ExportImagesAction (Document document, IEnumerable<Page> pages)
         {
-            image_objects = GetImageObjectsFrom (pages).Where (IsExportable).ToList ();
+            var page_list = pages.ToList ();
+            max_page_index = page_list.Last ().Index;
+            image_objects = GetImageObjectsFrom (page_list).ToList ();
         }
 
         public int ExportableImageCount {
@@ -65,20 +71,17 @@ namespace PdfMod.Pdf.Actions
 
         IEnumerable<ImageInfo> GetImageObjectsFrom (IEnumerable<Page> pages)
         {
-            // Doesn't seem like you can get the images just on one page; the following
-            // gets all the images in the whole document, so only need to do it from one page
-            //foreach (var page in pages) {
-                var page = pages.First ();
+            foreach (var page in pages) {
                 var resources = page.Pdf.Elements.GetDictionary ("/Resources");
                 if (resources == null)
-                    yield break;
+                    continue;
 
                 var x_objects = resources.Elements.GetDictionary ("/XObject");
                 if (x_objects == null)
-                    yield break;
+                    continue;
 
                 int i = 0;
-                var items = x_objects.Elements.Values;
+                var items = x_objects.Elements.Values.ToList ();
                 foreach (var item in items) {
                     var reference = item as PdfReference;
                     if (reference == null)
@@ -88,10 +91,15 @@ namespace PdfMod.Pdf.Actions
                     // Put this in a variable to pass to GetString so that it's not pulled out as a translation string
                     var subtype = "/Subtype";
                     if (x_object != null && x_object.Elements.GetString (subtype) == "/Image") {
-                        yield return new ImageInfo () { Page = page, ImageObject = x_object, PageIndex = i++ };
+                        var img = new ImageInfo () { Page = page, ImageObject = x_object, PageIndex = i++, PageCount = items.Count };
+                        if (IsExportable (img)) {
+                            yield return img;
+                        } else {
+                            i--;
+                        }
                     }
                 }
-            //}
+            }
         }
 
         bool IsExportable (ImageInfo image)
@@ -103,7 +111,7 @@ namespace PdfMod.Pdf.Actions
         /// <summary>
         /// Currently extracts only JPEG images.
         /// </summary>
-        static void Export (ImageInfo image, string to_path)
+        void Export (ImageInfo image, string to_path)
         {
             string filter = image.ImageObject.Elements.GetName("/Filter");
             switch (filter) {
@@ -116,18 +124,34 @@ namespace PdfMod.Pdf.Actions
             }
         }
 
-        static string GetFilename (ImageInfo image, string to_path, string ext)
+        string GetFilename (ImageInfo image, string to_path, string ext)
         {
-            var name = image.ImageObject.Elements.GetName ("/Name");
+            string name = image.ImageObject.Elements.GetName ("/Name");
+            if (name == "/X") { name = null; }
             var name_fragment = String.IsNullOrEmpty (name) ? null : String.Format (" ({0})", name);
             var path = Path.Combine (
                 to_path,
-                Hyena.StringUtil.EscapeFilename (
-                    String.Format ("{0:00}{1}.{2}", image.PageIndex, name_fragment, ext))
-                //String.Format ("Page {0} - #{1:00}{2}.{3}",
-                    //image.Page.Index, image.PageIndex, name_fragment, ext)
+                Hyena.StringUtil.EscapeFilename (String.Format (
+                    "{0} - {1}{2}.{3}",
+                    String.Format (Catalog.GetString ("Page {0}"),
+                        SortableNumberString (image.Page.Index + 1, max_page_index + 1)),
+                    SortableNumberString (image.PageIndex + 1, image.PageCount),
+                    name_fragment, ext
+                ))
             );
             return path;
+        }
+
+        static string SortableNumberString (int num, int count)
+        {
+            var fmt = new StringBuilder ("{0:");
+            int places = count.ToString ().Length;
+            for (int i = 0; i < places; i++) {
+                fmt.Append ('0');
+            }
+            fmt.Append ('}');
+
+            return String.Format (fmt.ToString (), num);
         }
 
         /// <summary>
@@ -166,6 +190,7 @@ namespace PdfMod.Pdf.Actions
             public Page Page { get; set; }
             public PdfDictionary ImageObject { get; set; }
             public int PageIndex { get; set; }
+            public int PageCount { get; set; }
         }
     }
 }

@@ -6,7 +6,6 @@
       <menuitem action="SaveAs"/>
       <menuitem action="RecentMenu"/>
       <separator/>
-      <menuitem action="ExportImages"/>
       <menuitem action="InsertFrom"/>
       <separator/>
       <menuitem action="Properties"/>
@@ -23,6 +22,8 @@
       <menuitem action="RotateLeft"/>
       <menuitem action="RotateRight"/>
       <!--<menuitem action="RotateArbitrary"/>-->
+      <separator/>
+      <menuitem action="ExportImages"/>
       <separator/>
       <menuitem action="SelectAll"/>
       <menuitem action="SelectOdds"/>
@@ -62,13 +63,13 @@
     <separator/>
     <toolitem action="Properties"/>
     <toolitem action="ViewBookmarks"/>
-    <toolitem action="ExportImages"/>
     <toolitem action="InsertFrom"/>
     <separator/>
     <toolitem action="Extract"/>
     <toolitem action="Remove"/>
     <toolitem action="RotateLeft"/>
     <toolitem action="RotateRight"/>
+    <toolitem action="ExportImages"/>
     <separator/>
     <!-- Commented out until we have a good icon <toolitem action="OpenInViewer"/>-->
   </toolbar>
@@ -80,6 +81,8 @@
     <menuitem action="RotateLeft"/>
     <menuitem action="RotateRight"/>
     <!--<menuitem action="RotateArbitrary"/>-->
+    <separator/>
+    <menuitem action="ExportImages"/>
     <separator/>
     <menuitem action="SelectAll"/>
     <menuitem action="SelectOdds"/>
