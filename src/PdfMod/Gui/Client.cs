@@ -98,17 +98,25 @@ namespace PdfMod.Gui
             query_box = new QueryBox (this) { NoShowAll = true };
             query_box.Hide ();
 
+            // ActionManager
+            ActionManager = new Hyena.Gui.ActionManager ();
+            Window.AddAccelGroup (ActionManager.UIManager.AccelGroup);
+            Actions = new Actions (this, ActionManager);
+
             // Status bar
             StatusBar = new Gtk.Statusbar () { HasResizeGrip = true };
             status_label = new Label () { Xalign = 0.0f };
             StatusBar.PackStart (status_label, true, true, 6);
             StatusBar.ReorderChild (status_label, 0);
 
-            // ActionManager
-            ActionManager = new Hyena.Gui.ActionManager ();
-            Window.AddAccelGroup (ActionManager.UIManager.AccelGroup);
-            Actions = new Actions (this, ActionManager);
+            var zoom_align = new Alignment (1f, 0.5f, 0f, 0f) { RightPadding = 24 };
+            var zoom_box = new HBox () { Spacing = 6 };
 
+            var zoom_slider = new ZoomSlider (this);
+            StatusBar.PackEnd (zoom_slider, false, false, 0);
+            StatusBar.ReorderChild (zoom_slider, 1);
+
+            // Properties editor box
             EditorBox = new MetadataEditorBox (this) { NoShowAll = true };
             EditorBox.Hide ();
 

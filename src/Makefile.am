@@ -40,6 +40,7 @@ FILES =  \
 	PdfMod/Gui/PageCell.cs \
 	PdfMod/Gui/PageListStore.cs \
 	PdfMod/Gui/SelectMatchingBox.cs \
+	PdfMod/Gui/ZoomSlider.cs \
 	PdfMod/Main.cs \
 	PdfMod/Pdf/Actions/BaseAction.cs \
 	PdfMod/Pdf/Actions/BasePageAction.cs \

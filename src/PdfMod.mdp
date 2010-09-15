@@ -52,6 +52,7 @@
     <File subtype="Code" buildaction="Compile" name="PdfMod/Core/Configuration.cs" />
     <File subtype="Code" buildaction="Compile" name="PdfMod/Pdf/PageLabels.cs" />
     <File subtype="Code" buildaction="Compile" name="PdfMod/Gui/BookmarkView.cs" />
+    <File subtype="Code" buildaction="Compile" name="PdfMod/Gui/ZoomSlider.cs" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

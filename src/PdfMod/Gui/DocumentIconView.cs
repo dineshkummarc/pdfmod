@@ -459,6 +459,11 @@ namespace PdfMod.Gui
         bool zoom_manually_set;
         public void Zoom (int pixels)
         {
+            Zoom (pixels, false);
+        }
+
+        public void Zoom (int pixels, bool absolute)
+        {
             CanZoomIn = CanZoomOut = true;
 
             if (!zoom_manually_set) {
@@ -466,7 +471,7 @@ namespace PdfMod.Gui
                 (app.Actions["ZoomFit"] as ToggleAction).Active = false;
             }
 
-            int new_width = ItemSize + pixels;
+            int new_width = absolute ? pixels : ItemSize + pixels;
             if (new_width <= MIN_WIDTH) {
                 CanZoomOut = false;
                 new_width = MIN_WIDTH;
