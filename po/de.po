@@ -319,7 +319,7 @@ msgstr "Lesezeichen hinzufügen"
 msgid "Remove Bookmark"
 msgid_plural "Remove Bookmarks"
 msgstr[0] "Lesezeichen entfernen"
-msgstr[1] "{0} Seiten entfernen"
+msgstr[1] "Lesezeichen entfernen"
 
 #: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
 msgid "Rename Bookmark"
