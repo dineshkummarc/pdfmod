@@ -144,7 +144,7 @@ namespace PdfMod.Gui
             public PdfOutline Bookmark;
             public PdfOutline Parent;
             // TODO Save/restore the precise position this bookmark was at beneath its parent
-            public int Position;
+            //public int Position;
         }
 
         TreeIter IterForBookmark (PdfOutline bookmark)

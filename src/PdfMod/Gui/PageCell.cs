@@ -32,11 +32,9 @@ namespace PdfMod.Gui
         const int scale_every = 400;
 
         ThumbnailLruCache surface_cache;
-        IconView parent;
 
         public PageCell (IconView parent)
         {
-            this.parent = parent;
             surface_cache = new ThumbnailLruCache ();
         }
 

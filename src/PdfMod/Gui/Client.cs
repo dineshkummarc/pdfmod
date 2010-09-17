@@ -109,9 +109,6 @@ namespace PdfMod.Gui
             StatusBar.PackStart (status_label, true, true, 6);
             StatusBar.ReorderChild (status_label, 0);
 
-            var zoom_align = new Alignment (1f, 0.5f, 0f, 0f) { RightPadding = 24 };
-            var zoom_box = new HBox () { Spacing = 6 };
-
             var zoom_slider = new ZoomSlider (this);
             StatusBar.PackEnd (zoom_slider, false, false, 0);
             StatusBar.ReorderChild (zoom_slider, 1);

@@ -110,10 +110,10 @@ namespace PdfMod.Gui
         void HandleDocumentLoaded (object o, EventArgs e)
         {
             doc = app.Document;
-            var pdf = app.Document.Pdf;
+            /*var pdf = app.Document.Pdf;
             var info = pdf.Info;
             
-            /*Console.WriteLine ("Author           = {0}", info.Author);
+            Console.WriteLine ("Author           = {0}", info.Author);
             Console.WriteLine ("CreationDate     = {0}", info.CreationDate);
             Console.WriteLine ("Creator          = {0}", info.Creator);
             Console.WriteLine ("Keywords         = {0}", info.Keywords);
