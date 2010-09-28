@@ -69,7 +69,8 @@ REFERENCES =  \
 	-pkg:hyena \
 	-pkg:hyena.gui \
 	System \
-	System.Core
+	System.Core \
+	-r:../bin/PdfSharp.dll
 
 PROJECT_REFERENCES = ../bin/PdfSharp.dll
 
@@ -80,8 +81,6 @@ PROGRAMFILES += $(POPPLER_SHARP_DLL_CONFIG)
 else
 REFERENCES += -pkg:poppler-sharp
 endif
-
-DLL_REFERENCES = ../bin/PdfSharp.dll 
 
 CLEANFILES = $(PROGRAMFILES) $(BINARIES)
 
@@ -103,7 +102,7 @@ $(build_xamlg_list): %.xaml.g.cs: %.xaml
 
 $(ASSEMBLY_MDB): $(ASSEMBLY)
 
-$(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(DLL_REFERENCES) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
+$(ASSEMBLY): $(build_sources) $(build_resources) $(build_datafiles) $(PROJECT_REFERENCES) $(build_xamlg_list) $(build_satellite_assembly_list)
 	mkdir -p $(shell dirname $(ASSEMBLY))
 	cp $(BUNDLE_ASSEMBLIES) $(BUILD_DIR)
 	cp $(BUNDLE_FILES) $(BUILD_DIR)

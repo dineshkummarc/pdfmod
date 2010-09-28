@@ -1,3 +1,40 @@
+=============================
+Version 0.9.0 - Sept 28, 2010
+=============================
+
+Contributors:
+Chow Loong Jin, Gabriel Burt, Łukasz Jernaś
+
+Enhancements:
+* Bookmarks support (bgo#627747)
+
+    Can add, edit, and remove bookmarks (aka outlines).
+
+* Make Export Images a page action
+
+    It acts on the selected pages (like extract page and rotate
+    do).  It now displays the number of images that will be
+    exported, and is insensitive if none can be exported (bgo#594457)
+    
+* Add zoom slider/buttons in bottom-right (bgo#614378, bgo#628437)
+* Allow compiling with external poppler-sharp
+
+Bugs Fixed:
+* Fix double-width page icon rendering (bgo#590744)
+* Make SaveAs not require unsaved changes (bgo#628449)
+* Fix crash with export images by escaping output path
+* Better handling of files dropped from nautilus
+* Avoid XDG-related crash in file chooser (bgo#619073)
+* Mark missing string as translatable (bgo#618596)
+* Escape directory and filenames properly before making them (bgo#606432)
+* Fix page tooltip logic
+
+Translators:
+Andrej Žnidaršič, Aron Xu, Bruno Brouard, Claude Paroz, Daniel Nylander,
+Fran Diéguez, Jorge González, Łukasz Jernaś, Marek Černocký, Mario Blättermann,
+Matej Urbančič, Mattias Põldaru, Petr Kovar, Priit Laes, Takeshi AIHANA,
+Wouter Bolsterlee, YunQiang Su
+
 ===========================
 Version 0.8.3 - May 6, 2010
 ===========================
