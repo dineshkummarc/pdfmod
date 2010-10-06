@@ -140,7 +140,8 @@ namespace PdfMod.Pdf
                 tmp_path = new Uri (uri).LocalPath;
             }
 
-            var uri_obj = new Uri (uri);
+            var safe_uri = new Hyena.SafeUri (uri);
+            var uri_obj = new Uri (safe_uri.AbsoluteUri);
             Uri = uri_obj.AbsoluteUri;
             SuggestedSavePath = Path = uri_obj.LocalPath;
 

@@ -71,6 +71,7 @@ namespace PdfMod.Core
         public void LoadPath (string path, string suggestedFilename)
         {
             LoadPath (path, suggestedFilename, null);
+            Log.DebugFormat ("Loaded {0}", path);
         }
 
         public abstract void LoadPath (string path, string suggestedFilename, System.Action finishedCallback);
