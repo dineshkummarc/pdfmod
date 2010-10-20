@@ -415,7 +415,7 @@ namespace PdfMod.Gui
         static void OnLogNotify (LogNotifyArgs args)
         {
             ThreadAssist.ProxyToMain (delegate {
-                Gtk.MessageType mtype;
+                Gtk.MessageType mtype = Gtk.MessageType.Error;
                 var entry = args.Entry;
 
                 switch (entry.Type) {
