@@ -251,8 +251,12 @@ namespace PdfMod.Gui
 
         void OnSave (object o, EventArgs args)
         {
-            app.Document.Save (app.Document.SuggestedSavePath);
-            undo_manager.Clear ();
+            try {
+                app.Document.Save (app.Document.SuggestedSavePath);
+                undo_manager.Clear ();
+            } catch (Exception e) {
+                Log.Error (Catalog.GetString ("Unable to Save Document"), e.Message, true);
+            }
         }
 
         void OnSaveAs (object o, EventArgs args)
