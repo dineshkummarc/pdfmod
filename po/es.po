@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: pdfmod.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-09-14 21:06+0000\n"
-"PO-Revision-Date: 2010-09-17 20:19+0200\n"
+"POT-Creation-Date: 2010-10-25 19:26+0000\n"
+"PO-Revision-Date: 2010-10-26 10:49+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -192,7 +192,6 @@ msgstr "Pantalla completa"
 
 #: ../src/PdfMod/Gui/Actions.cs:186
 #, csharp-format
-#| msgid "Export Images"
 msgid "Export Image"
 msgid_plural "Export {0} Images"
 msgstr[0] "Exportar imagen"
@@ -200,7 +199,6 @@ msgstr[1] "Exportar {0} imágenes"
 
 #: ../src/PdfMod/Gui/Actions.cs:189
 #, csharp-format
-#| msgid "Save all images in this document to a new folder"
 msgid "Save image from the selected pages to a new folder"
 msgid_plural "Save {0} images from the selected pages to a new folder"
 msgstr[0] "Guardar en una carpeta nueva la imagen de las páginas seleccionadas"
@@ -253,46 +251,50 @@ msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Extraer la página seleccionada"
 msgstr[1] "Extraer las {0} páginas seleccionadas"
 
-#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:312
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
 msgid "Select PDF"
 msgstr "Seleccionar PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:260
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Imposible guardar el documento"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
 msgid "Save as..."
 msgstr "Guardar como…"
 
-#: ../src/PdfMod/Gui/Actions.cs:329 ../src/PdfMod/Gui/Client.cs:303
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
 msgid "Error Loading Document"
 msgstr "Error al cargar el documento"
 
-#: ../src/PdfMod/Gui/Actions.cs:330 ../src/PdfMod/Gui/Client.cs:304
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Hubo un error al cargar {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:506
+#: ../src/PdfMod/Gui/Actions.cs:510
 msgid "Error opening help"
 msgstr "Error al abrir la ayuda"
 
-#: ../src/PdfMod/Gui/Actions.cs:507
+#: ../src/PdfMod/Gui/Actions.cs:511
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "¿Quiere abrir la documentación en línea de PDF Mod?"
 
-#: ../src/PdfMod/Gui/Actions.cs:528
+#: ../src/PdfMod/Gui/Actions.cs:532
 msgid "Visit Website"
 msgstr "Visitar la página web del proyecto"
 
-#: ../src/PdfMod/Gui/Actions.cs:530
+#: ../src/PdfMod/Gui/Actions.cs:534
 msgid "Primary Development:"
 msgstr "Desarrollo inicial:"
 
-#: ../src/PdfMod/Gui/Actions.cs:533
+#: ../src/PdfMod/Gui/Actions.cs:537
 msgid "Contributors:"
 msgstr "Contribuidores:"
 
 #. Translators: {0} and {1} are the years the copyright assertion covers; put into
 #. variables so you don't have to re-translate this every year
-#: ../src/PdfMod/Gui/Actions.cs:551
+#: ../src/PdfMod/Gui/Actions.cs:555
 #, csharp-format
 msgid ""
 "Copyright {0} Novell Inc.\n"
@@ -301,7 +303,7 @@ msgstr ""
 "Copyright {0} Novell Inc.\n"
 "Copyright {1} Otros colaboradores de PDF Mod"
 
-#: ../src/PdfMod/Gui/Actions.cs:554
+#: ../src/PdfMod/Gui/Actions.cs:558
 msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org>, 2009-2010\n"
@@ -337,59 +339,59 @@ msgstr "El marcador enlaza a la página {0}"
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:202
+#: ../src/PdfMod/Gui/Client.cs:207
 msgid "Save the changes made to this document?"
 msgstr "¿Guardar los cambios realizados en este documento?"
 
-#: ../src/PdfMod/Gui/Client.cs:205
+#: ../src/PdfMod/Gui/Client.cs:210
 msgid "Close _Without Saving"
 msgstr "Salir _sin guardar"
 
-#: ../src/PdfMod/Gui/Client.cs:235
+#: ../src/PdfMod/Gui/Client.cs:240
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "¿Continuar abriendo {0} documento en ventanas separadas?"
 msgstr[1] "¿Continuar abriendo todos los {0} documentos en ventanas separadas?"
 
-#: ../src/PdfMod/Gui/Client.cs:239
+#: ../src/PdfMod/Gui/Client.cs:244
 msgid "Open _First"
 msgstr "Abrir p_rimero"
 
-#: ../src/PdfMod/Gui/Client.cs:240
+#: ../src/PdfMod/Gui/Client.cs:245
 msgid "Open _All"
 msgstr "Abrir _todos"
 
-#: ../src/PdfMod/Gui/Client.cs:271
+#: ../src/PdfMod/Gui/Client.cs:276
 msgid "Loading document..."
 msgstr "Cargando documento…"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:333
+#: ../src/PdfMod/Gui/Client.cs:338
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (originalmente {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:338
+#: ../src/PdfMod/Gui/Client.cs:343
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} página"
 msgstr[1] "{0} páginas"
 
-#: ../src/PdfMod/Gui/Client.cs:359
+#: ../src/PdfMod/Gui/Client.cs:364
 msgid "Document is Encrypted"
 msgstr "El documento está cifrado"
 
-#: ../src/PdfMod/Gui/Client.cs:360
+#: ../src/PdfMod/Gui/Client.cs:365
 msgid "Enter the document's password to open it:"
 msgstr "Introducir la contraseña del documento para abrirlo:"
 
-#: ../src/PdfMod/Gui/Client.cs:390
+#: ../src/PdfMod/Gui/Client.cs:395
 msgid "PDF Documents"
 msgstr "Documentos pdf"
 
-#: ../src/PdfMod/Gui/Client.cs:391
+#: ../src/PdfMod/Gui/Client.cs:396
 msgid "All Files"
 msgstr "Todos los archivos"
 
