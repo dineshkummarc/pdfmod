@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=pdfmod&component=general\n"
-"POT-Creation-Date: 2010-10-06 19:51+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&component=general\n"
+"POT-Creation-Date: 2010-10-25 19:26+0000\n"
 "PO-Revision-Date: 2010-10-16 22:58+0200\n"
 "Last-Translator: Bruno Brouard <annoa.b@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -255,46 +255,50 @@ msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Extrait la page sélectionnée"
 msgstr[1] "Extrait les {0} pages sélectionnées"
 
-#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:312
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
 msgid "Select PDF"
 msgstr "Sélectionner le PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:260
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Impossible d'enregistrer le document"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
 msgid "Save as..."
 msgstr "Enregistrer sous..."
 
-#: ../src/PdfMod/Gui/Actions.cs:329 ../src/PdfMod/Gui/Client.cs:308
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
 msgid "Error Loading Document"
 msgstr "Erreur de chargement du document"
 
-#: ../src/PdfMod/Gui/Actions.cs:330 ../src/PdfMod/Gui/Client.cs:309
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Une erreur est survenue lors de l'ouverture de {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:506
+#: ../src/PdfMod/Gui/Actions.cs:510
 msgid "Error opening help"
 msgstr "Erreur lors de l'ouverture de l'aide"
 
-#: ../src/PdfMod/Gui/Actions.cs:507
+#: ../src/PdfMod/Gui/Actions.cs:511
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Voulez-vous ouvrir la documentation en ligne de PDF Mod ?"
 
-#: ../src/PdfMod/Gui/Actions.cs:528
+#: ../src/PdfMod/Gui/Actions.cs:532
 msgid "Visit Website"
 msgstr "Visitez le site Web"
 
-#: ../src/PdfMod/Gui/Actions.cs:530
+#: ../src/PdfMod/Gui/Actions.cs:534
 msgid "Primary Development:"
 msgstr "Développement initial :"
 
-#: ../src/PdfMod/Gui/Actions.cs:533
+#: ../src/PdfMod/Gui/Actions.cs:537
 msgid "Contributors:"
 msgstr "Contributeurs :"
 
 #. Translators: {0} and {1} are the years the copyright assertion covers; put into
 #. variables so you don't have to re-translate this every year
-#: ../src/PdfMod/Gui/Actions.cs:551
+#: ../src/PdfMod/Gui/Actions.cs:555
 #, csharp-format
 msgid ""
 "Copyright {0} Novell Inc.\n"
@@ -303,7 +307,7 @@ msgstr ""
 "Copyright {0} Novell Inc.\n"
 "Copyright {1} Autres contributeurs de PDF Mod"
 
-#: ../src/PdfMod/Gui/Actions.cs:554
+#: ../src/PdfMod/Gui/Actions.cs:558
 msgid "translator-credits"
 msgstr ""
 "Olivier Lê Thanh Duong <olivier@lethanh.be>\n"
@@ -433,4 +437,3 @@ msgstr "Fe_rmer"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "Masquer les propriétés du document"
-
