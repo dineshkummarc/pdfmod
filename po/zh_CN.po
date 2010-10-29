@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=pdfmod&component=general\n"
 "POT-Creation-Date: 2010-10-25 19:26+0000\n"
-"PO-Revision-Date: 2010-10-28 00:11+0800\n"
+"PO-Revision-Date: 2010-10-29 21:16+0800\n"
 "Last-Translator: Dean Lee <xslidian@lidian.info>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -255,7 +255,7 @@ msgstr "选择 PDF 文件"
 
 #: ../src/PdfMod/Gui/Actions.cs:258
 msgid "Unable to Save Document"
-msgstr ""
+msgstr "无法保存文档"
 
 #: ../src/PdfMod/Gui/Actions.cs:264
 msgid "Save as..."
