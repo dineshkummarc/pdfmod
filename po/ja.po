@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-11 23:40+0900\n"
-"PO-Revision-Date: 2010-05-11 23:39+0900\n"
+"POT-Creation-Date: 2010-11-07 11:11+0900\n"
+"PO-Revision-Date: 2010-11-07 11:06+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,7 +23,13 @@ msgstr "PDF の変更"
 
 #: ../data/pdfmod.desktop.in.in.h:2
 msgid "Remove, extract, and rotate pages in PDF documents"
-msgstr "PDF ドキュメントのページの削除/展開/回転を行います"
+msgstr "PDF ドキュメントのページの削除や展開や回転を行います"
+
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:136
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "{0}ページ"
 
 #. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
@@ -44,201 +51,246 @@ msgstr "ページの移動エラー"
 msgid "Error trying to remove pages from document"
 msgstr "ドキュメントからページの削除エラー"
 
-#: ../src/PdfMod/Pdf/Page.cs:36
-#, csharp-format
-msgid "Page {0}"
-msgstr "{0}ページ"
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "_File"
+msgstr "ファイル(_F)"
 
-#: ../src/PdfMod/Gui/Actions.cs:63
+#: ../src/PdfMod/Gui/Actions.cs:66
 msgid "Open a document"
 msgstr "ドキュメントを開きます"
 
-#: ../src/PdfMod/Gui/Actions.cs:64
-msgid "_Insert From..."
-msgstr "別の PDF を挿入する(_I)..."
-
-#: ../src/PdfMod/Gui/Actions.cs:64
-msgid "Insert pages from another document"
-msgstr "別のドキュメントのページを挿入します"
-
-#: ../src/PdfMod/Gui/Actions.cs:65
+#: ../src/PdfMod/Gui/Actions.cs:67
 msgid "Save changes to this document, overwriting the existing file"
 msgstr "このドキュメントの変更点を保存します (既存のファイルを上書きします)"
 
-#: ../src/PdfMod/Gui/Actions.cs:66
+#: ../src/PdfMod/Gui/Actions.cs:68
 msgid "Save this document to a new file"
 msgstr "このドキュメントを新しいファイルとして保存します"
-
-#: ../src/PdfMod/Gui/Actions.cs:68
-msgid "_File"
-msgstr "ファイル(_F)"
 
 #: ../src/PdfMod/Gui/Actions.cs:69
 msgid "Recent _Files"
 msgstr "最近開いたファイル(_F)"
 
-#: ../src/PdfMod/Gui/Actions.cs:73
-msgid "Rotate Right"
-msgstr "時計回りに回転する"
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "_Insert From..."
+msgstr "別の PDF を挿入する(_I)..."
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "Insert pages from another document"
+msgstr "別のドキュメントのページを挿入します"
 
 #: ../src/PdfMod/Gui/Actions.cs:73
-msgid "Rotate right"
-msgstr "時計回りに回転させます"
-
-#: ../src/PdfMod/Gui/Actions.cs:74
-msgid "Rotate Left"
-msgstr "反時計回りに回転する"
-
-#: ../src/PdfMod/Gui/Actions.cs:74
-msgid "Rotate left"
-msgstr "反時計回りに回転させます"
-
-#: ../src/PdfMod/Gui/Actions.cs:75
-msgid "Export Images"
-msgstr "画像のエキスポート"
-
-#: ../src/PdfMod/Gui/Actions.cs:75
-msgid "Save all images in this document to a new folder"
-msgstr "ドキュメントに含まれている全ての画像を任意のフォルダに保存します"
-
-#: ../src/PdfMod/Gui/Actions.cs:77
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: ../src/PdfMod/Gui/Actions.cs:79
-msgid "Select Even Pages"
-msgstr "偶数ページの選択"
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate Left"
+msgstr "反時計回りに回転する"
 
-#: ../src/PdfMod/Gui/Actions.cs:80
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate left"
+msgstr "反時計回りに回転させます"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate Right"
+msgstr "時計回りに回転する"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate right"
+msgstr "時計回りに回転させます"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
 msgid "Select Odd Pages"
 msgstr "奇数ページの選択"
 
-#: ../src/PdfMod/Gui/Actions.cs:81
+#: ../src/PdfMod/Gui/Actions.cs:83
+msgid "Select Even Pages"
+msgstr "偶数ページの選択"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
 msgid "Select Matching..."
 msgstr "検索して選択..."
 
-#: ../src/PdfMod/Gui/Actions.cs:82
+#: ../src/PdfMod/Gui/Actions.cs:85
 msgid "_Invert Selection"
 msgstr "検索の反転(_I)"
 
-#: ../src/PdfMod/Gui/Actions.cs:86
+#: ../src/PdfMod/Gui/Actions.cs:87
 msgid "_View"
 msgstr "表示(_V)"
 
 #: ../src/PdfMod/Gui/Actions.cs:90
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: ../src/PdfMod/Gui/Actions.cs:91
-msgid "_Contents"
-msgstr "目次(_C)"
-
-#: ../src/PdfMod/Gui/Actions.cs:96
 msgid "Open in Viewer"
 msgstr "ビューアで開く"
 
-#: ../src/PdfMod/Gui/Actions.cs:96
+#: ../src/PdfMod/Gui/Actions.cs:90
 msgid "Open in viewer"
 msgstr "選択したページをビューアの中に開きます"
 
+#: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
+msgid "_Bookmarks"
+msgstr "ブックマーク(_B)"
+
+#: ../src/PdfMod/Gui/Actions.cs:93
+msgid "_Add Bookmark"
+msgstr "ブックマークの追加(_A)"
+
+#: ../src/PdfMod/Gui/Actions.cs:94
+msgid "Re_name Bookmark"
+msgstr "ブックマーク名の変更(_N)"
+
+#: ../src/PdfMod/Gui/Actions.cs:95
+msgid "_Change Bookmark Destination"
+msgstr "ブックマーク先の変更(_C)"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] "ブックマークの削除(_R)"
+msgstr[1] "複数のブックマークの削除(_R)"
+
+#: ../src/PdfMod/Gui/Actions.cs:97
+msgid "_Edit Bookmarks"
+msgstr "ブックマークの編集(_E)"
+
+#: ../src/PdfMod/Gui/Actions.cs:99
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
 #: ../src/PdfMod/Gui/Actions.cs:100
+msgid "_Contents"
+msgstr "目次(_C)"
+
+#: ../src/PdfMod/Gui/Actions.cs:107
+msgid "_Add"
+msgstr "追加(_A)"
+
+#: ../src/PdfMod/Gui/Actions.cs:108
+msgid "_Remove"
+msgstr "削除(_R)"
+
+#: ../src/PdfMod/Gui/Actions.cs:111
 msgid "View and edit the title, keywords, and more for this document"
 msgstr "このドキュメントのタイトルやキーワード等の情報を表示したり編集します"
 
-#: ../src/PdfMod/Gui/Actions.cs:102
+#: ../src/PdfMod/Gui/Actions.cs:113
 msgid "Toolbar"
 msgstr "ツールバー"
 
-#: ../src/PdfMod/Gui/Actions.cs:103
+#: ../src/PdfMod/Gui/Actions.cs:114
+msgid "Bookmarks"
+msgstr "ブックマーク"
+
+#: ../src/PdfMod/Gui/Actions.cs:115
 msgid "Fullscreen"
 msgstr "フルスクリーン表示"
 
-#: ../src/PdfMod/Gui/Actions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Export Image"
+msgid_plural "Export {0} Images"
+msgstr[0] "画像のエキスポート"
+msgstr[1] "{0}個の画像のエキスポート"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Save image from the selected pages to a new folder"
+msgid_plural "Save {0} images from the selected pages to a new folder"
+msgstr[0] "選択したページに含まれている画像を新しいフォルダに保存します"
+msgstr[1] "選択したページに含まれている{0}個の画像を新しいフォルダに保存します"
+
+#: ../src/PdfMod/Gui/Actions.cs:196
 msgid "_Undo"
 msgstr "元に戻す(_U)"
 
-#: ../src/PdfMod/Gui/Actions.cs:173
+#: ../src/PdfMod/Gui/Actions.cs:197
 #, csharp-format
 msgid "Undo {0}"
 msgstr "\"{0}\" を元に戻す"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:201
 msgid "_Redo"
 msgstr "やり直す(_R)"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:202
 #, csharp-format
 msgid "Redo {0}"
 msgstr "\"{0}\" をやり直す"
 
-#: ../src/PdfMod/Gui/Actions.cs:186
+#: ../src/PdfMod/Gui/Actions.cs:210
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "ページの削除"
 msgstr[1] "{0}ページの削除"
 
-#: ../src/PdfMod/Gui/Actions.cs:189
+#: ../src/PdfMod/Gui/Actions.cs:213
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "選択したページを削除します"
 msgstr[1] "選択した{0}ページを削除します"
 
-#: ../src/PdfMod/Gui/Actions.cs:192
+#: ../src/PdfMod/Gui/Actions.cs:216
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "ページを抜き出す"
 msgstr[1] "{0}ページ抜き出す"
 
-#: ../src/PdfMod/Gui/Actions.cs:195
+#: ../src/PdfMod/Gui/Actions.cs:219
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "選択したページを抜き出します"
 msgstr[1] "選択した{0}ページを抜き出します"
 
-#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:244
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
 msgid "Select PDF"
 msgstr "PDF の選択"
 
-#: ../src/PdfMod/Gui/Actions.cs:261 ../src/PdfMod/Gui/Client.cs:289
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "ドキュメントを保存できません"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
+msgid "Save as..."
+msgstr "別名で保存..."
+
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
 msgid "Error Loading Document"
 msgstr "ドキュメントの読み込みエラー"
 
-#: ../src/PdfMod/Gui/Actions.cs:262 ../src/PdfMod/Gui/Client.cs:290
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "{0} を読み込んでいる最中にエラーが発生しました。"
 
-#: ../src/PdfMod/Gui/Actions.cs:276
-msgid "Save as..."
-msgstr "別名で保存..."
-
-#: ../src/PdfMod/Gui/Actions.cs:413
+#: ../src/PdfMod/Gui/Actions.cs:510
 msgid "Error opening help"
 msgstr "ヘルプの表示エラー"
 
-#: ../src/PdfMod/Gui/Actions.cs:414
+#: ../src/PdfMod/Gui/Actions.cs:511
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "PDF Mod のオンライン・ドキュメントを開きますか？"
 
-#: ../src/PdfMod/Gui/Actions.cs:435
+#: ../src/PdfMod/Gui/Actions.cs:532
 msgid "Visit Website"
 msgstr "ホームページを開く"
 
-#: ../src/PdfMod/Gui/Actions.cs:437
+#: ../src/PdfMod/Gui/Actions.cs:534
 msgid "Primary Development:"
 msgstr "メインの開発者:"
 
-#: ../src/PdfMod/Gui/Actions.cs:440
+#: ../src/PdfMod/Gui/Actions.cs:537
 msgid "Contributors:"
 msgstr "その他の貢献者:"
 
 #. Translators: {0} and {1} are the years the copyright assertion covers; put into
 #. variables so you don't have to re-translate this every year
-#: ../src/PdfMod/Gui/Actions.cs:458
+#: ../src/PdfMod/Gui/Actions.cs:555
 #, csharp-format
 msgid ""
 "Copyright {0} Novell Inc.\n"
@@ -247,63 +299,93 @@ msgstr ""
 "Copyright {0} Novell Inc.\n"
 "Copyright {1} その他の貢献者"
 
-#: ../src/PdfMod/Gui/Actions.cs:461
+#: ../src/PdfMod/Gui/Actions.cs:558
 msgid "translator-credits"
 msgstr "相花 毅 <takeshi.aihana@gmail.com>"
 
-#: ../src/PdfMod/Gui/Client.cs:85
+#. Add it to the PDF document
+#: ../src/PdfMod/Gui/BookmarkView.cs:90
+msgid "New bookmark"
+msgstr "新しいブックマーク"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:113
+msgid "Add Bookmark"
+msgstr "ブックマークの追加"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/BookmarkView.cs:137
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "ブックマークの削除"
+msgstr[1] "複数のブックマークの削除"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
+msgid "Rename Bookmark"
+msgstr "ブックマーク名の変更"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:417
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr "{0}ページ目を指しているブックマークです"
+
+#: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:190
+#: ../src/PdfMod/Gui/Client.cs:207
 msgid "Save the changes made to this document?"
 msgstr "このドキュメントの変更点を保存しますか？"
 
-#: ../src/PdfMod/Gui/Client.cs:193
+#: ../src/PdfMod/Gui/Client.cs:210
 msgid "Close _Without Saving"
 msgstr "保存せずに閉じる(_W)"
 
-#: ../src/PdfMod/Gui/Client.cs:223
+#: ../src/PdfMod/Gui/Client.cs:240
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] "{0} のドキュメントを別々のウィンドウで開きますか？"
 msgstr[1] "{0} の全てのドキュメントを別々のウィンドウで開きますか？"
 
-#: ../src/PdfMod/Gui/Client.cs:227
+#: ../src/PdfMod/Gui/Client.cs:244
 msgid "Open _First"
 msgstr "先頭を開く(_F)"
 
-#: ../src/PdfMod/Gui/Client.cs:228
+#: ../src/PdfMod/Gui/Client.cs:245
 msgid "Open _All"
 msgstr "全て開く(_A)"
 
-#: ../src/PdfMod/Gui/Client.cs:259
+#: ../src/PdfMod/Gui/Client.cs:276
 msgid "Loading document..."
 msgstr "ドキュメントの読み込み中..."
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:315
+#: ../src/PdfMod/Gui/Client.cs:338
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr "{0} (もともとは {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:320
+#: ../src/PdfMod/Gui/Client.cs:343
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0}ページ"
 msgstr[1] "{0}ページ"
 
-#: ../src/PdfMod/Gui/Client.cs:343
+#: ../src/PdfMod/Gui/Client.cs:364
 msgid "Document is Encrypted"
 msgstr "ドキュメントは暗号化されています"
 
-#: ../src/PdfMod/Gui/Client.cs:344
+#: ../src/PdfMod/Gui/Client.cs:365
 msgid "Enter the document's password to open it:"
 msgstr "ドキュメントを開く際のパスワードを入力して下さい:"
 
-#: ../src/PdfMod/Gui/Client.cs:378
+#: ../src/PdfMod/Gui/Client.cs:395
+msgid "PDF Documents"
+msgstr "PDF ドキュメント"
+
+#: ../src/PdfMod/Gui/Client.cs:396
 msgid "All Files"
 msgstr "全てのファイル"
 
