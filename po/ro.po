@@ -1,0 +1,444 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Daniel Butum <megabyttes@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&component=general\n"
+"POT-Creation-Date: 2010-11-14 14:35+0000\n"
+"PO-Revision-Date: 2010-11-24 23:17+0300\n"
+"Last-Translator: Daniel Butum <megabyttes@gmail.com>\n"
+"Language-Team: Romania\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);;\n"
+"X-Generator: Virtaal 0.6.1\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "Modificator PDF"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Elimină, extrage, și rotește paginile PDF din document"
+
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:136
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Pagina {0}"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "Mută {1}"
+msgstr[1] "Mută {1}"
+msgstr[2] "Mută {1}"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "Eroare la încercarea de anulare a mutării paginilor"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "Eroare la încercarea mutării paginilor"
+
+#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
+msgid "Error trying to remove pages from document"
+msgstr "Eroare la încercarea eliminării paginilor din document"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "_File"
+msgstr "_Fișier"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+msgid "Open a document"
+msgstr "Deschide un document"
+
+#: ../src/PdfMod/Gui/Actions.cs:67
+msgid "Save changes to this document, overwriting the existing file"
+msgstr ""
+"Salvează modificările aplicate documentului, înlocuind fișierul existent"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "Save this document to a new file"
+msgstr "Salvează documentul într-un fișier nou"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr "_Fișiere recente"
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "_Insert From..."
+msgstr "_Inserează din..."
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "Insert pages from another document"
+msgstr "Inserează pagini din alt document"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "_Edit"
+msgstr "_Editare"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate Left"
+msgstr "Rotește la stânga"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate left"
+msgstr "Rotește la stânga"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate Right"
+msgstr "Rotește la dreapta"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate right"
+msgstr "Rotește la dreapta"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "Select Odd Pages"
+msgstr "Selectează paginile impare"
+
+#: ../src/PdfMod/Gui/Actions.cs:83
+msgid "Select Even Pages"
+msgstr "Selectează paginile pare"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
+msgid "Select Matching..."
+msgstr "Selectează după un criteriu..."
+
+#: ../src/PdfMod/Gui/Actions.cs:85
+msgid "_Invert Selection"
+msgstr "_Inversează selecția"
+
+#: ../src/PdfMod/Gui/Actions.cs:87
+msgid "_View"
+msgstr "_Vizualizare"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in Viewer"
+msgstr "Deschide în vizualizator"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in viewer"
+msgstr "Deschide în vizualizator"
+
+#: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
+msgid "_Bookmarks"
+msgstr "_Semne de carte"
+
+#: ../src/PdfMod/Gui/Actions.cs:93
+msgid "_Add Bookmark"
+msgstr "_Adaugă un semn de carte"
+
+#: ../src/PdfMod/Gui/Actions.cs:94
+msgid "Re_name Bookmark"
+msgstr "Rede_numește semnul de carte"
+
+#: ../src/PdfMod/Gui/Actions.cs:95
+msgid "_Change Bookmark Destination"
+msgstr "Modifi_că destinația semnului de carte"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] "_Elimină semnul de carte"
+msgstr[1] "_Elimină semnele de carte"
+msgstr[2] "_Elimină semnele de carte"
+
+#: ../src/PdfMod/Gui/Actions.cs:97
+msgid "_Edit Bookmarks"
+msgstr "_Editează semnele de carte"
+
+#: ../src/PdfMod/Gui/Actions.cs:99
+msgid "_Help"
+msgstr "_Ajutor"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "_Contents"
+msgstr "_Conținut"
+
+#: ../src/PdfMod/Gui/Actions.cs:107
+msgid "_Add"
+msgstr "_Adaugă"
+
+#: ../src/PdfMod/Gui/Actions.cs:108
+msgid "_Remove"
+msgstr "_Elimină"
+
+#: ../src/PdfMod/Gui/Actions.cs:111
+msgid "View and edit the title, keywords, and more for this document"
+msgstr ""
+"Vizualizează și editează titlul, cunvintele cheie, și mai altele pentru "
+"acest document"
+
+#: ../src/PdfMod/Gui/Actions.cs:113
+msgid "Toolbar"
+msgstr "Bară de unelte"
+
+#: ../src/PdfMod/Gui/Actions.cs:114
+msgid "Bookmarks"
+msgstr "Semne de carte"
+
+#: ../src/PdfMod/Gui/Actions.cs:115
+msgid "Fullscreen"
+msgstr "Pe tot ecranul"
+
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Export Image"
+msgid_plural "Export {0} Images"
+msgstr[0] "Exportă imaginea"
+msgstr[1] "Exportă {0} imagini"
+msgstr[2] "Exportă {0} de imagini"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Save image from the selected pages to a new folder"
+msgid_plural "Save {0} images from the selected pages to a new folder"
+msgstr[0] "Salvează imaginea din paginile selectate într-un dosar nou"
+msgstr[1] "Salvează {0} imagini din paginile selectate într-un dosar nou"
+msgstr[2] "Salvează {0} de imagini din paginile selectate într-un dosar nou"
+
+#: ../src/PdfMod/Gui/Actions.cs:196
+msgid "_Undo"
+msgstr "An_ulează"
+
+#: ../src/PdfMod/Gui/Actions.cs:197
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Anulează {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:201
+msgid "_Redo"
+msgstr "_Refă"
+
+#: ../src/PdfMod/Gui/Actions.cs:202
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Refă {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:210
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Elimină pagina"
+msgstr[1] "Elimină {0} pagini"
+msgstr[2] "Elimină {0} de pagini"
+
+#: ../src/PdfMod/Gui/Actions.cs:213
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Elimină pagina selectată"
+msgstr[1] "Elimină {0} pagini selectate"
+msgstr[2] "Elimină {0} de pagini selectate"
+
+#: ../src/PdfMod/Gui/Actions.cs:216
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Extrage pagina"
+msgstr[1] "Extrage {0} pagini"
+msgstr[2] "Extrage {0} de pagini"
+
+#: ../src/PdfMod/Gui/Actions.cs:219
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Extrage pagina selectată"
+msgstr[1] "Extrage {0} pagini selectate"
+msgstr[2] "Extrage {0} de pagini selectate"
+
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
+msgid "Select PDF"
+msgstr "Selectare PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Documentul nu a putut fi salvat"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
+msgid "Save as..."
+msgstr "Salvează ca..."
+
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
+msgid "Error Loading Document"
+msgstr "Eroare la încărcarea documentului"
+
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "S-a produs o eroare la încărcarea {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:510
+msgid "Error opening help"
+msgstr "Eroare la deschiderea ajutorului"
+
+#: ../src/PdfMod/Gui/Actions.cs:511
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Doriți să deschideți documentația online a programului PDF Mod?"
+
+#: ../src/PdfMod/Gui/Actions.cs:532
+msgid "Visit Website"
+msgstr "Vizitați siteul"
+
+#: ../src/PdfMod/Gui/Actions.cs:534
+msgid "Primary Development:"
+msgstr "Dezvoltare principală:"
+
+#: ../src/PdfMod/Gui/Actions.cs:537
+msgid "Contributors:"
+msgstr "Contribuitori:"
+
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:555
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Drepturi de autor {0} Novell Inc.\n"
+"Drepturi de autor {1} Alți contribuitori la PDF Mod"
+
+#: ../src/PdfMod/Gui/Actions.cs:558
+msgid "translator-credits"
+msgstr "Butum Daniel <danbutum@yahoo.com>"
+
+#. Add it to the PDF document
+#: ../src/PdfMod/Gui/BookmarkView.cs:90
+msgid "New bookmark"
+msgstr "Semn de carte nou"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:113
+msgid "Add Bookmark"
+msgstr "Adaugă un semn de carte"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/BookmarkView.cs:137
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "Elimină semnul de carte"
+msgstr[1] "Elimină semnele de carte"
+msgstr[2] "Elimină semnele de carte"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
+msgid "Rename Bookmark"
+msgstr "Redenumește semnul de carte"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:417
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr "Semnul de carte trimite către pagina {0}"
+
+#: ../src/PdfMod/Gui/Client.cs:86
+msgid "PDF Mod"
+msgstr "PDF Mod"
+
+#: ../src/PdfMod/Gui/Client.cs:207
+msgid "Save the changes made to this document?"
+msgstr "Doriți să salvați modificările aplicate documentului?"
+
+#: ../src/PdfMod/Gui/Client.cs:210
+msgid "Close _Without Saving"
+msgstr "Închide _fără a salva"
+
+#: ../src/PdfMod/Gui/Client.cs:240
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Continuați, deschizând {0} document într-o fereastră separată?"
+msgstr[1] ""
+"Continuați, deschizând toate cele {0} documente în ferestre separate?"
+msgstr[2] ""
+"Continuați, deschizând toate cele {0} de documente în ferestre separate?"
+
+#: ../src/PdfMod/Gui/Client.cs:244
+msgid "Open _First"
+msgstr "Deschide _primul"
+
+#: ../src/PdfMod/Gui/Client.cs:245
+msgid "Open _All"
+msgstr "Deschide _toate"
+
+#: ../src/PdfMod/Gui/Client.cs:276
+msgid "Loading document..."
+msgstr "Se încarcă documentul..."
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:338
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (inițial {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:343
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} pagină"
+msgstr[1] "{0} pagini"
+msgstr[2] "{0} de pagini"
+
+#: ../src/PdfMod/Gui/Client.cs:364
+msgid "Document is Encrypted"
+msgstr "Documentul este criptat"
+
+#: ../src/PdfMod/Gui/Client.cs:365
+msgid "Enter the document's password to open it:"
+msgstr "Introduceți parola documentului pentru a-l deschide:"
+
+#: ../src/PdfMod/Gui/Client.cs:395
+msgid "PDF Documents"
+msgstr "Documente PDF"
+
+#: ../src/PdfMod/Gui/Client.cs:396
+msgid "All Files"
+msgstr "Toate fișierele"
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+msgid "Select Matching"
+msgstr "Selectează cele care se potrivesc"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "_Titlu:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "_Autor:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "_Cuvinte cheie:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "_Subiect:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+msgid "_Revert Properties"
+msgstr "_Refă proprietățile"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr "Schimbă proprietățile documentului înapoi la valorile originale"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "_Închide"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+msgid "Hide the document's properties"
+msgstr "Ascunde proprietățile documentului"
