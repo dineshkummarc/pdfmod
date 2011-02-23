@@ -1,6 +1,6 @@
 # Norwegian translation of pdfmod (bokmål dialect).
 # Copyright (C) 2000-2003, 2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 2000-2010.
+# Kjartan Maraas <kmaraas@gnome.org>, 2000-2011.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 #
@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod 0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-14 11:44+0100\n"
-"PO-Revision-Date: 2010-03-14 11:47+0100\n"
+"POT-Creation-Date: 2011-02-23 22:57+0100\n"
+"PO-Revision-Date: 2011-02-23 23:02+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmal <i18n-nb@lster.ping.uio.no>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,13 +26,19 @@ msgstr "PDF-redigering"
 msgid "Remove, extract, and rotate pages in PDF documents"
 msgstr ""
 
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:136
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Side {0}"
+
 #. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
 #, csharp-format
 msgid "Move {1}"
 msgid_plural "Move {1}"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Flytt {1}"
+msgstr[1] "Flytt {1}"
 
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
 msgid "Error trying to unmove pages"
@@ -45,265 +52,344 @@ msgstr ""
 msgid "Error trying to remove pages from document"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:63
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "_File"
+msgstr "_Fil"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
 msgid "Open a document"
 msgstr "Åpne et dokument"
 
-#: ../src/PdfMod/Gui/Actions.cs:64
-msgid "_Insert From..."
-msgstr "Sett _inn fra..."
-
-#: ../src/PdfMod/Gui/Actions.cs:64
-#, fuzzy
-msgid "Insert pages from another document"
-msgstr "Forstørr dokumentet"
-
-#: ../src/PdfMod/Gui/Actions.cs:65
+#: ../src/PdfMod/Gui/Actions.cs:67
 msgid "Save changes to this document, overwriting the existing file"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:66
-#, fuzzy
-msgid "Save this document to a new file"
-msgstr "Lagrer dokumentet til %s"
-
 #: ../src/PdfMod/Gui/Actions.cs:68
-msgid "_File"
-msgstr "_Fil"
+msgid "Save this document to a new file"
+msgstr "Lagrer dette dokumentet til en ny fil"
 
 #: ../src/PdfMod/Gui/Actions.cs:69
 msgid "Recent _Files"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:73
-msgid "Rotate Right"
-msgstr "Roter til høyre"
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "_Insert From..."
+msgstr "Sett _inn fra …"
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "Insert pages from another document"
+msgstr "Sett inn sider fra et annet dokument"
 
 #: ../src/PdfMod/Gui/Actions.cs:73
-msgid "Rotate right"
-msgstr "Roter til høyre"
-
-#: ../src/PdfMod/Gui/Actions.cs:74
-msgid "Rotate Left"
-msgstr "Roter til venstre"
-
-#: ../src/PdfMod/Gui/Actions.cs:74
-msgid "Rotate left"
-msgstr "Roter til venstre"
-
-#: ../src/PdfMod/Gui/Actions.cs:75
-msgid "Export Images"
-msgstr "Eksporter bilder"
-
-#: ../src/PdfMod/Gui/Actions.cs:75
-msgid "Save all images in this document to a new folder"
-msgstr ""
-
-#: ../src/PdfMod/Gui/Actions.cs:77
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: ../src/PdfMod/Gui/Actions.cs:79
-msgid "Select Even Pages"
-msgstr "Velg like sider"
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate Left"
+msgstr "Roter til venstre"
 
-#: ../src/PdfMod/Gui/Actions.cs:80
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate left"
+msgstr "Roter til venstre"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate Right"
+msgstr "Roter til høyre"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate right"
+msgstr "Roter til høyre"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
 msgid "Select Odd Pages"
 msgstr "Velg ulike sider"
 
-#: ../src/PdfMod/Gui/Actions.cs:81
+#: ../src/PdfMod/Gui/Actions.cs:83
+msgid "Select Even Pages"
+msgstr "Velg like sider"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
 #, fuzzy
 msgid "Select Matching..."
 msgstr "Velg side"
 
-#: ../src/PdfMod/Gui/Actions.cs:82
+#: ../src/PdfMod/Gui/Actions.cs:85
 #, fuzzy
 msgid "_Invert Selection"
 msgstr "Ugyldig sideutvalg"
 
-#: ../src/PdfMod/Gui/Actions.cs:86
+#: ../src/PdfMod/Gui/Actions.cs:87
 msgid "_View"
 msgstr "_Vis"
 
 #: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in Viewer"
+msgstr "Åpne for visning"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in viewer"
+msgstr "Åpne for visning"
+
+#: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
+msgid "_Bookmarks"
+msgstr "_Bokmerker"
+
+#: ../src/PdfMod/Gui/Actions.cs:93
+msgid "_Add Bookmark"
+msgstr "_Legg til bokmerke"
+
+#: ../src/PdfMod/Gui/Actions.cs:94
+msgid "Re_name Bookmark"
+msgstr "Endre _navn på bokmerke"
+
+#: ../src/PdfMod/Gui/Actions.cs:95
+msgid "_Change Bookmark Destination"
+msgstr ""
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/Gui/Actions.cs:97
+msgid "_Edit Bookmarks"
+msgstr "R_ediger bokmerker"
+
+#: ../src/PdfMod/Gui/Actions.cs:99
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../src/PdfMod/Gui/Actions.cs:91
+#: ../src/PdfMod/Gui/Actions.cs:100
 msgid "_Contents"
 msgstr "_Innhold"
 
-#: ../src/PdfMod/Gui/Actions.cs:96
-#, fuzzy
-msgid "Open in Viewer"
-msgstr "Dokumentvisning"
+#: ../src/PdfMod/Gui/Actions.cs:107
+msgid "_Add"
+msgstr "_Legg til"
 
-#: ../src/PdfMod/Gui/Actions.cs:96
-#, fuzzy
-msgid "Open in viewer"
-msgstr "Åpne i nytt _vindu"
+#: ../src/PdfMod/Gui/Actions.cs:108
+msgid "_Remove"
+msgstr "Fje_rn"
 
-#: ../src/PdfMod/Gui/Actions.cs:100
+#: ../src/PdfMod/Gui/Actions.cs:111
 msgid "View and edit the title, keywords, and more for this document"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:102
+#: ../src/PdfMod/Gui/Actions.cs:113
 msgid "Toolbar"
 msgstr "Verktøylinje"
 
-#: ../src/PdfMod/Gui/Actions.cs:103
+#: ../src/PdfMod/Gui/Actions.cs:114
+msgid "Bookmarks"
+msgstr "Bokmerker"
+
+#: ../src/PdfMod/Gui/Actions.cs:115
 msgid "Fullscreen"
 msgstr "Fullskjerm"
 
-#: ../src/PdfMod/Gui/Actions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Export Image"
+msgid_plural "Export {0} Images"
+msgstr[0] "Eksporter bilde"
+msgstr[1] "Eksporter {0} bilder"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Save image from the selected pages to a new folder"
+msgid_plural "Save {0} images from the selected pages to a new folder"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/PdfMod/Gui/Actions.cs:196
 msgid "_Undo"
 msgstr "_Angre"
 
-#: ../src/PdfMod/Gui/Actions.cs:173
+#: ../src/PdfMod/Gui/Actions.cs:197
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Angre {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:201
 msgid "_Redo"
 msgstr "Gjenopp_rett"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:202
 #, csharp-format
 msgid "Redo {0}"
 msgstr "Gjenopprett {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:186
+#: ../src/PdfMod/Gui/Actions.cs:210
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Fjern side"
 msgstr[1] "Fjern {0} sider"
 
-#: ../src/PdfMod/Gui/Actions.cs:189
-#, fuzzy, csharp-format
+#: ../src/PdfMod/Gui/Actions.cs:213
+#, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
-msgstr[0] "Fjern valgt verktøylinje"
-msgstr[1] "Fjern valgt verktøylinje"
+msgstr[0] "Fjern valgt side"
+msgstr[1] "Fjern {0} valgte sider"
 
-#: ../src/PdfMod/Gui/Actions.cs:192
+#: ../src/PdfMod/Gui/Actions.cs:216
 #, fuzzy, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "_Neste side"
 msgstr[1] "_Neste side"
 
-#: ../src/PdfMod/Gui/Actions.cs:195
+#: ../src/PdfMod/Gui/Actions.cs:219
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:249
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
 msgid "Select PDF"
 msgstr "Velg PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:207
-msgid "PDF Documents"
-msgstr "PDF-dokumenter"
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Kan ikke lagre dokument"
 
-#: ../src/PdfMod/Gui/Actions.cs:208 ../src/PdfMod/Gui/Actions.cs:254
-#: ../src/PdfMod/Gui/Actions.cs:285
-msgid "All Files"
-msgstr "Alle filer"
-
-#: ../src/PdfMod/Gui/Actions.cs:276
+#: ../src/PdfMod/Gui/Actions.cs:264
 msgid "Save as..."
-msgstr "Lagre som..."
+msgstr "Lagre som …"
 
-#: ../src/PdfMod/Gui/Actions.cs:418
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
+#, fuzzy
+msgid "Error Loading Document"
+msgstr "Laster ned dokument (%d%%)"
+
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
+#, fuzzy, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Det oppsto en feil ved visning av hjelp"
+
+#: ../src/PdfMod/Gui/Actions.cs:510
 msgid "Error opening help"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:419
+#: ../src/PdfMod/Gui/Actions.cs:511
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:440
+#: ../src/PdfMod/Gui/Actions.cs:532
 msgid "Visit Website"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:442
+#: ../src/PdfMod/Gui/Actions.cs:534
 msgid "Primary Development:"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Actions.cs:445
-#, fuzzy
+#: ../src/PdfMod/Gui/Actions.cs:537
 msgid "Contributors:"
-msgstr "_Sammenhengende"
+msgstr "Bidragsytere:"
 
-#: ../src/PdfMod/Gui/Actions.cs:461
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:555
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Actions.cs:558
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
-#: ../src/PdfMod/Gui/Client.cs:84
+#. Add it to the PDF document
+#: ../src/PdfMod/Gui/BookmarkView.cs:90
+msgid "New bookmark"
+msgstr "Nytt bokmerke"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:113
+msgid "Add Bookmark"
+msgstr "Legg til bokmerke"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/BookmarkView.cs:137
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "Fjern bokmerke"
+msgstr[1] "Fjern bokmerker"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
+msgid "Rename Bookmark"
+msgstr "Endre navn på bokmerke"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:417
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr ""
+
+#: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
-msgstr ""
+msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:189
+#: ../src/PdfMod/Gui/Client.cs:207
 msgid "Save the changes made to this document?"
-msgstr ""
+msgstr "Lagre endringene som er gjort i dokumentet?"
 
-#: ../src/PdfMod/Gui/Client.cs:192
+#: ../src/PdfMod/Gui/Client.cs:210
 msgid "Close _Without Saving"
-msgstr ""
+msgstr "Lukk _uten å lagre"
 
-#: ../src/PdfMod/Gui/Client.cs:222
+#: ../src/PdfMod/Gui/Client.cs:240
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/PdfMod/Gui/Client.cs:226
+#: ../src/PdfMod/Gui/Client.cs:244
 msgid "Open _First"
 msgstr "Åpne _første"
 
-#: ../src/PdfMod/Gui/Client.cs:227
+#: ../src/PdfMod/Gui/Client.cs:245
 msgid "Open _All"
 msgstr "Åpne _alle"
 
-#: ../src/PdfMod/Gui/Client.cs:258
+#: ../src/PdfMod/Gui/Client.cs:276
 msgid "Loading document..."
-msgstr "Laster dokument..."
-
-#: ../src/PdfMod/Gui/Client.cs:288
-#, fuzzy
-msgid "Error Loading Document"
-msgstr "Laster ned dokument (%d%%)"
-
-#: ../src/PdfMod/Gui/Client.cs:289
-#, fuzzy, csharp-format
-msgid "There was an error loading {0}"
-msgstr "Det oppsto en feil ved visning av hjelp"
+msgstr "Laster dokument …"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:314
+#: ../src/PdfMod/Gui/Client.cs:338
 #, csharp-format
 msgid "{0} (originally {1})"
 msgstr ""
 
-#: ../src/PdfMod/Gui/Client.cs:319
+#: ../src/PdfMod/Gui/Client.cs:343
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{0} side"
+msgstr[1] "{0} sider"
 
-#: ../src/PdfMod/Gui/Client.cs:342
+#: ../src/PdfMod/Gui/Client.cs:364
 msgid "Document is Encrypted"
 msgstr "Dokumentet er kryptert"
 
-#: ../src/PdfMod/Gui/Client.cs:343
+#: ../src/PdfMod/Gui/Client.cs:365
 msgid "Enter the document's password to open it:"
 msgstr ""
+
+#: ../src/PdfMod/Gui/Client.cs:395
+msgid "PDF Documents"
+msgstr "PDF-dokumenter"
+
+#: ../src/PdfMod/Gui/Client.cs:396
+msgid "All Files"
+msgstr "Alle filer"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
 #, fuzzy
@@ -327,9 +413,8 @@ msgid "_Subject:"
 msgstr "_Emne:"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
-#, fuzzy
 msgid "_Revert Properties"
-msgstr "Egenskaper"
+msgstr "Fo_rkast egenskaper"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
 msgid "Change the document's properties back to the original values"
@@ -340,7 +425,5 @@ msgid "_Close"
 msgstr "_Lukk"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
-#, fuzzy
 msgid "Hide the document's properties"
-msgstr "Overstyr begrensninger satt for dokumentet"
-
+msgstr "Skjul egenskaper for dokumentet"
