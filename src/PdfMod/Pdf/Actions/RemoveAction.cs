@@ -1,5 +1,6 @@
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Mono.Unix;
@@ -13,10 +14,12 @@ namespace PdfMod.Pdf.Actions
 {
     public class RemoveAction : BasePageAction
     {
-        int [] old_indices;
+        //int [] old_indices;
+        Page [] pages;
 
         public RemoveAction (Document document, IEnumerable<Page> pages) : base (document, pages)
         {
+            this.pages = pages.ToArray ();
         }
 
         public override void Undo ()
@@ -37,16 +40,7 @@ namespace PdfMod.Pdf.Actions
 
         public override void Redo ()
         {
-            if (old_indices != null) {
-                throw new InvalidOperationException (Catalog.GetString ("Error trying to remove pages from document"));
-            }
-
-            old_indices = new int[Pages.Count];
-            for (int i = 0; i < Pages.Count; i++) {
-                old_indices[i] = Document.IndexOf (Pages[i]);
-                Console.WriteLine ("Old index of {0} was {1}", Pages[i], old_indices[i]);
-                Document.Remove (Pages[i]);
-            }
+            Document.Remove (pages);
         }
     }
 }
