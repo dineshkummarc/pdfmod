@@ -30,7 +30,7 @@ namespace PdfMod
             ApplicationContext.TrySetProcessName ("pdfmod");
             Gdk.Global.ProgramClass = "pdfmod";
             Log.Debugging = true;
-            Log.DebugFormat ("Starting PdfMod");
+            Log.DebugFormat ("Starting PdfMod {0}", Core.Defines.VERSION);
 
             InitCatalog ("/usr/local/share/locale/", Core.Defines.PREFIX + "/share/locale/");
 
