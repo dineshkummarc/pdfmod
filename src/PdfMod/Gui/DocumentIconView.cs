@@ -212,9 +212,10 @@ namespace PdfMod.Gui
         {
             // Scroll if within 20 pixels of the top or bottom
             var parent = Parent.Parent as Gtk.ScrolledWindow;
-            if (y < 20) {
+            double rel_y = y - parent.Vadjustment.Value;
+            if (rel_y < 20) {
                 parent.Vadjustment.Value -= 30;
-            } else if ((parent.Allocation.Height - y) < 20) {
+            } else if ((parent.Allocation.Height - rel_y) < 20) {
                 parent.Vadjustment.Value = Math.Min (parent.Vadjustment.Upper - parent.Allocation.Height, parent.Vadjustment.Value + 30);
             }
 
