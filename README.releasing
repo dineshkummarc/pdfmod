@@ -1,0 +1,10 @@
+To make a release:
+
+* Bump version in configure.ac
+* Update AUTHORS, and the contributors list in src/PdfMod/Gui/Actions.cs
+* Update NEWS and pdfmod.doap
+* Run make distcheck
+* Tag it: `git tag -a -m "0.N.N release" 0.N.N && git push origin 0.N.N`
+* Upload tarball to master.gnome.org and run install-module on it
+* Update http://live.gnome.org/PdfMod
+* Announce to pdfmod-list@gnome.org and gnome-announce-list@gnome.org

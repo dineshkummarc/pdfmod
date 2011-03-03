@@ -1,9 +1,12 @@
-=============================
-Version 0.9.1 - NOT YET RELEASED
-=============================
+===========================
+Version 0.9.1 - Mar 3, 2011
+===========================
 
 Contributors:
 Gabriel Burt, Robson Roberto Souza Peixoto, Thomas Klausner
+
+Enhancements:
+* Make removing many pages much faster (bgo#630012)
 
 Bugs Fixed:
 * Fix being able to load files with : in their path (bgo#631456)
@@ -12,6 +15,9 @@ Bugs Fixed:
 * Fix poppler-sharp.dll.config for NetBSD (bgo#638852)
 * Fix scrolling the view while dragging
 * Don't crash if Outlines point to null (bgo#642379)
+* Fix issue with saving landscape pages (bgo#597215)
+* Fix crash on page click due to ExportImagesAction (bgo#631889)
+* Fix crash if Catalog.Outlines is PdfNull (bgo#633123)
 
 Translators:
 Andrej Žnidaršič, Aron Xu, Bruno Brouard, Carles Ferrando, Daniel Butum,
