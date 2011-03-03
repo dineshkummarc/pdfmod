@@ -104,7 +104,8 @@ namespace PdfMod.Pdf.Actions
 
         bool IsExportable (ImageInfo image)
         {
-            var filter = image.ImageObject.Elements.GetName("/Filter");
+            var filter_obj = image.ImageObject.Elements["/Filter"];
+            var filter = filter_obj == null ? "" : filter_obj.ToString ();
             return filter == "/DCTDecode" || filter == "/FlateDecode";
         }
 
@@ -113,7 +114,8 @@ namespace PdfMod.Pdf.Actions
         /// </summary>
         void Export (ImageInfo image, string to_path)
         {
-            string filter = image.ImageObject.Elements.GetName("/Filter");
+            var filter_obj = image.ImageObject.Elements["/Filter"];
+            var filter = filter_obj == null ? "" : filter_obj.ToString ();
             switch (filter) {
                 case "/DCTDecode":
                     ExportJpegImage (image, GetFilename (image, to_path, "jpg"));
