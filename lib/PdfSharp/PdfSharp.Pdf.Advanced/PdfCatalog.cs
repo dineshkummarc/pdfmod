@@ -147,10 +147,20 @@ namespace PdfSharp.Pdf.Advanced
       {
         if (this.outline == null) {
           try {
-            this.outline = (PdfOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+            var obj = Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+            this.outline = obj as PdfOutline;
+
+            // If there's a PdfNull object there (pdfopt does this) then remove it
+            // and replace it with a real PdfOutline so that the user can edit the outlines/bookmarks
+            // if they want to
+            if (this.outline == null && obj is PdfNull) {
+              Elements.Remove (Keys.Outlines);
+              this.outline = Elements.GetValue(Keys.Outlines, VCF.CreateIndirect) as PdfOutline;
+            }
           } catch (InvalidOperationException) {
+            // This happens if the Outline iref points to a null value; remove it and start over
             Elements.Remove (Keys.Outlines);
-            this.outline = (PdfOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+            this.outline = Elements.GetValue(Keys.Outlines, VCF.CreateIndirect) as PdfOutline;
           }
         }
         return this.outline.Outlines;
