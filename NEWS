@@ -1,4 +1,25 @@
 =============================
+Version 0.9.1 - NOT YET RELEASED
+=============================
+
+Contributors:
+Gabriel Burt, Robson Roberto Souza Peixoto, Thomas Klausner
+
+Bugs Fixed:
+* Fix being able to load files with : in their path (bgo#631456)
+* Fix build on Mono 2.8
+* Don't crash if unable to save (bgo#633125)
+* Fix poppler-sharp.dll.config for NetBSD (bgo#638852)
+* Fix scrolling the view while dragging
+* Don't crash if Outlines point to null (bgo#642379)
+
+Translators:
+Andrej Žnidaršič, Aron Xu, Bruno Brouard, Carles Ferrando, Daniel Butum,
+Daniel Nylander, Dean Lee, Gabor Kelemen, Gabor Kelemen, Gyorgy Ballo,
+Jorge González, Kjartan Maraas, Marek Černocký, Mario Blättermann,
+Matej Urbančič, Mateus Zenaide, Mattias Põldaru, Takeshi AIHANA
+
+=============================
 Version 0.9.0 - Sept 28, 2010
 =============================
 
