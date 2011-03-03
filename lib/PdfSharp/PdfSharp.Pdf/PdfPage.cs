@@ -560,11 +560,7 @@ namespace PdfSharp.Pdf
 
     internal override void WriteObject(PdfWriter writer)
     {
-      // HACK: temporarily flip media box if Landscape
-      PdfRectangle mediaBox = MediaBox;
       // TODO: Take /Rotate into account
-      if (orientation == PageOrientation.Landscape)
-        MediaBox = new PdfRectangle(mediaBox.X1, mediaBox.Y1, mediaBox.Y2, mediaBox.X2);
 //#warning THHO4STLA: warum nicht new PdfRectangle(mediaBox.Y1, mediaBox.X1, mediaBox.Y2, mediaBox.X2)? - siehe auch Orientation
 //#warning THHO4STLA: CropBox, BleedBox etc. auch drehen?
 
@@ -591,9 +587,6 @@ namespace PdfSharp.Pdf
         item.GetType();
 #endif
       base.WriteObject(writer);
-
-      if (this.orientation == PageOrientation.Landscape)
-        MediaBox = mediaBox;
     }
 
     /// <summary>
