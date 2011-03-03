@@ -545,7 +545,10 @@ namespace PdfMod.Gui
                     "\tŁukasz Jernaś",
                     "\tRomain Tartière",
                     "\tRobert Dyer",
-                    "\tAndreu Correa Casablanca"
+                    "\tAndreu Correa Casablanca",
+                    "\tChow Loong Jin",
+                    "\tRobson Roberto Souza Peixoto",
+                    "\tThomas Klausner"
                 },
                 Documenters = new string [] { "Gabriel Burt" },
                 Artists = new string [] { "Kalle Persson" },
@@ -553,7 +556,7 @@ namespace PdfMod.Gui
                     // Translators: {0} and {1} are the years the copyright assertion covers; put into
                     // variables so you don't have to re-translate this every year
                     Catalog.GetString ("Copyright {0} Novell Inc.\nCopyright {1} Other PDF Mod Contributors"),
-                    "2009-2010", "2009"
+                    "2009-2011", "2009-2011"
                 ),
                 TranslatorCredits = Catalog.GetString ("translator-credits")
             };
