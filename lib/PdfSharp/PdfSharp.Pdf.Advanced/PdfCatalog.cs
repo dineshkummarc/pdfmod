@@ -145,8 +145,14 @@ namespace PdfSharp.Pdf.Advanced
     {
       get
       {
-        if (this.outline == null)
-          this.outline = (PdfOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+        if (this.outline == null) {
+          try {
+            this.outline = (PdfOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+          } catch (InvalidOperationException) {
+            Elements.Remove (Keys.Outlines);
+            this.outline = (PdfOutline)Elements.GetValue(Keys.Outlines, VCF.CreateIndirect);
+          }
+        }
         return this.outline.Outlines;
       }
     }
