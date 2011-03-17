@@ -147,7 +147,7 @@ msgstr "_Canvia el destí de l'adreça d'interès"
 msgid "_Remove Bookmark"
 msgid_plural "_Remove Bookmarks"
 msgstr[0] "_Suprimeix l'adreça d'interès"
-msgstr[1] "_Suprimeix l'adreces d'interès"
+msgstr[1] "_Suprimeix les adreces d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:97
 msgid "_Edit Bookmarks"
@@ -341,7 +341,7 @@ msgstr "Voleu desar els canvis realitzats en aquest document?"
 
 #: ../src/PdfMod/Gui/Client.cs:210
 msgid "Close _Without Saving"
-msgstr "Tancar _sense desar"
+msgstr "Tanca _sense desar"
 
 #: ../src/PdfMod/Gui/Client.cs:240
 #, csharp-format
@@ -397,7 +397,7 @@ msgstr "Selecciona per coincidència"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
 msgid "_Title:"
-msgstr "_Títol"
+msgstr "_Títol:"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
 msgid "_Author:"
