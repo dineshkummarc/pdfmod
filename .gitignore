@@ -3,6 +3,7 @@ POTFILES
 intltool-*
 *.swp
 *.gmo
+*.mo
 *.pc
 *.zip
 *.tree
