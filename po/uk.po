@@ -1,0 +1,434 @@
+# Ukrainian translation for pdfmod.
+# Copyright (C) 2011 pdfmod's COPYRIGHT HOLDER
+# This file is distributed under the same license as the pdfmod package.
+# Sergiy Gavrylov <sergiovana@bigmir.net>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-04-06 20:47+0000\n"
+"PO-Revision-Date: 2011-04-25 12:23+0300\n"
+"Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
+"Language-Team: Ukrainian <linux@linux.org.ua>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n% "
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "Редактор PDF"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Вилучення, копіювання та обертання сторінок в документах PDF"
+
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:138
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "сторінку {0}"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "Перемістити {1}"
+msgstr[1] "Перемістити {1}"
+msgstr[2] "Перемістити {1}"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "Помилка зворотнього переміщення сторінок"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "Помилка переміщення сторінок"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "_File"
+msgstr "_Фаил"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+msgid "Open a document"
+msgstr "Відкрити документ"
+
+#: ../src/PdfMod/Gui/Actions.cs:67
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Зберегти зміни в документі, перезаписом наявного файла"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "Save this document to a new file"
+msgstr "Зберегти цей документ у новий файл"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr "Н_едавні файли"
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "_Insert From..."
+msgstr "_Вставити з…"
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "Insert pages from another document"
+msgstr "Вставити сторінки з іншого документа"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "_Edit"
+msgstr "З_міни"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate Left"
+msgstr "Повернути ліворуч"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate left"
+msgstr "Повернути ліворуч"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate Right"
+msgstr "Повернути праворуч"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate right"
+msgstr "Повернути праворуч"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "Select Odd Pages"
+msgstr "Вибрати непарні сторінки"
+
+#: ../src/PdfMod/Gui/Actions.cs:83
+msgid "Select Even Pages"
+msgstr "Вибрати парні сторінки"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
+msgid "Select Matching..."
+msgstr "Вибрати відповідності…"
+
+#: ../src/PdfMod/Gui/Actions.cs:85
+msgid "_Invert Selection"
+msgstr "_Інвертувати вибір"
+
+#: ../src/PdfMod/Gui/Actions.cs:87
+msgid "_View"
+msgstr "П_ерегляд"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in Viewer"
+msgstr "Відкрити в переглядачі"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in viewer"
+msgstr "Відкрити в переглядачі"
+
+#: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
+msgid "_Bookmarks"
+msgstr "За_кладки"
+
+#: ../src/PdfMod/Gui/Actions.cs:93
+msgid "_Add Bookmark"
+msgstr "_Додати закладку"
+
+#: ../src/PdfMod/Gui/Actions.cs:94
+msgid "Re_name Bookmark"
+msgstr "_Перейменувати закладку"
+
+#: ../src/PdfMod/Gui/Actions.cs:95
+msgid "_Change Bookmark Destination"
+msgstr "З_мінити призначення закладки"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] "_Вилучити закладку"
+msgstr[1] "_Вилучити закладки"
+msgstr[2] "_Вилучити заклади"
+
+#: ../src/PdfMod/Gui/Actions.cs:97
+msgid "_Edit Bookmarks"
+msgstr "_Редагувати закладки"
+
+#: ../src/PdfMod/Gui/Actions.cs:99
+msgid "_Help"
+msgstr "_Довідка"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "_Contents"
+msgstr "_Зміст"
+
+#: ../src/PdfMod/Gui/Actions.cs:107
+msgid "_Add"
+msgstr "Д_одати"
+
+#: ../src/PdfMod/Gui/Actions.cs:108
+msgid "_Remove"
+msgstr "_Вилучити"
+
+#: ../src/PdfMod/Gui/Actions.cs:111
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "Перегляд та зміна назви, ключових слів та іншого в цьому документі"
+
+#: ../src/PdfMod/Gui/Actions.cs:113
+msgid "Toolbar"
+msgstr "Панель інструментів"
+
+#: ../src/PdfMod/Gui/Actions.cs:114
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: ../src/PdfMod/Gui/Actions.cs:115
+msgid "Fullscreen"
+msgstr "На весь екран"
+
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Export Image"
+msgid_plural "Export {0} Images"
+msgstr[0] "Експортувати {0} зображення"
+msgstr[1] "Експортувати {0} зображення"
+msgstr[2] "Експортувати {0} зображень"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Save image from the selected pages to a new folder"
+msgid_plural "Save {0} images from the selected pages to a new folder"
+msgstr[0] "Зберегти {0} зображення з вибраних сторінок у нову теку"
+msgstr[1] "Зберегти {0} зображення з вибраних сторінок у нову теку"
+msgstr[2] "Зберегти {0} зображень з вибраних сторінок у нову теку"
+
+#: ../src/PdfMod/Gui/Actions.cs:196
+msgid "_Undo"
+msgstr "П_овернути"
+
+#: ../src/PdfMod/Gui/Actions.cs:197
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Повернути {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:201
+msgid "_Redo"
+msgstr "Пов_торити"
+
+#: ../src/PdfMod/Gui/Actions.cs:202
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Повторити {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:210
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Вилучити {0} сторінку"
+msgstr[1] "Вилучити {0} сторінки"
+msgstr[2] "Вилучити {0} сторінок"
+
+#: ../src/PdfMod/Gui/Actions.cs:213
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Вилучити {0} вибрану сторінку"
+msgstr[1] "Вилучити {0} вибраних сторінки"
+msgstr[2] "Вилучити {0} вибраних сторінок"
+
+#: ../src/PdfMod/Gui/Actions.cs:216
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Скопіювати {0} сторінку"
+msgstr[1] "Скопіювати {0} сторінки"
+msgstr[2] "Скопіювати {0} сторінок"
+
+#: ../src/PdfMod/Gui/Actions.cs:219
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Скопіювати {0} вибрану сторінку"
+msgstr[1] "Скопіювати {0} вибраних сторінки"
+msgstr[2] "Скопіювати {0} вибраних сторінок"
+
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
+msgid "Select PDF"
+msgstr "Вибрати PDF"
+
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Не вдалось зберегти документ"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
+msgid "Save as..."
+msgstr "Зберегти як…"
+
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
+msgid "Error Loading Document"
+msgstr "Помилка завантаження документа"
+
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Виникла помилка під час завантаження {0}"
+
+#: ../src/PdfMod/Gui/Actions.cs:510
+msgid "Error opening help"
+msgstr "Помилка відкривання довідки"
+
+#: ../src/PdfMod/Gui/Actions.cs:511
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Відкрити документацію «PDF Mod» на сайті?"
+
+#: ../src/PdfMod/Gui/Actions.cs:532
+msgid "Visit Website"
+msgstr "Відвідати сайт"
+
+#: ../src/PdfMod/Gui/Actions.cs:534
+msgid "Primary Development:"
+msgstr "Основні розробники:"
+
+#: ../src/PdfMod/Gui/Actions.cs:537
+msgid "Contributors:"
+msgstr "Розробники:"
+
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:558
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Авторське право {0} Novell Inc.\n"
+"Авторське право {1} Інші розробники PDF Mod"
+
+#: ../src/PdfMod/Gui/Actions.cs:561
+msgid "translator-credits"
+msgstr "Sergiy Gavrylov <sergiovana@bigmir.net>, 2011."
+
+#. Add it to the PDF document
+#: ../src/PdfMod/Gui/BookmarkView.cs:90
+msgid "New bookmark"
+msgstr "Нова закладка"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:113
+msgid "Add Bookmark"
+msgstr "Додати закладку"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/BookmarkView.cs:137
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "Вилучити закладку"
+msgstr[1] "Вилучити закладки"
+msgstr[2] "Вилучити закладки"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
+msgid "Rename Bookmark"
+msgstr "Переийменувати закладку"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:417
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr "Закладка посилається на сторінку {0}"
+
+#: ../src/PdfMod/Gui/Client.cs:86
+msgid "PDF Mod"
+msgstr "«PDF Mod»"
+
+#: ../src/PdfMod/Gui/Client.cs:207
+msgid "Save the changes made to this document?"
+msgstr "Зберегти зміни в документі?"
+
+#: ../src/PdfMod/Gui/Client.cs:210
+msgid "Close _Without Saving"
+msgstr "_Закрити без збереження"
+
+#: ../src/PdfMod/Gui/Client.cs:240
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Продовжити, відкривши {0} документ в окремому вікні?"
+msgstr[1] "Продовжити, відкривши {0} документи в окремому вікні?"
+msgstr[2] "Продовжити, відкривши {0} документів в окремому вікні?"
+
+#: ../src/PdfMod/Gui/Client.cs:244
+msgid "Open _First"
+msgstr "Відкрити _перший"
+
+#: ../src/PdfMod/Gui/Client.cs:245
+msgid "Open _All"
+msgstr "Відкрити _всі"
+
+#: ../src/PdfMod/Gui/Client.cs:276
+msgid "Loading document..."
+msgstr "Завантаження документа…"
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:338
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (початковий {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:343
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} сторінка"
+msgstr[1] "{0} сторінки"
+msgstr[2] "{0} сторінок"
+
+#: ../src/PdfMod/Gui/Client.cs:364
+msgid "Document is Encrypted"
+msgstr "Документ зашифрований"
+
+#: ../src/PdfMod/Gui/Client.cs:365
+msgid "Enter the document's password to open it:"
+msgstr "Введіть пароль, щоб відкрити документ:"
+
+#: ../src/PdfMod/Gui/Client.cs:395
+msgid "PDF Documents"
+msgstr "Документи PDF"
+
+#: ../src/PdfMod/Gui/Client.cs:396
+msgid "All Files"
+msgstr "Всі файли"
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+msgid "Select Matching"
+msgstr "Вибрати збіги"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "_Назва:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "_Автор:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "_Ключові слова:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "_Тема:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+msgid "_Revert Properties"
+msgstr "_Скасувати зміну властивостей"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr "Повернути властивості документа до початкових значень"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "_Закрити"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+msgid "Hide the document's properties"
+msgstr "Приховати властивості документа"
