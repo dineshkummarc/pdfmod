@@ -6,4 +6,4 @@ DOC_ENTITIES =
 DOC_INCLUDES = 
 DOC_FIGURES =
 
-DOC_LINGUAS = ca cs da de es fr hr pl sl sv uk zh_CN
+DOC_LINGUAS = ca cs da de es fr hr pl sl sv uk zh_CN zh_HK zh_TW
