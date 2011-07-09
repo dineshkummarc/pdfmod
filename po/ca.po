@@ -6,13 +6,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Pdf Mod 0.9\n"
+"Project-Id-Version: Pdf Mod 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-05 14:13+0100\n"
-"PO-Revision-Date: 2011-03-06 10:14+0200\n"
-"Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
+"POT-Creation-Date: 2011-07-10 01:50+0200\n"
+"PO-Revision-Date: 2011-07-10 01:51+0200\n"
+"Last-Translator: Andreu Correa Casablanca <castarco@gmail.com >\n"
 "Language-Team: Català <gnome@llistes.softcatala.org>\n"
-"Language: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: ../data/pdfmod.desktop.in.in.h:1
 msgid "PDF Modifier"
-msgstr "Modificador de fitxers PDF"
+msgstr "Modificador de documents PDF"
 
 #: ../data/pdfmod.desktop.in.in.h:2
 msgid "Remove, extract, and rotate pages in PDF documents"
-msgstr "Podeu suprimir, extreure i capgirar pàgines en documents PDF"
+msgstr "Suprimiu, extraieu i capgireu pàgines de documents PDF"
 
 #: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:138
 #: ../src/PdfMod/Pdf/Page.cs:36
@@ -37,8 +37,8 @@ msgstr "Pàgina {0}"
 #, csharp-format
 msgid "Move {1}"
 msgid_plural "Move {1}"
-msgstr[0] "Es mou {1}"
-msgstr[1] "Es mouen {1}"
+msgstr[0] "Mou-ne {1}"
+msgstr[1] "Mou-ne {1}"
 
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
 msgid "Error trying to unmove pages"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: ../src/PdfMod/Gui/Actions.cs:68
 msgid "Save this document to a new file"
-msgstr "Desa aquest document en un fitxer nou"
+msgstr "Desa el document en un fitxer nou"
 
 #: ../src/PdfMod/Gui/Actions.cs:69
 msgid "Recent _Files"
@@ -127,31 +127,31 @@ msgstr "Obre en el visualitzador"
 
 #: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
 msgid "_Bookmarks"
-msgstr "_Adreces d'interès"
+msgstr "_Pàgines d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:93
 msgid "_Add Bookmark"
-msgstr "_Afegeix adreça d'interès"
+msgstr "_Afegeix una pàgina d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:94
 msgid "Re_name Bookmark"
-msgstr "Ca_nvia de nom l'adreça d'interès"
+msgstr "Canvia el _nom d'una pàgina d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:95
 msgid "_Change Bookmark Destination"
-msgstr "_Canvia el destí de l'adreça d'interès"
+msgstr "_Canvia la destinació de la pàgina d'interès"
 
 #. Translators: {0} is available for you to use; contains the number of bookmarks
 #: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
 #, csharp-format
 msgid "_Remove Bookmark"
 msgid_plural "_Remove Bookmarks"
-msgstr[0] "_Suprimeix l'adreça d'interès"
-msgstr[1] "_Suprimeix les adreces d'interès"
+msgstr[0] "_Suprimeix la pàgina d'interès"
+msgstr[1] "_Suprimeix les pàgines d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:97
 msgid "_Edit Bookmarks"
-msgstr "_Edita les adreces d'interès"
+msgstr "_Edita les pàgines d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:99
 msgid "_Help"
@@ -180,7 +180,7 @@ msgstr "Barra d'eines"
 
 #: ../src/PdfMod/Gui/Actions.cs:114
 msgid "Bookmarks"
-msgstr "Adreces d'interès"
+msgstr "Pàgines d'interès"
 
 #: ../src/PdfMod/Gui/Actions.cs:115
 msgid "Fullscreen"
@@ -212,19 +212,19 @@ msgstr "Desfés {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:201
 msgid "_Redo"
-msgstr "_Refés"
+msgstr "_Torna a fer"
 
 #: ../src/PdfMod/Gui/Actions.cs:202
 #, csharp-format
 msgid "Redo {0}"
-msgstr "Refés {0}"
+msgstr "Torna a fer {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:210
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Suprimeix la pàgina"
-msgstr[1] "Suprimeix les {0} pàgines"
+msgstr[1] "Suprimeix {0} pàgines"
 
 #: ../src/PdfMod/Gui/Actions.cs:213
 #, csharp-format
@@ -253,7 +253,7 @@ msgstr "Selecciona el PDF"
 
 #: ../src/PdfMod/Gui/Actions.cs:258
 msgid "Unable to Save Document"
-msgstr "No es pot desar el document"
+msgstr "No s'ha pogut desar el document"
 
 #: ../src/PdfMod/Gui/Actions.cs:264
 msgid "Save as..."
@@ -297,7 +297,7 @@ msgid ""
 "Copyright {1} Other PDF Mod Contributors"
 msgstr ""
 "Copyright {0} Novell Inc.\n"
-"Copyright {1} altres PDF Mod Contributors"
+"Copyright {1} Altres col·laboradors del PDF Mod"
 
 #: ../src/PdfMod/Gui/Actions.cs:561
 msgid "translator-credits"
@@ -308,28 +308,28 @@ msgstr ""
 #. Add it to the PDF document
 #: ../src/PdfMod/Gui/BookmarkView.cs:90
 msgid "New bookmark"
-msgstr "Adreça d'interès nova"
+msgstr "Pàgina d'interès nova"
 
 #: ../src/PdfMod/Gui/BookmarkView.cs:113
 msgid "Add Bookmark"
-msgstr "Afegeix adreça d'interès"
+msgstr "Afegeix una pàgina d'interès nova"
 
 #. Translators: {0} is available for you to use; contains the number of bookmarks
 #: ../src/PdfMod/Gui/BookmarkView.cs:137
 #, csharp-format
 msgid "Remove Bookmark"
 msgid_plural "Remove Bookmarks"
-msgstr[0] "Suprimeix l'adreça d'interès"
-msgstr[1] "Suprimeix les adreces d'interès"
+msgstr[0] "Suprimeix la pàgina d'interès"
+msgstr[1] "Suprimeix les pàgines d'interès"
 
 #: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
 msgid "Rename Bookmark"
-msgstr "Canvia de nom l'adreça d'interès"
+msgstr "Canvia el nom de la pàgina d'interès"
 
 #: ../src/PdfMod/Gui/BookmarkView.cs:417
 #, csharp-format
 msgid "Bookmark links to page {0}"
-msgstr "L'adreça d'interès enllaça a pàgina {0}"
+msgstr "La pàgina d'interès enllaça a la pàgina {0}"
 
 #: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
@@ -427,3 +427,6 @@ msgstr "_Tanca"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "Oculta les propietats del document"
+
+#~ msgid "Error trying to remove pages from document"
+#~ msgstr "S'ha produït un error en provar de suprimir pàgines del document"
