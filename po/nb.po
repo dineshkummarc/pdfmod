@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pdfmod 0.x\n"
+"Project-Id-Version: pdfmod 0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-23 22:57+0100\n"
-"PO-Revision-Date: 2011-02-23 23:02+0100\n"
+"PO-Revision-Date: 2011-07-19 09:25+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmal <i18n-nb@lster.ping.uio.no>\n"
 "Language: \n"
@@ -24,7 +24,7 @@ msgstr "PDF-redigering"
 
 #: ../data/pdfmod.desktop.in.in.h:2
 msgid "Remove, extract, and rotate pages in PDF documents"
-msgstr ""
+msgstr "Fjern, hent ut og roter sider i PDF-dokumenter"
 
 #: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:136
 #: ../src/PdfMod/Pdf/Page.cs:36
@@ -42,15 +42,15 @@ msgstr[1] "Flytt {1}"
 
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
 msgid "Error trying to unmove pages"
-msgstr ""
+msgstr "Feil ved forsøk på å omgjøre flytting av sider"
 
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
 msgid "Error trying to move pages"
-msgstr ""
+msgstr "Feil ved forsøk på å flytte sider"
 
 #: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
 msgid "Error trying to remove pages from document"
-msgstr ""
+msgstr "Feil ved forsøk på å fjerne sider fra dokumentet"
 
 #: ../src/PdfMod/Gui/Actions.cs:65
 msgid "_File"
@@ -62,7 +62,7 @@ msgstr "Åpne et dokument"
 
 #: ../src/PdfMod/Gui/Actions.cs:67
 msgid "Save changes to this document, overwriting the existing file"
-msgstr ""
+msgstr "Lagre endringer til dette dokumentet, og overskriv eksisterende fil"
 
 #: ../src/PdfMod/Gui/Actions.cs:68
 msgid "Save this document to a new file"
@@ -70,7 +70,7 @@ msgstr "Lagrer dette dokumentet til en ny fil"
 
 #: ../src/PdfMod/Gui/Actions.cs:69
 msgid "Recent _Files"
-msgstr ""
+msgstr "Sist brukte _filer"
 
 #: ../src/PdfMod/Gui/Actions.cs:70
 msgid "_Insert From..."
@@ -109,14 +109,12 @@ msgid "Select Even Pages"
 msgstr "Velg like sider"
 
 #: ../src/PdfMod/Gui/Actions.cs:84
-#, fuzzy
 msgid "Select Matching..."
-msgstr "Velg side"
+msgstr "Velg passende …"
 
 #: ../src/PdfMod/Gui/Actions.cs:85
-#, fuzzy
 msgid "_Invert Selection"
-msgstr "Ugyldig sideutvalg"
+msgstr "_Inverter utvalg"
 
 #: ../src/PdfMod/Gui/Actions.cs:87
 msgid "_View"
@@ -144,15 +142,15 @@ msgstr "Endre _navn på bokmerke"
 
 #: ../src/PdfMod/Gui/Actions.cs:95
 msgid "_Change Bookmark Destination"
-msgstr ""
+msgstr "_Endre mål for bokmerke"
 
 #. Translators: {0} is available for you to use; contains the number of bookmarks
 #: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
 #, csharp-format
 msgid "_Remove Bookmark"
 msgid_plural "_Remove Bookmarks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fje_rn bokmerke"
+msgstr[1] "Fje_rn bokmerker"
 
 #: ../src/PdfMod/Gui/Actions.cs:97
 msgid "_Edit Bookmarks"
@@ -176,7 +174,7 @@ msgstr "Fje_rn"
 
 #: ../src/PdfMod/Gui/Actions.cs:111
 msgid "View and edit the title, keywords, and more for this document"
-msgstr ""
+msgstr "Vis og rediger tittel, nøkkelord og mer for dette dokumentet"
 
 #: ../src/PdfMod/Gui/Actions.cs:113
 msgid "Toolbar"
@@ -201,8 +199,8 @@ msgstr[1] "Eksporter {0} bilder"
 #, csharp-format
 msgid "Save image from the selected pages to a new folder"
 msgid_plural "Save {0} images from the selected pages to a new folder"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Lagre bilde fra valgte sider til en ny mappe"
+msgstr[1] "Lagre {0} bilder fra valgte sider til en ny mappe"
 
 #: ../src/PdfMod/Gui/Actions.cs:196
 msgid "_Undo"
@@ -237,18 +235,18 @@ msgstr[0] "Fjern valgt side"
 msgstr[1] "Fjern {0} valgte sider"
 
 #: ../src/PdfMod/Gui/Actions.cs:216
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
-msgstr[0] "_Neste side"
-msgstr[1] "_Neste side"
+msgstr[0] "Hent ut side"
+msgstr[1] "Hent ut {0} sider"
 
 #: ../src/PdfMod/Gui/Actions.cs:219
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hent ut valgt side"
+msgstr[1] "Hent ut {0} valgte sider"
 
 #: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
 msgid "Select PDF"
@@ -263,30 +261,29 @@ msgid "Save as..."
 msgstr "Lagre som …"
 
 #: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
-#, fuzzy
 msgid "Error Loading Document"
-msgstr "Laster ned dokument (%d%%)"
+msgstr "Feil ved lasting av dokument"
 
 #: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "There was an error loading {0}"
-msgstr "Det oppsto en feil ved visning av hjelp"
+msgstr "Det oppsto en feil ved lasting av {0}"
 
 #: ../src/PdfMod/Gui/Actions.cs:510
 msgid "Error opening help"
-msgstr ""
+msgstr "Feil ved åpning av hjelp"
 
 #: ../src/PdfMod/Gui/Actions.cs:511
 msgid "Would you like to open PDF Mod's online documentation?"
-msgstr ""
+msgstr "Vil du åpne PDF Mod's dokumentasjon på nettet?"
 
 #: ../src/PdfMod/Gui/Actions.cs:532
 msgid "Visit Website"
-msgstr ""
+msgstr "Besøk nettsiden"
 
 #: ../src/PdfMod/Gui/Actions.cs:534
 msgid "Primary Development:"
-msgstr ""
+msgstr "Hovedutvikling:"
 
 #: ../src/PdfMod/Gui/Actions.cs:537
 msgid "Contributors:"
@@ -300,6 +297,8 @@ msgid ""
 "Copyright {0} Novell Inc.\n"
 "Copyright {1} Other PDF Mod Contributors"
 msgstr ""
+"Opphavsrett {0} Novell Inc.\n"
+"Opphavsrett {1} andre PDF Mod bidragsytere"
 
 #: ../src/PdfMod/Gui/Actions.cs:558
 msgid "translator-credits"
@@ -329,7 +328,7 @@ msgstr "Endre navn på bokmerke"
 #: ../src/PdfMod/Gui/BookmarkView.cs:417
 #, csharp-format
 msgid "Bookmark links to page {0}"
-msgstr ""
+msgstr "Bokmerke lenker til side {0}"
 
 #: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
@@ -347,8 +346,8 @@ msgstr "Lukk _uten å lagre"
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fortsett med å åpne {0} dokument i separate vinduer?"
+msgstr[1] "Fortsett med å åpne alle {0} dokumentene i separate vinduer?"
 
 #: ../src/PdfMod/Gui/Client.cs:244
 msgid "Open _First"
@@ -366,7 +365,7 @@ msgstr "Laster dokument …"
 #: ../src/PdfMod/Gui/Client.cs:338
 #, csharp-format
 msgid "{0} (originally {1})"
-msgstr ""
+msgstr "{0} (opprinnelig {1})"
 
 #: ../src/PdfMod/Gui/Client.cs:343
 #, csharp-format
@@ -381,7 +380,7 @@ msgstr "Dokumentet er kryptert"
 
 #: ../src/PdfMod/Gui/Client.cs:365
 msgid "Enter the document's password to open it:"
-msgstr ""
+msgstr "Oppgi dokumentets passord for å åpne det:"
 
 #: ../src/PdfMod/Gui/Client.cs:395
 msgid "PDF Documents"
@@ -392,9 +391,8 @@ msgid "All Files"
 msgstr "Alle filer"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
-#, fuzzy
 msgid "Select Matching"
-msgstr "Velg side"
+msgstr "Velg passende"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
 msgid "_Title:"
@@ -418,7 +416,7 @@ msgstr "Fo_rkast egenskaper"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
 msgid "Change the document's properties back to the original values"
-msgstr ""
+msgstr "Endre dokumentets egenskaper tilbake til opprinnelige verdier"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
 msgid "_Close"
