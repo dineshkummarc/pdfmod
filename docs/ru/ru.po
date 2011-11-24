@@ -1,0 +1,207 @@
+# Russian translation for pdfmod.
+# Copyright (C) 2010 pdfmod's COPYRIGHT HOLDER
+# This file is distributed under the same license as the pdfmod package.
+# Den V. Kaftaev <dkaftaev@gmail.com>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod master\n"
+"POT-Creation-Date: 2011-11-12 18:53+0000\n"
+"PO-Revision-Date: 2011-11-24 19:13+0300\n"
+"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: C/pdfmod.xml:6(title)
+msgid "The PDF Mod Manual"
+msgstr "Руководство PDF Mod"
+
+#: C/pdfmod.xml:8(para)
+msgid "This is the user's manual for PDF Mod, a simple tool for manipulating PDF documents."
+msgstr "Это руководство пользователя PDF Mod, простого инструмента для работы с документами PDF."
+
+#: C/pdfmod.xml:10(subtitle)
+msgid "Quick, Easy PDF Modification"
+msgstr "Быстрое и лёгкое изменение PDF"
+
+#: C/pdfmod.xml:12(year)
+msgid "2009"
+msgstr "2009"
+
+#: C/pdfmod.xml:13(holder)
+#: C/pdfmod.xml:23(orgname)
+msgid "Novell, Inc."
+msgstr "Novell, Inc."
+
+#: C/pdfmod.xml:16(publishername)
+msgid "GNOME Documentation Project"
+msgstr "Проект документации GNOME"
+
+#: C/pdfmod.xml:20(firstname)
+msgid "Gabriel"
+msgstr "Габриэль"
+
+#: C/pdfmod.xml:21(surname)
+msgid "Burt"
+msgstr "Бурт"
+
+#: C/pdfmod.xml:29(revnumber)
+msgid "0.2"
+msgstr "0.2"
+
+#: C/pdfmod.xml:30(date)
+msgid "2009-07-29"
+msgstr "29.07.2009"
+
+#: C/pdfmod.xml:33(revnumber)
+msgid "0.1"
+msgstr "0.1"
+
+#: C/pdfmod.xml:34(date)
+msgid "2009-07-25"
+msgstr "25.07.2009"
+
+#: C/pdfmod.xml:40(title)
+msgid "Introduction"
+msgstr "Введение"
+
+#: C/pdfmod.xml:41(para)
+msgid "PDF Mod is a simple tool for doing basic manipulations of PDF documents."
+msgstr "PDF Mod — простой инструмент для выполнения основных действий с документами PDF."
+
+#: C/pdfmod.xml:45(para)
+msgid "With this tool, you can rotate, remove, or extract pages in a PDF document. You can also add pages from another document."
+msgstr "С помощью этого инструмента можно переворачивать, удалять или копировать страницы в документах PDF, а также добавлять страницы из других документов."
+
+#: C/pdfmod.xml:50(para)
+msgid "You can start PDF Mod from your applications menu or launcher, or by right clicking on one or more PDF documents in the file browser, and choosing to open with PDF Mod."
+msgstr "PDF Mod можно запустить из меню «Приложения» или нажать правую кнопку мыши на одном или нескольких документах в файловом менеджере и выбрать «Открыть с помощью PDF Mod»."
+
+#: C/pdfmod.xml:56(para)
+msgid "Like a normal editor application, you must save the changes you make using PDF Mod. If you want to keep the original document and save your changes to a new file, use Save As."
+msgstr "Как и при использовании любого обычного редактора, в ходе работы возникнет необходимость сохранить изменения, сделанные с помощью PDF Mod. Если вы хотите сохранить изменённую копию в новый файл, оставив исходный документ нетронутым, используйте пункт «Сохранить как...»."
+
+#: C/pdfmod.xml:63(title)
+msgid "Usage"
+msgstr "Использование"
+
+#: C/pdfmod.xml:66(title)
+msgid "Opening a Document"
+msgstr "Открытие документов"
+
+#: C/pdfmod.xml:67(para)
+msgid "To open a document in PDF Mod:"
+msgstr "Чтобы открыть документ в PDF Mod:"
+
+#: C/pdfmod.xml:72(para)
+msgid "Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> and select your document, or"
+msgstr "Нажмите <menuchoice><guimenu>Файл</guimenu><guimenuitem>Открыть</guimenuitem></menuchoice> и выберите документ или"
+
+#: C/pdfmod.xml:77(para)
+msgid "Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> and select your document, or"
+msgstr "Нажмите <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> и выберите документ или"
+
+#: C/pdfmod.xml:87(para)
+msgid "Drag a PDF document from your Desktop or file browser into a PDF Mod window that doesn't already have a document loaded, or"
+msgstr "Перетащите документ PDF с рабочего стола или из файлового менеджера в пустое окно PDF Mod или"
+
+#: C/pdfmod.xml:92(para)
+msgid "Choose a document from <menuchoice><guimenu>File</guimenu><guimenuitem>Recent Documents</guimenuitem></menuchoice>."
+msgstr "Выберите документ в <menuchoice><guimenu>Файл</guimenu><guimenuitem>Недавние файлы</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:100(title)
+msgid "Zooming"
+msgstr "Масштабирование"
+
+#: C/pdfmod.xml:101(para)
+msgid "Zooming will make the page thumbnails bigger or smaller. PDF Mod starts in Best Fit mode, where it tries to make all the pages visible at once."
+msgstr "Функция масштабирования управляет размером миниатюр. PDF Mod запускается в режиме «Наилучшее заполнение», в котором он пытается сделать видимым как можно больше страниц."
+
+#: C/pdfmod.xml:104(para)
+msgid "You can zoom in or out with the options under <menuchoice><guimenu>View</guimenu></menuchoice>, or by pressing <keycap>Ctrl</keycap> and moving your mouse's scroll wheel."
+msgstr "Вы можете управлять масштабирование с помощью меню <menuchoice><guimenu>Вид</guimenu></menuchoice> или вращением колеса мыши при удержании клавиши <keycap>Ctrl</keycap>."
+
+#: C/pdfmod.xml:110(title)
+msgid "Viewing and Editing Properties"
+msgstr "Просмотр и изменение свойств документа"
+
+#: C/pdfmod.xml:111(para)
+msgid "You can view and edit the Title, Author, Keywords, and Subject of the document by opening the properties. To do so, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice>, press <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, or click the Properties button on the toolbar."
+msgstr "Вы можете просматривать и изменять заголовок, автора, ключевые слова и тему документа, открыв его свойства. Для этого выберите <menuchoice><guimenu>Файл</guimenu><guimenuitem>Свойства</guimenuitem></menuchoice>, нажмите <keycombo><keycap>Alt</keycap><keycap>Enter</keycap></keycombo>, или нажмите на кнопку «Свойства» в панели инструментов."
+
+#: C/pdfmod.xml:119(title)
+msgid "Selecting Pages"
+msgstr "Выбор страниц"
+
+#: C/pdfmod.xml:120(para)
+msgid "PDF Mod can automatically select all pages, even-numbered pages, odd-numbered pages, or pages containing a search term. These options are available under <menuchoice><guimenu>Edit</guimenu></menuchoice>."
+msgstr "PDF Mod может автоматически выбрать все страницы, чётные либо нечётные, или страницы, содержащие слова для поиска. Эти возможности доступны в меню <menuchoice><guimenu>Правка</guimenu></menuchoice>."
+
+#: C/pdfmod.xml:124(para)
+msgid "You can select pages manually using the keyboard and mouse as well. Use <keycap>Ctrl</keycap> or <keycap>Shift</keycap> to select more than one page."
+msgstr "Вы можете выбрать страницу вручную, используя клавиатуру или мышь. Используйте <keycap>Ctrl</keycap> или <keycap>Shift</keycap> для выбора двух и более страниц."
+
+#: C/pdfmod.xml:130(title)
+msgid "Moving Pages"
+msgstr "Перемещение страниц"
+
+#: C/pdfmod.xml:131(para)
+msgid "To move (aka reorder) the selected page or pages, drag them to the position in the document to which you want them moved."
+msgstr "Для того, чтобы переместить выбранные страницы (т. е. изменить их порядок), перетащите их мышью на нужную позицию."
+
+#: C/pdfmod.xml:135(para)
+msgid "All editing actions except removing pages can be undone by choosing <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice> or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+msgstr "Все сделанные изменения, кроме удаления страниц, могут быть отменены через пункт меню <menuchoice><guimenu>Правка</guimenu><guimenuitem>Отменить</guimenuitem></menuchoice> или нажатием <keycombo><keycap>Ctrl</keycap><keycap>Z</keycap></keycombo>."
+
+#: C/pdfmod.xml:144(title)
+msgid "Extracting Pages"
+msgstr "Извлечение страниц"
+
+#: C/pdfmod.xml:145(para)
+msgid "Extracting the selected page or pages will open a new PDF Mod window with just the selected pages in a new document, ready for further editing or to save."
+msgstr "Извлечение выделенных страниц откроет новое окно PDF Mod с этими страницами в новом документе, готовом для редактирования и сохранения."
+
+#: C/pdfmod.xml:148(para)
+msgid "To extract the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
+msgstr "Чтобы извлечь выделенные страницы, виберите <menuchoice><guimenu>Правка</guimenu><guimenuitem>Извлечь страницу</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:152(para)
+msgid "All of the editing and selection actions available under <menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right clicking on a page. Some actions are available on the toolbar as well."
+msgstr "Все действия, относящиеся к редактированию и выделению, доступны в меню <menuchoice><guimenu>Правка</guimenu></menuchoice>, а также с помощью нажатия правой кнопки мыши. Некоторые действия также доступны в панели инструментов."
+
+#: C/pdfmod.xml:160(title)
+msgid "Rotating Pages"
+msgstr "Вращение страниц"
+
+#: C/pdfmod.xml:161(para)
+msgid "To rotate the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Rotate Page</guimenuitem></menuchoice> or press <keycombo><keycap>[</keycap></keycombo> to rotate left (CCW) and <keycombo><keycap>]</keycap></keycombo> to rotate right (CW)."
+msgstr "Чтобы повернуть выбраннные страницы, выберите <menuchoice><guimenu>Правка</guimenu><guimenuitem>Повернуть страницу</guimenuitem></menuchoice> или нажмите  <keycombo><keycap>[</keycap></keycombo> (поворот против часовой стрелки) или <keycombo><keycap>]</keycap></keycombo> (поворот по часовой стрелке)."
+
+#: C/pdfmod.xml:168(title)
+msgid "Removing Pages"
+msgstr "Удаление страниц"
+
+#: C/pdfmod.xml:169(para)
+msgid "To remove the selected page or pages, press <keycap>Delete</keycap> or choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Remove Page</guimenuitem></menuchoice>."
+msgstr "Чтобы удалить одну или несколько выбранных страниц, нажмите <keycap>Delete</keycap> или выберите в меню <menuchoice><guimenu>Правка</guimenu><guimenuitem>Удалить страницу</guimenuitem></menuchoice>."
+
+#: C/pdfmod.xml:174(para)
+msgid "It is not currently possible to undo this action via <menuchoice><guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice>. You can close the document without saving and open it again to get your page back, though you will lose any other changes you have made."
+msgstr "В настоящий момент PDF Mod не позволяет возвращать удалённые страницы при помощи пункта меню <menuchoice><guimenu>Правка</guimenu><guimenuitem>Отменить</guimenuitem></menuchoice>. Чтобы вернуть страницу, вы можете закрыть документ без сохранения, и открыть его заново, но в этом случае вы потеряете сделанные изменения."
+
+#: C/pdfmod.xml:182(title)
+msgid "Saving"
+msgstr "Сохранение"
+
+#: C/pdfmod.xml:183(para)
+msgid "After making changes to the document, there are two ways to save your work. You can overwrite the original document by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>, or you can save your changes to a new file by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Save As</guimenuitem></menuchoice>."
+msgstr "После редактирования документа можно сохранить работу двумя способами. Вы можете переписать исходный документ, выбрав в меню <menuchoice><guimenu>Файл</guimenu><guimenuitem>Сохранить</guimenuitem></menuchoice>, или сохранить изменения в новом файле, выбрав <menuchoice><guimenu>Файл</guimenu><guimenuitem>Сохранить как...</guimenuitem></menuchoice>."
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/pdfmod.xml:0(None)
+msgid "translator-credits"
+msgstr "Денис Кафтаев <dkaftaev@gmail.com>, 2011"
+
