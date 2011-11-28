@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
 "POT-Creation-Date: 2011-11-12 18:53+0000\n"
-"PO-Revision-Date: 2011-11-24 19:13+0300\n"
+"PO-Revision-Date: 2011-11-28 09:57+0300\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -166,7 +166,7 @@ msgstr "Извлечение выделенных страниц откроет 
 
 #: C/pdfmod.xml:148(para)
 msgid "To extract the selected page or pages, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Extract Page</guimenuitem></menuchoice>."
-msgstr "Чтобы извлечь выделенные страницы, виберите <menuchoice><guimenu>Правка</guimenu><guimenuitem>Извлечь страницу</guimenuitem></menuchoice>."
+msgstr "Чтобы извлечь выделенные страницы, выберите <menuchoice><guimenu>Правка</guimenu><guimenuitem>Извлечь страницу</guimenuitem></menuchoice>."
 
 #: C/pdfmod.xml:152(para)
 msgid "All of the editing and selection actions available under <menuchoice><guimenu>Edit</guimenu></menuchoice> are also available by right clicking on a page. Some actions are available on the toolbar as well."
