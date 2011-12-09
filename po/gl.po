@@ -6,19 +6,22 @@
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://trasno.net
 # Fran Diéguez <frandieguez@ubuntu.com>, 2010.
+# Xosé M. Lamas <correo.xmgz@gmail.com>, 2011.
+# Fran Dieguez <frandieguez@gnome.org>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-24 12:27+0200\n"
-"PO-Revision-Date: 2010-05-24 12:27+0200\n"
-"Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
-"Language-Team: Galician <gnome@g11.net>\n"
+"POT-Creation-Date: 2011-12-09 13:44+0100\n"
+"PO-Revision-Date: 2011-12-09 13:51+0100\n"
+"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
+"Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../data/pdfmod.desktop.in.in.h:1
 msgid "PDF Modifier"
@@ -27,6 +30,12 @@ msgstr "Modificador de PDF"
 #: ../data/pdfmod.desktop.in.in.h:2
 msgid "Remove, extract, and rotate pages in PDF documents"
 msgstr "Eliminar, extraer, e rotar páxinas de documentos PDF"
+
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:138
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Páxina {0}"
 
 #. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
@@ -44,205 +53,246 @@ msgstr "Produciuse un erro ao intentar anular o movemento de páxinas"
 msgid "Error trying to move pages"
 msgstr "Produciuse un erro ao intentar mover as páxinas"
 
-#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
-msgid "Error trying to remove pages from document"
-msgstr "Produciuse un erro ao intentar eliminar páxinas do documento"
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "_File"
+msgstr "_Ficheiro"
 
-#: ../src/PdfMod/Pdf/Page.cs:36
-#, csharp-format
-msgid "Page {0}"
-msgstr "Páxina {0}"
-
-#: ../src/PdfMod/Gui/Actions.cs:63
+#: ../src/PdfMod/Gui/Actions.cs:66
 msgid "Open a document"
 msgstr "Abrir un documento"
 
-#: ../src/PdfMod/Gui/Actions.cs:64
-msgid "_Insert From..."
-msgstr "_Inserir desde..."
-
-#: ../src/PdfMod/Gui/Actions.cs:64
-msgid "Insert pages from another document"
-msgstr "Inserir páxinas de outro documento"
-
-#: ../src/PdfMod/Gui/Actions.cs:65
+#: ../src/PdfMod/Gui/Actions.cs:67
 msgid "Save changes to this document, overwriting the existing file"
 msgstr "Gardar os cambios deste documento, sobrescribindo o ficheiro existente"
 
-#: ../src/PdfMod/Gui/Actions.cs:66
+#: ../src/PdfMod/Gui/Actions.cs:68
 msgid "Save this document to a new file"
 msgstr "Gardar este documento nun novo ficheiro"
-
-#: ../src/PdfMod/Gui/Actions.cs:68
-msgid "_File"
-msgstr "_Ficheiro"
 
 #: ../src/PdfMod/Gui/Actions.cs:69
 msgid "Recent _Files"
 msgstr "_Ficheiros recentes"
 
-#: ../src/PdfMod/Gui/Actions.cs:73
-msgid "Rotate Right"
-msgstr "Rotar á dereita"
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "_Insert From..."
+msgstr "_Inserir desde..."
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "Insert pages from another document"
+msgstr "Inserir páxinas de outro documento"
 
 #: ../src/PdfMod/Gui/Actions.cs:73
-msgid "Rotate right"
-msgstr "Rotar á dereita"
-
-#: ../src/PdfMod/Gui/Actions.cs:74
-msgid "Rotate Left"
-msgstr "Rotar á esquerda"
-
-#: ../src/PdfMod/Gui/Actions.cs:74
-msgid "Rotate left"
-msgstr "Rotar á esquerda"
-
-#: ../src/PdfMod/Gui/Actions.cs:75
-msgid "Export Images"
-msgstr "Exportar as imaxes"
-
-#: ../src/PdfMod/Gui/Actions.cs:75
-msgid "Save all images in this document to a new folder"
-msgstr "Gardar todas as imaxes deste documento nun novo cartafol"
-
-#: ../src/PdfMod/Gui/Actions.cs:77
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../src/PdfMod/Gui/Actions.cs:79
-msgid "Select Even Pages"
-msgstr "Seleccionar as páxinas pares"
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate Left"
+msgstr "Rotar á esquerda"
 
-#: ../src/PdfMod/Gui/Actions.cs:80
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate left"
+msgstr "Rotar á esquerda"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate Right"
+msgstr "Rotar á dereita"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate right"
+msgstr "Rotar á dereita"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
 msgid "Select Odd Pages"
 msgstr "Seleccionar as páxinas impares"
 
-#: ../src/PdfMod/Gui/Actions.cs:81
+#: ../src/PdfMod/Gui/Actions.cs:83
+msgid "Select Even Pages"
+msgstr "Seleccionar as páxinas pares"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
 msgid "Select Matching..."
 msgstr "Seleccionar as coincidencias"
 
-#: ../src/PdfMod/Gui/Actions.cs:82
+#: ../src/PdfMod/Gui/Actions.cs:85
 msgid "_Invert Selection"
 msgstr "_Inverter a selección"
 
-#: ../src/PdfMod/Gui/Actions.cs:86
+#: ../src/PdfMod/Gui/Actions.cs:87
 msgid "_View"
 msgstr "_Ver"
 
 #: ../src/PdfMod/Gui/Actions.cs:90
-msgid "_Help"
-msgstr "A_xuda"
-
-#: ../src/PdfMod/Gui/Actions.cs:91
-msgid "_Contents"
-msgstr "_Contido"
-
-#: ../src/PdfMod/Gui/Actions.cs:96
 msgid "Open in Viewer"
 msgstr "Abrir no visor"
 
-#: ../src/PdfMod/Gui/Actions.cs:96
+#: ../src/PdfMod/Gui/Actions.cs:90
 msgid "Open in viewer"
 msgstr "Abrir no visor"
 
+#: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
+msgid "_Bookmarks"
+msgstr "_Marcadores"
+
+#: ../src/PdfMod/Gui/Actions.cs:93
+msgid "_Add Bookmark"
+msgstr "_Engadir marcador"
+
+#: ../src/PdfMod/Gui/Actions.cs:94
+msgid "Re_name Bookmark"
+msgstr "Re_nomear marcador"
+
+#: ../src/PdfMod/Gui/Actions.cs:95
+msgid "_Change Bookmark Destination"
+msgstr "_Cambiar destino do marcador"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] "_Quitar marcador"
+msgstr[1] "_Quitar marcadores"
+
+#: ../src/PdfMod/Gui/Actions.cs:97
+msgid "_Edit Bookmarks"
+msgstr "_Editar marcadores"
+
+#: ../src/PdfMod/Gui/Actions.cs:99
+msgid "_Help"
+msgstr "A_xuda"
+
 #: ../src/PdfMod/Gui/Actions.cs:100
+msgid "_Contents"
+msgstr "_Contido"
+
+#: ../src/PdfMod/Gui/Actions.cs:107
+msgid "_Add"
+msgstr "Eng_adir"
+
+#: ../src/PdfMod/Gui/Actions.cs:108
+msgid "_Remove"
+msgstr "_Quitar"
+
+#: ../src/PdfMod/Gui/Actions.cs:111
 msgid "View and edit the title, keywords, and more for this document"
 msgstr "Ver e editar o título, palabras chave, e outras cousas deste documento"
 
-#: ../src/PdfMod/Gui/Actions.cs:102
+#: ../src/PdfMod/Gui/Actions.cs:113
 msgid "Toolbar"
 msgstr "Barra de ferramentas"
 
-#: ../src/PdfMod/Gui/Actions.cs:103
+#: ../src/PdfMod/Gui/Actions.cs:114
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+#: ../src/PdfMod/Gui/Actions.cs:115
 msgid "Fullscreen"
 msgstr "Pantalla completa"
 
-#: ../src/PdfMod/Gui/Actions.cs:172
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Export Image"
+msgid_plural "Export {0} Images"
+msgstr[0] "Exportar Imaxe"
+msgstr[1] "Exportar {0} Imaxes"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Save image from the selected pages to a new folder"
+msgid_plural "Save {0} images from the selected pages to a new folder"
+msgstr[0] "Gardar imaxe desde as páxinas seleccionadas a un novo cartafol"
+msgstr[1] "Gardar {0} imaxes desde as páxinas seleccionadas a un novo cartafol"
+
+#: ../src/PdfMod/Gui/Actions.cs:196
 msgid "_Undo"
 msgstr "_Desfacer"
 
-#: ../src/PdfMod/Gui/Actions.cs:173
+#: ../src/PdfMod/Gui/Actions.cs:197
 #, csharp-format
 msgid "Undo {0}"
 msgstr "Desfacer {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:177
+#: ../src/PdfMod/Gui/Actions.cs:201
 msgid "_Redo"
 msgstr "_Refacer"
 
-#: ../src/PdfMod/Gui/Actions.cs:178
+#: ../src/PdfMod/Gui/Actions.cs:202
 #, csharp-format
 msgid "Redo {0}"
 msgstr "Refacer {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:186
+#: ../src/PdfMod/Gui/Actions.cs:210
 #, csharp-format
 msgid "Remove Page"
 msgid_plural "Remove {0} Pages"
 msgstr[0] "Eliminar a páxina"
 msgstr[1] "Eliminar {0} páxinas"
 
-#: ../src/PdfMod/Gui/Actions.cs:189
+#: ../src/PdfMod/Gui/Actions.cs:213
 #, csharp-format
 msgid "Remove the selected page"
 msgid_plural "Remove the {0} selected pages"
 msgstr[0] "Eliminar a páxina seleccionada"
 msgstr[1] "Eliminar as {0} páxinas seleccionadas"
 
-#: ../src/PdfMod/Gui/Actions.cs:192
+#: ../src/PdfMod/Gui/Actions.cs:216
 #, csharp-format
 msgid "Extract Page"
 msgid_plural "Extract {0} Pages"
 msgstr[0] "Extraer a páxina"
 msgstr[1] "Extraer {0} páxinas"
 
-#: ../src/PdfMod/Gui/Actions.cs:195
+#: ../src/PdfMod/Gui/Actions.cs:219
 #, csharp-format
 msgid "Extract the selected page"
 msgid_plural "Extract the {0} selected pages"
 msgstr[0] "Extraer a páxina seleccionada"
 msgstr[1] "Extraer as {0} páxinas seleccionadas"
 
-#: ../src/PdfMod/Gui/Actions.cs:203 ../src/PdfMod/Gui/Actions.cs:244
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
 msgid "Select PDF"
 msgstr "Seleccionar PDF"
 
-#: ../src/PdfMod/Gui/Actions.cs:261 ../src/PdfMod/Gui/Client.cs:289
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Non foi posíbel gardar o documento"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
+msgid "Save as..."
+msgstr "Gardar como..."
+
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
 msgid "Error Loading Document"
 msgstr "Produciuse un erro ao cargar o documento"
 
-#: ../src/PdfMod/Gui/Actions.cs:262 ../src/PdfMod/Gui/Client.cs:290
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
 #, csharp-format
 msgid "There was an error loading {0}"
 msgstr "Produciuse un erro ao cargar {0}"
 
-#: ../src/PdfMod/Gui/Actions.cs:276
-msgid "Save as..."
-msgstr "Gardar como..."
-
-#: ../src/PdfMod/Gui/Actions.cs:413
+#: ../src/PdfMod/Gui/Actions.cs:510
 msgid "Error opening help"
 msgstr "Produciuse un erro ao abrir a axuda"
 
-#: ../src/PdfMod/Gui/Actions.cs:414
+#: ../src/PdfMod/Gui/Actions.cs:511
 msgid "Would you like to open PDF Mod's online documentation?"
 msgstr "Desexa abrir a documentación en liña de PDF Mod?"
 
-#: ../src/PdfMod/Gui/Actions.cs:435
+#: ../src/PdfMod/Gui/Actions.cs:532
 msgid "Visit Website"
 msgstr "Visitar sitio web"
 
-#: ../src/PdfMod/Gui/Actions.cs:437
+#: ../src/PdfMod/Gui/Actions.cs:534
 msgid "Primary Development:"
 msgstr "Desenvolvemento primario:"
 
-#: ../src/PdfMod/Gui/Actions.cs:440
+#: ../src/PdfMod/Gui/Actions.cs:537
 msgid "Contributors:"
 msgstr "Colaboradores:"
 
 #. Translators: {0} and {1} are the years the copyright assertion covers; put into
 #. variables so you don't have to re-translate this every year
-#: ../src/PdfMod/Gui/Actions.cs:458
+#: ../src/PdfMod/Gui/Actions.cs:558
 #, csharp-format
 msgid ""
 "Copyright {0} Novell Inc.\n"
@@ -251,79 +301,106 @@ msgstr ""
 "Copyright {0} Novell Inc.\n"
 "Copyright {1} Outros contribuidores de PDF Mod"
 
-#: ../src/PdfMod/Gui/Actions.cs:461
+#: ../src/PdfMod/Gui/Actions.cs:561
 msgid "translator-credits"
 msgstr ""
+"Fran Diéguez <frandieguez@ubuntu.com>, 2010-2011\n"
+"Xosé M. Lamas <correo.xmgz@gmail.com>, 2011\n"
 "Leandro Regueiro <leandro.regueiro@gmail.com>, 2010\n"
-"Fran Diéguez <frandieguez@ubuntu.com>, 2010\n"
 "\n"
 "Proxecto Trasno - Adaptación do software libre á lingua galega:  Se\n"
 "desexas colaborar connosco, podes atopar máis información\n"
 "en http://trasno.net"
 
-#: ../src/PdfMod/Gui/Client.cs:85
+#. Add it to the PDF document
+#: ../src/PdfMod/Gui/BookmarkView.cs:90
+msgid "New bookmark"
+msgstr "Novo marcador"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:113
+msgid "Add Bookmark"
+msgstr "Engadir marcador"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/BookmarkView.cs:137
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "Quitar marcador"
+msgstr[1] "Quitar marcadores"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
+msgid "Rename Bookmark"
+msgstr "Renomear marcador"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:417
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr "O marcador liga á páxona {0}"
+
+#: ../src/PdfMod/Gui/Client.cs:86
 msgid "PDF Mod"
 msgstr "PDF Mod"
 
-#: ../src/PdfMod/Gui/Client.cs:190
+#: ../src/PdfMod/Gui/Client.cs:207
 msgid "Save the changes made to this document?"
 msgstr "Desexa gardar os cambios realizados ao documento?"
 
-#: ../src/PdfMod/Gui/Client.cs:193
+#: ../src/PdfMod/Gui/Client.cs:210
 msgid "Close _Without Saving"
 msgstr "Pechar _sen gardar"
 
-#: ../src/PdfMod/Gui/Client.cs:223
+#: ../src/PdfMod/Gui/Client.cs:240
 #, csharp-format
 msgid "Continue, opening {0} document in separate windows?"
 msgid_plural "Continue, opening all {0} documents in separate windows?"
-msgstr[0] "Continuar ca apertura de {0} documento en xanelas separadas?"
-msgstr[1] "Continuar ca apertura de {0} documentos en xanelas separadas?"
+msgstr[0] "Continuar abrindo {0} documento en xanelas separadas?"
+msgstr[1] "Continuar abrindo {0} documentos en xanelas separadas?"
 
-#: ../src/PdfMod/Gui/Client.cs:227
+#: ../src/PdfMod/Gui/Client.cs:244
 msgid "Open _First"
 msgstr "Abrir _primeiro"
 
-#: ../src/PdfMod/Gui/Client.cs:228
+#: ../src/PdfMod/Gui/Client.cs:245
 msgid "Open _All"
 msgstr "_Abrir todo"
 
-#: ../src/PdfMod/Gui/Client.cs:259
+#: ../src/PdfMod/Gui/Client.cs:276
 msgid "Loading document..."
-msgstr "Cargando o documento..."
+msgstr "Cargando o documento…"
 
 #. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
-#: ../src/PdfMod/Gui/Client.cs:315
+#: ../src/PdfMod/Gui/Client.cs:338
 #, csharp-format
 msgid "{0} (originally {1})"
-msgstr "{0} (antes ocupaba {1})"
+msgstr "{0} (orixinalmente {1})"
 
-#: ../src/PdfMod/Gui/Client.cs:320
+#: ../src/PdfMod/Gui/Client.cs:343
 #, csharp-format
 msgid "{0} page"
 msgid_plural "{0} pages"
 msgstr[0] "{0} páxina"
 msgstr[1] "{0} páxinas"
 
-#: ../src/PdfMod/Gui/Client.cs:343
+#: ../src/PdfMod/Gui/Client.cs:364
 msgid "Document is Encrypted"
 msgstr "O documento está cifrado"
 
-#: ../src/PdfMod/Gui/Client.cs:344
+#: ../src/PdfMod/Gui/Client.cs:365
 msgid "Enter the document's password to open it:"
-msgstr "Introduza o contrasinal do documento para abrilo:"
+msgstr "Escriba o contrasinal do documento para abrilo:"
 
-#: ../src/PdfMod/Gui/Client.cs:377
+#: ../src/PdfMod/Gui/Client.cs:395
 msgid "PDF Documents"
 msgstr "Documentos PDF"
 
-#: ../src/PdfMod/Gui/Client.cs:378
+#: ../src/PdfMod/Gui/Client.cs:396
 msgid "All Files"
 msgstr "Todos os ficheiros"
 
 #: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
 msgid "Select Matching"
-msgstr "Seleccionar as coincidencias"
+msgstr "Seleccionar coincidencias"
 
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
 msgid "_Title:"
@@ -356,3 +433,6 @@ msgstr "_Pechar"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "Ocultar as propiedades do documento"
+
+#~ msgid "Error trying to remove pages from document"
+#~ msgstr "Produciuse un erro ao intentar eliminar páxinas do documento"
