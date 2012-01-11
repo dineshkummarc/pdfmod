@@ -6,15 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pdfmod master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-07 11:11+0900\n"
-"PO-Revision-Date: 2010-11-07 11:06+0900\n"
-"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=pdfmod&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-12-09 12:51+0000\n"
+"PO-Revision-Date: 2012-01-11 20:47+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
 "Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/pdfmod.desktop.in.in.h:1
@@ -25,7 +26,7 @@ msgstr "PDF の変更"
 msgid "Remove, extract, and rotate pages in PDF documents"
 msgstr "PDF ドキュメントのページの削除や展開や回転を行います"
 
-#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:136
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:138
 #: ../src/PdfMod/Pdf/Page.cs:36
 #, csharp-format
 msgid "Page {0}"
@@ -46,10 +47,6 @@ msgstr "ページ移動のアンドゥ・エラー"
 #: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
 msgid "Error trying to move pages"
 msgstr "ページの移動エラー"
-
-#: ../src/PdfMod/Pdf/Actions/RemoveAction.cs:41
-msgid "Error trying to remove pages from document"
-msgstr "ドキュメントからページの削除エラー"
 
 #: ../src/PdfMod/Gui/Actions.cs:65
 msgid "_File"
@@ -121,11 +118,11 @@ msgstr "表示(_V)"
 
 #: ../src/PdfMod/Gui/Actions.cs:90
 msgid "Open in Viewer"
-msgstr "ビューアで開く"
+msgstr "ビューアーで開く"
 
 #: ../src/PdfMod/Gui/Actions.cs:90
 msgid "Open in viewer"
-msgstr "選択したページをビューアの中に開きます"
+msgstr "選択したページをビューアーの中に開きます"
 
 #: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
 msgid "_Bookmarks"
@@ -198,8 +195,9 @@ msgstr[1] "{0}個の画像のエキスポート"
 #, csharp-format
 msgid "Save image from the selected pages to a new folder"
 msgid_plural "Save {0} images from the selected pages to a new folder"
-msgstr[0] "選択したページに含まれている画像を新しいフォルダに保存します"
-msgstr[1] "選択したページに含まれている{0}個の画像を新しいフォルダに保存します"
+msgstr[0] "選択したページに含まれている画像を新しいフォルダーに保存します"
+msgstr[1] ""
+"選択したページに含まれている{0}個の画像を新しいフォルダーに保存します"
 
 #: ../src/PdfMod/Gui/Actions.cs:196
 msgid "_Undo"
@@ -290,7 +288,7 @@ msgstr "その他の貢献者:"
 
 #. Translators: {0} and {1} are the years the copyright assertion covers; put into
 #. variables so you don't have to re-translate this every year
-#: ../src/PdfMod/Gui/Actions.cs:555
+#: ../src/PdfMod/Gui/Actions.cs:558
 #, csharp-format
 msgid ""
 "Copyright {0} Novell Inc.\n"
@@ -299,7 +297,7 @@ msgstr ""
 "Copyright {0} Novell Inc.\n"
 "Copyright {1} その他の貢献者"
 
-#: ../src/PdfMod/Gui/Actions.cs:558
+#: ../src/PdfMod/Gui/Actions.cs:561
 msgid "translator-credits"
 msgstr "相花 毅 <takeshi.aihana@gmail.com>"
 
@@ -424,3 +422,6 @@ msgstr "閉じる(_C)"
 #: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
 msgid "Hide the document's properties"
 msgstr "ドキュメントのプロパティ表示を OFF にします"
+
+#~ msgid "Error trying to remove pages from document"
+#~ msgstr "ドキュメントからページの削除エラー"
