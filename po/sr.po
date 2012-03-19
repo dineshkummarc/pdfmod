@@ -1,0 +1,449 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: pdfmod\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=pdfmod"
+"&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-01-11 15:14+0000\n"
+"PO-Revision-Date: 2012-03-19 11:25+0200\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/pdfmod.desktop.in.in.h:1
+msgid "PDF Modifier"
+msgstr "ПДФ уређивач"
+
+#: ../data/pdfmod.desktop.in.in.h:2
+msgid "Remove, extract, and rotate pages in PDF documents"
+msgstr "Уклањајте, извлачите и заокрећите странице у ПДФ документима"
+
+#: ../src/PdfMod/Pdf/Actions/ExportImagesAction.cs:138
+#: ../src/PdfMod/Pdf/Page.cs:36
+#, csharp-format
+msgid "Page {0}"
+msgstr "Страница {0}"
+
+#. Translators: {0} is the # of pages, {1} is a translated string summarizing the pages, eg "page 1"
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:24
+#, csharp-format
+msgid "Move {1}"
+msgid_plural "Move {1}"
+msgstr[0] "Премести {1}"
+msgstr[1] "Премести {1}"
+msgstr[2] "Премести {1}"
+msgstr[3] "Премести једну"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:31
+msgid "Error trying to unmove pages"
+msgstr "Грешка покушаја повраћаја премештања страница"
+
+#: ../src/PdfMod/Pdf/Actions/MoveAction.cs:41
+msgid "Error trying to move pages"
+msgstr "Грешка покушаја премештања страница"
+
+#: ../src/PdfMod/Gui/Actions.cs:65
+msgid "_File"
+msgstr "_Датотека"
+
+#: ../src/PdfMod/Gui/Actions.cs:66
+msgid "Open a document"
+msgstr "Отворите документ"
+
+#: ../src/PdfMod/Gui/Actions.cs:67
+msgid "Save changes to this document, overwriting the existing file"
+msgstr "Сачувајте измене у овом документу, преписујући постојећу датотеку"
+
+#: ../src/PdfMod/Gui/Actions.cs:68
+msgid "Save this document to a new file"
+msgstr "Сачувајте овај документ као нову датотеку"
+
+#: ../src/PdfMod/Gui/Actions.cs:69
+msgid "Recent _Files"
+msgstr "_Скорашње датотеке"
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "_Insert From..."
+msgstr "_Уметни из..."
+
+#: ../src/PdfMod/Gui/Actions.cs:70
+msgid "Insert pages from another document"
+msgstr "Уметните странице из другог документа"
+
+#: ../src/PdfMod/Gui/Actions.cs:73
+msgid "_Edit"
+msgstr "_Уређивање"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate Left"
+msgstr "Окрени на лево"
+
+#: ../src/PdfMod/Gui/Actions.cs:78
+msgid "Rotate left"
+msgstr "Окрените на лево"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate Right"
+msgstr "Окрени на десно"
+
+#: ../src/PdfMod/Gui/Actions.cs:79
+msgid "Rotate right"
+msgstr "Окрените на десно"
+
+#: ../src/PdfMod/Gui/Actions.cs:82
+msgid "Select Odd Pages"
+msgstr "Изабери непарне странице"
+
+#: ../src/PdfMod/Gui/Actions.cs:83
+msgid "Select Even Pages"
+msgstr "Изабери парне странице"
+
+#: ../src/PdfMod/Gui/Actions.cs:84
+msgid "Select Matching..."
+msgstr "Означи према услову..."
+
+#: ../src/PdfMod/Gui/Actions.cs:85
+msgid "_Invert Selection"
+msgstr "_Преокрени избор"
+
+#: ../src/PdfMod/Gui/Actions.cs:87
+msgid "_View"
+msgstr "_Преглед"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in Viewer"
+msgstr "Отвори у прегледачу"
+
+#: ../src/PdfMod/Gui/Actions.cs:90
+msgid "Open in viewer"
+msgstr "Отворите у прегледачу"
+
+#: ../src/PdfMod/Gui/Actions.cs:92 ../src/PdfMod/Gui/BookmarkView.cs:346
+msgid "_Bookmarks"
+msgstr "_Обележивачи"
+
+#: ../src/PdfMod/Gui/Actions.cs:93
+msgid "_Add Bookmark"
+msgstr "_Додај обележивач"
+
+#: ../src/PdfMod/Gui/Actions.cs:94
+msgid "Re_name Bookmark"
+msgstr "_Преименуј обележивач"
+
+#: ../src/PdfMod/Gui/Actions.cs:95
+msgid "_Change Bookmark Destination"
+msgstr "_Измени одредиште обележивача"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/Actions.cs:96 ../src/PdfMod/Gui/BookmarkView.cs:383
+#, csharp-format
+msgid "_Remove Bookmark"
+msgid_plural "_Remove Bookmarks"
+msgstr[0] "_Уклони обележивач"
+msgstr[1] "_Уклони обележивача"
+msgstr[2] "_Уклони обележивача"
+msgstr[3] "_Уклони обележивач"
+
+#: ../src/PdfMod/Gui/Actions.cs:97
+msgid "_Edit Bookmarks"
+msgstr "_Уреди обележиваче"
+
+#: ../src/PdfMod/Gui/Actions.cs:99
+msgid "_Help"
+msgstr "По_моћ"
+
+#: ../src/PdfMod/Gui/Actions.cs:100
+msgid "_Contents"
+msgstr "_Садржај"
+
+#: ../src/PdfMod/Gui/Actions.cs:107
+msgid "_Add"
+msgstr "_Додај"
+
+#: ../src/PdfMod/Gui/Actions.cs:108
+msgid "_Remove"
+msgstr "_Уклони"
+
+#: ../src/PdfMod/Gui/Actions.cs:111
+msgid "View and edit the title, keywords, and more for this document"
+msgstr "Прегледајте и уредите наслов, кључне речи, и још тога за овај документ"
+
+#: ../src/PdfMod/Gui/Actions.cs:113
+msgid "Toolbar"
+msgstr "Линија алата"
+
+#: ../src/PdfMod/Gui/Actions.cs:114
+msgid "Bookmarks"
+msgstr "Обележивачи"
+
+#: ../src/PdfMod/Gui/Actions.cs:115
+msgid "Fullscreen"
+msgstr "Преко целог екрана"
+
+#: ../src/PdfMod/Gui/Actions.cs:186
+#, csharp-format
+msgid "Export Image"
+msgid_plural "Export {0} Images"
+msgstr[0] "Извези {0} слику"
+msgstr[1] "Извези {0} слике"
+msgstr[2] "Извези {0} слика"
+msgstr[3] "Извези слику"
+
+#: ../src/PdfMod/Gui/Actions.cs:189
+#, csharp-format
+msgid "Save image from the selected pages to a new folder"
+msgid_plural "Save {0} images from the selected pages to a new folder"
+msgstr[0] "Сачувајте {0} слику са изабране странице у нову фасциклу"
+msgstr[1] "Сачувајте {0} слике са изабране странице у нову фасциклу"
+msgstr[2] "Сачувајте {0} слика са изабране странице у нову фасциклу"
+msgstr[3] "Сачувајте једну слику са изабране странице у нову фасциклу"
+
+#: ../src/PdfMod/Gui/Actions.cs:196
+msgid "_Undo"
+msgstr "_Опозови"
+
+#: ../src/PdfMod/Gui/Actions.cs:197
+#, csharp-format
+msgid "Undo {0}"
+msgstr "Опозови „{0}“"
+
+#: ../src/PdfMod/Gui/Actions.cs:201
+msgid "_Redo"
+msgstr "_Понови"
+
+#: ../src/PdfMod/Gui/Actions.cs:202
+#, csharp-format
+msgid "Redo {0}"
+msgstr "Понови „{0}“"
+
+#: ../src/PdfMod/Gui/Actions.cs:210
+#, csharp-format
+msgid "Remove Page"
+msgid_plural "Remove {0} Pages"
+msgstr[0] "Уклони {0} страницу"
+msgstr[1] "Уклони {0} странице"
+msgstr[2] "Уклони {0} страница"
+msgstr[3] "Уклони страницу"
+
+#: ../src/PdfMod/Gui/Actions.cs:213
+#, csharp-format
+msgid "Remove the selected page"
+msgid_plural "Remove the {0} selected pages"
+msgstr[0] "Уклоните {0} изабрану страницу"
+msgstr[1] "Уклоните {0} изабране странице"
+msgstr[2] "Уклоните {0} изабраних страница"
+msgstr[3] "Уклоните изабрану страницу"
+
+#: ../src/PdfMod/Gui/Actions.cs:216
+#, csharp-format
+msgid "Extract Page"
+msgid_plural "Extract {0} Pages"
+msgstr[0] "Извуци {0} страницу"
+msgstr[1] "Извуци {0} странице"
+msgstr[2] "Извуци {0} страница"
+msgstr[3] "Извуци страницу"
+
+#: ../src/PdfMod/Gui/Actions.cs:219
+#, csharp-format
+msgid "Extract the selected page"
+msgid_plural "Extract the {0} selected pages"
+msgstr[0] "Извуците {0} изабрану страницу"
+msgstr[1] "Извуците {0} изабране странице"
+msgstr[2] "Извуците {0} изабраних страница"
+msgstr[3] "Извуците изабрану страницу"
+
+#: ../src/PdfMod/Gui/Actions.cs:229 ../src/PdfMod/Gui/Actions.cs:316
+msgid "Select PDF"
+msgstr "Изабери ПДФ"
+
+#: ../src/PdfMod/Gui/Actions.cs:258
+msgid "Unable to Save Document"
+msgstr "Не могу да сачувам документ"
+
+#: ../src/PdfMod/Gui/Actions.cs:264
+msgid "Save as..."
+msgstr "Сачувај као..."
+
+#: ../src/PdfMod/Gui/Actions.cs:333 ../src/PdfMod/Gui/Client.cs:308
+msgid "Error Loading Document"
+msgstr "Грешка учитавања документа"
+
+#: ../src/PdfMod/Gui/Actions.cs:334 ../src/PdfMod/Gui/Client.cs:309
+#, csharp-format
+msgid "There was an error loading {0}"
+msgstr "Дошло је до грешке при учитавању „{0}“"
+
+#: ../src/PdfMod/Gui/Actions.cs:510
+msgid "Error opening help"
+msgstr "Грешка отварања помоћи"
+
+#: ../src/PdfMod/Gui/Actions.cs:511
+msgid "Would you like to open PDF Mod's online documentation?"
+msgstr "Да ли желите да отворите документацију на мрежи ПДФ уређивача?"
+
+#: ../src/PdfMod/Gui/Actions.cs:532
+msgid "Visit Website"
+msgstr "Посетите веб страницу"
+
+#: ../src/PdfMod/Gui/Actions.cs:534
+msgid "Primary Development:"
+msgstr "Главни програмери:"
+
+#: ../src/PdfMod/Gui/Actions.cs:537
+msgid "Contributors:"
+msgstr "Доприносиоци:"
+
+#. Translators: {0} and {1} are the years the copyright assertion covers; put into
+#. variables so you don't have to re-translate this every year
+#: ../src/PdfMod/Gui/Actions.cs:558
+#, csharp-format
+msgid ""
+"Copyright {0} Novell Inc.\n"
+"Copyright {1} Other PDF Mod Contributors"
+msgstr ""
+"Ауторска права {0} Новел Инц.\n"
+"Ауторска права {1} Остали доприносиоци ПДФ уређивача"
+
+#: ../src/PdfMod/Gui/Actions.cs:561
+msgid "translator-credits"
+msgstr ""
+"  Мирослав Николић <miroslavnikolic@rocketmail.com>  \n"
+"\n"
+"http://prevod.org — превод на српски језик"
+
+#. Add it to the PDF document
+#: ../src/PdfMod/Gui/BookmarkView.cs:90
+msgid "New bookmark"
+msgstr "Нови обележивач"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:113
+msgid "Add Bookmark"
+msgstr "Додај обалеживач"
+
+#. Translators: {0} is available for you to use; contains the number of bookmarks
+#: ../src/PdfMod/Gui/BookmarkView.cs:137
+#, csharp-format
+msgid "Remove Bookmark"
+msgid_plural "Remove Bookmarks"
+msgstr[0] "Уклони обележивач"
+msgstr[1] "Уклони обележивача"
+msgstr[2] "Уклони обележивача"
+msgstr[3] "Уклони обележивач"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:285 ../src/PdfMod/Gui/BookmarkView.cs:323
+msgid "Rename Bookmark"
+msgstr "Преименуј обележивач"
+
+#: ../src/PdfMod/Gui/BookmarkView.cs:417
+#, csharp-format
+msgid "Bookmark links to page {0}"
+msgstr "Обележивач води на страницу {0}"
+
+#: ../src/PdfMod/Gui/Client.cs:86
+msgid "PDF Mod"
+msgstr "ПДФ уређивач"
+
+#: ../src/PdfMod/Gui/Client.cs:207
+msgid "Save the changes made to this document?"
+msgstr "Да сачувам измене начињене над овим документом?"
+
+#: ../src/PdfMod/Gui/Client.cs:210
+msgid "Close _Without Saving"
+msgstr "Затвори _без чувања"
+
+#: ../src/PdfMod/Gui/Client.cs:240
+#, csharp-format
+msgid "Continue, opening {0} document in separate windows?"
+msgid_plural "Continue, opening all {0} documents in separate windows?"
+msgstr[0] "Да наставим, отварајући {0} документ у посебним прозорима?"
+msgstr[1] "Да наставим, отварајући {0} документа у посебним прозорима?"
+msgstr[2] "Да наставим, отварајући {0} докумената у посебним прозорима?"
+msgstr[3] "Да наставим, отварајући један документ у посебним прозорима?"
+
+#: ../src/PdfMod/Gui/Client.cs:244
+msgid "Open _First"
+msgstr "Отвори _први"
+
+#: ../src/PdfMod/Gui/Client.cs:245
+msgid "Open _All"
+msgstr "Отвори _све"
+
+#: ../src/PdfMod/Gui/Client.cs:276
+msgid "Loading document..."
+msgstr "Учитавам докумнет..."
+
+#. Translators: this string is used to show current/original file size, eg "2 MB (originally 1 MB)"
+#: ../src/PdfMod/Gui/Client.cs:338
+#, csharp-format
+msgid "{0} (originally {1})"
+msgstr "{0} (првобитна величина — {1})"
+
+#: ../src/PdfMod/Gui/Client.cs:343
+#, csharp-format
+msgid "{0} page"
+msgid_plural "{0} pages"
+msgstr[0] "{0} страница"
+msgstr[1] "{0} странице"
+msgstr[2] "{0} страница"
+msgstr[3] "Једна страница"
+
+#: ../src/PdfMod/Gui/Client.cs:364
+msgid "Document is Encrypted"
+msgstr "Документ је шифрован"
+
+#: ../src/PdfMod/Gui/Client.cs:365
+msgid "Enter the document's password to open it:"
+msgstr "Унесите лозинку документа да га отворите:"
+
+#: ../src/PdfMod/Gui/Client.cs:395
+msgid "PDF Documents"
+msgstr "ПДФ документи"
+
+#: ../src/PdfMod/Gui/Client.cs:396
+msgid "All Files"
+msgstr "Све датотеке"
+
+#: ../src/PdfMod/Gui/SelectMatchingBox.cs:41
+msgid "Select Matching"
+msgstr "Изабери поклапања"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:62
+msgid "_Title:"
+msgstr "_Наслов:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:63
+msgid "_Author:"
+msgstr "_Аутор:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:64
+msgid "_Keywords:"
+msgstr "_Кључне речи:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:65
+msgid "_Subject:"
+msgstr "_Тема:"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:85
+msgid "_Revert Properties"
+msgstr "_Поврати својства"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:86
+msgid "Change the document's properties back to the original values"
+msgstr "Измените својства документа на њихове првобитне вредности"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:89
+msgid "_Close"
+msgstr "_Затвори"
+
+#: ../src/PdfMod/Gui/MetadataEditorBox.cs:90
+msgid "Hide the document's properties"
+msgstr "Сакриј својства документа"
